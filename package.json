@@ -5,9 +5,11 @@
   "license": "MIT",
   "scripts": {
     "build": "neutrino build",
-    "start": "neutrino start"
+    "start": "neutrino start",
+    "server": "nodemon server/app.js"
   },
   "dependencies": {
+    "express": "^4.16.4",
     "prop-types": "^15.6.2",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
@@ -15,6 +17,9 @@
   },
   "devDependencies": {
     "@neutrinojs/react": "^8.3.0",
-    "neutrino": "^8.3.0"
+    "body-parser": "^1.18.3",
+    "morgan": "^1.9.1",
+    "neutrino": "^8.3.0",
+    "nodemon": "^1.18.5"
   }
 }
