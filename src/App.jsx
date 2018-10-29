@@ -1,9 +1,9 @@
-import { Component } from 'react';
-import './App.css';
+import { Component } from "react";
+import "./styles/index.css";
 
 export default class App extends Component {
   state = {
-    name: 'discover'
+    name: "discover"
   };
 
   render() {
