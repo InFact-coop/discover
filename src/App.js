@@ -1,5 +1,10 @@
 import { Component } from "react"
+import styled from "styled-components"
 import "./styles/index.css"
+
+const Title = styled.div.attrs({
+  className: "flex justify-center bg-light-purple",
+})``
 
 export default class App extends Component {
   state = {
@@ -8,9 +13,9 @@ export default class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <Title className="App">
         <h1>Welcome to {this.state.name}</h1>
-      </div>
+      </Title>
     )
   }
 }
