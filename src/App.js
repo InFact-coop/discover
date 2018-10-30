@@ -1,16 +1,31 @@
 import { Component } from "react"
-import "./styles/index.css"
+import { connect } from "react-redux"
+import styled from "styled-components"
 
-export default class App extends Component {
+const Title = styled.div.attrs({
+  className: "flex justify-center bg-light-purple",
+})``
+
+class App extends Component {
   state = {
     name: "discover",
   }
 
   render() {
     return (
-      <div className="App">
-        <h1>Welcome to {this.state.name}</h1>
-      </div>
+      <Title className="App">
+        <h1 style={{ color: this.props.titleColor }}>
+          Welcome to {this.state.name}
+        </h1>
+      </Title>
     )
   }
 }
+
+const mapStateToProps = ({ app }) => {
+  return {
+    titleColor: app.titleColor,
+  }
+}
+
+export default connect(mapStateToProps)(App)

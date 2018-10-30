@@ -1,13 +1,19 @@
 import { render } from "react-dom"
 import { AppContainer } from "react-hot-loader"
+import { Provider } from "react-redux"
+import store from "./state"
 import App from "./App"
+
+import "./styles/index.css"
 
 const root = document.getElementById("root")
 const load = () =>
   render(
-    <AppContainer>
-      <App />
-    </AppContainer>,
+    <Provider store={store}>
+      <AppContainer>
+        <App />
+      </AppContainer>
+    </Provider>,
     root
   )
 
