@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@neutrinojs/style-loader": "^8.3.0",
+    "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "prop-types": "^15.6.2",
     "react": "^16.6.0",
