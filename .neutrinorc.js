@@ -6,6 +6,7 @@ module.exports = {
         html: {
           title: "discover",
         },
+        babel: { plugins: ["babel-plugin-styled-components"] },
       },
     ],
     [
