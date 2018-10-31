@@ -27,14 +27,16 @@ module.exports = {
       },
     ],
     neutrino =>
-      neutrino.config
-        .plugin("workbox")
-        .use(require("workbox-webpack-plugin").GenerateSW, [
-          {
-            swDest: "sw.js",
-            clientsClaim: true,
-            skipWaiting: true,
-          },
-        ]),
+      neutrino.config.when(process.env.NODE_ENV === "production", config => {
+        config
+          .plugin("workbox")
+          .use(require("workbox-webpack-plugin").GenerateSW, [
+            {
+              swDest: "sw.js",
+              clientsClaim: true,
+              skipWaiting: true,
+            },
+          ])
+      }),
   ],
 }
