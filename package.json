@@ -6,7 +6,8 @@
   "scripts": {
     "build": "neutrino build",
     "start": "neutrino start",
-    "server": "nodemon server/app.js"
+    "server": "nodemon server/app.js",
+    "heroku-postbuild": "neutrino build"
   },
   "dependencies": {
     "@neutrinojs/style-loader": "^8.3.0",
