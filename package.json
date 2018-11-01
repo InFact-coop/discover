@@ -9,7 +9,7 @@
     "server": "nodemon server/app.js",
     "lint": "eslint src --quiet",
     "format": "prettier --list-different  \"src/**/*.{js,jsx}\"",
-    "heroku-postbuild": "neutrino build"
+    "heroku-postbuild": "yarn run build"
   },
   "dependencies": {
     "@neutrinojs/style-loader": "^8.3.0",
