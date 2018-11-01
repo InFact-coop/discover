@@ -3,7 +3,7 @@ import { hot } from "react-hot-loader"
 import styled from "styled-components"
 
 const Title = styled.div.attrs({
-  className: "flex justify-center bg-light-purple",
+  className: "flex justify-center bg-light-yellow",
 })``
 
 class App extends Component {
