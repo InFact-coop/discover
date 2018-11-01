@@ -1,5 +1,5 @@
 import { Component } from "react"
-import { connect } from "react-redux"
+import { hot } from "react-hot-loader"
 import styled from "styled-components"
 
 const Title = styled.div.attrs({
@@ -22,8 +22,4 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ app }) => ({
-  titleColor: app.titleColor,
-})
-
-export default connect(mapStateToProps)(App)
+export default hot(module)(App)
