@@ -22,10 +22,8 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ app }) => {
-  return {
-    titleColor: app.titleColor,
-  }
-}
+const mapStateToProps = ({ app }) => ({
+  titleColor: app.titleColor,
+})
 
 export default connect(mapStateToProps)(App)

@@ -7,6 +7,8 @@
     "build": "neutrino build",
     "start": "neutrino start",
     "server": "nodemon server/app.js",
+    "lint": "eslint src --quiet",
+    "format": "prettier --list-different  \"src/**/*.{js,jsx}\"",
     "heroku-postbuild": "neutrino build"
   },
   "dependencies": {
@@ -41,6 +43,7 @@
     "postcss-custom-properties": "^8.0.8",
     "postcss-import": "^12.0.1",
     "postcss-loader": "^3.0.0",
+    "prettier": "1.14.3",
     "tachyons-custom": "^4.9.6"
   }
 }
