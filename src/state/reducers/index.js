@@ -1,6 +1,6 @@
 import { combineReducers } from "redux"
-import app from "./app"
+import title from "./title"
 
 export default combineReducers({
-  app,
+  title,
 })
