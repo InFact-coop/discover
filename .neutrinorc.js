@@ -20,7 +20,6 @@ module.exports = {
         },
       },
     ],
-    "@neutrinojs/hot",
     [
       "@neutrinojs/style-loader",
       {
