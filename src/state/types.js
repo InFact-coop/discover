@@ -1,4 +1,9 @@
 // router
 
-//eslint-disable-next-line
 export const CHANGE_VIEW = "CHANGE_VIEW"
+
+// title
+
+export const CHANGE_TEXT_COLOR = "CHANGE_TEXT_COLOR"
+export const CHANGE_TEXT_TO_WHITE = "CHANGE_TEXT_TO_WHITE"
+export const CHANGE_TEXT_TO_BLACK = "CHANGE_TEXT_TO_BLACK"

@@ -1,9 +1,9 @@
 import { combineReducers } from "redux"
 
-import app from "./app"
+import title from "./title"
 import router from "./router"
 
 export default combineReducers({
-  app,
+  title,
   router,
 })
