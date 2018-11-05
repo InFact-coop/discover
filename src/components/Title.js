@@ -37,11 +37,9 @@ Title.prototypes = {
   changeTextColor: PropTypes.func,
 }
 
-const mapStateToProps = ({ title }) => ({
-  textColor: title.textColor,
-})
-
 export default connect(
-  mapStateToProps,
+  ({ title }) => ({
+    textColor: title.textColor,
+  }),
   { changeTextColor }
 )(Title)
