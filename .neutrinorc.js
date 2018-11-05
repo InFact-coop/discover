@@ -8,7 +8,15 @@ module.exports = {
         },
         babel: { plugins: ["babel-plugin-styled-components"] },
         devServer: {
-          proxy: "http://localhost:4000",
+          proxy: {
+            "/api/*": {
+              target: "http://localhost:4000",
+              changeOrigin: true,
+              pathRewrite: {
+                "^/api": "",
+              },
+            },
+          },
         },
       },
     ],
