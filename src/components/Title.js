@@ -9,15 +9,11 @@ const Background = styled.div.attrs({
 })``
 
 class Title extends Component {
-  constructor() {
-    super()
-    this.changeColorOnClick = this.changeColorOnClick.bind(this)
-  }
   state = {
     name: "discover",
   }
 
-  changeColorOnClick() {
+  changeColorOnClick = () => {
     this.props.changeTextColor()
   }
 
