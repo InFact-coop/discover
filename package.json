@@ -22,6 +22,7 @@
     "react-hot-loader": "^4.3.11",
     "react-redux": "^5.1.0",
     "redux": "^4.0.1",
+    "redux-actions": "^2.6.4",
     "redux-thunk": "^2.3.0",
     "styled-components": "^4.0.2",
     "workbox-webpack-plugin": "^3.6.3"
