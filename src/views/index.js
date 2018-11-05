@@ -5,8 +5,6 @@ export const Home = "Home"
 export const Landing = "Landing"
 export const Help = "Help"
 
-export const Views = [Home, Landing, Help]
-
 const Router = ({ currentView }) => {
   const CurrentView = require(`./${currentView}`).default
   return (
