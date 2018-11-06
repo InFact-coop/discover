@@ -1,6 +1,7 @@
 import { hot } from "react-hot-loader"
-import Title from "./Title"
 
-const App = () => <Title />
+import Router from "./views"
+
+const App = () => <Router />
 
 export default hot(module)(App)
