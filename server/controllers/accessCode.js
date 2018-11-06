@@ -3,6 +3,9 @@ const AccessCode = require("../models/AccessCode")
 const { secret } = require("../config/config")
 
 exports.generateCode = async (req, res) => {
+  const { admin } = req.signedCookies
+  if (!admin) return res.render("login")
+
   const randomCode = Math.random()
     .toString(36)
     .substr(2, 10)

@@ -28,3 +28,9 @@ exports.verifyAdmin = async (req, res) => {
     res.status(500).json({ err: true, message })
   }
 }
+
+exports.adminPage = (req, res) => {
+  const { admin } = req.signedCookies
+  if (admin) return res.render("generate")
+  res.render("login")
+}
