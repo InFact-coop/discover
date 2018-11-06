@@ -14,7 +14,8 @@ const config = env => {
       secret: SECRET,
       adminAccessToken: ADMIN_ACCESS_TOKEN,
     }
-  } else if (env === "production") {
+  }
+  if (env === "production") {
     return {
       database: PRODUCTION_DATABASE,
       secret: SECRET,

@@ -3,7 +3,7 @@ const { generateCode } = require("../controllers/accessCode")
 const { createAdmin, verifyAdmin, adminPage } = require("../controllers/admin")
 
 router.get("/", adminPage)
-router.post("/accesscode", generateCode)
+router.get("/accesscode", generateCode)
 router.post("/signup", createAdmin)
 router.post("/login", verifyAdmin)
 
