@@ -3,13 +3,16 @@ const AccessCode = require("../models/AccessCode")
 const { secret } = require("../config/config")
 
 exports.generateCode = (req, res) => {
+  const { admin } = req.signedCookies
+  if (!admin) return res.render("login")
+
   const randomCode = Math.random()
     .toString(36)
     .substr(2, 10)
 
   AccessCode.create({ code: randomCode })
-    .then(docs => {
-      res.json(docs)
+    .then(({ code }) => {
+      res.render("generate", { code })
     })
     .catch(err => {
       res.status(500).json(err)

@@ -19,14 +19,25 @@ exports.createAdmin = (req, res) => {
 
 exports.verifyAdmin = (req, res) => {
   const { username, password } = req.body
+
   Admin.findOne({ username })
     .then(docs => {
       if (!docs) throw new Error("Username doesn't exist")
       if (!docs.validPassword(password)) throw new Error("wrong password")
-      res.end()
+      res.cookie("admin", username, {
+        expires: new Date(Date.now() + 900000000000),
+        signed: true,
+      })
+      res.render("generate")
     })
     .catch(err => {
       const message = err.message || "Something is wrong please check with"
       res.status(500).json({ err: true, message })
     })
+}
+
+exports.adminPage = (req, res) => {
+  const { admin } = req.signedCookies
+  if (admin) return res.render("generate")
+  res.render("login")
 }
