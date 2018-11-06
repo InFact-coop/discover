@@ -8,13 +8,7 @@ const {
 } = process.env
 
 const config = env => {
-  if (env === "development") {
-    return {
-      database: DEVELOPMENT_DATABASE,
-      secret: SECRET,
-      adminAccessToken: ADMIN_ACCESS_TOKEN,
-    }
-  } else if (env === "production") {
+  if (env === "production") {
     return {
       database: PRODUCTION_DATABASE,
       secret: SECRET,
