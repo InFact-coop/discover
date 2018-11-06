@@ -6,21 +6,23 @@ const AdminSchema = mongoose.Schema({
   password: { type: String, required: true },
 })
 
-AdminSchema.pre("save", function(next) {
-  bcrypt
-    .hash(this.password, 8)
-    .then(hashedPassword => {
-      this.password = hashedPassword
+AdminSchema.pre("save", async function(next) {
+  try {
+    const hashedPassword = await bcrypt.hash(this.password, 8)
+    this.password = hashedPassword
 
-      return next()
-    })
-    .catch(err => {
-      next(err)
-    })
+    return next()
+  } catch (err) {
+    next(err)
+  }
 })
 
-AdminSchema.methods.validPassword = function(password) {
-  return bcrypt.compareSync(password, this.password)
+AdminSchema.methods.validPassword = async password => {
+  try {
+    return await bcrypt.compare(password, this.password)
+  } catch (err) {
+    return false
+  }
 }
 
 module.exports = mongoose.model("Admin", AdminSchema)
