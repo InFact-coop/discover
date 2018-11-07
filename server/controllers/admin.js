@@ -22,7 +22,11 @@ exports.verifyAdmin = async (req, res) => {
     const docs = await Admin.findOne({ username })
     if (!docs) throw new Error("Username doesn't exist")
     if (!docs.validPassword(password)) throw new Error("wrong password")
-    res.end()
+    res.cookie("admin", username, {
+      expires: new Date(Date.now() + 900000000000),
+      signed: true,
+    })
+    res.render("generate")
   } catch (err) {
     const message = err.message || "Something is wrong please check with"
     res.status(500).json({ err: true, message })

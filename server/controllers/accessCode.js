@@ -11,7 +11,7 @@ exports.generateCode = async (req, res) => {
     .substr(2, 10)
   try {
     const docs = await AccessCode.create({ code: randomCode })
-    res.json(docs)
+    res.render("generate", { code: docs.code })
   } catch (err) {
     res.status(500).json(err)
   }
