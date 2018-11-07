@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="37px" height="37px" viewBox="0 0 37 37" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.3 (67297) - http://www.bohemiancoding.com/sketch -->
+    <title>user</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M2.36733119,9.18614215 C3.59221405,6.65357692 7.19551649,4.03553415 9.4905861,2.23527564 C13.0940174,-0.591265167 19.9497587,-0.534913591 25.1003901,1.27612959 C27.9628145,2.28260309 30.9683038,4.49573958 32.8143732,6.31164633 C38.0027614,11.4152621 37.4180821,18.3402736 36.0622523,25.1889119 C34.1679135,34.7576954 17.4882124,39.9100016 9.4905861,35.1532916 C5.66000033,32.8749925 0.803720768,26.5119034 0.0299450854,18.4752838 C-0.167519397,16.4243704 0.611609304,13.3279899 2.36733119,9.18614215 Z" id="path-1"></path>
+    </defs>
+    <g id="Assets" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="avatar">
+            <g id="single-02">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="Mask" fill="#FFE66D" fill-rule="nonzero" opacity="0.5" xlink:href="#path-1"></use>
+                <g mask="url(#mask-2)" id="Shape" stroke="#526476" stroke-linecap="square" stroke-width="2">
+                    <g transform="translate(4.000000, 3.000000)">
+                        <path d="M18.125,23 L10.875,23 C4.868375,23 0,27.7615455 0,33.6363636 C0,33.6363636 5.4375,36 14.5,36 C23.5625,36 29,33.6363636 29,33.6363636 C29,27.7615455 24.131625,23 18.125,23 Z"></path>
+                        <path d="M6,8.86666667 C6,3.96973333 9.80557143,0 14.5,0 C19.1944286,0 23,3.96973333 23,8.86666667 C23,13.7636 19.1944286,19 14.5,19 C9.80557143,19 6,13.7636 6,8.86666667 Z"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

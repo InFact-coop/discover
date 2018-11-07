@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="72px" height="72px" viewBox="0 0 72 72" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.3 (67297) - http://www.bohemiancoding.com/sketch -->
+    <title>exit_bot</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="20" cy="20" r="20"></circle>
+        <filter x="-70.0%" y="-50.0%" width="240.0%" height="240.0%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="8" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="8" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.2 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Assets" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-7" transform="translate(16.000000, 8.000000)">
+            <g id="Oval" fill-rule="nonzero">
+                <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                <use fill="#FFFFFF" xlink:href="#path-1"></use>
+            </g>
+            <g id="imagination-dream-passion-motivation-startup" transform="translate(9.000000, 9.000000)" stroke="#118AB2" stroke-linecap="round" stroke-linejoin="round">
+                <g id="Group-5">
+                    <path d="M12,12.75 L22.5,12.75" id="Path"></path>
+                    <polyline id="Path" points="18 8 22.5 12.5 18 17"></polyline>
+                    <polyline id="Path" points="12 6 12 0 0 0 0 16.5 7.5 22.5 7.5 7.5 0 0"></polyline>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
