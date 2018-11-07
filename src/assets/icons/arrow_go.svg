@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="15px" viewBox="0 0 22 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.3 (67297) - http://www.bohemiancoding.com/sketch -->
+    <title>arrow_go</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Assets" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Artboard" transform="translate(-30.000000, -30.000000)" stroke="#526476">
+            <g id="tail-right" transform="translate(30.000000, 30.000000)">
+                <path d="M0.6875,7.5625 L21.3125,7.5625" id="Path"></path>
+                <polyline id="Path" points="14.4375 0.6875 21.3125 7.5625 14.4375 14.4375"></polyline>
+            </g>
+        </g>
+    </g>
+</svg>
