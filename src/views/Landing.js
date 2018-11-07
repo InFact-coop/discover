@@ -1,12 +1,12 @@
 import { connect } from "react-redux"
 
 import { changeView } from "../state/actions/router"
-import { Home } from "."
+import { Code } from "."
 
 const Landing = ({ changeView }) => (
   <div>
     <h1>Landing</h1>
-    <div onClick={() => changeView(Home)}>Go to home</div>
+    <div onClick={() => changeView(Code)}>Go to code</div>
   </div>
 )
 
