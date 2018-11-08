@@ -3,8 +3,6 @@ import { connect } from "react-redux"
 import { verifyToken } from "../state/actions/router"
 
 export const Home = "Home"
-export const Landing = "Landing"
-export const Help = "Help"
 export const Code = "Code"
 
 class Router extends Component {

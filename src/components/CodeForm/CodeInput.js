@@ -1,12 +1,9 @@
 import { Component } from "react"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
-// import styled from "styled-components"
-import { verifyCode } from "../state/actions/code"
+import { verifyCode } from "../../state/actions/code"
 
-// const Background = styled.div.attrs({
-//   className: "flex justify-center bg-light-purple",
-// })``
+import { CodeInput, SubmitButton, InputWithButton } from "./style"
 
 class Code extends Component {
   state = {
@@ -38,22 +35,17 @@ class Code extends Component {
     const {
       formState: { code },
     } = this.state
-    const { err } = this.props
     return (
-      <div>
-        <form onSubmit={this.onCodeSubmit}>
-          <input
-            type="text"
-            onChange={this.onInputChange}
-            value={code}
-            name="code"
-            label="code"
-          />
-          <input type="submit" />
-        </form>
-
-        {err && <h3>{err}</h3>}
-      </div>
+      <InputWithButton>
+        <CodeInput
+          type="text"
+          onChange={this.onInputChange}
+          value={code}
+          name="code"
+          label="code"
+        />
+        <SubmitButton onClick={this.onCodeSubmit} />
+      </InputWithButton>
     )
   }
 }

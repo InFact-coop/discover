@@ -1,17 +1,10 @@
 import { connect } from "react-redux"
 
 import { changeView } from "../state/actions/router"
-import { Home } from "."
 
-import CodeInput from "../components/Code"
+import CodeForm from "../components/CodeForm/CodeForm"
 
-const Code = ({ changeView }) => (
-  <div>
-    <h1>Code</h1>
-    <CodeInput />
-    <div onClick={() => changeView(Home)}>Go to Home</div>
-  </div>
-)
+const Code = () => <CodeForm />
 
 export default connect(
   null,
