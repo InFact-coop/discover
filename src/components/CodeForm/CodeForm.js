@@ -1,6 +1,5 @@
 import { Component } from "react"
 import { connect } from "react-redux"
-// import PropTypes from "prop-types"
 import CodeInput from "./CodeInput"
 
 import { Title, Message, Form } from "./style"
