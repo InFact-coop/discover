@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node server",
-    "build": "neutrino build",
+    "build": "neutrino build --options.env.NODE_ENV production",
     "neutrino-start": "neutrino start",
     "server": "nodemon server",
     "lint": "eslint src --quiet",
