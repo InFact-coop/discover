@@ -1,8 +1,25 @@
 import { Component } from "react"
 import { connect } from "react-redux"
+import styled from "styled-components"
 import CodeInput from "./CodeInput"
+import DevelopedBy from "../shared/DevelopedBy"
 
-import { Title, Message, Form } from "./style"
+const _Title = styled.p.attrs({
+  className: "flex justify-center ma6 mono font-1",
+})`
+  color: var(--dark-gray);
+`
+
+const _Message = styled.p.attrs({
+  className: "flex justify-center ma2 mono font-4",
+})`
+  color: var(--dark-gray);
+`
+const _Form = styled.div.attrs({
+  className: "flex flex-column justify-center items-center h-50",
+})`
+  height: 75vh;
+`
 
 class Code extends Component {
   state = {
@@ -11,21 +28,18 @@ class Code extends Component {
   }
 
   render() {
-    const { err } = this.props
     const { title, message } = this.state
 
     return (
-      <Form>
-        <Title>{title}</Title>
-        <Message>{message}</Message>
+      <_Form>
+        <_Title>{title}</_Title>
+        <_Message>{message}</_Message>
         <CodeInput />
-        {err && <h3>{err}</h3>}
-      </Form>
+        <DevelopedBy />
+      </_Form>
     )
   }
 }
-
-Code.prototypes = {}
 
 export default connect(
   ({ code: { err } }) => ({
