@@ -31,7 +31,7 @@ exports.verifyCode = async (req, res) => {
     )
     const token = jwt.sign({ code }, secret)
     res.cookie("code_token", token, {
-      expires: new Date(Date.now() + 900000000000),
+      expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
     })
     res.json({ code })
   } catch (err) {
