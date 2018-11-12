@@ -4,6 +4,7 @@ import { connect } from "react-redux"
 export const Home = "Home"
 export const Code = "Code"
 export const Loading = "Loading"
+export const Technique = "Technique"
 
 class Router extends Component {
   render() {
