@@ -35,9 +35,9 @@ exports.verifyCode = async (req, res) => {
 }
 
 exports.verifyToken = async (req, res) => {
-  const { token } = req.body
   try {
-    const { code } = await jwt.verify(token, secret)
+    const { token } = req.body
+    const { code } = jwt.verify(token, secret)
 
     const accessCode = await AccessCode.findOne({ code })
 
@@ -46,6 +46,6 @@ exports.verifyToken = async (req, res) => {
     res.json({ verified: true })
   } catch (err) {
     const message = err.message || "Oops, something went wrong"
-    res.json({ verified: false, message })
+    res.status(401).json({ verified: false, message })
   }
 }

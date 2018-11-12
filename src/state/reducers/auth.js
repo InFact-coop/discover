@@ -20,7 +20,7 @@ export default (state = INITIAL_STATE, { payload, type }) => {
       }
     case VERIFY_FAILED:
       return {
-        ...state,
+        ...INITIAL_STATE,
         err: payload.err,
       }
     default:

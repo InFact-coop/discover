@@ -23,11 +23,13 @@ export const verifyCode = code => async dispatch => {
   }
 }
 
-export const verifyToken = code => async dispatch => {
-  const {
-    data: { verified },
-  } = await axios.post("/api/user/codetoken", { code })
-
-  if (!verified) dispatch(verifyFailed({ err: null }))
-  else dispatch(verifySucceeded({ code }))
+export const verifyToken = token => async dispatch => {
+  try {
+    const {
+      data: { verified },
+    } = await axios.post("/api/user/codetoken", { token })
+    if (verified) dispatch(verifySucceeded({ token }))
+  } catch (err) {
+    dispatch(verifyFailed({ err: null }))
+  }
 }
