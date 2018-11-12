@@ -1,9 +1,9 @@
 import { CHANGE_VIEW, VERIFY_SUCCEEDED } from "../types"
 
-import { Code, Home } from "../../views/Router"
+import { Loading, Home } from "../../views"
 
 const INITIAL_STATE = {
-  currentView: Code,
+  currentView: Loading,
 }
 
 export default (state = INITIAL_STATE, { payload, type }) => {

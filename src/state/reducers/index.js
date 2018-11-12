@@ -1,9 +1,9 @@
 import { combineReducers } from "redux"
 
 import router from "./router"
-import code from "./code"
+import auth from "./auth"
 
 export default combineReducers({
   router,
-  code,
+  auth,
 })
