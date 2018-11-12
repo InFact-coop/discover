@@ -2,16 +2,11 @@ import { connect } from "react-redux"
 
 import { changeView } from "../state/actions/router"
 
-import Title from "../components/Title"
+import CodeForm from "../components/CodeForm/CodeForm"
 
-const Home = () => (
-  <div>
-    <h1 className="font-1 sans">Home</h1>
-    <Title />
-  </div>
-)
+const Code = () => <CodeForm />
 
 export default connect(
   null,
   { changeView }
-)(Home)
+)(Code)

@@ -1,20 +1,29 @@
-import { Fragment } from "react"
+import { Fragment, Component } from "react"
 import { connect } from "react-redux"
+import { verifyToken } from "../state/actions/code"
+import Loading from "./Loading"
+import Router from "./Router"
+import Code from "./Code"
 
-export const Home = "Home"
-export const Landing = "Landing"
-export const Help = "Help"
+class Verify extends Component {
+  componentDidUpdate() {
+    const { verifyToken, code } = this.props
+    verifyToken(code)
+  }
 
-const Router = ({ currentView }) => {
-  const CurrentView = require(`./${currentView}`).default
-  return (
-    <Fragment>
-      <CurrentView />
-    </Fragment>
-  )
+  render() {
+    const { isVerified, isLoading } = this.props
+
+    if (isLoading) return <Loading />
+    return <Fragment>{isVerified ? <Router /> : <Code />}</Fragment>
+  }
 }
 
 export default connect(
-  ({ router: { currentView } }) => ({ currentView }),
-  null
-)(Router)
+  ({ code: { isVerified, isLoading, code } }) => ({
+    isVerified,
+    isLoading,
+    code,
+  }),
+  { verifyToken }
+)(Verify)

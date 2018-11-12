@@ -24,15 +24,30 @@ exports.verifyCode = async (req, res) => {
 
     if (!docs || docs.verified || Date.now() > docs.expires_at)
       throw new Error("Code isn't valid, please check with")
-    const { updatedCode } = await AccessCode.findOneAndUpdate(
+    await AccessCode.findOneAndUpdate(
       { code },
       { verified: true },
       { new: true }
     )
-    const token = jwt.sign({ code: updatedCode }, secret)
-    res.json({ token })
+    const token = jwt.sign({ code }, secret)
+    res.cookie("code_token", token, {
+      expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
+    })
+    res.json({ code })
   } catch (err) {
     const message = err.message || "Something is wrong please check with"
-    res.status(500).json({ err: true, message })
+    res.json({ err: true, message })
+  }
+}
+
+exports.verifyToken = async (req, res) => {
+  const { code_token } = req.cookies
+  const { code } = req.body
+  try {
+    const { code: decodedCode } = await jwt.verify(code_token, secret)
+    if (decodedCode !== code) throw new Error()
+    res.json({ verified: true })
+  } catch (err) {
+    res.json({ verified: false })
   }
 }

@@ -23,7 +23,7 @@ exports.verifyAdmin = async (req, res) => {
     if (!docs) throw new Error("Username doesn't exist")
     if (!docs.validPassword(password)) throw new Error("wrong password")
     res.cookie("admin", username, {
-      expires: new Date(Date.now() + 900000000000),
+      expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
       signed: true,
     })
     res.render("generate")
