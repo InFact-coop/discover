@@ -6,7 +6,9 @@ import App from "./App"
 import "./styles/index.css"
 
 const root = document.getElementById("root")
-const load = () =>
+
+//eslint-disable-next-line
+export const load = () =>
   render(
     <Provider store={store}>
       <App />
@@ -26,5 +28,3 @@ if (process.env.NODE_ENV === "production" && "serviceWorker" in navigator) {
       })
   })
 }
-
-load()

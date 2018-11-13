@@ -23,31 +23,29 @@ exports.verifyCode = async (req, res) => {
     const docs = await AccessCode.findOne({ code })
 
     if (!docs || docs.verified || Date.now() > docs.expires_at)
-      throw new Error("Code isn't valid, please check with")
-    await AccessCode.findOneAndUpdate(
-      { code },
-      { verified: true },
-      { new: true }
-    )
+      throw new Error("Code isn't valid, please try again")
+
     const token = jwt.sign({ code }, secret)
-    res.cookie("code_token", token, {
-      expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
-    })
-    res.json({ code })
+
+    res.json({ token })
   } catch (err) {
-    const message = err.message || "Something is wrong please check with"
-    res.json({ err: true, message })
+    const message = err.message || "Oops, something went wrong"
+    res.status(401).json({ err: true, message })
   }
 }
 
 exports.verifyToken = async (req, res) => {
-  const { code_token } = req.cookies
-  const { code } = req.body
   try {
-    const { code: decodedCode } = await jwt.verify(code_token, secret)
-    if (decodedCode !== code) throw new Error()
+    const { token } = req.body
+    const { code } = jwt.verify(token, secret)
+
+    const accessCode = await AccessCode.findOne({ code })
+
+    if (!accessCode) throw new Error("This code is not valid")
+
     res.json({ verified: true })
   } catch (err) {
-    res.json({ verified: false })
+    const message = err.message || "Oops, something went wrong"
+    res.status(401).json({ verified: false, message })
   }
 }
