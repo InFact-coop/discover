@@ -41,6 +41,6 @@ export default (state = INITIAL_STATE, { payload, type }) => {
         }),
       }
     default:
-      return { ...state }
+      return state
   }
 }
