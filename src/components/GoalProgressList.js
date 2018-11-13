@@ -19,6 +19,13 @@ const getGoalProgress = (startDate, endDate) => {
   return percentComplete
 }
 
+const daysToGo = (endDate) => {
+  const deadline = Date.parse(endDate);
+  if (Date.now() > deadline)
+    return "You completed this goal!"
+  return `${Math.round((deadline - Date.now())/86400000)} days to go!`;
+}
+
 class GoalList extends Component {
   render () {
     const {current_goal, past_goals} = this.props
@@ -28,7 +35,7 @@ class GoalList extends Component {
         width={getGoalProgress(current_goal.start_date, current_goal.finish_date)} 
         color="light-red" 
         goal={current_goal.description}
-        progressText="40 days out of 60"
+        progressText={daysToGo(current_goal.finish_date)}
       />
       {
         past_goals.map((goal, key) => {
