@@ -17,3 +17,6 @@ export const REMOVE_TECHNIQUE = "REMOVE_TECHNIQUE"
 
 // technique
 export const TOGGLE_SELECT_TECHNIQUE = "TOGGLE_SELECT_TECHNIQUE"
+
+// profile
+export const CHANGE_NAME = "CHANGE_NAME"
