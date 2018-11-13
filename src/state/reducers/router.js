@@ -11,7 +11,7 @@ export default (state = INITIAL_STATE, { payload, type }) => {
     case CHANGE_VIEW:
       return { ...state, currentView: payload }
     case VERIFY_SUCCEEDED:
-      return { ...state, currentView: GoalProgress }
+      return { ...state, currentView: Home }
     case VERIFY_FAILED:
       return { ...state, currentView: Code }
     default:
