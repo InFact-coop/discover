@@ -38,7 +38,7 @@ const _Hint = styled.p.attrs({
 `
 
 class Technique extends Component {
-  onCardClick = title => {
+  onCardClick = title => () => {
     const { toggleSelectTechnique } = this.props
     toggleSelectTechnique(title)
   }
@@ -64,7 +64,7 @@ class Technique extends Component {
               description={description}
               image={image}
               selected={selected}
-              onClick={this.onCardClick}
+              onCardClick={this.onCardClick(title)}
             />
           ))}
         </Carousel>

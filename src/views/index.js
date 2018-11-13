@@ -6,6 +6,7 @@ import { changeView } from "../state/actions/router"
 export const Home = "Home"
 export const Code = "Code"
 export const Loading = "Loading"
+export const Technique = "Technique"
 
 class Router extends Component {
   componentDidMount() {
@@ -16,7 +17,7 @@ class Router extends Component {
 
   render() {
     const { router } = this.props
-    const CurrentView = require(`./${router.currentView}`).default
+    const CurrentView = require(`./${Technique}`).default
     return <CurrentView />
   }
 }

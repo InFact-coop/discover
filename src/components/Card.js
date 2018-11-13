@@ -14,6 +14,10 @@ const _Card = styled.div.attrs({
   className: "flex flex-column ma1 items-center br4",
 })`
   background-color: var(--yellow);
+  ${({ width, height }) =>
+    `width: ${width};
+    height: ${height};	
+  `};
 `
 const _CardTitle = styled.p.attrs({
   className: "font-4 mono mt6 mb2 b tc",
@@ -48,7 +52,7 @@ class Card extends Component {
     } = this.props
     return (
       <_CardContainer selected={selected}>
-        <_Card style={{ width, height }} onClick={onCardClick}>
+        <_Card width={width} height={height} onClick={onCardClick}>
           <_CardTitle>{title}</_CardTitle>
           <_CardDescription>{description}</_CardDescription>
           <_CardImage src={image} />
