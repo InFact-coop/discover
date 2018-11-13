@@ -1,5 +1,8 @@
 import { Component } from "react"
+// import { connect } from "react-redux"
 import styled from "styled-components"
+
+import dummyStore from "./dummyStore";
 
 const _Wrapper = styled.div.attrs({
   className: "ph3 flex flex-column items-center mb5"
@@ -14,28 +17,38 @@ const _ProgressBar = styled.div.attrs({
 })`
   height: 20px;
 `
+const fillColours = ["purple","green","blue"];
 const _ProgressFill = styled.div.attrs({
   className: ""
 })`
   border-radius: 7px;
   height: 18px;
-  width: ${({width}) => `${width}`};
+  width: ${({width}) => `${width}%`};
   background-color: ${({color}) => `var(--${color})`};
   opacity: 0.5;
 `
 const _ProgressText = styled.h2.attrs({
-  className: "mono font-5 dark-gray absolute top-0"
+  className: "mono font-6 dark-gray absolute top-0"
 })`
   left: 50%;
   transform: translateX(-50%);
   line-height: 20px;
 `
 
+const getGoalProgress = (startDate, endDate) => {
+  const deadline = Date.parse(endDate);
+  const start = Date.parse(startDate);
+  const totalDays = (deadline - start)/86400000;
+  const daysElapsed = (Date.now() - start)/86400000;
+  const percentComplete = Math.round((daysElapsed / totalDays)*100);
+  return percentComplete
+}
+
 class Goal extends Component {
   render () {
     const { width, color, goal, progressText } = this.props
     return (
-      <div className="mb3">
+      <div className="mb4 w-100">
         <_GoalText>{goal}</_GoalText>
         <_ProgressBar>
           <_ProgressFill width={width} color={color}/>
@@ -46,100 +59,68 @@ class Goal extends Component {
   }
 }
 
-export default class GoalProgressList extends Component {
+class GoalList extends Component {
   render () {
+    const {current_goal, past_goals} = this.props
     return (
-      <_Wrapper>
-        <Goal 
-          width="80%" 
-          color="purple" 
-          goal="Stop Procrastinating and work on my time management skills"
-          progressText="40 days out of 60"
-        />
-        <Goal 
-          width="50%" 
-          color="green" 
-          goal="Stop Procrastinating and work on my time management skills"
-          progressText="28 days out of 30"
-          />
-        <Goal 
-          width="100%" 
-          color="blue" 
-          goal="Stop Procrastinating and work on my time management skills"
-          progressText="Huzzah! Completed!"
-          />
-         <Goal 
-          width="100%" 
-          color="light-red" 
-          goal="Stop Procrastinating and work on my time management skills"
-          progressText="Huzzah! Completed!"
-          />
-      </_Wrapper>
+    <_Wrapper>
+      <Goal 
+        width={getGoalProgress(current_goal.start_date, current_goal.finish_date)} 
+        color="light-red" 
+        goal={current_goal.description}
+        progressText="40 days out of 60"
+      />
+      {
+        past_goals.map((goal, key) => {
+          return (
+            <Goal 
+              key={key}
+              width={100} 
+              color={fillColours[key%3]} 
+              goal={goal.description}
+              progressText="28 days out of 30"
+            />
+          )
+        })
+      }
+    </_Wrapper>
     )
-  }
+  }  
 }
 
+const GoalProgressList = () => (
+  <GoalList 
+    current_goal={dummyStore.current_goal} 
+    past_goals={dummyStore.past_goals}
+  />
+)
 
+// GoalList.propTypes = {
+//   current_goal: PropTypes.shape({
+//     description: PropTypes.string.isRequired,
+//     start_date: PropTypes.string.isRequired,
+//     finish_date: PropTypes.string.isRequired
+//   }),
+//   past_goals: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       description: PropTypes.string.isRequired,
+//       start_date: PropTypes.string.isRequired,
+//       finish_date: PropTypes.string.isRequired
 
+//     }).isRequired
+//   )
+// }
 
+// const mapStateToProps = state => {
+//   return {
+//     currentGoal: state.current_goal,
+//     pastGoals: state.past_goals
+//   }
+// }
 
+// const GoalProgressList = connect(
+//   mapStateToProps,
+//   { changeView }
+// )(GoalList)
 
-
-
-
-
-const dummyStore = 
-{
-  "user_info": {
-    "name": "Ruth",
-    "avatar": String
-  },
-  "current_goal": {
-    "description": "Stop procrastinating and work on my time management skills",
-    "days_of_week": [String],
-    "time_of_day": {
-      "description": "After School",
-      "time": "16:00:00"
-    },
-    "start_date": "Wed Oct 13 2018 00:00:00 GMT+0000 (Greenwich Mean Time)",
-    "finish_date": "Wed Dec 13 2018 00:00:00 GMT+0000 (Greenwich Mean Time)"
-  },
-  "past_goals": 
-  [
-    {
-      "description": "Sleep at least 7-8 hours (schools day).",
-      "days_of_week": ["Monday", "Tuesday", "Wednesday","Thursday","Friday"],
-      "time_of_day": {
-        "description": "evening",
-        "time": "22:00:00"
-      },
-      "start_date": "Wed Mar 25 2018 00:00:00 GMT+0000 (Greenwich Mean Time)",
-      "finish_date": "Wed Apr 25 2018 00:00:00 GMT+0000 (Greenwich Mean Time)"
-    },
-    {
-      "description": "Meditate 3 days a week before I go to sleep",
-      "days_of_week": ["Sunday","Tuesday","Thursday"],
-      "time_of_day": {
-        "description": "evening",
-        "time": "22:00:00"
-      },
-      "start_date": "Wed Mar 25 2018 00:00:00 GMT+0000 (Greenwich Mean Time)",
-      "finish_date": "Wed May 25 2018 00:00:00 GMT+0000 (Greenwich Mean Time)"
-    },
-    {
-      "description": "stop waking up at 1am to complete homework/essays",
-      "days_of_week": ["Monday", "Tuesday", "Wednesday","Thursday","Sunday"],
-      "time_of_day": {
-        "description": "evening",
-        "time": "01:00:00"
-      },
-      "start_date": "Wed Mar 25 2018 00:00:00 GMT+0000 (Greenwich Mean Time)",
-      "finish_date": "Wed May 25 2018 00:00:00 GMT+0000 (Greenwich Mean Time)"
-    }
-  ],
-  "techniques": {
-    "name": String,
-    "description": String,
-    "tips": {} // not sure about contents yet
-  }
-}
+export default GoalProgressList
