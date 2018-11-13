@@ -1,9 +1,9 @@
-import { CHANGE_VIEW, VERIFY_SUCCEEDED } from "../types"
+import { CHANGE_VIEW, VERIFY_SUCCEEDED, VERIFY_FAILED } from "../types"
 
-import { Code, Home } from "../../views/Router"
+import { Loading, Home, Code } from "../../views"
 
 const INITIAL_STATE = {
-  currentView: Code,
+  currentView: Loading,
 }
 
 export default (state = INITIAL_STATE, { payload, type }) => {
@@ -12,6 +12,8 @@ export default (state = INITIAL_STATE, { payload, type }) => {
       return { ...state, currentView: payload }
     case VERIFY_SUCCEEDED:
       return { ...state, currentView: Home }
+    case VERIFY_FAILED:
+      return { ...state, currentView: Code }
     default:
       return state
   }

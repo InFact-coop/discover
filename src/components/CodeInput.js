@@ -1,9 +1,7 @@
 import { Component } from "react"
-import { connect } from "react-redux"
 import styled from "styled-components"
 import PropTypes from "prop-types"
-import { verifyCode } from "../../state/actions/code"
-import arrowGo from "../../assets/icons/arrow_go.svg"
+import arrowGo from "../assets/icons/arrow_go.svg"
 
 const _InputWithButton = styled.div.attrs({
   className: "flex justify-center items-center",
@@ -23,7 +21,7 @@ const _SubmitButton = styled.div.attrs({
   background-color: var(--yellow);
 `
 
-class Code extends Component {
+class CodeInput extends Component {
   state = {
     formState: {
       code: "",
@@ -53,6 +51,7 @@ class Code extends Component {
     const {
       formState: { code },
     } = this.state
+
     return (
       <_InputWithButton>
         <_CodeInput
@@ -68,13 +67,8 @@ class Code extends Component {
   }
 }
 
-Code.prototypes = {
+CodeInput.prototypes = {
   verifyCode: PropTypes.func.isRequired,
 }
 
-export default connect(
-  ({ code: { err } }) => ({
-    err,
-  }),
-  { verifyCode }
-)(Code)
+export default CodeInput
