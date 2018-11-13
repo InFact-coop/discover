@@ -1,7 +1,7 @@
 import { connect } from "react-redux"
 
 import { changeView } from "../state/actions/router"
-import { Technique } from "./Router"
+import { Technique } from "."
 
 const Home = () => (
   <div>
