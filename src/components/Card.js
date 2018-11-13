@@ -33,18 +33,22 @@ const _CardImage = styled.img.attrs({
 `
 
 class Card extends Component {
-  state = {
-    selected: false,
-  }
   onClick = () => {
     this.setState(({ selected }) => ({ selected: !selected }))
   }
   render() {
-    const { selected } = this.state
-    const { width, height, title, description, image } = this.props
+    const {
+      width,
+      height,
+      title,
+      description,
+      image,
+      selected,
+      onCardClick,
+    } = this.props
     return (
       <_CardContainer selected={selected}>
-        <_Card style={{ width, height }} onClick={this.onClick}>
+        <_Card style={{ width, height }} onClick={onCardClick}>
           <_CardTitle>{title}</_CardTitle>
           <_CardDescription>{description}</_CardDescription>
           <_CardImage src={image} />

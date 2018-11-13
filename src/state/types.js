@@ -14,3 +14,6 @@ export const CHANGE_TEXT_TO_BLACK = "CHANGE_TEXT_TO_BLACK"
 // current goal
 export const ADD_TECHNIQUE = "ADD_TECHNIQUE"
 export const REMOVE_TECHNIQUE = "REMOVE_TECHNIQUE"
+
+// technique
+export const TOGGLE_SELECT_TECHNIQUE = "TOGGLE_SELECT_TECHNIQUE"

@@ -1,9 +1,10 @@
 import { Component, Fragment } from "react"
+import { connect } from "react-redux"
 import styled, { createGlobalStyle } from "styled-components"
+import { toggleSelectTechnique } from "../state/actions/technique"
 import Card from "../components/Card"
 import Carousel from "../components/Carousel"
 import background from "../assets/backgrounds/bg_which_technique.svg"
-import circle from "../assets/icons/circle.png"
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -37,30 +38,12 @@ const _Hint = styled.p.attrs({
 `
 
 class Technique extends Component {
-  state = {
-    techniques: [
-      {
-        title: "Mindfulness exercise",
-        description:
-          "Taking time to focus in the present moment Taking time to focus in the present momentTaking time to focus in the present momentTaking",
-        image: circle,
-      },
-      {
-        title: "Just an exercise",
-        description:
-          "Taking time to focus in the present moment Taking time to focus in the present moment",
-        image: circle,
-      },
-      {
-        title: "Not an exercise",
-        description:
-          "Taking time to focus in the present moment Taking time to focus in the present momentTaking time to",
-        image: circle,
-      },
-    ],
+  onCardClick = title => {
+    const { toggleSelectTechnique } = this.props
+    toggleSelectTechnique(title)
   }
   render() {
-    const { techniques } = this.state
+    const { techniques } = this.props
     return (
       <Fragment>
         <GlobalStyle />
@@ -72,7 +55,7 @@ class Technique extends Component {
           <_Hint>&#40;you can choose more than one!&#41;</_Hint>
         </_Container>
         <Carousel>
-          {techniques.map(({ title, description, image }) => (
+          {techniques.map(({ title, description, image, selected }) => (
             <Card
               key={title}
               width="17rem"
@@ -80,6 +63,8 @@ class Technique extends Component {
               title={title}
               description={description}
               image={image}
+              selected={selected}
+              onClick={this.onCardClick}
             />
           ))}
         </Carousel>
@@ -88,4 +73,7 @@ class Technique extends Component {
   }
 }
 
-export default Technique
+export default connect(
+  ({ technique: { techniques } }) => ({ techniques }),
+  { toggleSelectTechnique }
+)(Technique)
