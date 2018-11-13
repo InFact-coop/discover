@@ -7,6 +7,7 @@ export const Home = "Home"
 export const Code = "Code"
 export const Loading = "Loading"
 export const Technique = "Technique"
+export const Name = "Name"
 
 class Router extends Component {
   componentDidMount() {
@@ -17,7 +18,7 @@ class Router extends Component {
 
   render() {
     const { router } = this.props
-    const CurrentView = require(`./${Technique}`).default
+    const CurrentView = require(`./${Name}`).default
     return <CurrentView />
   }
 }
