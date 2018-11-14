@@ -1,5 +1,5 @@
 import { createAction } from "redux-actions"
-import { CHANGE_NAME } from "../types"
+import { CHANGE_NAME, CHANGE_AVATAR } from "../types"
 
-// eslint-disable-next-line
 export const changeName = createAction(CHANGE_NAME)
+export const changeAvatar = createAction(CHANGE_AVATAR)
