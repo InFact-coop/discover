@@ -7,6 +7,7 @@ export const Home = "Home"
 export const Code = "Code"
 export const Loading = "Loading"
 export const Technique = "Technique"
+export const GoalProgress = "GoalProgress"
 
 class Router extends Component {
   componentDidMount() {
