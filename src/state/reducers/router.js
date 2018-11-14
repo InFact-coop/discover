@@ -1,6 +1,6 @@
 import { CHANGE_VIEW, VERIFY_SUCCEEDED, VERIFY_FAILED } from "../types"
 
-import { Loading, Home, Code } from "../../views"
+import { Loading, Home, Code, GoalProgress } from "../../views"
 
 const INITIAL_STATE = {
   currentView: Loading,

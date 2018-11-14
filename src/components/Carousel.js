@@ -20,8 +20,7 @@ class Carousel extends Component {
           <Flickity
             options={{
               prevNextButtons: false,
-              freeScroll: true,
-              contain: true,
+              wrapAround: true,
             }}
             className={"outline-0 w-100 overflow-hidden"}
             disableImagesLoaded={true}

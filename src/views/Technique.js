@@ -18,7 +18,7 @@ const _Container = styled.div.attrs({
 `
 
 const _Title = styled.p.attrs({
-  className: "mono font-2 ma1",
+  className: "mono font-1 ma3",
 })`
   color: var(--mid-gray);
   font-weight: 500;
@@ -31,10 +31,9 @@ const _Question = styled.p.attrs({
 `
 
 const _Hint = styled.p.attrs({
-  className: "mono font-4 mb3",
+  className: "mono font-4 b mt1 mb3",
 })`
   color: var(--mid-gray);
-  font-weight: 500;
 `
 
 class Technique extends Component {
@@ -50,7 +49,7 @@ class Technique extends Component {
         <_Container>
           <_Title> Great!</_Title>
           <_Question>
-            and which technique will you choose to achieve your goal ?
+            and which technique will you choose to achieve your goal?
           </_Question>
           <_Hint>&#40;you can choose more than one!&#41;</_Hint>
         </_Container>
