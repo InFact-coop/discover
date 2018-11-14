@@ -20,12 +20,13 @@ const _Card = styled.div.attrs({
   `};
 `
 const _CardTitle = styled.p.attrs({
-  className: "font-4 mono mt6 mb2 b tc",
+  className: "font-3 sans mt6 mb2 tc",
 })`
   color: var(--gray);
+  font-weight: 500;
 `
 const _CardDescription = styled.p.attrs({
-  className: "font-5 mono ma2 tc",
+  className: "font-4 sans ma2 tc",
 })`
   color: var(--gray);
 `

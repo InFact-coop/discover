@@ -17,7 +17,7 @@ class Router extends Component {
 
   render() {
     const { router } = this.props
-    const CurrentView = require(`./${Technique}`).default
+    const CurrentView = require(`./${router.currentView}`).default
     return <CurrentView />
   }
 }
