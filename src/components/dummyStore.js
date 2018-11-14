@@ -12,7 +12,7 @@ const dummyStore =
       "time": "16:00:00"
     },
     "start_date": "Wed Oct 13 2018 00:00:00 GMT+0000 (Greenwich Mean Time)",
-    "finish_date": "Wed Dec 13 2018 00:00:00 GMT+0000 (Greenwich Mean Time)"
+    "scheduled_finish_date": "Wed Dec 13 2018 00:00:00 GMT+0000 (Greenwich Mean Time)"
   },
   "past_goals": 
   [
@@ -24,7 +24,8 @@ const dummyStore =
         "time": "22:00:00"
       },
       "start_date": "Wed Mar 25 2018 00:00:00 GMT+0000 (Greenwich Mean Time)",
-      "finish_date": "Wed Apr 25 2018 00:00:00 GMT+0000 (Greenwich Mean Time)"
+      "actual_finish_date": "Wed Apr 19 2018 00:00:00 GMT+0000 (Greenwich Mean Time)",
+      "scheduled_finish_date": "Wed Apr 25 2018 00:00:00 GMT+0000 (Greenwich Mean Time)"
     },
     {
       "description": "Meditate 3 days a week before I go to sleep",
@@ -34,7 +35,8 @@ const dummyStore =
         "time": "22:00:00"
       },
       "start_date": "Wed Mar 25 2018 00:00:00 GMT+0000 (Greenwich Mean Time)",
-      "finish_date": "Wed May 25 2018 00:00:00 GMT+0000 (Greenwich Mean Time)"
+      "actual_finish_date": "Wed May 23 2018 00:00:00 GMT+0000 (Greenwich Mean Time)",
+      "scheduled_finish_date": "Wed May 25 2018 00:00:00 GMT+0000 (Greenwich Mean Time)"
     },
     {
       "description": "stop waking up at 1am to complete homework/essays",
@@ -44,7 +46,8 @@ const dummyStore =
         "time": "01:00:00"
       },
       "start_date": "Wed Mar 25 2018 00:00:00 GMT+0000 (Greenwich Mean Time)",
-      "finish_date": "Wed May 25 2018 00:00:00 GMT+0000 (Greenwich Mean Time)"
+      "actual_finish_date": "Wed Apr 18 2018 00:00:00 GMT+0000 (Greenwich Mean Time)",
+      "scheduled_finish_date": "Wed May 25 2018 00:00:00 GMT+0000 (Greenwich Mean Time)"
     }
   ],
   "techniques": {
