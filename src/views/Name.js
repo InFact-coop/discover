@@ -30,7 +30,7 @@ const _Question = styled.p.attrs({
 })``
 
 const _Input = styled.input.attrs({
-  className: "w-80 ba ma4 pa2 br2 font-1",
+  className: "w-80 ba ma4 pa2 br3 font-2",
 })`
   border-color: var(--moon-gray);
   border-width: thin;

@@ -27,7 +27,7 @@ const _Question = styled.p.attrs({
 })``
 
 const _Input = styled.textarea.attrs({
-  className: "w-90 ba ma4 ph3 pv2 font-3",
+  className: "w-90 ba ma4 ph3 pv2 sans font-3",
 })`
   border-color: var(--moon-gray);
   border-width: thin;

@@ -8,6 +8,8 @@ export const Code = "Code"
 export const Loading = "Loading"
 export const Technique = "Technique"
 export const Name = "Name"
+export const Avatar = "Avatar"
+export const SetGoal = "SetGoal"
 
 class Router extends Component {
   componentDidMount() {
@@ -18,7 +20,7 @@ class Router extends Component {
 
   render() {
     const { router } = this.props
-    const CurrentView = require(`./${Name}`).default
+    const CurrentView = require(`./${router.currentView}`).default
     return <CurrentView />
   }
 }
