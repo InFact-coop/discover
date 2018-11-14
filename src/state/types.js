@@ -12,8 +12,11 @@ export const CHANGE_TEXT_TO_WHITE = "CHANGE_TEXT_TO_WHITE"
 export const CHANGE_TEXT_TO_BLACK = "CHANGE_TEXT_TO_BLACK"
 
 // current goal
-export const ADD_TECHNIQUE = "ADD_TECHNIQUE"
-export const REMOVE_TECHNIQUE = "REMOVE_TECHNIQUE"
+export const CHANGE_GOAL = "CHANGE_GOAL"
 
 // technique
 export const TOGGLE_SELECT_TECHNIQUE = "TOGGLE_SELECT_TECHNIQUE"
+
+// profile
+export const CHANGE_NAME = "CHANGE_NAME"
+export const CHANGE_AVATAR = "CHANGE_AVATAR"
