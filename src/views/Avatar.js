@@ -4,8 +4,8 @@ import styled, { createGlobalStyle } from "styled-components"
 import PropTypes from "prop-types"
 import ProgressBar from "../components/ProgressBar"
 import SaveButton from "../components/SaveButton"
-import SkipButton from "../components/SkipButton"
-import { Name, SetGoal } from "."
+import BackButton from "../components/BackButton"
+import { SetGoal } from "."
 import { changeAvatar } from "../state/actions/profile"
 import background from "../assets/backgrounds/bg_avatar.svg"
 import avatar1 from "../assets/icons/avatar_round.svg"
@@ -71,7 +71,7 @@ class Avatar extends Component {
       <_Container>
         <GlobalStyle />
         <ProgressBar progress={2} />
-        <SkipButton action="back" to={Name} />
+        <BackButton />
         <_Title>Please choose your avatar</_Title>
         <_AvatarsRow>
           <_Avatar

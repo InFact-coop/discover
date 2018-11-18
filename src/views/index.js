@@ -13,8 +13,10 @@ export const SetGoal = "SetGoal"
 export const GoalDays = "GoalDays"
 export const GoalTime = "GoalTime"
 export const Recap = "Recap"
-export const GoalProgress = "GoalProgress"
 export const AllSet = "AllSet"
+export const GoalProgress = "GoalProgress"
+export const MyGoal = "MyGoal"
+export const EditGoal = "EditGoal"
 
 class Router extends Component {
   componentDidMount() {

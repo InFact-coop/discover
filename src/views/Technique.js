@@ -3,9 +3,9 @@ import { connect } from "react-redux"
 import styled, { createGlobalStyle } from "styled-components"
 import PropTypes from "prop-types"
 import ProgressBar from "../components/ProgressBar"
-import SkipButton from "../components/SkipButton"
+import BackButton from "../components/BackButton"
 import SaveButton from "../components/SaveButton"
-import { SetGoal, GoalDays } from "."
+import { GoalDays, EditGoal } from "."
 import { changeTechniques } from "../state/actions/currentGoal"
 import Card from "../components/Card"
 import Carousel from "../components/Carousel"
@@ -77,12 +77,16 @@ class Technique extends Component {
   }
   render() {
     const { techniques } = this.state
+    const {
+      router: { history },
+    } = this.props
+    const edit = history[history.length - 1] === "EditGoal"
     return (
       <Fragment>
         <GlobalStyle />
         <_Container>
-          <ProgressBar progress={3} />
-          <SkipButton action="back" to={SetGoal} />
+          {!edit && <ProgressBar progress={4} />}
+          <BackButton />
           <_Title> Great!</_Title>
           <_Question>
             and which technique will you choose to achieve your goal?
@@ -106,11 +110,19 @@ class Technique extends Component {
             )
           )}
         </Carousel>
-        <SaveButton
-          saveFunction={this.saveFunction}
-          redirectTo={GoalDays}
-          text="NEXT"
-        />
+        {edit ? (
+          <SaveButton
+            saveFunction={this.saveFunction}
+            redirectTo={EditGoal}
+            text="SAVE"
+          />
+        ) : (
+          <SaveButton
+            saveFunction={this.saveFunction}
+            redirectTo={GoalDays}
+            text="NEXT"
+          />
+        )}
       </Fragment>
     )
   }
@@ -123,6 +135,10 @@ Technique.prototypes = {
 }
 
 export default connect(
-  ({ staticData, currentGoal }) => ({ staticData, currentGoal }),
+  ({ router, staticData, currentGoal }) => ({
+    staticData,
+    currentGoal,
+    router,
+  }),
   { changeTechniques }
 )(Technique)
