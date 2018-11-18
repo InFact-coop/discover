@@ -5,7 +5,7 @@ const daysToGo = (endDate) => {
   const dateNow = normalizeDate(Date.now())
   if (dateNow > deadline)
     return "You completed this goal!"
-  return `${(deadline - dateNow)/86400000} days to go!`;
+  return `${Math.floor((deadline - dateNow)/86400000)} days to go!`;
 }
 
 export default daysToGo
