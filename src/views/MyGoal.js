@@ -1,6 +1,9 @@
+import { connect } from "react-redux"
 import styled, { createGlobalStyle } from "styled-components"
 import GoalDetails from "../components/GoalDetails"
+import { changeView } from "../state/actions/router"
 import goalIcon from "../assets/icons/my_goal_big.svg"
+import { EditGoal } from "."
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -25,7 +28,7 @@ const _EditButton = styled.div.attrs({
   font-weight: 500;
   color: white;
 `
-const MyGoal = () => (
+const MyGoal = ({ changeView }) => (
   <_Container>
     <GlobalStyle />
     <_GoalImage src={goalIcon} />
@@ -34,8 +37,11 @@ const MyGoal = () => (
     <GoalDetails section={"days"} />
     <GoalDetails section={"time"} />
     <GoalDetails section={"progress"} />
-    <_EditButton> EDIT MY GOAL</_EditButton>
+    <_EditButton onClick={() => changeView(EditGoal)}>EDIT MY GOAL</_EditButton>
   </_Container>
 )
 
-export default MyGoal
+export default connect(
+  null,
+  { changeView }
+)(MyGoal)
