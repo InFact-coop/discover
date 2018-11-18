@@ -10,7 +10,11 @@ export const Technique = "Technique"
 export const Name = "Name"
 export const Avatar = "Avatar"
 export const SetGoal = "SetGoal"
+export const GoalDays = "GoalDays"
+export const GoalTime = "GoalTime"
+export const Recap = "Recap"
 export const GoalProgress = "GoalProgress"
+export const AllSet = "AllSet"
 
 class Router extends Component {
   componentDidMount() {
