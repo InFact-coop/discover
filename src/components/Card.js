@@ -1,5 +1,6 @@
 import { Component } from "react"
 import styled from "styled-components"
+import PropTypes from "prop-types"
 
 const _CardContainer = styled.div.attrs({
   className: "br4 ma1",
@@ -13,14 +14,14 @@ const _CardContainer = styled.div.attrs({
 const _Card = styled.div.attrs({
   className: "flex flex-column ma1 items-center br4",
 })`
-  background-color: var(--yellow);
-  ${({ width, height }) =>
-    `width: ${width};
+  ${({ width, height, backgroundColor }) =>
+    `background-color: var(${backgroundColor});
+    width: ${width};
     height: ${height};	
   `};
 `
 const _CardTitle = styled.p.attrs({
-  className: "font-3 sans mt6 mb2 tc",
+  className: "font-3 sans mt4 mb2 tc",
 })`
   color: var(--gray);
   font-weight: 500;
@@ -38,9 +39,6 @@ const _CardImage = styled.img.attrs({
 `
 
 class Card extends Component {
-  onClick = () => {
-    this.setState(({ selected }) => ({ selected: !selected }))
-  }
   render() {
     const {
       width,
@@ -49,11 +47,18 @@ class Card extends Component {
       description,
       image,
       selected,
+      backgroundColor,
       onCardClick,
     } = this.props
+
     return (
       <_CardContainer selected={selected}>
-        <_Card width={width} height={height} onClick={onCardClick}>
+        <_Card
+          width={width}
+          height={height}
+          backgroundColor={backgroundColor}
+          onClick={onCardClick}
+        >
           <_CardTitle>{title}</_CardTitle>
           <_CardDescription>{description}</_CardDescription>
           <_CardImage src={image} />
@@ -61,6 +66,17 @@ class Card extends Component {
       </_CardContainer>
     )
   }
+}
+
+Card.prototypes = {
+  width: PropTypes.number,
+  height: PropTypes.number,
+  title: PropTypes.string,
+  description: PropTypes.string,
+  image: PropTypes.string,
+  selected: PropTypes.boolean,
+  backgroundColor: PropTypes.string,
+  onCardClick: PropTypes.func,
 }
 
 export default Card
