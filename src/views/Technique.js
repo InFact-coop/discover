@@ -7,6 +7,7 @@ import BackButton from "../components/BackButton"
 import SaveButton from "../components/SaveButton"
 import { GoalDays, EditGoal } from "."
 import { changeTechniques } from "../state/actions/currentGoal"
+import { changeView } from "../state/actions/router"
 import Card from "../components/Card"
 import Carousel from "../components/Carousel"
 import background from "../assets/backgrounds/bg_which_technique.svg"
@@ -14,6 +15,7 @@ import background from "../assets/backgrounds/bg_which_technique.svg"
 const GlobalStyle = createGlobalStyle`
   body {
     background: url(${background}) no-repeat;
+    background-size: cover;
   }
 `
 const _Container = styled.div.attrs({
@@ -78,6 +80,7 @@ class Technique extends Component {
   render() {
     const { techniques } = this.state
     const {
+      changeView,
       router: { history },
     } = this.props
     const edit = history[history.length - 1] === "EditGoal"
@@ -95,19 +98,25 @@ class Technique extends Component {
         </_Container>
         <Carousel>
           {techniques.map(
-            ({ title, description, image, backgroundColor, selected }) => (
-              <Card
-                key={title}
-                width="17rem"
-                height="22rem"
-                title={title}
-                description={description}
-                image={image}
-                backgroundColor={backgroundColor}
-                selected={selected}
-                onCardClick={this.onCardClick(title)}
-              />
-            )
+            ({ title, description, image, backgroundColor, selected }) => {
+              const onClick =
+                title === "I want to SKIP this bit!"
+                  ? () => changeView(GoalDays)
+                  : this.onCardClick(title)
+              return (
+                <Card
+                  key={title}
+                  width="17rem"
+                  height="22rem"
+                  title={title}
+                  description={description}
+                  image={image}
+                  backgroundColor={backgroundColor}
+                  selected={selected}
+                  onCardClick={onClick}
+                />
+              )
+            }
           )}
         </Carousel>
         {edit ? (
@@ -140,5 +149,5 @@ export default connect(
     currentGoal,
     router,
   }),
-  { changeTechniques }
+  { changeTechniques, changeView }
 )(Technique)
