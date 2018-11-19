@@ -12,6 +12,7 @@ import background from "../assets/backgrounds/bg_what_is_your_goal.svg"
 const GlobalStyle = createGlobalStyle`
   body {
     background: url(${background}) no-repeat;
+    background-size: cover;
   }
 `
 const _Container = styled.div.attrs({

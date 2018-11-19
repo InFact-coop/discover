@@ -19,6 +19,7 @@ import botIcon from "../assets/icons/bot.svg"
 const GlobalStyle = createGlobalStyle`
   body {
     background: url(${background}) no-repeat;
+    background-size: cover;
   }
 `
 const _Container = styled.div.attrs({

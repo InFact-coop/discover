@@ -13,6 +13,7 @@ import avatar1 from "../assets/icons/avatar_round.svg"
 const GlobalStyle = createGlobalStyle`
   body {
     background: url(${background}) no-repeat;
+    background-size: cover;
   }
 `
 const _Container = styled.div.attrs({
