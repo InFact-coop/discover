@@ -7,6 +7,7 @@ import {
   SELECT_TIME_OF_DAY,
   CHANGE_TIME,
   CHANGE_TECHNIQUES,
+  ARCHIVE_GOAL,
 } from "../types"
 
 const INITIAL_STATE = {
@@ -49,6 +50,9 @@ export default (state = INITIAL_STATE, { payload, type }) => {
         ...state,
         techniques: payload,
       }
+    case ARCHIVE_GOAL: {
+      return INITIAL_STATE
+    }
     default:
       return state
   }

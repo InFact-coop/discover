@@ -29,3 +29,6 @@ export const TOGGLE_SELECT_TECHNIQUE = "TOGGLE_SELECT_TECHNIQUE"
 // profile
 export const CHANGE_NAME = "CHANGE_NAME"
 export const CHANGE_AVATAR = "CHANGE_AVATAR"
+
+//previous goals
+export const ARCHIVE_GOAL = "ARCHIVE_GOAL"
