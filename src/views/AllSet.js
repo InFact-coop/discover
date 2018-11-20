@@ -41,7 +41,7 @@ class AllSet extends Component {
   }
 }
 
-AllSet.proptypes = {
+AllSet.propTypes = {
   changeView: PropTypes.func.isRequired,
 }
 

@@ -120,7 +120,7 @@ class Recap extends Component {
   }
 }
 
-Recap.proptypes = {
+Recap.propTypes = {
   description: PropTypes.string.isRequired,
   duration: PropTypes.string,
   daysOfWeek: PropTypes.array,

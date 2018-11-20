@@ -200,7 +200,7 @@ class GoalDays extends Component {
   }
 }
 
-GoalDays.proptypes = {
+GoalDays.propTypes = {
   staticData: PropTypes.object.isRequired,
   daysOfWeek: PropTypes.array,
   duration: PropTypes.string,
