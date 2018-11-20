@@ -36,7 +36,7 @@ class GoalDetails extends Component {
       duration,
       timeOfDay,
       daysOfWeek,
-      finishDate,
+      scheduledFinishDate,
       techniques,
     } = this.props
 
@@ -89,7 +89,7 @@ class GoalDetails extends Component {
           <_Container>
             <_TextMono>and you have</_TextMono>
             <p className="mono font-3 tc" style={{ color: "var(--light-red)" }}>
-              {goalDaysToGo(finishDate)}
+              {goalDaysToGo(scheduledFinishDate)}
             </p>
           </_Container>
         )
@@ -112,7 +112,7 @@ export default connect(
       daysOfWeek,
       timeOfDay,
       techniques,
-      finishDate,
+      scheduledFinishDate,
     },
   }) => ({
     description,
@@ -120,6 +120,6 @@ export default connect(
     daysOfWeek,
     techniques,
     timeOfDay,
-    finishDate,
+    scheduledFinishDate,
   })
 )(GoalDetails)

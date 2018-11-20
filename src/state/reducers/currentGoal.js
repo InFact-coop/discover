@@ -2,12 +2,13 @@ import {
   CHANGE_GOAL,
   SELECT_DAY,
   SET_START_DATE,
-  SET_FINISH_DATE,
+  SET_SCHEDULED_FINISH_DATE,
   SET_DURATION,
   SELECT_TIME_OF_DAY,
   CHANGE_TIME,
   CHANGE_TECHNIQUES,
-  ARCHIVE_GOAL,
+  SET_ACTUAL_FINISH_DATE,
+  CLEAR_CURRENT_GOAL,
 } from "../types"
 
 const INITIAL_STATE = {
@@ -18,7 +19,8 @@ const INITIAL_STATE = {
     time: "00:00",
   },
   startDate: "",
-  finishDate: "",
+  scheduledFinishDate: "",
+  actualFinishDate: "",
   duration: "",
   techniques: [],
 }
@@ -31,8 +33,8 @@ export default (state = INITIAL_STATE, { payload, type }) => {
       return { ...state, daysOfWeek: payload }
     case SET_START_DATE:
       return { ...state, startDate: payload }
-    case SET_FINISH_DATE:
-      return { ...state, finishDate: payload }
+    case SET_SCHEDULED_FINISH_DATE:
+      return { ...state, scheduledFinishDate: payload }
     case SET_DURATION:
       return { ...state, duration: payload }
     case SELECT_TIME_OF_DAY:
@@ -50,7 +52,10 @@ export default (state = INITIAL_STATE, { payload, type }) => {
         ...state,
         techniques: payload,
       }
-    case ARCHIVE_GOAL: {
+    case SET_ACTUAL_FINISH_DATE: {
+      return { ...state, actualFinishDate: payload }
+    }
+    case CLEAR_CURRENT_GOAL: {
       return INITIAL_STATE
     }
     default:
