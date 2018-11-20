@@ -10,6 +10,7 @@ import background from "../assets/backgrounds/bg_splash.svg"
 const GlobalStyle = createGlobalStyle`
   body {
     background: url(${background}) no-repeat;
+    background-size: cover;
   }
 `
 

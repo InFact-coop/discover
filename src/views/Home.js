@@ -1,16 +1,10 @@
-import { connect } from "react-redux"
+import NavBar from "../components/NavBar"
 
-import { changeView } from "../state/actions/router"
-import { MyGoal } from "."
-
-const Home = ({ changeView }) => (
+const Home = () => (
   <div>
     <h1 className="font-1 sans">Home</h1>
-    <div onClick={() => changeView(MyGoal)}>Go to My Goal</div>
+    <NavBar />
   </div>
 )
 
-export default connect(
-  null,
-  { changeView }
-)(Home)
+export default Home
