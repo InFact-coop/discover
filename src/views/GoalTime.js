@@ -160,7 +160,7 @@ class GoalTime extends Component {
   }
 }
 
-GoalTime.prototypes = {
+GoalTime.proptypes = {
   timeOfDay: PropTypes.object,
   staticData: PropTypes.object.isRequired,
   selectTimeOfDay: PropTypes.func.isRequired,

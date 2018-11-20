@@ -107,7 +107,7 @@ class Avatar extends Component {
   }
 }
 
-Avatar.prototypes = {
+Avatar.proptypes = {
   avatar: PropTypes.string,
   changeAvatar: PropTypes.func.isRequired,
 }

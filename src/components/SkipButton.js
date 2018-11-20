@@ -34,7 +34,7 @@ class SkipButton extends Component {
   }
 }
 
-SkipButton.prototypes = {
+SkipButton.proptypes = {
   changeView: PropTypes.func.isRequired,
   to: PropTypes.string.isRequired,
   action: PropTypes.string.isRequired,

@@ -68,7 +68,7 @@ class Card extends Component {
   }
 }
 
-Card.prototypes = {
+Card.proptypes = {
   width: PropTypes.number,
   height: PropTypes.number,
   title: PropTypes.string,
