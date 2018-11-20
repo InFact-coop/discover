@@ -1,23 +1,25 @@
-import { Component } from "react"
+import { Component, Fragment } from "react"
 import { connect } from "react-redux"
 import styled, { createGlobalStyle } from "styled-components"
 import PropTypes from "prop-types"
 import ProgressBar from "../components/ProgressBar"
 import SaveButton from "../components/SaveButton"
-import SkipButton from "../components/SkipButton"
-import { Technique, GoalTime } from "."
+import BackButton from "../components/BackButton"
+import { GoalTime, EditGoal } from "."
 import {
   selectDay,
   setStartDate,
   setFinishDate,
   setDuration,
 } from "../state/actions/currentGoal"
+import { changeView } from "../state/actions/router"
 import background from "../assets/backgrounds/bg_avatar.svg"
 import botIcon from "../assets/icons/bot.svg"
 
 const GlobalStyle = createGlobalStyle`
   body {
     background: url(${background}) no-repeat;
+    background-size: cover;
   }
 `
 const _Container = styled.div.attrs({
@@ -62,6 +64,15 @@ const _Pill = styled.div.attrs({
     selected &&
     `border: 0.2rem solid var(--gray);	
 `};
+`
+
+const _SkipButton = styled.div.attrs({
+  className: "flex justify-center items-center sans h2 w2",
+})`
+  position: fixed;
+  top: 1.5rem;
+  right: 1rem;
+  font-weight: 500;
 `
 
 class GoalDays extends Component {
@@ -152,12 +163,28 @@ class GoalDays extends Component {
 
   render() {
     const { days, durations, everyDaySelected } = this.state
+    const {
+      changeView,
+      router: { history },
+    } = this.props
+    const edit = history[history.length - 1] === "EditGoal"
+
     return (
       <_Container>
         <GlobalStyle />
-        <ProgressBar progress={5} />
-        <SkipButton to={Technique} action="back" />
-        <SkipButton to={GoalTime} action="skip" />
+        {!edit && (
+          <Fragment>
+            <ProgressBar progress={5} />
+            <_SkipButton
+              onClick={() => {
+                changeView(GoalTime)
+              }}
+            >
+              SKIP
+            </_SkipButton>
+          </Fragment>
+        )}
+        <BackButton />
         <_BotIcon src={botIcon} />
         <_Title>Perfect!</_Title>
         <_Description>
@@ -190,11 +217,19 @@ class GoalDays extends Component {
             </_Pill>
           ))}
         </_InnerContainer>
-        <SaveButton
-          saveFunction={this.saveFunction}
-          text="NEXT"
-          redirectTo={GoalTime}
-        />
+        {edit ? (
+          <SaveButton
+            saveFunction={this.saveFunction}
+            redirectTo={EditGoal}
+            text="SAVE"
+          />
+        ) : (
+          <SaveButton
+            saveFunction={this.saveFunction}
+            text="NEXT"
+            redirectTo={GoalTime}
+          />
+        )}
       </_Container>
     )
   }
@@ -210,18 +245,21 @@ GoalDays.propTypes = {
   setStartDate: PropTypes.func.isRequired,
   setFinishDate: PropTypes.func.isRequired,
   setDuration: PropTypes.func.isRequired,
+  changeView: PropTypes.func.isRequired,
 }
 
 export default connect(
   ({
+    router,
     staticData,
     currentGoal: { daysOfWeek, duration, startDate, finishDate },
   }) => ({
+    router,
     daysOfWeek,
     duration,
     startDate,
     finishDate,
     staticData,
   }),
-  { selectDay, setStartDate, setFinishDate, setDuration }
+  { selectDay, setStartDate, setFinishDate, setDuration, changeView }
 )(GoalDays)

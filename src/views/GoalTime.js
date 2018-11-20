@@ -4,9 +4,10 @@ import styled, { createGlobalStyle } from "styled-components"
 import PropTypes from "prop-types"
 import ProgressBar from "../components/ProgressBar"
 import SaveButton from "../components/SaveButton"
-import SkipButton from "../components/SkipButton"
-import { GoalDays, Recap } from "."
+import BackButton from "../components/BackButton"
+import { Recap, EditGoal } from "."
 import { selectTimeOfDay, changeTime } from "../state/actions/currentGoal"
+import { changeView } from "../state/actions/router"
 import Card from "../components/Card"
 import Carousel from "../components/Carousel"
 import background from "../assets/backgrounds/bg_when.svg"
@@ -14,6 +15,7 @@ import background from "../assets/backgrounds/bg_when.svg"
 const GlobalStyle = createGlobalStyle`
   body {
     background: url(${background}) no-repeat;
+    background-size: cover;
   }
 `
 const _Container = styled.div.attrs({
@@ -55,6 +57,14 @@ const _TimeInput = styled.input.attrs({
 })`
   border-style: hidden;
   color: var(--mid-gray);
+`
+const _SkipButton = styled.div.attrs({
+  className: "flex justify-center items-center sans h2 w2",
+})`
+  position: fixed;
+  top: 1.5rem;
+  right: 1rem;
+  font-weight: 500;
 `
 
 class GoalTime extends Component {
@@ -99,12 +109,27 @@ class GoalTime extends Component {
   }
   render() {
     const { times, hours, minutes } = this.state
+    const {
+      changeView,
+      router: { history },
+    } = this.props
+    const edit = history[history.length - 1] === "EditGoal"
     return (
       <Fragment>
         <GlobalStyle />
-        <ProgressBar progress={6} />
-        <SkipButton action="back" to={GoalDays} />
-        <SkipButton action="skip" to={Recap} />
+        {!edit && (
+          <Fragment>
+            <ProgressBar progress={6} />
+            <_SkipButton
+              onClick={() => {
+                changeView(Recap)
+              }}
+            >
+              SKIP
+            </_SkipButton>
+          </Fragment>
+        )}
+        <BackButton />
         <_Container>
           <_Title> Awesome!</_Title>
           <_Description>
@@ -150,11 +175,19 @@ class GoalTime extends Component {
             />
           </_TimeDiv>
         </_TimeContainer>
-        <SaveButton
-          saveFunction={this.saveFunction}
-          text="NEXT"
-          redirectTo={Recap}
-        />
+        {edit ? (
+          <SaveButton
+            saveFunction={this.saveFunction}
+            redirectTo={EditGoal}
+            text="SAVE"
+          />
+        ) : (
+          <SaveButton
+            saveFunction={this.saveFunction}
+            text="NEXT"
+            redirectTo={Recap}
+          />
+        )}
       </Fragment>
     )
   }
@@ -165,9 +198,14 @@ GoalTime.propTypes = {
   staticData: PropTypes.object.isRequired,
   selectTimeOfDay: PropTypes.func.isRequired,
   changeTime: PropTypes.func.isRequired,
+  changeView: PropTypes.func.isRequired,
 }
 
 export default connect(
-  ({ staticData, currentGoal: { timeOfDay } }) => ({ timeOfDay, staticData }),
-  { selectTimeOfDay, changeTime }
+  ({ router, staticData, currentGoal: { timeOfDay } }) => ({
+    timeOfDay,
+    staticData,
+    router,
+  }),
+  { selectTimeOfDay, changeTime, changeView }
 )(GoalTime)

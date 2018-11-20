@@ -1,5 +1,6 @@
 // router
 export const CHANGE_VIEW = "CHANGE_VIEW"
+export const BACK_TO_PREVIOUS_VIEW = "BACK_TO_PREVIOUS_VIEW"
 
 // code
 export const VERIFY_SUCCEEDED = "VERIFY_SUCCEEDED"

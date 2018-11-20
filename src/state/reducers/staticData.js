@@ -79,6 +79,13 @@ const INITIAL_STATE = {
       image: circle,
       backgroundColor: "--light-purple",
     },
+    {
+      title: "I want to SKIP this bit!",
+      description:
+        "OK, I get it but remember selecting techniques may be helpful in order to make your goal specific and achievable",
+      backgroundColor: "--light-yellow",
+      image: circle,
+    },
   ],
   days: [
     "Monday",

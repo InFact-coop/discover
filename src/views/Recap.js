@@ -1,8 +1,8 @@
-import { Component } from "react"
 import { connect } from "react-redux"
 import styled, { createGlobalStyle } from "styled-components"
 import PropTypes from "prop-types"
-import SkipButton from "../components/SkipButton"
+import GoalDetails from "../components/GoalDetails"
+import BackButton from "../components/BackButton"
 import { GoalTime, AllSet } from "."
 import { changeView } from "../state/actions/router"
 import background from "../assets/backgrounds/bg_RECAP.svg"
@@ -16,7 +16,7 @@ const GlobalStyle = createGlobalStyle`
 const _Container = styled.div.attrs({
   className: "flex flex-column items-center justify-center center",
 })`
-  margin-top: 17%;
+  height: 95vh;
 `
 const _Title = styled.p.attrs({
   className: "mono font-1 tc ma2",
@@ -35,18 +35,6 @@ const _InnerContainer = styled.div.attrs({
   height: 55vh;
   width: 90%;
 `
-const _DescriptionContainer = styled.div.attrs({
-  className: "flex flex-column justify-center items-center ma3 ",
-})``
-
-const _TextMono = styled.p.attrs({
-  className: "mono font-4 tc",
-})``
-const _TextSans = styled.p.attrs({
-  className: "mono font-4 tc",
-})`
-  font-weight: 500;
-`
 
 const _NextButton = styled.div.attrs({
   className: "w-60 sans font-3 flex items-center justify-center br-pill",
@@ -57,85 +45,28 @@ const _NextButton = styled.div.attrs({
   color: white;
 `
 
-class Recap extends Component {
-  state = {
-    daysString: "",
-    techniquesString: "",
-  }
+const Recap = ({ changeView }) => (
+  <_Container>
+    <GlobalStyle />
+    <BackButton action="back" to={GoalTime} />
+    <_Title>Oky, Doky!</_Title>
+    <_Description>So let's recap</_Description>
+    <_InnerContainer>
+      <GoalDetails section={"description"} />
+      <GoalDetails section={"technique"} />
+      <GoalDetails section={"days"} />
+      <GoalDetails section={"time"} />
+      <GoalDetails section={"duration"} />
+    </_InnerContainer>
+    <_NextButton onClick={() => changeView(AllSet)}>COOL LET'S GO</_NextButton>
+  </_Container>
+)
 
-  toSentence = arr =>
-    arr.length > 1
-      ? `${arr.slice(0, arr.length - 1).join(", ")} and ${arr[arr.length - 1]}`
-      : arr[0]
-
-  componentDidMount() {
-    const { techniques, daysOfWeek } = this.props
-    this.setState({
-      daysString: `Every ${
-        daysOfWeek.length === 7 ? "day" : this.toSentence(daysOfWeek)
-      }`,
-      techniquesString: this.toSentence(techniques),
-    })
-  }
-  render() {
-    const { description, duration, timeOfDay, changeView } = this.props
-    const { daysString, techniquesString } = this.state
-    return (
-      <_Container>
-        <GlobalStyle />
-        <SkipButton action="back" to={GoalTime} />
-        <_Title>Oky, Doky!</_Title>
-        <_Description>So let's recap</_Description>
-        <_InnerContainer>
-          <_DescriptionContainer>
-            <_TextMono>Your goal is</_TextMono>
-            <_TextSans>{description}</_TextSans>
-          </_DescriptionContainer>
-          <_DescriptionContainer>
-            <_TextMono>By using</_TextMono>
-            <_TextSans>
-              <u>{techniquesString}</u>
-            </_TextSans>
-          </_DescriptionContainer>
-          <_DescriptionContainer>
-            <_TextMono>And you will do it</_TextMono>
-            <_TextSans> {daysString}</_TextSans>
-          </_DescriptionContainer>
-          <_DescriptionContainer>
-            <_TextMono>preferably</_TextMono>
-            <_TextSans>
-              {timeOfDay.description}, at {timeOfDay.time}
-            </_TextSans>
-          </_DescriptionContainer>
-          <_DescriptionContainer>
-            <_TextMono>for</_TextMono>
-            <_TextSans>{duration}</_TextSans>
-          </_DescriptionContainer>
-        </_InnerContainer>
-        <_NextButton onClick={() => changeView(AllSet)}>
-          COOL LET'S GO
-        </_NextButton>
-      </_Container>
-    )
-  }
+Recap.prototypes = {
+  changeView: PropTypes.func.isRequired,
 }
 
-Recap.propTypes = {
-  description: PropTypes.string.isRequired,
-  duration: PropTypes.string,
-  daysOfWeek: PropTypes.array,
-  timeOfDay: PropTypes.object,
-  techniques: PropTypes.array,
-}
 export default connect(
-  ({
-    currentGoal: { description, duration, daysOfWeek, timeOfDay, techniques },
-  }) => ({
-    description,
-    duration,
-    daysOfWeek,
-    techniques,
-    timeOfDay,
-  }),
+  null,
   { changeView }
 )(Recap)

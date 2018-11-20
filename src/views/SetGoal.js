@@ -3,15 +3,16 @@ import { connect } from "react-redux"
 import styled, { createGlobalStyle } from "styled-components"
 import PropTypes from "prop-types"
 import ProgressBar from "../components/ProgressBar"
-import SkipButton from "../components/SkipButton"
+import BackButton from "../components/BackButton"
 import SaveButton from "../components/SaveButton"
-import { Avatar, Technique } from "."
+import { Avatar, Technique, EditGoal } from "."
 import { changeGoal } from "../state/actions/currentGoal"
 import background from "../assets/backgrounds/bg_what_is_your_goal.svg"
 
 const GlobalStyle = createGlobalStyle`
   body {
     background: url(${background}) no-repeat;
+    background-size: cover;
   }
 `
 const _Container = styled.div.attrs({
@@ -61,13 +62,17 @@ class SetGoal extends Component {
     changeGoal(goal)
   }
   render() {
-    const { name } = this.props
+    const {
+      name,
+      router: { history },
+    } = this.props
     const { goal } = this.state
+    const edit = history[history.length - 1] === "EditGoal"
     return (
       <_Container>
         <GlobalStyle />
-        <ProgressBar progress={3} />
-        <SkipButton action="back" to={Avatar} />
+        {!edit && <ProgressBar progress={3} />}
+        <BackButton action="back" to={Avatar} />
         <_Title>It's goal time, {name}!</_Title>
         <_Question>What should I set as your DISCOVER goal?</_Question>
         <_Input
@@ -75,11 +80,19 @@ class SetGoal extends Component {
           value={goal}
           onChange={this.onInputChange}
         />
-        <SaveButton
-          saveFunction={this.saveFunction}
-          redirectTo={Technique}
-          text="YUP, NEXT"
-        />
+        {edit ? (
+          <SaveButton
+            saveFunction={this.saveFunction}
+            redirectTo={EditGoal}
+            text="SAVE"
+          />
+        ) : (
+          <SaveButton
+            saveFunction={this.saveFunction}
+            redirectTo={Technique}
+            text="YUP, NEXT"
+          />
+        )}
       </_Container>
     )
   }
@@ -91,9 +104,10 @@ SetGoal.propTypes = {
   changeGoal: PropTypes.func.isRequired,
 }
 export default connect(
-  ({ profile: { name }, currentGoal: { description } }) => ({
+  ({ router, profile: { name }, currentGoal: { description } }) => ({
     name,
     description,
+    router,
   }),
   { changeGoal }
 )(SetGoal)
