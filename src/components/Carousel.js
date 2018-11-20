@@ -1,5 +1,6 @@
 import { Component } from "react"
 import styled from "styled-components"
+import PropTypes from "prop-types"
 
 const _FlickityContainer = styled.div``
 
@@ -31,6 +32,10 @@ class Carousel extends Component {
       </_FlickityContainer>
     )
   }
+}
+
+Carousel.propTypes = {
+  children: PropTypes.array.isRequired,
 }
 
 export default Carousel

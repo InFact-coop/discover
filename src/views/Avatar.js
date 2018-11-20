@@ -1,6 +1,11 @@
 import { Component } from "react"
 import { connect } from "react-redux"
 import styled, { createGlobalStyle } from "styled-components"
+import PropTypes from "prop-types"
+import ProgressBar from "../components/ProgressBar"
+import SaveButton from "../components/SaveButton"
+import SkipButton from "../components/SkipButton"
+import { Name, SetGoal } from "."
 import { changeAvatar } from "../state/actions/profile"
 import background from "../assets/backgrounds/bg_avatar.svg"
 import avatar1 from "../assets/icons/avatar_round.svg"
@@ -43,6 +48,7 @@ class Avatar extends Component {
     currentAvatar: "",
   }
 
+  // to add border on selected avatars
   static getDerivedStateFromProps(nextProps, prevState) {
     const { avatar } = nextProps
     const { currentAvatar } = prevState
@@ -64,6 +70,8 @@ class Avatar extends Component {
     return (
       <_Container>
         <GlobalStyle />
+        <ProgressBar progress={2} />
+        <SkipButton action="back" to={Name} />
         <_Title>Please choose your avatar</_Title>
         <_AvatarsRow>
           <_Avatar
@@ -93,9 +101,15 @@ class Avatar extends Component {
             onClick={this.onAvatarClick}
           />
         </_AvatarsRow>
+        <SaveButton redirectTo={SetGoal} text="THAT'S MY AVATAR!" />
       </_Container>
     )
   }
+}
+
+Avatar.propTypes = {
+  avatar: PropTypes.string,
+  changeAvatar: PropTypes.func.isRequired,
 }
 
 export default connect(

@@ -1,7 +1,7 @@
 import { connect } from "react-redux"
 
 import { changeView } from "../state/actions/router"
-import { Name, Avatar, SetGoal, Technique } from "."
+import { Name, Avatar, SetGoal, Technique, GoalDays } from "."
 
 const Home = ({ changeView }) => (
   <div>
@@ -10,6 +10,7 @@ const Home = ({ changeView }) => (
     <div onClick={() => changeView(Avatar)}>Go to Avatar</div>
     <div onClick={() => changeView(SetGoal)}>Go to SetGoal</div>
     <div onClick={() => changeView(Technique)}>Go to Technique</div>
+    <div onClick={() => changeView(GoalDays)}>Go to GoalDays</div>
   </div>
 )
 

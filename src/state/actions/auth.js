@@ -2,10 +2,20 @@ import axios from "axios"
 import { createAction } from "redux-actions"
 import * as r from "ramda" //eslint-disable-line import/no-namespace
 
-import { VERIFY_FAILED, VERIFY_SUCCEEDED } from "../types"
+import {
+  VERIFY_FAILED,
+  VERIFY_SUCCEEDED,
+  VERIFY_FAILED_ROLLBACK,
+} from "../types"
 
 const verifySucceeded = createAction(VERIFY_SUCCEEDED)
-const verifyFailed = createAction(VERIFY_FAILED)
+const verifyFailed = err => ({
+  type: VERIFY_FAILED,
+  payload: { err },
+  offline: {
+    rollback: { type: VERIFY_FAILED_ROLLBACK },
+  },
+})
 
 export const verifyCode = code => async dispatch => {
   try {
@@ -25,10 +35,7 @@ export const verifyCode = code => async dispatch => {
 
 export const verifyToken = token => async dispatch => {
   try {
-    const {
-      data: { verified },
-    } = await axios.post("/api/user/codetoken", { token })
-    if (verified) dispatch(verifySucceeded({ token }))
+    await axios.post("/api/user/codetoken", { token })
   } catch (err) {
     dispatch(verifyFailed({ err: null }))
   }

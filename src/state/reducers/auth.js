@@ -1,4 +1,9 @@
-import { VERIFY_SUCCEEDED, VERIFY_FAILED, VERIFY_START } from "../types"
+import {
+  VERIFY_SUCCEEDED,
+  VERIFY_FAILED,
+  VERIFY_START,
+  VERIFY_FAILED_ROLLBACK,
+} from "../types"
 
 const INITIAL_STATE = {
   code: "",
@@ -22,6 +27,10 @@ export default (state = INITIAL_STATE, { payload, type }) => {
       return {
         ...INITIAL_STATE,
         err: payload.err,
+      }
+    case VERIFY_FAILED_ROLLBACK:
+      return {
+        ...state,
       }
     default:
       return state

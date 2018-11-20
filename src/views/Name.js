@@ -1,6 +1,10 @@
 import { Component } from "react"
 import { connect } from "react-redux"
 import styled, { createGlobalStyle } from "styled-components"
+import PropTypes from "prop-types"
+import ProgressBar from "../components/ProgressBar"
+import SaveButton from "../components/SaveButton"
+import { Avatar } from "."
 import { changeName } from "../state/actions/profile"
 import background from "../assets/backgrounds/bg_what_is_your_name.svg"
 import botIcon from "../assets/icons/bot.svg"
@@ -48,16 +52,24 @@ class Name extends Component {
     const { name } = this.props
     return (
       <_Container>
-        <GlobalStyle />_<_BotIcon src={botIcon} />
+        <ProgressBar progress={1} />
+        <GlobalStyle />
+        <_BotIcon src={botIcon} />
         <_Title>
           OK,
           <br /> First thing first!
         </_Title>
         <_Question>what's your name my friend?</_Question>
         <_Input value={name} onChange={this.onInputChange} />
+        <SaveButton text="THAT'S MY NAME!" redirectTo={Avatar} />
       </_Container>
     )
   }
+}
+
+Name.propTypes = {
+  name: PropTypes.string,
+  changeName: PropTypes.func.isRequired,
 }
 
 export default connect(
