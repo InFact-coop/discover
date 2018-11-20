@@ -27,7 +27,7 @@ class SaveButton extends Component {
   }
 }
 
-SaveButton.prototypes = {
+SaveButton.propTypes = {
   changeView: PropTypes.func.isRequired,
   redirectTo: PropTypes.string.isRequired,
   saveFunction: PropTypes.func,
