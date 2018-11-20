@@ -74,7 +74,7 @@ Card.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
   image: PropTypes.string,
-  selected: PropTypes.boolean,
+  selected: PropTypes.bool,
   backgroundColor: PropTypes.string,
   onCardClick: PropTypes.func,
 }
