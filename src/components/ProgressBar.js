@@ -28,7 +28,7 @@ const ProgressBar = ({ progress }) => (
   </_Bar>
 )
 
-ProgressBar.prototypes = {
+ProgressBar.propTypes = {
   progress: PropTypes.number.isRequired,
 }
 

@@ -235,7 +235,7 @@ class GoalDays extends Component {
   }
 }
 
-GoalDays.prototypes = {
+GoalDays.propTypes = {
   staticData: PropTypes.object.isRequired,
   daysOfWeek: PropTypes.array,
   duration: PropTypes.string,

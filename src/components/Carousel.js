@@ -34,7 +34,7 @@ class Carousel extends Component {
   }
 }
 
-Carousel.prototypes = {
+Carousel.propTypes = {
   children: PropTypes.array.isRequired,
 }
 

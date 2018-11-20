@@ -137,7 +137,7 @@ class Technique extends Component {
   }
 }
 
-Technique.prototypes = {
+Technique.propTypes = {
   staticData: PropTypes.object.isRequired,
   currentGoal: PropTypes.object,
   changeTechniques: PropTypes.func.isRequired,

@@ -52,7 +52,7 @@ class Code extends Component {
   }
 }
 
-Code.prototypes = {
+Code.propTypes = {
   err: PropTypes.string,
   verifyCode: PropTypes.func.isRequired,
 }

@@ -67,7 +67,7 @@ class CodeInput extends Component {
   }
 }
 
-CodeInput.prototypes = {
+CodeInput.propTypes = {
   verifyCode: PropTypes.func.isRequired,
 }
 
