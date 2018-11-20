@@ -8,7 +8,7 @@ import ActionButton from "../components/shared/ActionButton"
 import Goal from "../components/GoalProgressListItem"
 import NavBar from "../components/NavBar"
 import { SetGoal, NewGoalConfirmation } from "."
-import { archiveGoal } from "../state/actions/pastGoals"
+import { archiveGoal, clearCurrentGoal } from "../state/actions/pastGoals"
 
 import getCurrentGoalProgress from "../utils/currentGoalProgress"
 import daysToGo from "../utils/goalDaysToGo"
@@ -32,13 +32,16 @@ class GoalProgress extends Component {
   onClick = () => {
     const {
       startDate,
-      finishDate,
+      scheduledFinishDate,
       currentGoal,
       archiveGoal,
+      clearCurrentGoal,
       changeView,
     } = this.props
-    if (getCurrentGoalProgress(startDate, finishDate) === 100) {
-      archiveGoal(currentGoal)
+    if (getCurrentGoalProgress(startDate, scheduledFinishDate) === 100) {
+      const actualFinishDate = new Date()
+      archiveGoal({ ...currentGoal, actualFinishDate })
+      clearCurrentGoal()
       changeView(SetGoal)
     } else changeView(NewGoalConfirmation)
   }
@@ -103,5 +106,5 @@ class GoalProgress extends Component {
 
 export default connect(
   ({ currentGoal }) => ({ currentGoal }),
-  { changeView, archiveGoal }
+  { changeView, archiveGoal, clearCurrentGoal }
 )(GoalProgress)

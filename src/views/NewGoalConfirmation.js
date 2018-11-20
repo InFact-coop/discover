@@ -4,7 +4,7 @@ import styled from "styled-components"
 import SaveButton from "../components/SaveButton"
 import BackButton from "../components/BackButton"
 import { backToPreviousView } from "../state/actions/router"
-import { archiveGoal } from "../state/actions/pastGoals"
+import { archiveGoal, clearCurrentGoal } from "../state/actions/pastGoals"
 import { SetGoal } from "."
 import botIcon from "../assets/icons/bot.svg"
 import daysToGo from "../utils/goalDaysToGo"
@@ -36,12 +36,18 @@ const _Hint = styled.p.attrs({
 })``
 
 class NewGoalConfirmation extends Component {
-  saveFunction = () => {
-    const { currentGoal, archiveGoal } = this.props
-    archiveGoal(currentGoal)
+  saveFunction = async () => {
+    const { currentGoal, archiveGoal, clearCurrentGoal } = this.props
+    const actualFinishDate = new Date()
+    archiveGoal({ ...currentGoal, actualFinishDate })
+    clearCurrentGoal()
   }
   render() {
-    const { name, finishDate, backToPreviousView } = this.props
+    const {
+      name,
+      currentGoal: { scheduledFinishDate },
+      backToPreviousView,
+    } = this.props
     return (
       <_Container>
         <BackButton />
@@ -50,7 +56,9 @@ class NewGoalConfirmation extends Component {
         <_Description>
           ARE YOU SURE?
           <br /> It’s good to stick to one goal at a time and you only have
-          <span style={{ color: "var(--red)" }}> {daysToGo(finishDate)}</span>
+          <span style={{ color: "var(--red)" }}>
+            {` ${daysToGo(scheduledFinishDate)}`}
+          </span>
           <br /> <br /> But if its not the one right for you, then no problem,
           let’s do it.
         </_Description>
@@ -66,9 +74,13 @@ class NewGoalConfirmation extends Component {
 }
 
 export default connect(
-  ({ profile: { name }, currentGoal: { finishDate } }) => ({
+  ({ profile: { name }, currentGoal }) => ({
     name,
-    finishDate,
+    currentGoal,
   }),
-  { backToPreviousView, archiveGoal }
+  {
+    backToPreviousView,
+    archiveGoal,
+    clearCurrentGoal,
+  }
 )(NewGoalConfirmation)
