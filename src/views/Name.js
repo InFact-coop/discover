@@ -68,7 +68,7 @@ class Name extends Component {
   }
 }
 
-Name.prototypes = {
+Name.propTypes = {
   name: PropTypes.string,
   changeName: PropTypes.func.isRequired,
 }
