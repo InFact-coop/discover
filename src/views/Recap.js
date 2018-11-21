@@ -62,7 +62,7 @@ const Recap = ({ changeView }) => (
   </_Container>
 )
 
-Recap.prototypes = {
+Recap.propTypes = {
   changeView: PropTypes.func.isRequired,
 }
 

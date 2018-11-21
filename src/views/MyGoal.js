@@ -1,6 +1,7 @@
 import { connect } from "react-redux"
 import styled, { createGlobalStyle } from "styled-components"
 import GoalDetails from "../components/GoalDetails"
+import NavBar from "../components/NavBar"
 import { changeView } from "../state/actions/router"
 import goalIcon from "../assets/icons/my_goal_big.svg"
 import { EditGoal } from "."
@@ -38,6 +39,7 @@ const MyGoal = ({ changeView }) => (
     <GoalDetails section={"time"} />
     <GoalDetails section={"progress"} />
     <_EditButton onClick={() => changeView(EditGoal)}>EDIT MY GOAL</_EditButton>
+    <NavBar />
   </_Container>
 )
 
