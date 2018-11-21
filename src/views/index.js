@@ -17,6 +17,7 @@ export const AllSet = "AllSet"
 export const GoalProgress = "GoalProgress"
 export const MyGoal = "MyGoal"
 export const EditGoal = "EditGoal"
+export const NewGoalConfirmation = "NewGoalConfirmation"
 
 class Router extends Component {
   componentDidMount() {

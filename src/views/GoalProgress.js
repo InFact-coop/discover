@@ -1,3 +1,4 @@
+import { Component } from "react"
 import { connect } from "react-redux"
 import { changeView } from "../state/actions/router"
 import styled from "styled-components"
@@ -6,6 +7,8 @@ import IconHeader from "../components/shared/IconHeader"
 import ActionButton from "../components/shared/ActionButton"
 import Goal from "../components/GoalProgressListItem"
 import NavBar from "../components/NavBar"
+import { SetGoal, NewGoalConfirmation } from "."
+import { archiveGoal, clearCurrentGoal } from "../state/actions/pastGoals"
 
 import getCurrentGoalProgress from "../utils/currentGoalProgress"
 import daysToGo from "../utils/goalDaysToGo"
@@ -25,39 +28,59 @@ const _Wrapper = styled.div.attrs({
 
 const fillColours = ["purple", "green", "blue"]
 
-const GoalProgress = () => (
-  <div>
-    <IconHeader title="Goals progress" icon={icon} />
-    <_Wrapper>
-      <Goal
-        width={getCurrentGoalProgress(
-          current_goal.start_date,
-          current_goal.scheduled_finish_date
-        )}
-        color="light-red"
-        goal={current_goal.description}
-        progressText={daysToGo(current_goal.scheduled_finish_date)}
-      />
-      {past_goals.map((goal, key) => {
-        return (
+class GoalProgress extends Component {
+  onClick = () => {
+    const {
+      startDate,
+      scheduledFinishDate,
+      currentGoal,
+      archiveGoal,
+      clearCurrentGoal,
+      changeView,
+    } = this.props
+    if (getCurrentGoalProgress(startDate, scheduledFinishDate) === 100) {
+      const actualFinishDate = new Date()
+      archiveGoal({ ...currentGoal, actualFinishDate })
+      clearCurrentGoal()
+      changeView(SetGoal)
+    } else changeView(NewGoalConfirmation)
+  }
+  render() {
+    return (
+      <div>
+        <IconHeader title="Goals progress" icon={icon} />
+        <_Wrapper>
           <Goal
-            key={key}
-            width={100}
-            color={fillColours[key % 3]}
-            goal={goal.description}
-            progressText={pastGoalDaysCompleted(
-              goal.start_date,
-              goal.scheduled_finish_date,
-              goal.actual_finish_date
+            width={getCurrentGoalProgress(
+              current_goal.start_date,
+              current_goal.scheduled_finish_date
             )}
+            color="light-red"
+            goal={current_goal.description}
+            progressText={daysToGo(current_goal.scheduled_finish_date)}
           />
-        )
-      })}
-    </_Wrapper>
-    <ActionButton>Set new goal</ActionButton>
-    <NavBar />
-  </div>
-)
+          {past_goals.map((goal, key) => {
+            return (
+              <Goal
+                key={key}
+                width={100}
+                color={fillColours[key % 3]}
+                goal={goal.description}
+                progressText={pastGoalDaysCompleted(
+                  goal.start_date,
+                  goal.scheduled_finish_date,
+                  goal.actual_finish_date
+                )}
+              />
+            )
+          })}
+        </_Wrapper>
+        <ActionButton onClick={this.onClick}>Set new goal</ActionButton>
+        <NavBar />
+      </div>
+    )
+  }
+}
 
 // GoalProgress.propTypes = {
 //   current_goal: PropTypes.shape({
@@ -82,6 +105,6 @@ const GoalProgress = () => (
 // }
 
 export default connect(
-  null,
-  { changeView }
+  ({ currentGoal }) => ({ currentGoal }),
+  { changeView, archiveGoal, clearCurrentGoal }
 )(GoalProgress)

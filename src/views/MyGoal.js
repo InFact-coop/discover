@@ -17,10 +17,6 @@ const _Container = styled.div.attrs({
   height: 100vh;
 `
 
-const _GoalImage = styled.img.attrs({
-  className: "",
-})``
-
 const _EditButton = styled.div.attrs({
   className: "w-60 sans font-3 flex items-center justify-center br-pill",
 })`
@@ -32,7 +28,7 @@ const _EditButton = styled.div.attrs({
 const MyGoal = ({ changeView }) => (
   <_Container>
     <GlobalStyle />
-    <_GoalImage src={goalIcon} />
+    <img src={goalIcon} />
     <GoalDetails section={"description"} />
     <GoalDetails section={"technique"} />
     <GoalDetails section={"days"} />

@@ -9,7 +9,7 @@ import { GoalTime, EditGoal } from "."
 import {
   selectDay,
   setStartDate,
-  setFinishDate,
+  setScheduledFinishDate,
   setDuration,
 } from "../state/actions/currentGoal"
 import { changeView } from "../state/actions/router"
@@ -92,7 +92,7 @@ class GoalDays extends Component {
       daysOfWeek,
       duration,
       startDate,
-      finishDate,
+      scheduledFinishDate,
     } = this.props
     const selectedDays = staticData.days.reduce((acc, curr) => {
       acc[curr] = {}
@@ -109,7 +109,7 @@ class GoalDays extends Component {
       durations: selectDuration,
       everyDaySelected: daysOfWeek.length === 7,
       startDate,
-      finishDate,
+      scheduledFinishDate,
     })
   }
 
@@ -136,28 +136,33 @@ class GoalDays extends Component {
     const numOfMonth = month[0]
     // start date is only set one time
     const _startDate = startDate || new Date()
-    const finishDate = new Date()
-    finishDate.setDate(finishDate.getDate() + numOfMonth * 30)
+    const scheduledFinishDate = new Date()
+    scheduledFinishDate.setDate(scheduledFinishDate.getDate() + numOfMonth * 30)
     Object.keys(durations).forEach(d => {
       durations[d].selected = d === month
     })
     this.setState({
       startDate: _startDate,
-      finishDate,
+      scheduledFinishDate,
       durations,
     })
   }
 
   saveFunction = () => {
-    const { selectDay, setStartDate, setFinishDate, setDuration } = this.props
-    const { days, startDate, finishDate, durations } = this.state
+    const {
+      selectDay,
+      setStartDate,
+      setScheduledFinishDate,
+      setDuration,
+    } = this.props
+    const { days, startDate, scheduledFinishDate, durations } = this.state
     const selectedDays = Object.keys(days).filter(day => days[day].selected)
     const selectedDuration = Object.keys(durations).filter(
       duration => durations[duration].selected
     )[0]
     selectDay(selectedDays)
     setStartDate(startDate)
-    setFinishDate(finishDate)
+    setScheduledFinishDate(scheduledFinishDate)
     setDuration(selectedDuration)
   }
 
@@ -240,10 +245,10 @@ GoalDays.propTypes = {
   daysOfWeek: PropTypes.array,
   duration: PropTypes.string,
   startDate: PropTypes.string,
-  finishDate: PropTypes.string,
+  scheduledFinishDate: PropTypes.string,
   selectDay: PropTypes.func.isRequired,
   setStartDate: PropTypes.func.isRequired,
-  setFinishDate: PropTypes.func.isRequired,
+  setScheduledFinishDate: PropTypes.func.isRequired,
   setDuration: PropTypes.func.isRequired,
   changeView: PropTypes.func.isRequired,
 }
@@ -252,14 +257,14 @@ export default connect(
   ({
     router,
     staticData,
-    currentGoal: { daysOfWeek, duration, startDate, finishDate },
+    currentGoal: { daysOfWeek, duration, startDate, scheduledFinishDate },
   }) => ({
     router,
     daysOfWeek,
     duration,
     startDate,
-    finishDate,
+    scheduledFinishDate,
     staticData,
   }),
-  { selectDay, setStartDate, setFinishDate, setDuration, changeView }
+  { selectDay, setStartDate, setScheduledFinishDate, setDuration, changeView }
 )(GoalDays)
