@@ -5,6 +5,12 @@ module.exports = {
       {
         html: {
           title: "discover",
+          links: [
+            {
+              href: "manifest.json",
+              rel: "manifest",
+            },
+          ],
         },
         babel: { plugins: ["babel-plugin-styled-components"] },
         devServer: {
@@ -13,6 +19,23 @@ module.exports = {
               target: "http://localhost:4000",
               changeOrigin: true,
             },
+          },
+        },
+        manifest: {
+          seed: {
+            lang: "en",
+            short_name: "Discover",
+            name: "Discover",
+            start_url: "/index.html",
+            display: "standalone",
+            orientation: "portrait",
+            icons: [
+              {
+                src: "/bot.svg",
+                sizes: "192x192",
+                type: "image/png",
+              },
+            ],
           },
         },
       },
@@ -35,6 +58,7 @@ module.exports = {
         ],
       },
     ],
+
     neutrino =>
       neutrino.config.when(process.env.NODE_ENV === "production", config => {
         config
