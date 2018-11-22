@@ -39,7 +39,8 @@ const _Question = styled.p.attrs({
 const _Input = styled.input.attrs({
   className: "w-80 ba ma4 pa2 br3 font-2",
 })`
-  border-color: var(--moon-gray);
+  border-color: ${({ inValid }) =>
+    inValid ? `var(--red)` : `var(--moon-gray)`};
   border-width: thin;
   background: var(--white-30);
   height: 2.5rem;
@@ -47,12 +48,35 @@ const _Input = styled.input.attrs({
 `
 
 class Name extends Component {
+  state = {
+    name: "",
+    error: {
+      name: false,
+    },
+  }
+  componentDidMount() {
+    const { name } = this.props
+    this.setState({ name })
+  }
   onInputChange = e => {
+    const { value } = e.target
+    this.setState({
+      name: value,
+      error: { name: value.length === 0 },
+    })
+  }
+  onBlur = () => {
+    const { name } = this.state
+    this.setState({ error: { name: name.length === 0 } })
+  }
+
+  saveFunction = () => {
     const { changeName } = this.props
-    changeName(e.target.value)
+    const { name } = this.state
+    changeName(name)
   }
   render() {
-    const { name } = this.props
+    const { name, error } = this.state
     return (
       <Fragment>
         <_Container>
@@ -64,9 +88,19 @@ class Name extends Component {
             <br /> First thing first!
           </_Title>
           <_Question>what's your name my friend?</_Question>
-          <_Input value={name} onChange={this.onInputChange} />
+          <_Input
+            value={name}
+            onChange={this.onInputChange}
+            onBlur={this.onBlur}
+            inValid={error.name}
+          />
         </_Container>
-        <SaveButton text="THAT'S MY NAME!" redirectTo={Avatar} />
+        <SaveButton
+          disabled={!name}
+          text="THAT'S MY NAME!"
+          redirectTo={Avatar}
+          saveFunction={this.saveFunction}
+        />
       </Fragment>
     )
   }
