@@ -35,7 +35,8 @@ const _Question = styled.p.attrs({
 const _Input = styled.textarea.attrs({
   className: "w-90 ba ma2 ph3 pv2 sans font-3",
 })`
-  border-color: var(--moon-gray);
+  border-color: ${({ inValid }) =>
+    inValid ? `var(--red)` : `var(--moon-gray)`};
   border-width: thin;
   border-radius: 1.3rem;
   background: var(--white-30);
@@ -46,6 +47,9 @@ const _Input = styled.textarea.attrs({
 class SetGoal extends Component {
   state = {
     goal: "",
+    error: {
+      goal: false,
+    },
   }
 
   componentDidMount() {
@@ -56,6 +60,11 @@ class SetGoal extends Component {
     const { value } = e.target
     this.setState({ goal: value })
   }
+  onBlur = () => {
+    const { goal } = this.state
+    this.setState({ error: { goal: goal.length === 0 } })
+  }
+
   saveFunction = () => {
     const { changeGoal } = this.props
     const { goal } = this.state
@@ -66,7 +75,7 @@ class SetGoal extends Component {
       name,
       router: { history },
     } = this.props
-    const { goal } = this.state
+    const { goal, error } = this.state
     const edit = history[history.length - 1] === "EditGoal"
     return (
       <_Container>
@@ -78,16 +87,20 @@ class SetGoal extends Component {
         <_Input
           placeholder="My goal is..."
           value={goal}
+          onBlur={this.onBlur}
           onChange={this.onInputChange}
+          inValid={error.goal}
         />
         {edit ? (
           <SaveButton
+            disabled={!goal}
             saveFunction={this.saveFunction}
             redirectTo={EditGoal}
             text="SAVE"
           />
         ) : (
           <SaveButton
+            disabled={!goal}
             saveFunction={this.saveFunction}
             redirectTo={Technique}
             text="YUP, NEXT"
