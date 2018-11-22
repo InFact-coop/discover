@@ -46,6 +46,7 @@ const _Hint = styled.p.attrs({
 class Technique extends Component {
   state = {
     techniques: [],
+    selectedTechniques: [],
   }
   componentDidMount() {
     const { staticData, currentGoal } = this.props
@@ -54,6 +55,7 @@ class Technique extends Component {
         ...t,
         selected: currentGoal.techniques.includes(t.title),
       })),
+      selectedTechniques: currentGoal.techniques,
     })
   }
   onCardClick = title => () => {
@@ -66,19 +68,19 @@ class Technique extends Component {
         }
         return technique
       }),
+      selectedTechniques: techniques
+        .filter(({ selected }) => selected)
+        .map(({ title }) => title),
     })
   }
 
   saveFunction = () => {
     const { changeTechniques } = this.props
-    const { techniques } = this.state
-    const selectedTechniques = techniques
-      .filter(({ selected }) => selected)
-      .map(({ title }) => title)
+    const { selectedTechniques } = this.state
     changeTechniques(selectedTechniques)
   }
   render() {
-    const { techniques } = this.state
+    const { techniques, selectedTechniques } = this.state
     const {
       changeView,
       router: { history },
@@ -121,12 +123,14 @@ class Technique extends Component {
         </_Container>
         {edit ? (
           <SaveButton
+            disabled={!selectedTechniques.length}
             saveFunction={this.saveFunction}
             redirectTo={EditGoal}
             text="SAVE"
           />
         ) : (
           <SaveButton
+            disabled={!selectedTechniques.length}
             saveFunction={this.saveFunction}
             redirectTo={GoalDays}
             text="NEXT"
