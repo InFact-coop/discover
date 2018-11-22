@@ -46,7 +46,7 @@ module.exports = {
             orientation: "portrait",
             icons: [
               {
-                src: "/bot.*.svg",
+                src: "/bot.svg",
                 sizes: "192x192",
                 type: "image/png",
               },
