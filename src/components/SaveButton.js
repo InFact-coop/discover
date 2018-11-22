@@ -13,7 +13,7 @@ const _Button = styled.button.attrs({
   font-weight: 500;
   color: white;
   position: fixed;
-  top: 90%;
+  bottom: 0;
 `
 
 class SaveButton extends Component {
