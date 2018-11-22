@@ -1,4 +1,4 @@
-import { Component } from "react"
+import { Component, Fragment } from "react"
 import { connect } from "react-redux"
 import styled, { createGlobalStyle } from "styled-components"
 import PropTypes from "prop-types"
@@ -17,8 +17,10 @@ const GlobalStyle = createGlobalStyle`
 `
 
 const _Container = styled.div.attrs({
-  className: "flex flex-column items-center",
-})``
+  className: "flex flex-column items-center mt3",
+})`
+  height: 90vh;
+`
 const _BotIcon = styled.img.attrs({
   className: "w-50 mt5 mb1",
 })``
@@ -52,18 +54,20 @@ class Name extends Component {
   render() {
     const { name } = this.props
     return (
-      <_Container>
-        <ProgressBar progress={1} />
-        <GlobalStyle />
-        <_BotIcon src={botIcon} />
-        <_Title>
-          OK,
-          <br /> First thing first!
-        </_Title>
-        <_Question>what's your name my friend?</_Question>
-        <_Input value={name} onChange={this.onInputChange} />
+      <Fragment>
+        <_Container>
+          <ProgressBar progress={1} />
+          <GlobalStyle />
+          <_BotIcon src={botIcon} />
+          <_Title>
+            OK,
+            <br /> First thing first!
+          </_Title>
+          <_Question>what's your name my friend?</_Question>
+          <_Input value={name} onChange={this.onInputChange} />
+        </_Container>
         <SaveButton text="THAT'S MY NAME!" redirectTo={Avatar} />
-      </_Container>
+      </Fragment>
     )
   }
 }

@@ -17,9 +17,9 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 const _Container = styled.div.attrs({
-  className: "flex flex-column items-center justify-center mt4",
+  className: "flex flex-column items-center mt5",
 })`
-  height: 80vh;
+  height: 90vh;
 `
 
 const _Title = styled.p.attrs({

@@ -12,7 +12,7 @@ import daysToGo from "../utils/goalDaysToGo"
 const _Container = styled.div.attrs({
   className: "flex flex-column items-center justify-center",
 })`
-  height: 85vh;
+  height: 90vh;
 `
 const _BotIcon = styled.img.attrs({
   className: "mb1",

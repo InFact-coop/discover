@@ -26,9 +26,10 @@ const _Message = styled.p.attrs({
   color: var(--dark-gray);
 `
 const _Form = styled.div.attrs({
-  className: "flex flex-column justify-center items-center h-50",
+  className: "flex flex-column items-center",
 })`
-  height: 75vh;
+  height: 90vh;
+  margin-top: 5rem;
 `
 
 class Code extends Component {
@@ -54,7 +55,7 @@ class Code extends Component {
 }
 
 Code.propTypes = {
-  err: PropTypes.string,
+  err: PropTypes.object,
   verifyCode: PropTypes.func.isRequired,
 }
 

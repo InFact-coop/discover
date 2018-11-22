@@ -19,9 +19,9 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 const _Container = styled.div.attrs({
-  className: "flex flex-column items-center",
+  className: "flex flex-column items-center mt6",
 })`
-  margin-top: 10%;
+  height: 90vh;
 `
 
 const _Title = styled.p.attrs({
@@ -95,30 +95,30 @@ class Technique extends Component {
             and which technique will you choose to achieve your goal?
           </_Question>
           <_Hint>&#40;you can choose more than one!&#41;</_Hint>
+          <Carousel>
+            {techniques.map(
+              ({ title, description, image, backgroundColor, selected }) => {
+                const onClick =
+                  title === "I want to SKIP this bit!"
+                    ? () => changeView(GoalDays)
+                    : this.onCardClick(title)
+                return (
+                  <Card
+                    key={title}
+                    width="17rem"
+                    height="22rem"
+                    title={title}
+                    description={description}
+                    image={image}
+                    backgroundColor={backgroundColor}
+                    selected={selected}
+                    onCardClick={onClick}
+                  />
+                )
+              }
+            )}
+          </Carousel>
         </_Container>
-        <Carousel>
-          {techniques.map(
-            ({ title, description, image, backgroundColor, selected }) => {
-              const onClick =
-                title === "I want to SKIP this bit!"
-                  ? () => changeView(GoalDays)
-                  : this.onCardClick(title)
-              return (
-                <Card
-                  key={title}
-                  width="17rem"
-                  height="22rem"
-                  title={title}
-                  description={description}
-                  image={image}
-                  backgroundColor={backgroundColor}
-                  selected={selected}
-                  onCardClick={onClick}
-                />
-              )
-            }
-          )}
-        </Carousel>
         {edit ? (
           <SaveButton
             saveFunction={this.saveFunction}

@@ -2,7 +2,9 @@ import { Component } from "react"
 import styled from "styled-components"
 import PropTypes from "prop-types"
 
-const _FlickityContainer = styled.div``
+const _FlickityContainer = styled.div.attrs({
+  className: "w-100",
+})``
 
 class Carousel extends Component {
   state = { Flickity: null }

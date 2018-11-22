@@ -13,7 +13,7 @@ import {
   setDuration,
 } from "../state/actions/currentGoal"
 import { changeView } from "../state/actions/router"
-import background from "../assets/backgrounds/bg_avatar.svg"
+import background from "../assets/backgrounds/bg_how_many_times.svg"
 import botIcon from "../assets/icons/bot.svg"
 
 const GlobalStyle = createGlobalStyle`
@@ -23,8 +23,9 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 const _Container = styled.div.attrs({
-  className: "flex flex-column items-center justify-center center mt4",
+  className: "flex flex-column items-center center mt5",
 })`
+  height: 90vh;
   width: 95%;
 `
 

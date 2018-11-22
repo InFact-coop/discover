@@ -12,7 +12,7 @@ const _Button = styled.div.attrs({
   font-weight: 500;
   color: white;
   position: fixed;
-  bottom: 0;
+  top: 90%;
 `
 
 class SaveButton extends Component {
