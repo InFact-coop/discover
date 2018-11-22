@@ -4,9 +4,10 @@ import styled from "styled-components"
 import PropTypes from "prop-types"
 import { changeView } from "../state/actions/router"
 
-const _Button = styled.div.attrs({
-  className: "w-100 sans font-3 flex items-center justify-center",
+const _Button = styled.button.attrs({
+  className: "w-100 sans font-3 br flex items-center justify-center",
 })`
+  border: none;
   height: 4.5rem;
   background-color: var(--mid-gray);
   font-weight: 500;
@@ -22,8 +23,13 @@ class SaveButton extends Component {
     changeView(redirectTo)
   }
   render() {
-    const { text } = this.props
-    return <_Button onClick={this.onClick}> {text} </_Button>
+    const { text, disabled } = this.props
+
+    return (
+      <_Button disabled={disabled} onClick={this.onClick}>
+        {text}
+      </_Button>
+    )
   }
 }
 
