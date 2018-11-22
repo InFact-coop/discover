@@ -110,7 +110,7 @@ class GoalDetails extends Component {
   }
 }
 
-GoalDetails.prototypes = {
+GoalDetails.propTypes = {
   description: PropTypes.string.isRequired,
   duration: PropTypes.string,
   daysOfWeek: PropTypes.array,

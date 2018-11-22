@@ -24,7 +24,7 @@ class BackButton extends Component {
   }
 }
 
-BackButton.prototypes = {
+BackButton.propTypes = {
   changeView: PropTypes.func.isRequired,
   backToPreviousView: PropTypes.func.isRequired,
   to: PropTypes.string.isRequired,

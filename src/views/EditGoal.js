@@ -70,7 +70,7 @@ class EditGoal extends Component {
   }
 }
 
-EditGoal.prototypes = {
+EditGoal.propTypes = {
   name: PropTypes.string.isRequired,
 }
 
