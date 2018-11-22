@@ -28,11 +28,11 @@ const _Title = styled.p.attrs({
   color: var(--mid-gray);
   font-weight: 500;
 `
-const _AvatarsRow = styled.div.attrs({
-  className: "flex justify-around items-center w-90 mv2",
+const _AvatarsContainer = styled.div.attrs({
+  className: "flex items-center justify-center flex-wrap mv2",
 })``
 const _Avatar = styled.img.attrs({
-  className: "w-70 h-75 br-100 mh1",
+  className: "w-40 h-75 br-100 mh2 mv3",
 })`
   ${({ selected }) =>
     selected &&
@@ -42,67 +42,64 @@ const _Avatar = styled.img.attrs({
 
 class Avatar extends Component {
   state = {
-    avatar1: { src: avatar1, selected: false },
-    avatar2: { src: avatar1, selected: false },
-    avatar3: { src: avatar1, selected: false },
-    avatar4: { src: avatar1, selected: false },
-    currentAvatar: "",
+    avatars: [
+      { name: "avatar1", src: avatar1, selected: false },
+      { name: "avatar2", src: avatar1, selected: false },
+      { name: "avatar3", src: avatar1, selected: false },
+      { name: "avatar4", src: avatar1, selected: false },
+    ],
+    selectedAvatar: "",
   }
 
-  // to add border on selected avatars
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const { avatar } = nextProps
-    const { currentAvatar } = prevState
-    return {
-      ...prevState,
-      [avatar]: { ...prevState[avatar], selected: true },
-      [currentAvatar]: { ...prevState[avatar], selected: false },
-      currentAvatar: avatar,
-    }
+  // to add border on selected avatar
+  componentDidMount() {
+    const { avatar } = this.props
+    const { avatars } = this.state
+    this.setState({
+      avatars: avatars.map(a => ({ ...a, selected: a.name === avatar })),
+      selectedAvatar: avatar,
+    })
   }
 
   onAvatarClick = e => {
     const { name } = e.target
+    const { avatars } = this.state
+    this.setState({
+      avatars: avatars.map(a => ({ ...a, selected: a.name === name })),
+      selectedAvatar: name,
+    })
+  }
+
+  saveFunction = () => {
     const { changeAvatar } = this.props
-    changeAvatar(name)
+    const { selectedAvatar } = this.state
+    changeAvatar(selectedAvatar)
   }
   render() {
-    const { avatar1, avatar2, avatar3, avatar4 } = this.state
+    const { avatars, selectedAvatar } = this.state
     return (
       <_Container>
         <GlobalStyle />
         <ProgressBar progress={2} />
         <BackButton />
         <_Title>Please choose your avatar</_Title>
-        <_AvatarsRow>
-          <_Avatar
-            src={avatar1.src}
-            name={"avatar1"}
-            selected={avatar1.selected}
-            onClick={this.onAvatarClick}
-          />
-          <_Avatar
-            src={avatar2.src}
-            name={"avatar2"}
-            selected={avatar2.selected}
-            onClick={this.onAvatarClick}
-          />
-        </_AvatarsRow>
-        <_AvatarsRow>
-          <_Avatar
-            src={avatar3.src}
-            name={"avatar3"}
-            selected={avatar3.selected}
-            onClick={this.onAvatarClick}
-          />
-          <_Avatar
-            src={avatar4.src}
-            name={"avatar4"}
-            selected={avatar4.selected}
-            onClick={this.onAvatarClick}
-          />
-        </_AvatarsRow>
-        <SaveButton redirectTo={SetGoal} text="THAT'S MY AVATAR!" />
+        <_AvatarsContainer>
+          {avatars.map(({ src, name, selected }) => (
+            <_Avatar
+              key={name}
+              src={src}
+              name={name}
+              selected={selected}
+              onClick={this.onAvatarClick}
+            />
+          ))}
+        </_AvatarsContainer>
+        <SaveButton
+          disabled={!selectedAvatar}
+          saveFunction={this.saveFunction}
+          redirectTo={SetGoal}
+          text="THAT'S MY AVATAR!"
+        />
       </_Container>
     )
   }
