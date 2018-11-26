@@ -48,7 +48,8 @@ class GoalProgress extends Component {
     } else changeView(NewGoalConfirmation)
   }
   render() {
-    const { currentGoal, archiveGoal } = this.props
+    console.log(this.props)
+    const { currentGoal, pastGoals } = this.props
     return (
       <div>
         <IconHeader title="Goals progress" icon={icon} />
@@ -62,7 +63,7 @@ class GoalProgress extends Component {
             goal={currentGoal.description}
             progressText={daysToGo(currentGoal.scheduledFinishDate)}
           />
-          {/* {archiveGoal.map((goal, key) => {
+          {pastGoals.map((goal, key) => {
             return (
               <Goal
                 key={key}
@@ -70,13 +71,13 @@ class GoalProgress extends Component {
                 color={fillColours[key % 3]}
                 goal={goal.description}
                 progressText={pastGoalDaysCompleted(
-                  goal.start_date,
-                  goal.scheduled_finish_date,
-                  goal.actual_finish_date
+                  goal.startDate,
+                  goal.scheduledFinishDate,
+                  goal.actualFinishDate
                 )}
               />
             )
-          })} */}
+          })}
         </_Wrapper>
         <ActionButton onClick={this.onClick}>Set new goal</ActionButton>
         <NavBar />
@@ -100,14 +101,7 @@ GoalProgress.propTypes = {
   ),
 }
 
-// const mapStateToProps = state => {
-//   return {
-//     current_goal: state.current_goal,
-//     past_goals: state.past_goals
-//   }
-// }
-
 export default connect(
-  ({ currentGoal }) => ({ currentGoal }),
+  ({ currentGoal, pastGoals }) => ({ currentGoal, pastGoals }),
   { changeView, archiveGoal, clearCurrentGoal }
 )(GoalProgress)
