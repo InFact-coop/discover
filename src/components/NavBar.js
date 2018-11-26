@@ -9,8 +9,8 @@ import listOfGoalsActive from "../assets/icons/list_of_goals_active.svg"
 import myGoalActive from "../assets/icons/my_goal_active.svg"
 import botIconActive from "../assets/icons/bot_icon_active.svg"
 // import helpActive from "../assets/icons/help_active.svg"
-// import tipsActive from "../assets/icons/tips_active.svg"
-import { Home, MyGoal, GoalProgress } from "../views"
+import tipsActive from "../assets/icons/tips_active.svg"
+import { Home, MyGoal, GoalProgress, Summary } from "../views"
 import { changeView } from "../state/actions/router"
 
 const _Container = styled.div.attrs({
@@ -41,7 +41,10 @@ const NavBar = ({ currentView, changeView }) => {
         onClick={() => changeView(Home)}
       />
       <_Icon src={help} />
-      <_Icon src={tips} />
+      <_Icon
+        src={currentView === Summary ? tipsActive : tips}
+        onClick={() => changeView(Summary)}
+      />
     </_Container>
   )
 }
