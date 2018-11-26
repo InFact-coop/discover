@@ -11,6 +11,21 @@ module.exports = {
               rel: "manifest",
             },
           ],
+          meta: [
+            {
+              name: "viewport",
+              content:
+                "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no",
+            },
+            {
+              name: "apple-mobile-web-app-capable",
+              content: "yes",
+            },
+            {
+              name: "apple-mobile-web-app-title",
+              content: "Discover",
+            },
+          ],
         },
         babel: { plugins: ["babel-plugin-styled-components"] },
         devServer: {
