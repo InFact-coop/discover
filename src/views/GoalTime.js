@@ -19,9 +19,9 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 const _Container = styled.div.attrs({
-  className: "flex flex-column items-center",
+  className: "flex flex-column items-center justify-center mt3",
 })`
-  margin-top: 25%;
+  height: 90vh;
 `
 
 const _Title = styled.p.attrs({
@@ -136,45 +136,45 @@ class GoalTime extends Component {
             Okay, And when do you think you are most likely to work on your
             goal?
           </_Description>
+          <Carousel>
+            {times.map(({ title, image, backgroundColor, selected }) => (
+              <Card
+                key={title}
+                width="17rem"
+                height="15rem"
+                title={title}
+                image={image}
+                backgroundColor={backgroundColor}
+                selected={selected}
+                onCardClick={this.onCardClick(title)}
+              />
+            ))}
+          </Carousel>
+          <_Hint>at</_Hint>
+          <_TimeContainer>
+            <_TimeDiv>
+              <_TimeInput
+                name="hours"
+                type="number"
+                value={hours}
+                min={0}
+                max={23}
+                onChange={this.onInputChange}
+              />
+            </_TimeDiv>
+            :
+            <_TimeDiv>
+              <_TimeInput
+                name="minutes"
+                type="number"
+                value={minutes}
+                min={0}
+                max={59}
+                onChange={this.onInputChange}
+              />
+            </_TimeDiv>
+          </_TimeContainer>
         </_Container>
-        <Carousel>
-          {times.map(({ title, image, backgroundColor, selected }) => (
-            <Card
-              key={title}
-              width="17rem"
-              height="15rem"
-              title={title}
-              image={image}
-              backgroundColor={backgroundColor}
-              selected={selected}
-              onCardClick={this.onCardClick(title)}
-            />
-          ))}
-        </Carousel>
-        <_Hint>at</_Hint>
-        <_TimeContainer>
-          <_TimeDiv>
-            <_TimeInput
-              name="hours"
-              type="number"
-              value={hours}
-              min={0}
-              max={23}
-              onChange={this.onInputChange}
-            />
-          </_TimeDiv>
-          :
-          <_TimeDiv>
-            <_TimeInput
-              name="minutes"
-              type="number"
-              value={minutes}
-              min={0}
-              max={59}
-              onChange={this.onInputChange}
-            />
-          </_TimeDiv>
-        </_TimeContainer>
         {edit ? (
           <SaveButton
             saveFunction={this.saveFunction}

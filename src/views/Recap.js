@@ -16,7 +16,7 @@ const GlobalStyle = createGlobalStyle`
 const _Container = styled.div.attrs({
   className: "flex flex-column items-center justify-center center",
 })`
-  height: 95vh;
+  height: 100vh;
 `
 const _Title = styled.p.attrs({
   className: "mono font-1 tc ma2",

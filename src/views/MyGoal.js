@@ -14,7 +14,7 @@ const GlobalStyle = createGlobalStyle`
 const _Container = styled.div.attrs({
   className: "flex flex-column mt5 items-center",
 })`
-  height: 100vh;
+  height: 90vh;
 `
 
 const _EditButton = styled.div.attrs({

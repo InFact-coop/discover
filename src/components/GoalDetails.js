@@ -49,50 +49,63 @@ class GoalDetails extends Component {
           </_Container>
         )
       case "technique":
-        return (
-          <_Container>
-            <_TextMono>By using</_TextMono>
-            <_TextSans>
-              <u>{this.toSentence(techniques)}</u>
-            </_TextSans>
-          </_Container>
-        )
+        if (techniques.length)
+          return (
+            <_Container>
+              <_TextMono>By using</_TextMono>
+              <_TextSans>
+                <u>{this.toSentence(techniques)}</u>
+              </_TextSans>
+            </_Container>
+          )
+        return <div />
       case "days":
-        return (
-          <_Container>
-            <_TextMono>And you will do it</_TextMono>
-            <_TextSans>
-              {`Every ${
-                daysOfWeek.length === 7 ? "day" : this.toSentence(daysOfWeek)
-              }`}
-            </_TextSans>
-          </_Container>
-        )
+        if (daysOfWeek.length)
+          return (
+            <_Container>
+              <_TextMono>And you will do it</_TextMono>
+              <_TextSans>
+                {`Every ${
+                  daysOfWeek.length === 7 ? "day" : this.toSentence(daysOfWeek)
+                }`}
+              </_TextSans>
+            </_Container>
+          )
+        return <div />
       case "time":
-        return (
-          <_Container>
-            <_TextMono>preferably</_TextMono>
-            <_TextSans>
-              {timeOfDay.description}, at {timeOfDay.time}
-            </_TextSans>
-          </_Container>
-        )
+        if (timeOfDay.description)
+          return (
+            <_Container>
+              <_TextMono>preferably</_TextMono>
+              <_TextSans>
+                {timeOfDay.description}, at {timeOfDay.time}
+              </_TextSans>
+            </_Container>
+          )
+        return <div />
       case "duration":
-        return (
-          <_Container>
-            <_TextMono>for</_TextMono>
-            <_TextSans>{duration}</_TextSans>
-          </_Container>
-        )
+        if (duration)
+          return (
+            <_Container>
+              <_TextMono>for</_TextMono>
+              <_TextSans>{duration}</_TextSans>
+            </_Container>
+          )
+        return <div />
       case "progress":
-        return (
-          <_Container>
-            <_TextMono>and you have</_TextMono>
-            <p className="mono font-3 tc" style={{ color: "var(--light-red)" }}>
-              {goalDaysToGo(scheduledFinishDate)}
-            </p>
-          </_Container>
-        )
+        if (scheduledFinishDate)
+          return (
+            <_Container>
+              <_TextMono>and you have</_TextMono>
+              <p
+                className="mono font-3 tc"
+                style={{ color: "var(--light-red)" }}
+              >
+                {goalDaysToGo(scheduledFinishDate)}
+              </p>
+            </_Container>
+          )
+        return <div />
     }
   }
 }

@@ -19,9 +19,9 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 const _Container = styled.div.attrs({
-  className: "flex flex-column items-center",
+  className: "flex flex-column items-center mt6",
 })`
-  margin-top: 10%;
+  height: 90vh;
 `
 
 const _Title = styled.p.attrs({
@@ -46,6 +46,7 @@ const _Hint = styled.p.attrs({
 class Technique extends Component {
   state = {
     techniques: [],
+    selectedTechniques: [],
   }
   componentDidMount() {
     const { staticData, currentGoal } = this.props
@@ -54,6 +55,7 @@ class Technique extends Component {
         ...t,
         selected: currentGoal.techniques.includes(t.title),
       })),
+      selectedTechniques: currentGoal.techniques,
     })
   }
   onCardClick = title => () => {
@@ -66,19 +68,19 @@ class Technique extends Component {
         }
         return technique
       }),
+      selectedTechniques: techniques
+        .filter(({ selected }) => selected)
+        .map(({ title }) => title),
     })
   }
 
   saveFunction = () => {
     const { changeTechniques } = this.props
-    const { techniques } = this.state
-    const selectedTechniques = techniques
-      .filter(({ selected }) => selected)
-      .map(({ title }) => title)
+    const { selectedTechniques } = this.state
     changeTechniques(selectedTechniques)
   }
   render() {
-    const { techniques } = this.state
+    const { techniques, selectedTechniques } = this.state
     const {
       changeView,
       router: { history },
@@ -95,38 +97,40 @@ class Technique extends Component {
             and which technique will you choose to achieve your goal?
           </_Question>
           <_Hint>&#40;you can choose more than one!&#41;</_Hint>
+          <Carousel>
+            {techniques.map(
+              ({ title, description, image, backgroundColor, selected }) => {
+                const onClick =
+                  title === "I want to SKIP this bit!"
+                    ? () => changeView(GoalDays)
+                    : this.onCardClick(title)
+                return (
+                  <Card
+                    key={title}
+                    width="17rem"
+                    height="22rem"
+                    title={title}
+                    description={description}
+                    image={image}
+                    backgroundColor={backgroundColor}
+                    selected={selected}
+                    onCardClick={onClick}
+                  />
+                )
+              }
+            )}
+          </Carousel>
         </_Container>
-        <Carousel>
-          {techniques.map(
-            ({ title, description, image, backgroundColor, selected }) => {
-              const onClick =
-                title === "I want to SKIP this bit!"
-                  ? () => changeView(GoalDays)
-                  : this.onCardClick(title)
-              return (
-                <Card
-                  key={title}
-                  width="17rem"
-                  height="22rem"
-                  title={title}
-                  description={description}
-                  image={image}
-                  backgroundColor={backgroundColor}
-                  selected={selected}
-                  onCardClick={onClick}
-                />
-              )
-            }
-          )}
-        </Carousel>
         {edit ? (
           <SaveButton
+            disabled={!selectedTechniques.length}
             saveFunction={this.saveFunction}
             redirectTo={EditGoal}
             text="SAVE"
           />
         ) : (
           <SaveButton
+            disabled={!selectedTechniques.length}
             saveFunction={this.saveFunction}
             redirectTo={GoalDays}
             text="NEXT"

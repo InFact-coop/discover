@@ -9,7 +9,7 @@ import welldone from "../assets/icons/welldone.svg"
 const _Container = styled.div.attrs({
   className: "flex flex-column justify-center items-center",
 })`
-  height: 100vh;
+  height: 90vh;
 `
 
 const _Image = styled.img.attrs({
