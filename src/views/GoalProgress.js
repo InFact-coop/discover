@@ -2,6 +2,7 @@ import { Component } from "react"
 import { connect } from "react-redux"
 import { changeView } from "../state/actions/router"
 import styled from "styled-components"
+import PropTypes from "prop-types"
 
 import IconHeader from "../components/shared/IconHeader"
 import ActionButton from "../components/shared/ActionButton"
@@ -15,11 +16,12 @@ import daysToGo from "../utils/goalDaysToGo"
 import pastGoalDaysCompleted from "../utils/pastGoalDaysCompleted"
 
 import icon from "../assets/icons/list_of_goals_big.svg"
+import { arch } from "os"
 
 // This will be removed when redux store is working ---->
-import dummyStore from "../components/dummyStore"
-const current_goal = dummyStore.current_goal
-const past_goals = dummyStore.past_goals
+// import dummyStore from "../components/dummyStore"
+// const current_goal = dummyStore.current_goal
+// const past_goals = dummyStore.past_goals
 // <----
 
 const _Wrapper = styled.div.attrs({
@@ -46,20 +48,21 @@ class GoalProgress extends Component {
     } else changeView(NewGoalConfirmation)
   }
   render() {
+    const { currentGoal, archiveGoal } = this.props
     return (
       <div>
         <IconHeader title="Goals progress" icon={icon} />
         <_Wrapper>
           <Goal
             width={getCurrentGoalProgress(
-              current_goal.start_date,
-              current_goal.scheduled_finish_date
+              currentGoal.startDate,
+              currentGoal.scheduledFinishDate
             )}
             color="light-red"
-            goal={current_goal.description}
-            progressText={daysToGo(current_goal.scheduled_finish_date)}
+            goal={currentGoal.description}
+            progressText={daysToGo(currentGoal.scheduledFinishDate)}
           />
-          {past_goals.map((goal, key) => {
+          {/* {archiveGoal.map((goal, key) => {
             return (
               <Goal
                 key={key}
@@ -73,7 +76,7 @@ class GoalProgress extends Component {
                 )}
               />
             )
-          })}
+          })} */}
         </_Wrapper>
         <ActionButton onClick={this.onClick}>Set new goal</ActionButton>
         <NavBar />
@@ -82,20 +85,20 @@ class GoalProgress extends Component {
   }
 }
 
-// GoalProgress.propTypes = {
-//   current_goal: PropTypes.shape({
-//     description: PropTypes.string.isRequired,
-//     start_date: PropTypes.string.isRequired,
-//     finish_date: PropTypes.string.isRequired
-//   }),
-//   past_goals: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       description: PropTypes.string.isRequired,
-//       start_date: PropTypes.string.isRequired,
-//       finish_date: PropTypes.string.isRequired
-//     }).isRequired
-//   )
-// }
+GoalProgress.propTypes = {
+  current_goal: PropTypes.shape({
+    description: PropTypes.string.isRequired,
+    start_date: PropTypes.string.isRequired,
+    finish_date: PropTypes.string.isRequired,
+  }),
+  past_goals: PropTypes.arrayOf(
+    PropTypes.shape({
+      description: PropTypes.string.isRequired,
+      start_date: PropTypes.string.isRequired,
+      finish_date: PropTypes.string.isRequired,
+    }).isRequired
+  ),
+}
 
 // const mapStateToProps = state => {
 //   return {
