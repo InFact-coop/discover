@@ -2,7 +2,6 @@ import { Component } from "react"
 import { connect } from "react-redux"
 import { changeView } from "../state/actions/router"
 import styled from "styled-components"
-import PropTypes from "prop-types"
 
 import IconHeader from "../components/shared/IconHeader"
 import ActionButton from "../components/shared/ActionButton"
@@ -16,13 +15,6 @@ import daysToGo from "../utils/goalDaysToGo"
 import pastGoalDaysCompleted from "../utils/pastGoalDaysCompleted"
 
 import icon from "../assets/icons/list_of_goals_big.svg"
-import { arch } from "os"
-
-// This will be removed when redux store is working ---->
-// import dummyStore from "../components/dummyStore"
-// const current_goal = dummyStore.current_goal
-// const past_goals = dummyStore.past_goals
-// <----
 
 const _Wrapper = styled.div.attrs({
   className: "ph3 flex flex-column items-center mb5",
@@ -48,7 +40,6 @@ class GoalProgress extends Component {
     } else changeView(NewGoalConfirmation)
   }
   render() {
-    console.log(this.props)
     const { currentGoal, pastGoals } = this.props
     return (
       <div>
@@ -63,42 +54,25 @@ class GoalProgress extends Component {
             goal={currentGoal.description}
             progressText={daysToGo(currentGoal.scheduledFinishDate)}
           />
-          {pastGoals.map((goal, key) => {
-            return (
-              <Goal
-                key={key}
-                width={100}
-                color={fillColours[key % 3]}
-                goal={goal.description}
-                progressText={pastGoalDaysCompleted(
-                  goal.startDate,
-                  goal.scheduledFinishDate,
-                  goal.actualFinishDate
-                )}
-              />
-            )
-          })}
+          {pastGoals.map((goal, key) => (
+            <Goal
+              key={key}
+              width={100}
+              color={fillColours[key % 3]}
+              goal={goal.description}
+              progressText={pastGoalDaysCompleted(
+                goal.startDate,
+                goal.scheduledFinishDate,
+                goal.actualFinishDate
+              )}
+            />
+          ))}
         </_Wrapper>
         <ActionButton onClick={this.onClick}>Set new goal</ActionButton>
         <NavBar />
       </div>
     )
   }
-}
-
-GoalProgress.propTypes = {
-  current_goal: PropTypes.shape({
-    description: PropTypes.string.isRequired,
-    start_date: PropTypes.string.isRequired,
-    finish_date: PropTypes.string.isRequired,
-  }),
-  past_goals: PropTypes.arrayOf(
-    PropTypes.shape({
-      description: PropTypes.string.isRequired,
-      start_date: PropTypes.string.isRequired,
-      finish_date: PropTypes.string.isRequired,
-    }).isRequired
-  ),
 }
 
 export default connect(
