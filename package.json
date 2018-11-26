@@ -42,7 +42,7 @@
     "@neutrinojs/react": "^8.3.0",
     "autoprefixer": "^9.3.1",
     "babel-eslint": "^10.0.1",
-    "babel-plugin-styled-components": "^1.8.0",
+    "babel-plugin-styled-components": "1.8.0",
     "body-parser": "^1.18.3",
     "eslint": "^5.8.0",
     "eslint-config-esnext": "^4.0.0",
