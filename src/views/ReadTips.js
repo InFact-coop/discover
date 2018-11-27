@@ -9,6 +9,7 @@ import close from "../assets/icons/close.svg"
 import back from "../assets/icons/arrow_back.svg"
 import { Summary } from "."
 import { getTipSections } from "../components/TipSections"
+import ActionButton from "../components/shared/ActionButton"
 
 const _TapAnywhere = styled.div.attrs({
   className: "ttu w-100 white sans font-4 pa4",
@@ -96,11 +97,15 @@ class ReadTips extends Component {
             ) : (
               ""
             )}
-            <_ExitCross
-              src={close}
-              alt="exit"
-              onClick={() => this.onExitClick()}
-            />
+            {tips.index !== tips.topicMaxIndex ? (
+              <_ExitCross
+                src={close}
+                alt="exit"
+                onClick={() => this.onExitClick()}
+              />
+            ) : (
+              ""
+            )}
           </_ButtonBanner>
           <_Main onClick={() => this.onAnywhereClick(tips.index)}>
             <Fragment>
@@ -110,7 +115,7 @@ class ReadTips extends Component {
                 <Content />
               )}
               {tips.index === tips.topicMaxIndex ? (
-                <p>Thanx, got it!</p>
+                <ActionButton>Thanx, got it!</ActionButton>
               ) : (
                 <TapAnywhere />
               )}
