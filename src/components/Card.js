@@ -23,13 +23,13 @@ const _Card = styled.div.attrs({
 const _CardTitle = styled.p.attrs({
   className: "font-3 sans mt4 mb2 tc",
 })`
-  color: var(--gray);
+  color: var(--dark-gray);
   font-weight: 500;
 `
 const _CardDescription = styled.p.attrs({
   className: "font-4 sans ma2 tc",
 })`
-  color: var(--gray);
+  color: var(--dark-gray);
 `
 const _CardImage = styled.img.attrs({
   className: "ma2",
