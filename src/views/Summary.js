@@ -3,7 +3,7 @@ import icon from "../assets/icons/tips_big.svg"
 import IconHeader from "../components/shared/IconHeader"
 import { connect } from "react-redux"
 import { changeView } from "../state/actions/router"
-import { selectTopic } from "../state/actions/tips"
+import { selectTopic, setPageIndex } from "../state/actions/tips"
 import NavBar from "../components/NavBar"
 import Carousel from "../components/Carousel"
 import Card from "../components/Card"
@@ -26,8 +26,9 @@ class Summary extends Component {
     })
   }
   onCardClick = title => {
-    const { changeView, selectTopic } = this.props
+    const { changeView, selectTopic, setPageIndex } = this.props
     selectTopic(title)
+    setPageIndex(0)
     changeView(ReadTips)
   }
   render() {
@@ -62,5 +63,5 @@ export default connect(
     staticData,
     tips,
   }),
-  { changeView, selectTopic }
+  { changeView, selectTopic, setPageIndex }
 )(Summary)
