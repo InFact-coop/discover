@@ -77,7 +77,7 @@ const INITIAL_STATE = {
       description:
         "Taking time to focus in the present moment - acknowledging and accepting your sensations, thoughts and feelings - can help your mind feel clearer, and calmer.",
       image: circle,
-      backgroundColor: "--light-purple",
+      backgroundColor: "--light-red",
     },
     {
       title: "I want to SKIP this bit!",
