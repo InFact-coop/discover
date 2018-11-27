@@ -94,17 +94,16 @@
   --box-shadow-5: 4px 4px 8px 0px rgba(0, 0, 0, 0.2);
 
   /* app colours */
-  --light-purple: #c2a6d6;
-  --light-red: #fcb2b2;
-  --light-yellow: #fcefb3;
-  --light-green: #a3e3de;
-  --light-blue: #85c1d5;
-
   --purple: #8b54b3;
   --red: #ff6b6b;
   --yellow: #ffe66d;
   --green: #4ecdc4;
   --blue: #118ab2;
+  --light-purple: rgba(139, 84, 179, 0.5);
+  --light-red: rgba(255, 107, 107, 0.5);
+  --light-yellow: rgba(255, 230, 109, 0.5);
+  --light-green: rgba(78, 205, 196, 0.5);
+  --light-blue: rgba(17, 138, 178, 0.5);
 
   --white: #ffffff;
   --near-white: #fafafa;
