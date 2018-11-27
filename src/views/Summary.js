@@ -3,9 +3,11 @@ import icon from "../assets/icons/tips_big.svg"
 import IconHeader from "../components/shared/IconHeader"
 import { connect } from "react-redux"
 import { changeView } from "../state/actions/router"
+import { selectTopic } from "../state/actions/tips"
 import NavBar from "../components/NavBar"
 import Carousel from "../components/Carousel"
 import Card from "../components/Card"
+import { ReadTips } from "."
 
 class Summary extends Component {
   state = {
@@ -23,9 +25,9 @@ class Summary extends Component {
         }),
     })
   }
-  onCardClick = title => () => {
-    console.log("I clicked...", title)
-    // store tips clicked for next view?
+  onCardClick = title => {
+    const { changeView, selectTopic } = this.props
+    selectTopic(title)
     changeView(ReadTips)
   }
   render() {
@@ -56,9 +58,9 @@ class Summary extends Component {
 }
 
 export default connect(
-  ({ router, staticData }) => ({
+  ({ staticData, tips }) => ({
     staticData,
-    router,
+    tips,
   }),
-  { changeView }
+  { changeView, selectTopic }
 )(Summary)
