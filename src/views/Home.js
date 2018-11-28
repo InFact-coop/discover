@@ -1,11 +1,20 @@
 import { Component } from "react"
 import NavBar from "../components/NavBar"
-import styled from "styled-components"
+import styled, { createGlobalStyle } from "styled-components"
 import axios from "axios"
 import * as r from "ramda" //eslint-disable-line import/no-namespace
-
+import exit from "../assets/icons/exit_bot.svg"
 const User = "User"
 const Bot = "Bot"
+import background from "../assets/backgrounds/bg_bot.svg"
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    background: url(${background}) no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+`
 
 const _Message = styled.div.attrs({
   className: "mono font-4 pv2 ph3 mb2 mh2",
@@ -13,35 +22,53 @@ const _Message = styled.div.attrs({
   border-radius: ${({ user }) =>
     user ? `21px 21px 6px 21px` : `21px 21px 21px 6px`};
   max-width: 210px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
 `
 
-const _Button = styled.button.attrs({
-  className: "bg-white blue ba b--blue pa3",
+const _MessageContainer = styled.div.attrs({
+  className: "flex flex-column",
+})``
+
+const _Option = styled.button.attrs({
+  className: "bg-white blue ba b--blue pv3 mb2",
 })`
+  width: ${({ number }) => (number === 2 ? "50%" : "100%")};
   border-radius: 6px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
 `
 
-const Message = ({ content, type }) => (
-  <_Message
-    className={
-      type === User ? "self-end bg-blue white user-style" : "bg-white dark-gray"
-    }
-    user={type === User}
-  >
-    {content}
-  </_Message>
-)
+const _OptionContainer = styled.div.attrs({
+  className: "fixed border-box",
+})`
+  width: calc(100vw - 32px);
+  bottom: 60px;
+`
 
-const ButtonOptions = ({ options, payload, onButtonClick }) => {
+const RenderConversation = ({ conversation }) => {
+  return conversation.map(({ content, type }) => (
+    <_Message
+      className={
+        type === User
+          ? "self-end bg-blue white user-style"
+          : "bg-white dark-gray"
+      }
+      user={type === User}
+      key={content}
+    >
+      {content}
+    </_Message>
+  ))
+}
+const RenderOptions = ({ options, payload, onButtonClick }) => {
   if (!options) {
-    return <_Button onClick={() => onButtonClick(payload)}>{payload}</_Button>
+    return <_Option onClick={() => onButtonClick(payload)}>{payload}</_Option>
   }
   return (
     <div>
       {payload.map(option => (
-        <_Button key={option} onClick={() => onButtonClick(option)}>
+        <_Option key={option} onClick={() => onButtonClick(option)}>
           {option}
-        </_Button>
+        </_Option>
       ))}
     </div>
   )
@@ -100,20 +127,32 @@ class Home extends Component {
   }
 
   render() {
-    const { postback } = this.state
+    const { postback, conversation } = this.state
     return (
       <div>
-        <h1 className="font-1 sans">Home</h1>
-        <div className="flex flex-column">
-          {this.state.conversation.map(message => (
-            <Message {...message} key={message.content} />
-          ))}
+        <GlobalStyle />
+        <div className="vw-100 flex justify-end">
+          <img src={exit} alt="exit chat" />
+        </div>
+
+        <_MessageContainer>
+          <RenderConversation conversation={conversation} />
+        </_MessageContainer>
+
+        <div className="mh3">
           {r.isEmpty(postback) ? (
             <div />
           ) : (
-            <ButtonOptions {...postback} onButtonClick={this.onOptionClick} />
+            <_OptionContainer>
+              <RenderOptions
+                {...postback}
+                onButtonClick={this.onOptionClick}
+                number={postback.payload.length}
+              />
+            </_OptionContainer>
           )}
         </div>
+
         <NavBar />
       </div>
     )
