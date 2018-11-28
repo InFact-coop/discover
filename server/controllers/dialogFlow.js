@@ -28,7 +28,7 @@ const getPostback = r.pipe(
   r.map(payload => {
     const { kind } = payload
     if (kind === "listValue") {
-      return payload[kind].values.map(r.prop("stringValue"))
+      return r.map(r.prop("stringValue"))(payload[kind].values)
     }
     return payload[kind]
   })
