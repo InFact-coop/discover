@@ -35,14 +35,23 @@ class Home extends Component {
     conversation: [{ content: "Hello I'm Ivan and I'm back", type: User }],
     postback: {},
   }
+
   onOptionClick = async option => {
     const { data } = await axios.get("/api/user/dialogflow", {
       params: {
-        query: { content: option },
+        query: option,
       },
     })
-    console.log(data)
+
+    this.setState(prevState => ({
+      conversation: [
+        ...prevState.conversation,
+        ...data.responses.map(BotTemplate),
+      ],
+      postback: data.postback,
+    }))
   }
+
   componentDidMount = async () => {
     const { data } = await axios.get("/api/user/dialogflow", {
       params: {
@@ -50,13 +59,13 @@ class Home extends Component {
       },
     })
 
-    this.setState({
+    this.setState(prevState => ({
       conversation: [
-        ...this.state.conversation,
+        ...prevState.conversation,
         ...data.responses.map(BotTemplate),
       ],
       postback: data.postback,
-    })
+    }))
   }
 
   render() {

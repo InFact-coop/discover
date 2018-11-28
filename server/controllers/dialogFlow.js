@@ -53,6 +53,14 @@ exports.queryDF = (req, res) => {
       // } else {
       //   // console.log(`  No intent matched.`)
       // }
+      console.log(
+        JSON.stringify(
+          r.view(
+            r.lensPath([0, "queryResult", "fulfillmentMessages", 0, "payload"]),
+            responses
+          )
+        )
+      )
       res.json({
         responses: getPayload(responses),
         postback: getPostback(responses),
