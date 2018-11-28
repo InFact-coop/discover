@@ -25,9 +25,12 @@ const getPayload = r.pipe(
 
 const getPostback = r.pipe(
   r.view(r.lensPath([...valuesPath, "postback", "structValue", "fields"])),
-  r.map(postback => {
-    const { kind } = postback
-    return postback[kind]
+  r.map(payload => {
+    const { kind } = payload
+    if (kind === "listValue") {
+      return payload[kind].values.map(r.prop("stringValue"))
+    }
+    return payload[kind]
   })
 )
 
@@ -53,14 +56,6 @@ exports.queryDF = (req, res) => {
       // } else {
       //   // console.log(`  No intent matched.`)
       // }
-      console.log(
-        JSON.stringify(
-          r.view(
-            r.lensPath([0, "queryResult", "fulfillmentMessages", 0, "payload"]),
-            responses
-          )
-        )
-      )
       res.json({
         responses: getPayload(responses),
         postback: getPostback(responses),
