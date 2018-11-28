@@ -23,7 +23,7 @@ const _ChatContainer = styled.div.attrs({
 `
 
 const _Message = styled.div.attrs({
-  className: "mono font-4 pv2 ph3 mb2 mh2",
+  className: "mono font-4 pv2 ph3 mb2",
 })`
   border-radius: ${({ user }) =>
     user ? `21px 21px 6px 21px` : `21px 21px 21px 6px`};
@@ -32,25 +32,25 @@ const _Message = styled.div.attrs({
 `
 
 const _MessageContainer = styled.div.attrs({
-  className: "flex flex-column message-container",
+  className: "flex flex-column message-container pb3 mh3",
 })`
   padding-top: 60px;
   overflow-y: scroll;
 `
 
 const _Option = styled.button.attrs({
-  className: "bg-white blue ba b--blue pv3 mb2",
+  className: "bg-white blue ba b--blue mb2 mh1",
 })`
-  width: ${({ number }) => (number === 2 ? "50%" : "100%")};
+  width: ${({ number }) => (number === 2 ? "47.5%" : "97.5%")};
+  padding: ${({ number }) => (number < 5 ? `16px 0` : `8px 0`)};
   border-radius: 6px;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
+  outline: none;
 `
 
 const _OptionContainer = styled.div.attrs({
-  className: "border-box w-100 ph3",
-})`
-  // bottom: 60px;
-`
+  className: "border-box w-100 ph2 pb3 mt2",
+})``
 
 const RenderConversation = ({ conversation }) => {
   return conversation.map(({ content, type }) => (
@@ -67,19 +67,19 @@ const RenderConversation = ({ conversation }) => {
     </_Message>
   ))
 }
-const RenderOptions = ({ options, payload, onButtonClick }) => {
+const RenderOptions = ({ options, payload, onButtonClick, number }) => {
   if (!options) {
-    return <_Option onClick={() => onButtonClick(payload)}>{payload}</_Option>
+    return (
+      <_Option number={1} onClick={() => onButtonClick(payload)}>
+        {payload}
+      </_Option>
+    )
   }
-  return (
-    <div>
-      {payload.map(option => (
-        <_Option key={option} onClick={() => onButtonClick(option)}>
-          {option}
-        </_Option>
-      ))}
-    </div>
-  )
+  return payload.map(option => (
+    <_Option key={option} onClick={() => onButtonClick(option)} number={number}>
+      {option}
+    </_Option>
+  ))
 }
 
 const BotTemplate = content => ({
@@ -94,7 +94,7 @@ const UserTemplate = content => ({
 
 class Home extends Component {
   state = {
-    conversation: [{ content: "Hello I'm Ivan and I'm back", type: User }],
+    conversation: [],
     postback: {},
   }
 
@@ -107,6 +107,7 @@ class Home extends Component {
     this.setState(prevState => ({
       conversation: [...prevState.conversation, UserTemplate(option)],
     }))
+
     const { data } = await axios.get("/api/user/dialogflow", {
       params: {
         query: option,
@@ -120,13 +121,15 @@ class Home extends Component {
       ],
       postback: data.postback,
     }))
-    this.scrollToBottom()
   }
-
-  componentDidMount = async () => {
+  onExitClick = async () => {
+    this.setState({
+      conversation: [],
+      postback: {},
+    })
     const { data } = await axios.get("/api/user/dialogflow", {
       params: {
-        query: this.state.conversation[0].content,
+        query: "Hello I'm Ivan and I'm back",
       },
     })
 
@@ -137,7 +140,26 @@ class Home extends Component {
       ],
       postback: data.postback,
     }))
+  }
+
+  componentDidUpdate() {
     this.scrollToBottom()
+  }
+
+  componentDidMount = async () => {
+    const { data } = await axios.get("/api/user/dialogflow", {
+      params: {
+        query: "Hello I'm Ivan and I'm back",
+      },
+    })
+
+    this.setState(prevState => ({
+      conversation: [
+        ...prevState.conversation,
+        ...data.responses.map(BotTemplate),
+      ],
+      postback: data.postback,
+    }))
   }
 
   render() {
@@ -145,7 +167,12 @@ class Home extends Component {
     return (
       <div>
         <GlobalStyle />
-        <img src={exit} alt="exit chat" className="fixed top-0 right-0" />
+        <img
+          src={exit}
+          alt="exit chat"
+          className="fixed top-0 right-0"
+          onClick={this.onExitClick}
+        />
         <_ChatContainer>
           <_MessageContainer>
             <RenderConversation conversation={conversation} />
@@ -154,7 +181,7 @@ class Home extends Component {
           {r.isEmpty(postback) ? (
             <div />
           ) : (
-            <_OptionContainer>
+            <_OptionContainer number={postback.payload.length}>
               <RenderOptions
                 {...postback}
                 onButtonClick={this.onOptionClick}
