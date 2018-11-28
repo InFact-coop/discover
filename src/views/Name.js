@@ -26,14 +26,14 @@ const _BotIcon = styled.img.attrs({
 })``
 
 const _Title = styled.p.attrs({
-  className: "mono font-1 tc ma2",
+  className: "mono font-2 tc ma2",
 })`
   color: var(--mid-gray);
   font-weight: 500;
 `
 
 const _Question = styled.p.attrs({
-  className: "mono font-3",
+  className: "mono font-4",
 })``
 
 const _Input = styled.input.attrs({
@@ -45,6 +45,7 @@ const _Input = styled.input.attrs({
   background: var(--white-30);
   height: 2.5rem;
   color: var(--near-black);
+  outline: none;
 `
 
 class Name extends Component {

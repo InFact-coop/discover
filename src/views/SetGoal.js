@@ -42,6 +42,7 @@ const _Input = styled.textarea.attrs({
   background: var(--white-30);
   height: 40%;
   color: var(--near-black);
+  outline: none;
 `
 
 class SetGoal extends Component {
