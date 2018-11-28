@@ -46,24 +46,23 @@ const _InnerContainer = styled.div.attrs({
   className: "flex flex-wrap justify-center mt2",
 })``
 const _Day = styled.div.attrs({
-  className: "flex items-center ma1 justify-center br-100",
+  className: "flex items-center ma1 justify-center br-100 sans bg-light-yellow",
 })`
-  background-color: var(--yellow);
   height: 2.5rem;
   width: 2.5rem;
   ${({ selected }) =>
     selected &&
-    `border: 0.2rem solid var(--gray);	
+    `border: 0.2rem solid var(--gray);
 `};
 `
 const _Pill = styled.div.attrs({
-  className: "flex items-center mv3 mh1 ph3 justify-center br-pill",
+  className:
+    "flex items-center mv3 mh1 ph3 justify-center br-pill sans bg-light-yellow",
 })`
-  background-color: var(--yellow);
   height: 2.5rem;
   ${({ selected }) =>
     selected &&
-    `border: 0.2rem solid var(--gray);	
+    `border: 0.2rem solid var(--gray);
 `};
 `
 
@@ -95,16 +94,19 @@ class GoalDays extends Component {
       startDate,
       scheduledFinishDate,
     } = this.props
+
     const selectedDays = staticData.days.reduce((acc, curr) => {
       acc[curr] = {}
       acc[curr].selected = daysOfWeek.includes(curr)
       return acc
     }, {})
+
     const selectDuration = staticData.durations.reduce((acc, curr) => {
       acc[curr] = {}
       acc[curr].selected = curr === duration
       return acc
     }, {})
+
     this.setState({
       days: selectedDays,
       durations: selectDuration,
@@ -117,7 +119,9 @@ class GoalDays extends Component {
   onDayClick = day => () => {
     const { days } = this.state
     const { selected } = days[day]
+
     days[day].selected = !selected
+
     this.setState({
       days,
       everyDaySelected:
