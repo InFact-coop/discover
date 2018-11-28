@@ -52,6 +52,11 @@ const BotTemplate = content => ({
   type: Bot,
 })
 
+const UserTemplate = content => ({
+  content,
+  type: User,
+})
+
 class Home extends Component {
   state = {
     conversation: [{ content: "Hello I'm Ivan and I'm back", type: User }],
@@ -59,6 +64,10 @@ class Home extends Component {
   }
 
   onOptionClick = async option => {
+    this.setState(prevState => ({
+      conversation: [...prevState.conversation, UserTemplate(option)],
+    }))
+
     const { data } = await axios.get("/api/user/dialogflow", {
       params: {
         query: option,
