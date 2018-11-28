@@ -16,6 +16,12 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
+const _ChatContainer = styled.div.attrs({
+  className: "flex flex-column justify-between mb4",
+})`
+  height: calc(100vh - 60px);
+`
+
 const _Message = styled.div.attrs({
   className: "mono font-4 pv2 ph3 mb2 mh2",
 })`
@@ -26,8 +32,11 @@ const _Message = styled.div.attrs({
 `
 
 const _MessageContainer = styled.div.attrs({
-  className: "flex flex-column",
-})``
+  className: "flex flex-column message-container",
+})`
+  padding-top: 60px;
+  overflow-y: scroll;
+`
 
 const _Option = styled.button.attrs({
   className: "bg-white blue ba b--blue pv3 mb2",
@@ -38,10 +47,9 @@ const _Option = styled.button.attrs({
 `
 
 const _OptionContainer = styled.div.attrs({
-  className: "fixed border-box",
+  className: "border-box w-100 ph3",
 })`
-  width: calc(100vw - 32px);
-  bottom: 60px;
+  // bottom: 60px;
 `
 
 const RenderConversation = ({ conversation }) => {
@@ -90,11 +98,15 @@ class Home extends Component {
     postback: {},
   }
 
+  scrollToBottom = () => {
+    const elem = document.querySelector(".message-container")
+    elem.scrollTop = elem.scrollHeight
+  }
+
   onOptionClick = async option => {
     this.setState(prevState => ({
       conversation: [...prevState.conversation, UserTemplate(option)],
     }))
-
     const { data } = await axios.get("/api/user/dialogflow", {
       params: {
         query: option,
@@ -108,6 +120,7 @@ class Home extends Component {
       ],
       postback: data.postback,
     }))
+    this.scrollToBottom()
   }
 
   componentDidMount = async () => {
@@ -124,6 +137,7 @@ class Home extends Component {
       ],
       postback: data.postback,
     }))
+    this.scrollToBottom()
   }
 
   render() {
@@ -131,15 +145,12 @@ class Home extends Component {
     return (
       <div>
         <GlobalStyle />
-        <div className="vw-100 flex justify-end">
-          <img src={exit} alt="exit chat" />
-        </div>
+        <img src={exit} alt="exit chat" className="fixed top-0 right-0" />
+        <_ChatContainer>
+          <_MessageContainer>
+            <RenderConversation conversation={conversation} />
+          </_MessageContainer>
 
-        <_MessageContainer>
-          <RenderConversation conversation={conversation} />
-        </_MessageContainer>
-
-        <div className="mh3">
           {r.isEmpty(postback) ? (
             <div />
           ) : (
@@ -151,8 +162,7 @@ class Home extends Component {
               />
             </_OptionContainer>
           )}
-        </div>
-
+        </_ChatContainer>
         <NavBar />
       </div>
     )
