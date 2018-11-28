@@ -1,25 +1,47 @@
 import { Component } from "react"
 import NavBar from "../components/NavBar"
+import styled from "styled-components"
 import axios from "axios"
 import * as r from "ramda" //eslint-disable-line import/no-namespace
 
 const User = "User"
 const Bot = "Bot"
 
+const _Message = styled.div.attrs({
+  className: "mono font-4 pv2 ph3 mb2 mh2",
+})`
+  border-radius: ${({ user }) =>
+    user ? `21px 21px 6px 21px` : `21px 21px 21px 6px`};
+  max-width: 210px;
+`
+
+const _Button = styled.button.attrs({
+  className: "bg-white blue ba b--blue pa3",
+})`
+  border-radius: 6px;
+`
+
 const Message = ({ content, type }) => (
-  <p className={type === User ? "self-end" : ""}>{content}</p>
+  <_Message
+    className={
+      type === User ? "self-end bg-blue white user-style" : "bg-white dark-gray"
+    }
+    user={type === User}
+  >
+    {content}
+  </_Message>
 )
 
 const ButtonOptions = ({ options, payload, onButtonClick }) => {
   if (!options) {
-    return <button onClick={() => onButtonClick(payload)}>{payload}</button>
+    return <_Button onClick={() => onButtonClick(payload)}>{payload}</_Button>
   }
   return (
     <div>
       {payload.map(option => (
-        <button key={option} onClick={() => onButtonClick(option)}>
+        <_Button key={option} onClick={() => onButtonClick(option)}>
           {option}
-        </button>
+        </_Button>
       ))}
     </div>
   )
