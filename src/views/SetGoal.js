@@ -29,15 +29,13 @@ const _Question = styled.p.attrs({
 })``
 
 const _Input = styled.textarea.attrs({
-  className: "w-90 ba ma2 ph3 pv2 sans font-3",
+  className: "w-90 ba ma2 ph3 pv2 sans font-3 dark-gray bg-white-30",
 })`
   border-color: ${({ inValid }) =>
     inValid ? `var(--red)` : `var(--moon-gray)`};
   border-width: thin;
   border-radius: 1.3rem;
-  background: var(--white-30);
   height: 40%;
-  color: var(--near-black);
   outline: none;
 `
 

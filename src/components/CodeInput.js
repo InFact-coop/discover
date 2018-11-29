@@ -8,9 +8,8 @@ const _InputWithButton = styled.div.attrs({
 })``
 
 const _CodeInput = styled.input.attrs({
-  className: "w-50 h2 ba ma2 br2",
+  className: "w-50 h2 ba ma2 br2  dark-gray bg-white-30 b--moon-gray",
 })`
-  border-color: var(--moon-gray);
   border-width: thin;
   outline: none;
 `

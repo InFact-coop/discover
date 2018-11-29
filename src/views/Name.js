@@ -33,14 +33,12 @@ const _Question = styled.p.attrs({
 })``
 
 const _Input = styled.input.attrs({
-  className: "w-80 ba ma4 pa2 br3 font-2",
+  className: "w-80 ba ma4 pa2 br3 font-2 sans dark-gray bg-white-30",
 })`
   border-color: ${({ inValid }) =>
     inValid ? `var(--red)` : `var(--moon-gray)`};
   border-width: thin;
-  background: var(--white-30);
   height: 2.5rem;
-  color: var(--near-black);
   outline: none;
 `
 
