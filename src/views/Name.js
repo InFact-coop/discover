@@ -11,6 +11,7 @@ import botIcon from "../assets/icons/bot.svg"
 import ProgressBar from "../components/ProgressBar"
 import SaveButton from "../components/SaveButton"
 import { _Title } from "../components/Text"
+import Input from "../components/Input"
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -31,16 +32,6 @@ const _BotIcon = styled.img.attrs({
 const _Question = styled.p.attrs({
   className: "mono font-4",
 })``
-
-const _Input = styled.input.attrs({
-  className: "w-80 ba ma4 pa2 br3 font-2 sans dark-gray bg-white-30",
-})`
-  border-color: ${({ inValid }) =>
-    inValid ? `var(--red)` : `var(--moon-gray)`};
-  border-width: thin;
-  height: 2.5rem;
-  outline: none;
-`
 
 class Name extends Component {
   state = {
@@ -83,7 +74,8 @@ class Name extends Component {
             <br /> First things first!
           </_Title>
           <_Question>what's your name my friend?</_Question>
-          <_Input
+          <Input
+            className="w-80 ma4 pa2 font-2 h2"
             value={name}
             onChange={this.onInputChange}
             onBlur={this.onBlur}
