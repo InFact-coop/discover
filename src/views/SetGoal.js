@@ -2,12 +2,15 @@ import { Component } from "react"
 import { connect } from "react-redux"
 import styled, { createGlobalStyle } from "styled-components"
 import PropTypes from "prop-types"
-import ProgressBar from "../components/ProgressBar"
-import BackButton from "../components/BackButton"
-import SaveButton from "../components/SaveButton"
+
 import { Avatar, Technique, EditGoal } from "."
 import { changeGoal } from "../state/actions/currentGoal"
 import background from "../assets/backgrounds/bg_what_is_your_goal.svg"
+
+import ProgressBar from "../components/ProgressBar"
+import BackButton from "../components/BackButton"
+import SaveButton from "../components/SaveButton"
+import { _Title } from "../components/Text"
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -19,13 +22,6 @@ const _Container = styled.div.attrs({
   className: "flex flex-column items-center justify-center",
 })`
   height: 90vh;
-`
-
-const _Title = styled.p.attrs({
-  className: "mono font-1 tc ma3",
-})`
-  color: var(--mid-gray);
-  font-weight: 500;
 `
 
 const _Question = styled.p.attrs({
@@ -42,6 +38,7 @@ const _Input = styled.textarea.attrs({
   background: var(--white-30);
   height: 40%;
   color: var(--near-black);
+  outline: none;
 `
 
 class SetGoal extends Component {
