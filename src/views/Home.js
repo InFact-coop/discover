@@ -56,8 +56,11 @@ const _Option = styled.button.attrs({
 `
 
 const _OptionContainer = styled.div.attrs({
-  className: "border-box w-100 ph2 pb3 mt2",
-})``
+  className: "border-box w-100 ph2 pb3 mt2 flex",
+})`
+  flex-direction: ${({ number }) => (number === 2 ? "row" : "column")};
+  flex-shrink: 0;
+`
 
 const RenderConversation = ({ conversation }) =>
   conversation.map(({ content, type }) => (

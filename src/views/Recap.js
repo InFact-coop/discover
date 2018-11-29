@@ -14,7 +14,7 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 const _Container = styled.div.attrs({
-  className: "flex flex-column items-center justify-center center",
+  className: "flex flex-column items-center justify-center center vh-100",
 })``
 
 const _Title = styled.p.attrs({
