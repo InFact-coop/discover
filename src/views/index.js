@@ -25,7 +25,7 @@ class Router extends Component {
   componentDidMount() {
     const { verifyToken, auth, changeView } = this.props
     if (auth.token) return verifyToken(auth.token)
-    return changeView(Home)
+    return changeView(Code)
   }
 
   render() {
