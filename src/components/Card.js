@@ -5,19 +5,16 @@ import PropTypes from "prop-types"
 const _CardContainer = styled.div.attrs({
   className: "br4 ma1",
 })`
-  ${({ selected }) =>
-    selected &&
-    `border: thin solid var(--gray);	
-  `};
+  border: ${({ selected }) => selected && "thin solid var(--gray);"};
 `
 
 const _Card = styled.div.attrs({
-  className: "flex flex-column ma1 items-center br4",
+  className: "flex flex-column ma1 items-center justify-center br4",
 })`
   ${({ width, height, backgroundColor }) =>
     `background-color: var(${backgroundColor});
     width: ${width};
-    height: ${height};	
+    height: ${height};
   `};
 `
 const _CardTitle = styled.p.attrs({
