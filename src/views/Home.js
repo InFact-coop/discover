@@ -5,6 +5,10 @@ import styled, { createGlobalStyle } from "styled-components"
 import axios from "axios"
 import * as r from "ramda" //eslint-disable-line import/no-namespace
 
+import { changeView } from "../state/actions/router"
+
+import { Help } from "."
+
 import exit from "../assets/icons/exit_bot.svg"
 import background from "../assets/backgrounds/bg_bot.svg"
 
@@ -70,7 +74,13 @@ const RenderConversation = ({ conversation }) =>
     </_Message>
   ))
 
-const RenderOptions = ({ options, payload, onButtonClick, number }) => {
+const RenderOptions = ({
+  options,
+  payload,
+  onButtonClick,
+  number,
+  changeView,
+}) => {
   if (!options) {
     return (
       <_Option number={1} onClick={() => onButtonClick(payload)}>
@@ -78,11 +88,24 @@ const RenderOptions = ({ options, payload, onButtonClick, number }) => {
       </_Option>
     )
   }
-  return payload.map(option => (
-    <_Option key={option} onClick={() => onButtonClick(option)} number={number}>
-      {option}
-    </_Option>
-  ))
+  return payload.map(option => {
+    if (option === "Show me the crisis resources please")
+      return (
+        <_Option key={option} onClick={() => changeView(Help)} number={number}>
+          {option}
+        </_Option>
+      )
+
+    return (
+      <_Option
+        key={option}
+        onClick={() => onButtonClick(option)}
+        number={number}
+      >
+        {option}
+      </_Option>
+    )
+  })
 }
 
 const BotTemplate = content => ({
@@ -145,6 +168,7 @@ class Home extends Component {
       conversation: [],
       postback: {},
     })
+
     const { data } = await axios.get("/api/user/dialogflow", {
       params: {
         query: "Hello I'm Ivan and I'm back",
@@ -192,6 +216,7 @@ class Home extends Component {
 
   render() {
     const { postback, conversation } = this.state
+    const { changeView } = this.props
     return (
       <div>
         <GlobalStyle />
@@ -214,6 +239,7 @@ class Home extends Component {
                 {...postback}
                 onButtonClick={this.onOptionClick}
                 number={postback.payload.length}
+                changeView={changeView}
               />
             </_OptionContainer>
           )}
@@ -226,5 +252,5 @@ class Home extends Component {
 
 export default connect(
   ({ profile }) => ({ profile }),
-  null
+  { changeView }
 )(Home)
