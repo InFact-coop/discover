@@ -2,9 +2,7 @@ import { Component, Fragment } from "react"
 import { connect } from "react-redux"
 import styled, { createGlobalStyle } from "styled-components"
 import PropTypes from "prop-types"
-import ProgressBar from "../components/ProgressBar"
-import SaveButton from "../components/SaveButton"
-import BackButton from "../components/BackButton"
+
 import { GoalTime, EditGoal } from "."
 import {
   selectDay,
@@ -13,8 +11,14 @@ import {
   setDuration,
 } from "../state/actions/currentGoal"
 import { changeView } from "../state/actions/router"
+
 import background from "../assets/backgrounds/bg_how_many_times.svg"
 import botIcon from "../assets/icons/bot.svg"
+
+import ProgressBar from "../components/ProgressBar"
+import SaveButton from "../components/SaveButton"
+import BackButton from "../components/BackButton"
+import { _Title } from "../components/Text"
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -33,37 +37,30 @@ const _BotIcon = styled.img.attrs({
   className: "w-40 mt5 mb1",
 })``
 
-const _Title = styled.p.attrs({
-  className: "mono font-1 tc ma2",
-})`
-  color: var(--mid-gray);
-  font-weight: 500;
-`
 const _Description = styled.p.attrs({
   className: "mono font-4 tc",
 })``
+
 const _InnerContainer = styled.div.attrs({
   className: "flex flex-wrap justify-center mt2",
 })``
+
 const _Day = styled.div.attrs({
-  className: "flex items-center ma1 justify-center br-100",
+  className: "flex items-center ma1 justify-center br-100 sans bg-light-yellow",
 })`
-  background-color: var(--yellow);
   height: 2.5rem;
   width: 2.5rem;
-  ${({ selected }) =>
-    selected &&
-    `border: 0.2rem solid var(--gray);	
-`};
+  border: ${({ selected }) => selected && "0.2rem solid var(--gray)"};
 `
+
 const _Pill = styled.div.attrs({
-  className: "flex items-center mv3 mh1 ph3 justify-center br-pill",
+  className:
+    "flex items-center mv3 mh1 ph3 justify-center br-pill sans bg-light-yellow",
 })`
-  background-color: var(--yellow);
   height: 2.5rem;
   ${({ selected }) =>
     selected &&
-    `border: 0.2rem solid var(--gray);	
+    `border: 0.2rem solid var(--gray);
 `};
 `
 
@@ -95,16 +92,19 @@ class GoalDays extends Component {
       startDate,
       scheduledFinishDate,
     } = this.props
+
     const selectedDays = staticData.days.reduce((acc, curr) => {
       acc[curr] = {}
       acc[curr].selected = daysOfWeek.includes(curr)
       return acc
     }, {})
+
     const selectDuration = staticData.durations.reduce((acc, curr) => {
       acc[curr] = {}
       acc[curr].selected = curr === duration
       return acc
     }, {})
+
     this.setState({
       days: selectedDays,
       durations: selectDuration,
@@ -117,7 +117,9 @@ class GoalDays extends Component {
   onDayClick = day => () => {
     const { days } = this.state
     const { selected } = days[day]
+
     days[day].selected = !selected
+
     this.setState({
       days,
       everyDaySelected:
@@ -200,7 +202,7 @@ class GoalDays extends Component {
         <_Title>Perfect!</_Title>
         <_Description>
           On <u>which days</u> and for <u>how long</u> will you be working on
-          your goal
+          your goal?
         </_Description>
         <_InnerContainer>
           {Object.keys(days).map(day => (
