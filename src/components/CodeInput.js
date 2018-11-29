@@ -2,17 +2,11 @@ import { Component } from "react"
 import styled from "styled-components"
 import PropTypes from "prop-types"
 import arrowGo from "../assets/icons/arrow_go.svg"
+import Input from "./Input"
 
 const _InputWithButton = styled.div.attrs({
   className: "flex justify-center items-center",
 })``
-
-const _CodeInput = styled.input.attrs({
-  className: "w-50 h2 ba ma2 br2  dark-gray bg-white-30 b--moon-gray",
-})`
-  border-width: thin;
-  outline: none;
-`
 
 const _SubmitButton = styled.div.attrs({
   className: "br-100 h2 w2 tc",
@@ -54,7 +48,8 @@ class CodeInput extends Component {
 
     return (
       <_InputWithButton>
-        <_CodeInput
+        <Input
+          className="w-50 h2 ph1"
           type="text"
           onChange={this.onInputChange}
           value={code}
