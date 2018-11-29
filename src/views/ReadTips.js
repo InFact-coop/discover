@@ -82,8 +82,6 @@ class ReadTips extends Component {
   render() {
     const { profile, tips } = this.props
     const Content = getTipSections(tips.topic)[tips.index - 1]
-    console.log(tips.index)
-    console.log(getTipSections(tips.topic))
     return (
       <div>
         <_TipScreen backgroundIndex={tips.index}>
