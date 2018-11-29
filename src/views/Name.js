@@ -2,12 +2,15 @@ import { Component, Fragment } from "react"
 import { connect } from "react-redux"
 import styled, { createGlobalStyle } from "styled-components"
 import PropTypes from "prop-types"
-import ProgressBar from "../components/ProgressBar"
-import SaveButton from "../components/SaveButton"
+
 import { Avatar } from "."
 import { changeName } from "../state/actions/profile"
 import background from "../assets/backgrounds/bg_what_is_your_name.svg"
 import botIcon from "../assets/icons/bot.svg"
+
+import ProgressBar from "../components/ProgressBar"
+import SaveButton from "../components/SaveButton"
+import { _Title } from "../components/Text"
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -24,13 +27,6 @@ const _Container = styled.div.attrs({
 const _BotIcon = styled.img.attrs({
   className: "w-50 mt5 mb1",
 })``
-
-const _Title = styled.p.attrs({
-  className: "mono font-2 tc ma2",
-})`
-  color: var(--mid-gray);
-  font-weight: 500;
-`
 
 const _Question = styled.p.attrs({
   className: "mono font-4",
@@ -84,9 +80,9 @@ class Name extends Component {
           <ProgressBar progress={1} />
           <GlobalStyle />
           <_BotIcon src={botIcon} />
-          <_Title>
+          <_Title className="ma2">
             OK,
-            <br /> First thing first!
+            <br /> First things first!
           </_Title>
           <_Question>what's your name my friend?</_Question>
           <_Input

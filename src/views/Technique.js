@@ -2,15 +2,18 @@ import { Component, Fragment } from "react"
 import { connect } from "react-redux"
 import styled, { createGlobalStyle } from "styled-components"
 import PropTypes from "prop-types"
-import ProgressBar from "../components/ProgressBar"
-import BackButton from "../components/BackButton"
-import SaveButton from "../components/SaveButton"
+
 import { GoalDays, EditGoal } from "."
 import { changeTechniques } from "../state/actions/currentGoal"
 import { changeView } from "../state/actions/router"
+import background from "../assets/backgrounds/bg_which_technique.svg"
+
+import ProgressBar from "../components/ProgressBar"
+import BackButton from "../components/BackButton"
+import SaveButton from "../components/SaveButton"
 import Card from "../components/Card"
 import Carousel from "../components/Carousel"
-import background from "../assets/backgrounds/bg_which_technique.svg"
+import { _Title } from "../components/Text"
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -22,13 +25,6 @@ const _Container = styled.div.attrs({
   className: "flex flex-column items-center mt6",
 })`
   height: 90vh;
-`
-
-const _Title = styled.p.attrs({
-  className: "mono font-1 ma3",
-})`
-  color: var(--mid-gray);
-  font-weight: 500;
 `
 
 const _Question = styled.p.attrs({
@@ -92,7 +88,7 @@ class Technique extends Component {
         <_Container>
           {!edit && <ProgressBar progress={4} />}
           <BackButton />
-          <_Title> Great!</_Title>
+          <_Title>Great!</_Title>
           <_Question>
             and which technique will you choose to achieve your goal?
           </_Question>
