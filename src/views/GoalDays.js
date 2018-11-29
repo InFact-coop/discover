@@ -168,7 +168,12 @@ class GoalDays extends Component {
   }
 
   render() {
-    const { days, durations, everyDaySelected } = this.state
+    const {
+      days,
+      durations,
+      everyDaySelected,
+      scheduledFinishDate,
+    } = this.state
     const {
       changeView,
       router: { history },
@@ -225,12 +230,14 @@ class GoalDays extends Component {
         </_InnerContainer>
         {edit ? (
           <SaveButton
+            disabled={!scheduledFinishDate}
             saveFunction={this.saveFunction}
             redirectTo={EditGoal}
             text="SAVE"
           />
         ) : (
           <SaveButton
+            disabled={!scheduledFinishDate}
             saveFunction={this.saveFunction}
             text="NEXT"
             redirectTo={GoalTime}
