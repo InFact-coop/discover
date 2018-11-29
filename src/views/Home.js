@@ -1,12 +1,15 @@
 import { Component } from "react"
+import { connect } from "react-redux"
 import NavBar from "../components/NavBar"
 import styled, { createGlobalStyle } from "styled-components"
 import axios from "axios"
 import * as r from "ramda" //eslint-disable-line import/no-namespace
+
 import exit from "../assets/icons/exit_bot.svg"
+import background from "../assets/backgrounds/bg_bot.svg"
+
 const User = "User"
 const Bot = "Bot"
-import background from "../assets/backgrounds/bg_bot.svg"
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -52,8 +55,8 @@ const _OptionContainer = styled.div.attrs({
   className: "border-box w-100 ph2 pb3 mt2",
 })``
 
-const RenderConversation = ({ conversation }) => {
-  return conversation.map(({ content, type }) => (
+const RenderConversation = ({ conversation }) =>
+  conversation.map(({ content, type }) => (
     <_Message
       className={
         type === User
@@ -66,7 +69,7 @@ const RenderConversation = ({ conversation }) => {
       {content}
     </_Message>
   ))
-}
+
 const RenderOptions = ({ options, payload, onButtonClick, number }) => {
   if (!options) {
     return (
@@ -98,6 +101,15 @@ class Home extends Component {
     postback: {},
   }
 
+  addMetaDataToMsgs = content => {
+    const { profile } = this.props
+
+    return r.pipe(
+      r.replace(/\$name/g, profile.name),
+      r.replace(/\$crisis-icon/g, "life ring")
+    )(content)
+  }
+
   scrollToBottom = () => {
     const elem = document.querySelector(".message-container")
     elem.scrollTop = elem.scrollHeight
@@ -117,11 +129,17 @@ class Home extends Component {
     this.setState(prevState => ({
       conversation: [
         ...prevState.conversation,
-        ...data.responses.map(BotTemplate),
+        ...r.map(
+          r.pipe(
+            this.addMetaDataToMsgs,
+            BotTemplate
+          )
+        )(data.responses),
       ],
       postback: data.postback,
     }))
   }
+
   onExitClick = async () => {
     this.setState({
       conversation: [],
@@ -136,7 +154,12 @@ class Home extends Component {
     this.setState(prevState => ({
       conversation: [
         ...prevState.conversation,
-        ...data.responses.map(BotTemplate),
+        ...r.map(
+          r.pipe(
+            this.addMetaDataToMsgs,
+            BotTemplate
+          )
+        )(data.responses),
       ],
       postback: data.postback,
     }))
@@ -156,7 +179,12 @@ class Home extends Component {
     this.setState(prevState => ({
       conversation: [
         ...prevState.conversation,
-        ...data.responses.map(BotTemplate),
+        ...r.map(
+          r.pipe(
+            this.addMetaDataToMsgs,
+            BotTemplate
+          )
+        )(data.responses),
       ],
       postback: data.postback,
     }))
@@ -196,4 +224,7 @@ class Home extends Component {
   }
 }
 
-export default Home
+export default connect(
+  ({ profile }) => ({ profile }),
+  null
+)(Home)
