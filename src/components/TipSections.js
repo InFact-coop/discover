@@ -189,28 +189,6 @@ const ProcTwo = () => {
 const ProcThree = () => {
   return (
     <_Container>
-      <_Bullets>
-        <li>
-          <_Bold>Inspire yourself.</_Bold> Remind yourself of phrases or quotes
-          that encourage you to keep going. Try to watch motivational speeches
-          or inspiring talks on YouTube, TED talks or podcasts.
-        </li>
-        <li>
-          <_Bold>Do things that energise you</_Bold>
-        </li>
-        <li>
-          <_Bold />
-          When you have achieved your target for the day, reward yourself with
-          something you enjoy, and notice how good it feels to get things done!
-        </li>
-      </_Bullets>
-    </_Container>
-  )
-}
-
-const ProcFour = () => {
-  return (
-    <_Container>
       <_SubTitle>Maintain your focus!</_SubTitle>
       <_Bullets>
         <li>
@@ -222,9 +200,41 @@ const ProcFour = () => {
           of achievement.
         </li>
         <li>
-          <_Bold>Reward your progress. </_Bold>
+          <_Bold>Reward your progress.</_Bold>
           When you have achieved your target for the day, reward yourself with
           something you enjoy, and notice how good it feels to get things done!
+        </li>
+      </_Bullets>
+    </_Container>
+  )
+}
+
+const ProcFour = () => {
+  return (
+    <_Container>
+      <_Bullets>
+        <li>
+          <_Bold>Inspire yourself.</_Bold> Remind yourself of phrases or quotes
+          that encourage you to keep going. Try to watch motivational speeches
+          or inspiring talks on YouTube, TED talks or podcasts.
+        </li>
+        <li>
+          <_Bold>Do things that energise you</_Bold>
+          <_Bullets>
+            <li>
+              Listen to music which helps you focus, stay motivated or
+              energised.{" "}
+            </li>
+            <li>Take a run, or a brisk walk.</li>
+            <li>Eat healthily.</li>
+            <li>Get a good night’s sleep to increase energy levels.</li>
+            <li>Work at a time of day when you feel most alert.</li>
+          </_Bullets>
+        </li>
+        <li>
+          <_Bold>Get support. </_Bold>
+          Allow a family member or friend to check in with your progress, and
+          help you stay motivated.
         </li>
       </_Bullets>
     </_Container>
