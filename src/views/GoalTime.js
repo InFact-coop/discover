@@ -49,15 +49,15 @@ const _TimeDiv = styled.div.attrs({
   width: 4.5rem;
 `
 const _TimeInput = styled.select.attrs({
-  className: "w-60 h-50 tc font-3 sans bg-white",
+  className: "w-60 h-50 tc font-3 sans bg-yellow center outline-0",
 })`
   border-style: hidden;
   color: var(--mid-gray);
   -webkit-appearance: none;
   -moz-appearance: none;
   text-indent: 1px;
-  text-overflow: "";
 `
+
 const _SkipButton = styled.div.attrs({
   className: "flex justify-center items-center sans h2 w2",
 })`
