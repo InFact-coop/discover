@@ -34,3 +34,7 @@ export const CHANGE_AVATAR = "CHANGE_AVATAR"
 
 //previous goals
 export const ARCHIVE_GOAL = "ARCHIVE_GOAL"
+
+// tips
+export const SELECT_TOPIC = "SELECT_TOPIC"
+export const SET_PAGE_INDEX = "SET_PAGE_INDEX"

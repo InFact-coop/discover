@@ -6,6 +6,7 @@ import staticData from "./staticData"
 import profile from "./profile"
 import currentGoal from "./currentGoal"
 import pastGoals from "./pastGoals"
+import tips from "./tips"
 
 export default combineReducers({
   router,
@@ -14,4 +15,5 @@ export default combineReducers({
   profile,
   currentGoal,
   pastGoals,
+  tips,
 })
