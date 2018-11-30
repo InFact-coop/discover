@@ -5,7 +5,8 @@ import PropTypes from "prop-types"
 const _CardContainer = styled.div.attrs({
   className: "br4 ma1",
 })`
-  border: ${({ selected }) => selected && "thin solid var(--dark-gray);"};
+  border: ${({ selected }) =>
+    selected ? "thin solid var(--gray)" : "thin solid transparent"};
 `
 
 const _Card = styled.div.attrs({

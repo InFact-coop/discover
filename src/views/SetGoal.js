@@ -11,6 +11,7 @@ import ProgressBar from "../components/ProgressBar"
 import BackButton from "../components/BackButton"
 import SaveButton from "../components/SaveButton"
 import { _Title } from "../components/Text"
+import Input from "../components/Input"
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -27,19 +28,6 @@ const _Container = styled.div.attrs({
 const _Question = styled.p.attrs({
   className: "mono font-3 ma2 tc",
 })``
-
-const _Input = styled.textarea.attrs({
-  className: "w-90 ba ma2 ph3 pv2 sans font-3",
-})`
-  border-color: ${({ inValid }) =>
-    inValid ? `var(--red)` : `var(--moon-gray)`};
-  border-width: thin;
-  border-radius: 1.3rem;
-  background: var(--white-30);
-  height: 40%;
-  color: var(--near-black);
-  outline: none;
-`
 
 class SetGoal extends Component {
   state = {
@@ -81,7 +69,9 @@ class SetGoal extends Component {
         <BackButton action="back" to={Avatar} />
         <_Title>It's goal time, {name}!</_Title>
         <_Question>What should I set as your DISCOVER goal?</_Question>
-        <_Input
+        <Input
+          as="textarea"
+          className="w-90 ba ph3 pv2 font-3 br4 h5"
           placeholder="My goal is..."
           value={goal}
           onBlur={this.onBlur}

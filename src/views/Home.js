@@ -1,12 +1,19 @@
 import { Component } from "react"
+import { connect } from "react-redux"
 import NavBar from "../components/NavBar"
 import styled, { createGlobalStyle } from "styled-components"
 import axios from "axios"
 import * as r from "ramda" //eslint-disable-line import/no-namespace
+
+import { changeView } from "../state/actions/router"
+
+import { Help } from "."
+
 import exit from "../assets/icons/exit_bot.svg"
+import background from "../assets/backgrounds/bg_bot.svg"
+
 const User = "User"
 const Bot = "Bot"
-import background from "../assets/backgrounds/bg_bot.svg"
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -49,11 +56,14 @@ const _Option = styled.button.attrs({
 `
 
 const _OptionContainer = styled.div.attrs({
-  className: "border-box w-100 ph2 pb3 mt2",
-})``
+  className: "border-box w-100 ph2 pb3 mt2 flex",
+})`
+  flex-direction: ${({ number }) => (number === 2 ? "row" : "column")};
+  flex-shrink: 0;
+`
 
-const RenderConversation = ({ conversation }) => {
-  return conversation.map(({ content, type }) => (
+const RenderConversation = ({ conversation }) =>
+  conversation.map(({ content, type }) => (
     <_Message
       className={
         type === User
@@ -66,8 +76,14 @@ const RenderConversation = ({ conversation }) => {
       {content}
     </_Message>
   ))
-}
-const RenderOptions = ({ options, payload, onButtonClick, number }) => {
+
+const RenderOptions = ({
+  options,
+  payload,
+  onButtonClick,
+  number,
+  changeView,
+}) => {
   if (!options) {
     return (
       <_Option number={1} onClick={() => onButtonClick(payload)}>
@@ -75,11 +91,24 @@ const RenderOptions = ({ options, payload, onButtonClick, number }) => {
       </_Option>
     )
   }
-  return payload.map(option => (
-    <_Option key={option} onClick={() => onButtonClick(option)} number={number}>
-      {option}
-    </_Option>
-  ))
+  return payload.map(option => {
+    if (option === "Show me the crisis resources please")
+      return (
+        <_Option key={option} onClick={() => changeView(Help)} number={number}>
+          {option}
+        </_Option>
+      )
+
+    return (
+      <_Option
+        key={option}
+        onClick={() => onButtonClick(option)}
+        number={number}
+      >
+        {option}
+      </_Option>
+    )
+  })
 }
 
 const BotTemplate = content => ({
@@ -96,6 +125,15 @@ class Home extends Component {
   state = {
     conversation: [],
     postback: {},
+  }
+
+  addMetaDataToMsgs = content => {
+    const { profile } = this.props
+
+    return r.pipe(
+      r.replace(/\$name/g, profile.name),
+      r.replace(/\$crisis-icon/g, "life ring")
+    )(content)
   }
 
   scrollToBottom = () => {
@@ -117,16 +155,23 @@ class Home extends Component {
     this.setState(prevState => ({
       conversation: [
         ...prevState.conversation,
-        ...data.responses.map(BotTemplate),
+        ...r.map(
+          r.pipe(
+            this.addMetaDataToMsgs,
+            BotTemplate
+          )
+        )(data.responses),
       ],
       postback: data.postback,
     }))
   }
+
   onExitClick = async () => {
     this.setState({
       conversation: [],
       postback: {},
     })
+
     const { data } = await axios.get("/api/user/dialogflow", {
       params: {
         query: "Hello I'm Ivan and I'm back",
@@ -136,7 +181,12 @@ class Home extends Component {
     this.setState(prevState => ({
       conversation: [
         ...prevState.conversation,
-        ...data.responses.map(BotTemplate),
+        ...r.map(
+          r.pipe(
+            this.addMetaDataToMsgs,
+            BotTemplate
+          )
+        )(data.responses),
       ],
       postback: data.postback,
     }))
@@ -156,7 +206,12 @@ class Home extends Component {
     this.setState(prevState => ({
       conversation: [
         ...prevState.conversation,
-        ...data.responses.map(BotTemplate),
+        ...r.map(
+          r.pipe(
+            this.addMetaDataToMsgs,
+            BotTemplate
+          )
+        )(data.responses),
       ],
       postback: data.postback,
     }))
@@ -164,6 +219,7 @@ class Home extends Component {
 
   render() {
     const { postback, conversation } = this.state
+    const { changeView } = this.props
     return (
       <div>
         <GlobalStyle />
@@ -186,6 +242,7 @@ class Home extends Component {
                 {...postback}
                 onButtonClick={this.onOptionClick}
                 number={postback.payload.length}
+                changeView={changeView}
               />
             </_OptionContainer>
           )}
@@ -196,4 +253,7 @@ class Home extends Component {
   }
 }
 
-export default Home
+export default connect(
+  ({ profile }) => ({ profile }),
+  { changeView }
+)(Home)
