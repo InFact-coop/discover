@@ -15,11 +15,10 @@ const GlobalStyle = createGlobalStyle`
 `
 const _Container = styled.div.attrs({
   className: "flex flex-column items-center justify-center center",
-})`
-  height: 100vh;
-`
+})``
+
 const _Title = styled.p.attrs({
-  className: "mono font-1 tc ma2",
+  className: "mono font-1 tc ma2 mt6",
 })`
   color: var(--mid-gray);
   font-weight: 500;
@@ -32,12 +31,11 @@ const _InnerContainer = styled.div.attrs({
   className: "flex flex-column items-center ma3 pa5 br4",
 })`
   background-color: var(--white-70);
-  height: 55vh;
   width: 90%;
 `
 
 const _NextButton = styled.div.attrs({
-  className: "w-60 sans font-3 flex items-center justify-center br-pill",
+  className: "w-60 sans font-3 flex items-center justify-center br-pill mb3",
 })`
   height: 4.5rem;
   background-color: var(--mid-gray);

@@ -2,15 +2,18 @@ import { Component, Fragment } from "react"
 import { connect } from "react-redux"
 import styled, { createGlobalStyle } from "styled-components"
 import PropTypes from "prop-types"
-import ProgressBar from "../components/ProgressBar"
-import SaveButton from "../components/SaveButton"
-import BackButton from "../components/BackButton"
+
 import { Recap, EditGoal } from "."
 import { selectTimeOfDay, changeTime } from "../state/actions/currentGoal"
 import { changeView } from "../state/actions/router"
+import background from "../assets/backgrounds/bg_when.svg"
+
+import ProgressBar from "../components/ProgressBar"
+import SaveButton from "../components/SaveButton"
+import BackButton from "../components/BackButton"
 import Card from "../components/Card"
 import Carousel from "../components/Carousel"
-import background from "../assets/backgrounds/bg_when.svg"
+import { _Title } from "../components/Text"
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -22,13 +25,6 @@ const _Container = styled.div.attrs({
   className: "flex flex-column items-center justify-center mt3",
 })`
   height: 90vh;
-`
-
-const _Title = styled.p.attrs({
-  className: "mono font-1 ma2",
-})`
-  color: var(--mid-gray);
-  font-weight: 500;
 `
 
 const _Description = styled.p.attrs({
@@ -131,7 +127,7 @@ class GoalTime extends Component {
         )}
         <BackButton />
         <_Container>
-          <_Title> Awesome!</_Title>
+          <_Title>Awesome!</_Title>
           <_Description>
             Okay, And when do you think you are most likely to work on your
             goal?

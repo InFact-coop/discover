@@ -12,6 +12,7 @@ const _CodeInput = styled.input.attrs({
 })`
   border-color: var(--moon-gray);
   border-width: thin;
+  outline: none;
 `
 
 const _SubmitButton = styled.div.attrs({
