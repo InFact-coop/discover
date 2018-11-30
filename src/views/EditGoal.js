@@ -1,12 +1,18 @@
 import { Component } from "react"
 import { connect } from "react-redux"
-import styled from "styled-components"
+import styled, { createGlobalStyle } from "styled-components"
 import PropTypes from "prop-types"
 import SaveButton from "../components/SaveButton"
 import BackButton from "../components/BackButton"
 import { changeView } from "../state/actions/router"
 import { Home, SetGoal, Technique, GoalDays, GoalTime } from "."
 import botIcon from "../assets/icons/bot.svg"
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    background: rgba(78, 205, 196, 0.25);
+  }
+`
 
 const _Container = styled.div.attrs({
   className: "flex flex-column items-center justify-center",
@@ -55,6 +61,7 @@ class EditGoal extends Component {
     const { views } = this.state
     return (
       <_Container>
+        <GlobalStyle />
         <_BotIcon src={botIcon} />
         <BackButton />
         <_Title> Hey {name},</_Title>

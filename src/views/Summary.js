@@ -8,6 +8,13 @@ import NavBar from "../components/NavBar"
 import Carousel from "../components/Carousel"
 import Card from "../components/Card"
 import { ReadTips } from "."
+import { createGlobalStyle } from "styled-components"
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    background: rgba(255, 107, 107, 0.05);
+  }
+`
 
 class Summary extends Component {
   state = {
@@ -35,6 +42,7 @@ class Summary extends Component {
     const { techniques } = this.state
     return (
       <div>
+        <GlobalStyle />
         <IconHeader title="Summary of DISCOVER tips" icon={icon} />
         <Carousel>
           {techniques.map(({ title, description, image, backgroundColor }) => {

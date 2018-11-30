@@ -1,7 +1,13 @@
-import styled from "styled-components"
+import styled, { createGlobalStyle } from "styled-components"
 import NavBar from "../components/NavBar"
 import IconHeader from "../components/shared/IconHeader"
 import icon from "../assets/icons/help_big.svg"
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    background: rgba(17, 138, 178, 0.05);
+  }
+`
 
 const _Bold = styled.span.attrs({
   className: "b",
@@ -21,6 +27,7 @@ const _SmallSection = styled.div.attrs({
 
 const Help = () => (
   <div>
+    <GlobalStyle />
     <IconHeader title="Urgent help in a crisis" icon={icon} />
     <_Container>
       <_SmallSection>

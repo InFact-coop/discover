@@ -1,7 +1,7 @@
 import { Component } from "react"
 import { connect } from "react-redux"
 import { changeView } from "../state/actions/router"
-import styled from "styled-components"
+import styled, { createGlobalStyle } from "styled-components"
 
 import IconHeader from "../components/shared/IconHeader"
 import ActionButton from "../components/shared/ActionButton"
@@ -15,6 +15,12 @@ import daysToGo from "../utils/goalDaysToGo"
 import pastGoalDaysCompleted from "../utils/pastGoalDaysCompleted"
 
 import icon from "../assets/icons/list_of_goals_big.svg"
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    background: rgba(255, 230, 109, 0.05);
+  }
+`
 
 const _Wrapper = styled.div.attrs({
   className: "ph3 flex flex-column items-center mb5",
@@ -43,6 +49,7 @@ class GoalProgress extends Component {
     const { currentGoal, pastGoals } = this.props
     return (
       <div>
+        <GlobalStyle/>
         <IconHeader title="Goals progress" icon={icon} />
         <_Wrapper>
           <Goal

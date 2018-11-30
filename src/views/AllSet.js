@@ -3,8 +3,14 @@ import { connect } from "react-redux"
 import PropTypes from "prop-types"
 import { changeView } from "../state/actions/router"
 import { Home } from "."
-import styled from "styled-components"
+import styled, { createGlobalStyle } from "styled-components"
 import welldone from "../assets/icons/welldone.svg"
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    background: rgba(78, 205, 196, 0.25);
+  }
+`
 
 const _Container = styled.div.attrs({
   className: "flex flex-column justify-center items-center",
@@ -17,9 +23,8 @@ const _Image = styled.img.attrs({
 })``
 
 const _Text = styled.p.attrs({
-  className: "mono ma3 font-1",
+  className: "mono ma3 font-1 dark-gray",
 })`
-  color: var(--mid-gray);
   font-weight: 500;
 `
 
@@ -34,6 +39,7 @@ class AllSet extends Component {
   render() {
     return (
       <_Container>
+        <GlobalStyle />
         <_Image src={welldone} />
         <_Text> All set! </_Text>
       </_Container>
