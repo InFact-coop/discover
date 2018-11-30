@@ -28,16 +28,12 @@ const _Container = styled.div.attrs({
 `
 
 const _Question = styled.p.attrs({
-  className: "mono font-4 w-90 tc mt1",
-})`
-  color: var(--gray);
-`
+  className: "mono font-4 w-90 tc mt1 dark-gray",
+})``
 
 const _Hint = styled.p.attrs({
-  className: "mono font-4 b mt1 mb3",
-})`
-  color: var(--mid-gray);
-`
+  className: "mono font-4 b mt1 mb3 dark-gray",
+})``
 
 class Technique extends Component {
   state = {

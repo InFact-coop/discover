@@ -50,7 +50,7 @@ const _Day = styled.div.attrs({
 })`
   height: 2.5rem;
   width: 2.5rem;
-  border: ${({ selected }) => selected && "0.2rem solid var(--gray)"};
+  border: ${({ selected }) => selected && "0.15rem solid var(--dark-gray)"};
 `
 
 const _Pill = styled.div.attrs({
@@ -60,7 +60,7 @@ const _Pill = styled.div.attrs({
   height: 2.5rem;
   ${({ selected }) =>
     selected &&
-    `border: 0.2rem solid var(--gray);
+    `border: 0.2rem solid var(--dark-gray);
 `};
 `
 

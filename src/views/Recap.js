@@ -6,6 +6,7 @@ import BackButton from "../components/BackButton"
 import { GoalTime, AllSet } from "."
 import { changeView } from "../state/actions/router"
 import background from "../assets/backgrounds/bg_RECAP.svg"
+import ActionButton from "../components/shared/ActionButton"
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -14,34 +15,19 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 const _Container = styled.div.attrs({
-  className: "flex flex-column items-center justify-center center",
+  className: "flex flex-column items-center justify-center center vh-100",
 })``
 
 const _Title = styled.p.attrs({
-  className: "mono font-1 tc ma2 mt6",
-})`
-  color: var(--mid-gray);
-  font-weight: 500;
-`
+  className: "mono font-1 tc ma2 mt6 dark-gray fw5",
+})``
 const _Description = styled.p.attrs({
   className: "mono font-3 tc ma2",
 })``
 
 const _InnerContainer = styled.div.attrs({
-  className: "flex flex-column items-center ma3 pa5 br4",
-})`
-  background-color: var(--white-70);
-  width: 90%;
-`
-
-const _NextButton = styled.div.attrs({
-  className: "w-60 sans font-3 flex items-center justify-center br-pill mb3",
-})`
-  height: 4.5rem;
-  background-color: var(--mid-gray);
-  font-weight: 500;
-  color: white;
-`
+  className: "flex flex-column items-center ma3 pa5 br4 bg-white-70 w-90",
+})``
 
 const Recap = ({ changeView }) => (
   <_Container>
@@ -56,7 +42,9 @@ const Recap = ({ changeView }) => (
       <GoalDetails section={"time"} />
       <GoalDetails section={"duration"} />
     </_InnerContainer>
-    <_NextButton onClick={() => changeView(AllSet)}>COOL LET'S GO</_NextButton>
+    <ActionButton onClick={() => changeView(AllSet)}>
+      COOL LET'S GO
+    </ActionButton>
   </_Container>
 )
 

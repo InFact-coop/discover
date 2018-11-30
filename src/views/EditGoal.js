@@ -13,7 +13,6 @@ const GlobalStyle = createGlobalStyle`
     background: rgba(78, 205, 196, 0.25);
   }
 `
-
 const _Container = styled.div.attrs({
   className: "flex flex-column items-center justify-center",
 })`
@@ -24,25 +23,16 @@ const _BotIcon = styled.img.attrs({
 })`
   width: 10rem;
 `
-
 const _Title = styled.p.attrs({
-  className: "mono font-1 tc ma2",
-})`
-  color: var(--mid-gray);
-  font-weight: 500;
-`
+  className: "mono font-1 tc ma2 fw5 dark-gray",
+})``
 const _Question = styled.p.attrs({
-  className: "mono w-70 font-4 tc mb3",
-})`
-  color: var(--mid-gray);
-  font-weight: 500;
-`
+  className: "mono w-70 font-4 tc mb3 fw5 dark-gray",
+})``
 const _Button = styled.div.attrs({
-  className: "flex justify-center items-center ba br2 mv1 sans font-4",
+  className:
+    "flex justify-center items-center ba br2 mv1 sans font-4 bg-white blue b--blue",
 })`
-  background-color: white;
-  color: var(--blue);
-  border-color: var(--blue);
   width: 22rem;
   height: 3rem;
 `

@@ -14,7 +14,7 @@ const _Step = styled.div.attrs({
   width: 16%;
   height: 0.2rem;
   background-color: ${({ progress, step }) =>
-    progress >= step ? `var(--gray);` : `var(--moon-gray);`};
+    progress >= step ? `var(--dark-gray);` : `var(--moon-gray);`};
 `
 
 const ProgressBar = ({ progress }) => (

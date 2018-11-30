@@ -34,7 +34,7 @@ const _Avatar = styled.img.attrs({
 })`
   ${({ selected }) =>
     selected &&
-    `border: 0.2rem solid var(--gray);
+    `border: 0.2rem solid var(--dark-gray);
   `};
 `
 
