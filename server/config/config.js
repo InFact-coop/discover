@@ -12,6 +12,7 @@ const config = env => {
     return {
       database: PRODUCTION_DATABASE,
       secret: SECRET,
+      adminAccessToken: ADMIN_ACCESS_TOKEN,
     }
   }
   return {
@@ -20,4 +21,5 @@ const config = env => {
     adminAccessToken: ADMIN_ACCESS_TOKEN,
   }
 }
+
 module.exports = config(NODE_ENV)
