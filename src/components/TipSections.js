@@ -56,11 +56,19 @@ const _Title = styled.h1.attrs({
 })`
   margin: 0 auto;
 `
+const _Link = styled.a.attrs({
+  className: "b underline white",
+  target: "_blank",
+  rel: "noopener noreferrer",
+})``
 const _SubTitle = styled.h2.attrs({
   className: "b ttu pv3 tl",
 })``
 const _Bold = styled.span.attrs({
   className: "b",
+})``
+const _Italics = styled.span.attrs({
+  className: "i",
 })``
 const _Bullets = styled.ul`
   list-style-type: "-";
@@ -265,43 +273,389 @@ const ProcFour = () => {
   )
 }
 
-const ThinkingTraps1 = () => {}
-const ThinkingTraps2 = () => {}
-const ThinkingTraps3 = () => {}
-const ThinkingTraps4 = () => {}
+const ThinkingTraps1 = () => {
+  return (
+    <_Container>
+      <_Title>Thinking traps top tips!</_Title>
+      <p>
+        Here is a reminder of the common thinking traps that we all fall into at
+        times. It can be helpful to recognise when we are falling into these.
+      </p>
+      <_SubTitle>Mindreading</_SubTitle>
+      <p>
+        When we assume that we know what another person is thinking. This
+        includes assuming that another person is thinking the same as you.{" "}
+        <_Italics>
+          E.g. Ben gave me a funny look, he must think I’m stupid
+        </_Italics>
+      </p>
+    </_Container>
+  )
+}
+const ThinkingTraps2 = () => {
+  return (
+    <_Container>
+      <_SubTitle>Fortune teller</_SubTitle>
+      <p>
+        When we assume we know what will happen in the future, and assuming that
+        the worst will definitely happen.{" "}
+        <_Italics>
+          E.g. My mum is late home, she must have been in an accident
+        </_Italics>
+      </p>
+      <_SubTitle>Disaster Thinker</_SubTitle>
+      <p>
+        When we assume from one particular situation that the same will happen
+        in all similar situations.{" "}
+        <_Italics>
+          E.g. That girl laughed when I asked her to the cinema; that means that
+          no-one will ever go out with me{" "}
+        </_Italics>
+      </p>
+    </_Container>
+  )
+}
+const ThinkingTraps3 = () => {
+  return (
+    <_Container>
+      <_SubTitle>Self Blamer</_SubTitle>
+      <p>
+        Taking too much responsibility for things that go wrong, or could go
+        wrong.
+        <_Italics>
+          E.g. My brother and I argued, and he stormed out the house, and now my
+          parents are angry. It’s my fault.
+        </_Italics>
+      </p>
+      <_SubTitle>Negative Glasses</_SubTitle>
+      <p>
+        Only noticing the bad in a situation and not noticing or caring about
+        the good.
+        <_Italics>
+          E.g. Out of my 9 GCSEs I got 4 A*s, 4 As and one D. I’m such a
+          failure.
+        </_Italics>
+      </p>
+    </_Container>
+  )
+}
+const ThinkingTraps4 = () => {
+  return (
+    <_Container>
+      <_SubTitle>Comparing to others</_SubTitle>
+      <p>
+        Comparing yourself to people, and seeing them as better than you.
+        <_Italics>
+          E.g. Everyone else gets this new subject so easily; I’m so stupid in
+          comparison.
+        </_Italics>
+      </p>
+    </_Container>
+  )
+}
 
-const Sleep1 = () => {}
-const Sleep2 = () => {}
-const Sleep3 = () => {}
-const Sleep4 = () => {}
+const Sleep1 = () => {
+  return (
+    <_Container>
+      <_Title>Sleep top tips!</_Title>
+      <p>
+        Here are some sleep tips, which are based on the science behind getting
+        to sleep (and what keeps us awake!).
+      </p>
+      <_SubTitle>Wind Down</_SubTitle>
+      <_Bullets>
+        <li>Start winding down 1-2 hours before you go to bed</li>
+        <li>This helps calm your brain and mind</li>
+        <li>Don’t drink caffeine for at least 4 hours before you go to bed</li>
+        <li>Don’t exercise right before bed (earlier is better!)</li>
+      </_Bullets>
+    </_Container>
+  )
+}
+const Sleep2 = () => {
+  return (
+    <_Container>
+      <_SubTitle>You</_SubTitle>
+      <_Bullets>
+        <li>Don’t go to bed hungry or thirsty</li>
+        <li>
+          Try to go to bed and wake up at the same every day (at least during
+          the week!)
+        </li>
+        <li>Aim for 8 hours a night</li>
+        <li>Don’t nap in the daytime! This can mess up your sleep cycle</li>
+      </_Bullets>
+      <_SubTitle>Your Room</_SubTitle>
+      <_Bullets>
+        <li> Make sure your room is the right temperature for you</li>
+        <li>Try to make sure there isn’t too much light</li>
+        <li>Try to have a quiet room</li>
+        <li>
+          Get your bed as comfy as possible! Don’t do school work in or around
+          your bed
+        </li>
+      </_Bullets>
+    </_Container>
+  )
+}
+const Sleep3 = () => {
+  return (
+    <_Container>
+      <_SubTitle>Thought and worries</_SubTitle>
+      <_Bullets>
+        <li>Remind yourself that one night’s bad sleep won’t hurt you</li>
+        <li>
+          Don’t watch the clock in the night, as this will stress you out and
+          keep you awake
+        </li>
+        <li>
+          If you are worrying, try switch your attention to something else. This
+          could be remembering a happy memory, reciting the alphabet backwards,
+          or listing boys/girls names beginning with A thorough to Z!
+        </li>
+        <li>
+          If you really can’t sleep, it may be a good idea to get up, some and
+          do something relaxing like reading, then go back to bed when you start
+          to feel sleepy
+        </li>
+      </_Bullets>
+    </_Container>
+  )
+}
 
-const ThoughtChallenging1 = () => {}
-const ThoughtChallenging2 = () => {}
-const ThoughtChallenging3 = () => {}
+const ThoughtChallenging1 = () => {
+  return (
+    <_Container>
+      <_Title>Thought challenging top tips!</_Title>
+      <p>
+        It can be helpful to challenge our negative thoughts, as they can lead
+        us to feel low, anxious, or stressed, but often they are based on wrong
+        assumptions. Try asking yourselves the following questions, in order to
+        challenge your negative thought(s):
+      </p>
+      <ol>
+        <li>Is this opinion or fact?</li>
+        <li>What evidence goes against that thought?</li>
+        <li>Are you jumping to conclusions?</li>
+        <li>What would you say to a friend in the same situation?</li>
+        <li>Is there another way of looking at this?</li>
+        <li>Is it really that important?</li>
+      </ol>
+    </_Container>
+  )
+}
+const ThoughtChallenging2 = () => {
+  return (
+    <_Container>
+      <p>
+        <_Bold>
+          You may now be able to re-frame your negative thought into a more
+          helpful, balanced one.
+        </_Bold>
+      </p>
+    </_Container>
+  )
+}
 
-const Problems1 = () => {}
-const Problems2 = () => {}
-const Problems3 = () => {}
+const Problems1 = () => {
+  return (
+    <_Container>
+      <_Title>Problem Solving top tips!</_Title>
+      <p>
+        Problem solving can be used when you have you have a practical problem
+        to solve. Here’s a reminder of the steps:
+      </p>
+      <ol>
+        <li>Define the exact problem you want to solve.</li>
+        <li>Brainstorm all the solutions you can think of.</li>
+        <li>
+          Think of the pros and cons of each option. Then eliminate the options
+          that won’t work!
+        </li>
+      </ol>
+    </_Container>
+  )
+}
+const Problems2 = () => {
+  return (
+    <_Container>
+      <ol>
+        <li>Choose one option.</li>
+        <li>Prepare all the steps to do it.</li>
+        <li>Do it!</li>
+        <li>
+          Review. Did it work? If not, work through an alternative solution.
+        </li>
+      </ol>
+    </_Container>
+  )
+}
 
-const Breathing1 = () => {}
-const Breathing2 = () => {}
-const Breathing3 = () => {}
+const Breathing1 = () => {
+  return (
+    <_Container>
+      <_Title>Breathing technique top tips!</_Title>
+      <p>
+        When you’re feeling stressed, your body is likely to respond by
+        breathing in a more shallow, rapid way. Actively changing your breathing
+        pattern is a really good way to calm yourself, and lower your stress
+        levels.
+      </p>
+    </_Container>
+  )
+}
+const Breathing2 = () => {
+  return (
+    <_Container>
+      <p>
+        Start by breathing in more slowly and deeply than usual, through your
+        nose, for a count of 3, and then breathe out for a count of 3. Continue
+        breathing in and out very slowly and deeply for a few minutes. Try to
+        imagine that you are breathing in calm and light, and breathing out
+        stress; allow the calm to reach your mind. Gently bring your breathing
+        back to the normal rate when you are ready.
+      </p>
+      <p>
+        If you find it hard to do this on your own, you could try follow a
+        guided breathing technique, e.g. on the{" "}
+        <_Link href="/">Breathe app.</_Link>
+      </p>
+    </_Container>
+  )
+}
 
-const Relaxation1 = () => {}
-const Relaxation2 = () => {}
-const Relaxation3 = () => {}
+const Relaxation1 = () => {
+  return (
+    <_Container>
+      <_Title>Relaxation top tips!</_Title>
+      <p>
+        Aside from the relaxed breathing technique, there are other ways to calm
+        ourselves.
+      </p>
+      <p>
+        One of these is called <_Bold>progressive muscle relaxation</_Bold>.
+        This is helpful as one of the major effects of stress is muscle tension.
+        This exercise can help relax your muscles, which in turn relaxes your
+        mind. Starting from your toes, you work your way around your body
+        slowing, tensing each muscle, and then letting go. This can be a good
+        one to try when you’re trying to fall asleep.
+      </p>
+    </_Container>
+  )
+}
+const Relaxation2 = () => {
+  return (
+    <_Container>
+      <p>
+        Another way to calm yourself and feel more relaxed is by visualisation.
+        Here, you close your eyes and picture yourself in a relaxing situation.
+        Use your senses to imagine the sights, smells, and sounds in your
+        imagination. Calm your breathing too, and then take the time to
+        re-engage back with your day.
+      </p>
+    </_Container>
+  )
+}
 
-const Thoughts1 = () => {}
-const Thoughts2 = () => {}
-const Thoughts3 = () => {}
+const Thoughts1 = () => {
+  return (
+    <_Container>
+      <_Title>Thought Switching top tips!</_Title>
+      <p>
+        Thought switching can be helpful to take our mind off worries. Doing a
+        mental activity can help switch your attention very effectively. This
+        can be especially helpful when you're worrying at night.
+      </p>
+      <p>
+        You could try doing a simple mental exercise to switch your thoughts.
+        This could be a numerical exercise like counting back in 7s from 100, or
+        trying to list animals, games, football teams (or any other category!)
+        through each letter of the alphabet (A-Z).
+      </p>
+    </_Container>
+  )
+}
+const Thoughts2 = () => {
+  return (
+    <_Container>
+      <_Title>Thought Switching top tips!</_Title>
+      <p>
+        You could also try switching activity to distract yourself, e.g. phoning
+        a friend for a chat, playing a computer game, watching TV, or going for
+        a jog.
+      </p>
+      <p>
+        <_Bold>Give it a go!</_Bold>
+      </p>
+    </_Container>
+  )
+}
 
-const Fears1 = () => {}
-const Fears2 = () => {}
-const Fears3 = () => {}
+const Fears1 = () => {
+  return (
+    <_Container>
+      <_Title>Facing my fears top tips!</_Title>
+      <p>
+        When we’re scared of something (e.g. dogs, public speaking, or anything
+        else!), it’s very common to try and avoid the situation completely.
+        However, this means that our fear remains, and we are never are able to
+        learn that we may actually be able to cope with it. A really helpful way
+        to overcome our fears is to gradually and slowly expose ourselves to
+        them over time.
+      </p>
+    </_Container>
+  )
+}
+const Fears2 = () => {
+  return (
+    <_Container>
+      <p>
+        To do this, draw a ladder on a piece of paper, with 6 steps on it. Write
+        down your feared situation at the top step of the ladder. Then, try and
+        break this fear down into smaller, gradual steps in order. Start at the
+        bottom and work your way up, facing your feared situations in a gradual
+        way. Remember to cross off and reward yourself for each step as you
+        achieve it!
+      </p>
+    </_Container>
+  )
+}
 
-const Mindfullness1 = () => {}
-const Mindfullness2 = () => {}
-const Mindfullness3 = () => {}
+const Mindfullness1 = () => {
+  return (
+    <_Container>
+      <_Title>Mindfulness top tips!</_Title>
+      <p>
+        Mindfulness is a way to focus on the here-and-now. Our minds our very
+        busy, we have 70,000 thoughts a day! Often these thoughts are about what
+        might go wrong in the future, or things we've done in the past.
+      </p>
+      <p>
+        Mindfulness is the act of concentrating on your breathing, being aware
+        of your breath, and being aware of what is going on around you in the
+        present moment. Practising mindfulness creates a peaceful mental
+        environment.
+      </p>
+      <p>
+        The more you do it, the easier it gets, and the more you will notice the
+        benefits!
+      </p>
+    </_Container>
+  )
+}
+const Mindfullness2 = () => {
+  return (
+    <_Container>
+      <p>
+        Try it by taking 5-minutes to focus on each breath as it flows in and
+        out of your body. Focusing on your breath like this allows you to
+        observe your thoughts as they arise in your mind, and to let go of
+        struggling with them. You could also try a mindfulness exercise on an
+        app like Headspace or Breathe.
+      </p>
+    </_Container>
+  )
+}
 
 export const TimeManagement = [TMOne, TMTwo, TMThree, TMFour]
 export const Procrastination = [ProcOne, ProcTwo, ProcThree, ProcFour]
@@ -311,15 +665,11 @@ export const ThinkingTraps = [
   ThinkingTraps3,
   ThinkingTraps4,
 ]
-export const ThoughtChallenging = [
-  ThoughtChallenging1,
-  ThoughtChallenging2,
-  ThoughtChallenging3,
-]
-export const ProblemSolving = [Problems1, Problems2, Problems3]
-export const SleepTips = [Sleep1, Sleep2, Sleep3, Sleep4]
-export const BreathingTechs = [Breathing1, Breathing2, Breathing3]
-export const RelaxationTips = [Relaxation1, Relaxation2, Relaxation3]
-export const ThoughtSwitching = [Thoughts1, Thoughts2, Thoughts3]
-export const FacingFears = [Fears1, Fears2, Fears3]
-export const Mindfullness = [Mindfullness1, Mindfullness2, Mindfullness3]
+export const ThoughtChallenging = [ThoughtChallenging1, ThoughtChallenging2]
+export const ProblemSolving = [Problems1, Problems2]
+export const SleepTips = [Sleep1, Sleep2]
+export const BreathingTechs = [Breathing1, Breathing2]
+export const RelaxationTips = [Relaxation1, Relaxation2]
+export const ThoughtSwitching = [Thoughts1, Thoughts2]
+export const FacingFears = [Fears1, Fears2]
+export const Mindfullness = [Mindfullness1, Mindfullness2]
