@@ -1,5 +1,46 @@
 import styled from "styled-components"
 
+import {
+  PROCRASTINATION_TIPS,
+  TIME_MANAGEMENT_TIPS,
+  THINKING_TRAPS,
+  THOUGHT_CHALLENGING,
+  PROBLEM_SOLVING,
+  SLEEP_TIPS,
+  BREATHING_TECHNIQUES,
+  RELAXATION_TIPS,
+  THOUGHT_SWITCHING,
+  FACING_MY_FEARS,
+  MINDFULNESS_EXERCISE,
+} from "../Constants"
+
+export const getTipSections = title => {
+  switch (title) {
+    case TIME_MANAGEMENT_TIPS:
+      return TimeManagement
+    case PROCRASTINATION_TIPS:
+      return Procrastination
+    case THINKING_TRAPS:
+      return ThinkingTraps
+    case THOUGHT_CHALLENGING:
+      return ThoughtChallenging
+    case PROBLEM_SOLVING:
+      return ProblemSolving
+    case SLEEP_TIPS:
+      return SleepTips
+    case BREATHING_TECHNIQUES:
+      return BreathingTechs
+    case RELAXATION_TIPS:
+      return RelaxationTips
+    case THOUGHT_SWITCHING:
+      return ThoughtSwitching
+    case FACING_MY_FEARS:
+      return FacingFears
+    case MINDFULNESS_EXERCISE:
+      return Mindfullness
+  }
+}
+
 const _Container = styled.div.attrs({
   className: "sans white tl font-4",
 })`
@@ -27,21 +68,6 @@ const _Bullets = styled.ul`
     content: "– ";
   }
 `
-
-export const getTipSections = title => {
-  switch (title) {
-    case "Time management tips":
-      return TimeManagement
-    case "Procrastination tips":
-      return Procrastination
-    case "Thinking traps":
-      return ThinkingTraps
-    case "Thought challenging":
-      return ThoughtChallenging
-    default:
-      return [1, 2, 3]
-  }
-}
 
 const TMOne = () => {
   return (
@@ -131,8 +157,6 @@ const TMFour = () => {
     </_Container>
   )
 }
-
-export const TimeManagement = [TMOne, TMTwo, TMThree, TMFour]
 
 const ProcOne = () => {
   return (
@@ -241,21 +265,61 @@ const ProcFour = () => {
   )
 }
 
+const ThinkingTraps1 = () => {}
+const ThinkingTraps2 = () => {}
+const ThinkingTraps3 = () => {}
+const ThinkingTraps4 = () => {}
+
+const Sleep1 = () => {}
+const Sleep2 = () => {}
+const Sleep3 = () => {}
+const Sleep4 = () => {}
+
+const ThoughtChallenging1 = () => {}
+const ThoughtChallenging2 = () => {}
+const ThoughtChallenging3 = () => {}
+
+const Problems1 = () => {}
+const Problems2 = () => {}
+const Problems3 = () => {}
+
+const Breathing1 = () => {}
+const Breathing2 = () => {}
+const Breathing3 = () => {}
+
+const Relaxation1 = () => {}
+const Relaxation2 = () => {}
+const Relaxation3 = () => {}
+
+const Thoughts1 = () => {}
+const Thoughts2 = () => {}
+const Thoughts3 = () => {}
+
+const Fears1 = () => {}
+const Fears2 = () => {}
+const Fears3 = () => {}
+
+const Mindfullness1 = () => {}
+const Mindfullness2 = () => {}
+const Mindfullness3 = () => {}
+
+export const TimeManagement = [TMOne, TMTwo, TMThree, TMFour]
 export const Procrastination = [ProcOne, ProcTwo, ProcThree, ProcFour]
-
-const ThinkingTrapsOne = ""
-const ThinkingTrapsTwo = ""
-const ThinkingTrapsThree = ""
-const ThinkingTrapsFour = ""
-
 export const ThinkingTraps = [
-  ThinkingTrapsOne,
-  ThinkingTrapsTwo,
-  ThinkingTrapsThree,
-  ThinkingTrapsFour,
+  ThinkingTraps1,
+  ThinkingTraps2,
+  ThinkingTraps3,
+  ThinkingTraps4,
 ]
-
-const ThoughtChallengingOne = ""
-const ThoughtChallengingTwo = ""
-
-export const ThoughtChallenging = [ThoughtChallengingOne, ThoughtChallengingTwo]
+export const ThoughtChallenging = [
+  ThoughtChallenging1,
+  ThoughtChallenging2,
+  ThoughtChallenging3,
+]
+export const ProblemSolving = [Problems1, Problems2, Problems3]
+export const SleepTips = [Sleep1, Sleep2, Sleep3, Sleep4]
+export const BreathingTechs = [Breathing1, Breathing2, Breathing3]
+export const RelaxationTips = [Relaxation1, Relaxation2, Relaxation3]
+export const ThoughtSwitching = [Thoughts1, Thoughts2, Thoughts3]
+export const FacingFears = [Fears1, Fears2, Fears3]
+export const Mindfullness = [Mindfullness1, Mindfullness2, Mindfullness3]
