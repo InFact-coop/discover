@@ -14,7 +14,7 @@ const App = () => (
       />
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-title" content="DISCOVERbot" />
-      <link href="manifest.json" rel="manifest" />
+      <link href="./manifest.json" rel="manifest" />
     </Helmet>
     <Router />
   </Fragment>
