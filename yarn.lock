@@ -631,6 +631,11 @@ anymatch@^2.0.0:
     micromatch "^3.1.4"
     normalize-path "^2.1.1"
 
+appcache-webpack-plugin@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/appcache-webpack-plugin/-/appcache-webpack-plugin-1.4.0.tgz#0c3ce98e6f5755c0852dd45c625e8f0e7f9885fe"
+  integrity sha512-QA0D+3yJmpPk0CyfxYMOzhzV941rkTSjCnUEy2vS05GeqK+mMnBScQSB23lstvzYaFpkeWeLMO9RamtafhliYw==
+
 aproba@^1.0.3, aproba@^1.1.1:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/aproba/-/aproba-1.2.0.tgz#6802e6264efd18c790a1b0d517f0f2627bf2c94a"

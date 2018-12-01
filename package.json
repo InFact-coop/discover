@@ -15,6 +15,7 @@
   "dependencies": {
     "@neutrinojs/style-loader": "^8.3.0",
     "@redux-offline/redux-offline": "^2.5.0",
+    "appcache-webpack-plugin": "^1.4.0",
     "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
