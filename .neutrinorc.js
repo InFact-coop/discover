@@ -3,7 +3,6 @@ module.exports = {
     [
       "@neutrinojs/react",
       {
-        html: { links: [{ href: "/manifest.json", rel: "manifest" }] },
         babel: { plugins: ["babel-plugin-styled-components"] },
         devServer: {
           proxy: {
@@ -50,7 +49,6 @@ module.exports = {
         ],
       },
     ],
-
     neutrino =>
       neutrino.config.when(process.env.NODE_ENV === "production", config => {
         config
@@ -94,5 +92,12 @@ module.exports = {
             },
           ])
       }),
+    [
+      "@neutrinojs/html-template",
+      {
+        title: "DISCOVERbot",
+        links: [{ href: "/manifest.json", rel: "manifest" }],
+      },
+    ],
   ],
 }
