@@ -5,14 +5,14 @@ import PropTypes from "prop-types"
 import goalDaysToGo from "../utils/goalDaysToGo"
 
 const _Container = styled.div.attrs({
-  className: "flex flex-column justify-center items-center ma3 ",
+  className: "flex flex-column justify-center items-center mb4 ",
 })``
 
 const _TextMono = styled.p.attrs({
-  className: "mono font-4 tc mb1",
+  className: "mono font-4 tc mb1 dark-gray",
 })``
 const _TextSans = styled.p.attrs({
-  className: "mono font-4 tc",
+  className: "sans font-3 tc dark-gray",
 })`
   font-weight: 500;
 `
@@ -44,7 +44,7 @@ class GoalDetails extends Component {
       case "description":
         return (
           <_Container>
-            <_TextMono>Your goal is</_TextMono>
+            <_TextMono>My goal</_TextMono>
             <_TextSans>{description}</_TextSans>
           </_Container>
         )
@@ -52,7 +52,7 @@ class GoalDetails extends Component {
         if (techniques.length)
           return (
             <_Container>
-              <_TextMono>By using</_TextMono>
+              <_TextMono>by using</_TextMono>
               <_TextSans>
                 <u>{this.toSentence(techniques)}</u>
               </_TextSans>
@@ -63,7 +63,7 @@ class GoalDetails extends Component {
         if (daysOfWeek.length)
           return (
             <_Container>
-              <_TextMono>And you will do it</_TextMono>
+              <_TextMono>and you will do it</_TextMono>
               <_TextSans>
                 {`Every ${
                   daysOfWeek.length === 7 ? "day" : this.toSentence(daysOfWeek)
@@ -97,10 +97,7 @@ class GoalDetails extends Component {
           return (
             <_Container>
               <_TextMono>and you have</_TextMono>
-              <p
-                className="mono font-3 tc"
-                style={{ color: "var(--light-red)" }}
-              >
+              <p className="mono font-3 tc red">
                 {goalDaysToGo(scheduledFinishDate)}
               </p>
             </_Container>

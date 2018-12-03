@@ -5,15 +5,10 @@ import PropTypes from "prop-types"
 import { changeView } from "../state/actions/router"
 
 const _Button = styled.button.attrs({
-  className: "w-100 sans font-3 br flex items-center justify-center",
+  className:
+    "w-100 sans font-4 br flex items-center justify-center white bg-dark-gray fw6 ttu fixed bottom-0 bn",
 })`
-  border: none;
   height: 4.5rem;
-  background-color: var(--mid-gray);
-  font-weight: 500;
-  color: white;
-  position: fixed;
-  bottom: 0;
 `
 
 class SaveButton extends Component {
