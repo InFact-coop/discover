@@ -113,7 +113,9 @@ class ReadTips extends Component {
                 <Content />
               )}
               {tips.index === tips.topicMaxIndex ? (
-                <ActionButton>Thanx, got it!</ActionButton>
+                <ActionButton onClick={() => this.onExitClick()}>
+                  Thanx, got it!
+                </ActionButton>
               ) : (
                 <TapAnywhere />
               )}

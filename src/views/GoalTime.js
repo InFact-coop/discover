@@ -28,31 +28,24 @@ const _Container = styled.div.attrs({
 `
 
 const _Description = styled.p.attrs({
-  className: "mono font-4 w-90 tc mt1 mb3",
-})`
-  color: var(--gray);
-`
-
+  className: "mono font-4 w-90 tc mt1 mb3 dark-gray",
+})``
 const _Hint = styled.p.attrs({
-  className: "sans font-3 tc mt4 mb2",
-})`
-  color: var(--dark-green);
-`
+  className: "sans font-3 tc mt4 mb2 dark-green",
+})``
 const _TimeContainer = styled.div.attrs({
   className: "flex justify-center items-center",
 })``
 const _TimeDiv = styled.div.attrs({
-  className: "flex items-center ma1 justify-center br-100",
+  className: "flex items-center ma1 justify-center br-100 bg-yellow",
 })`
-  background-color: var(--yellow);
-  height: 4.5rem;
-  width: 4.5rem;
+  height: 3.5rem;
+  width: 3.5rem;
 `
 const _TimeInput = styled.select.attrs({
-  className: "w-60 h-50 tc font-3 sans bg-yellow center outline-0",
+  className: "w-60 h-50 tc font-3 sans bg-yellow center outline-0 dark-gray",
 })`
   border-style: hidden;
-  color: var(--mid-gray);
   -webkit-appearance: none;
   -moz-appearance: none;
   text-indent: 1px;

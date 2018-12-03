@@ -1,6 +1,6 @@
 import { Component } from "react"
 import { connect } from "react-redux"
-import styled from "styled-components"
+import styled, { createGlobalStyle } from "styled-components"
 import SaveButton from "../components/SaveButton"
 import BackButton from "../components/BackButton"
 import { backToPreviousView } from "../state/actions/router"
@@ -8,6 +8,12 @@ import { archiveGoal, clearCurrentGoal } from "../state/actions/pastGoals"
 import { SetGoal } from "."
 import botIcon from "../assets/icons/bot.svg"
 import daysToGo from "../utils/goalDaysToGo"
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    background: rgba(78, 205, 196, 0.25);
+  }
+`
 
 const _Container = styled.div.attrs({
   className: "flex flex-column items-center justify-center",
@@ -20,19 +26,17 @@ const _BotIcon = styled.img.attrs({
   width: 10rem;
 `
 const _Title = styled.p.attrs({
-  className: "mono font-1 tc ma4",
+  className: "mono font-1 tc ma4 dark-gray",
 })`
-  color: var(--mid-gray);
   font-weight: 500;
 `
 const _Description = styled.p.attrs({
-  className: "mono w-70 font-4 tc mb3",
+  className: "mono w-70 font-4 tc mb3 dark-gray",
 })`
-  color: var(--mid-gray);
   font-weight: 500;
 `
 const _Hint = styled.p.attrs({
-  className: "sans b underline font-4 ma3",
+  className: "sans b underline font-4 ma3 dark-gray",
 })``
 
 class NewGoalConfirmation extends Component {
@@ -50,6 +54,7 @@ class NewGoalConfirmation extends Component {
     } = this.props
     return (
       <_Container>
+        <GlobalStyle />
         <BackButton />
         <_BotIcon src={botIcon} />
         <_Title>Hey {name},</_Title>
