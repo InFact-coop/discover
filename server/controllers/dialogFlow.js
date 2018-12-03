@@ -1,37 +1,19 @@
 const dialogflow = require("dialogflow")
 const r = require("ramda")
+const structToJson = require("../utils/structToJson")
+
+const projectId = "discover-b86c1"
+const sessionId = "session1"
+const languageCode = "en-GB"
 
 const sessionClient = new dialogflow.SessionsClient({
   credentials: JSON.parse(process.env.GCS_KEYFILE),
 })
-const projectId = "discover-b86c1"
-const sessionId = "lsadjfaslasdjfasdlfjjdf"
 const sessionPath = sessionClient.sessionPath(projectId, sessionId)
-const languageCode = "en-GB"
-
-const valuesPath = [
-  0,
-  "queryResult",
-  "fulfillmentMessages",
-  0,
-  "payload",
-  "fields",
-]
 
 const getPayload = r.pipe(
-  r.view(r.lensPath([...valuesPath, "responses", "listValue", "values"])),
-  r.map(r.prop("stringValue"))
-)
-
-const getPostback = r.pipe(
-  r.view(r.lensPath([...valuesPath, "postback", "structValue", "fields"])),
-  r.map(payload => {
-    const { kind } = payload
-    if (kind === "listValue") {
-      return r.map(r.prop("stringValue"))(payload[kind].values)
-    }
-    return payload[kind]
-  })
+  r.view(r.lensPath([0, "queryResult", "fulfillmentMessages", 0, "payload"])),
+  structToJson
 )
 
 exports.queryDF = (req, res) => {
@@ -49,19 +31,12 @@ exports.queryDF = (req, res) => {
   sessionClient
     .detectIntent(request)
     .then(responses => {
-      // console.log(getPostback(responses))
-      // console.log(JSON.stringify(responses))
-      // if (result.intent) {
-      //   // console.log(`  Intent: ${result.intent.displayName}`)
-      // } else {
-      //   // console.log(`  No intent matched.`)
-      // }
-      res.json({
-        responses: getPayload(responses),
-        postback: getPostback(responses),
-      })
+      if (!responses[0].queryResult.intent) {
+        console.log(`No intent matched.`) // eslint-disable-line
+      }
+      res.json(getPayload(responses))
     })
     .catch(err => {
-      // console.error("ERROR:", err)
+      console.error("ERROR:", err) //eslint-disable-line
     })
 }
