@@ -80,13 +80,17 @@ const RenderConversation = ({ conversation }) =>
 const RenderOptions = ({
   options,
   payload,
-  onButtonClick,
+  onOptionClick,
   number,
   changeView,
+  addContext,
 }) => {
   if (!options) {
     return (
-      <_Option number={1} onClick={() => onButtonClick(payload)}>
+      <_Option
+        number={1}
+        onClick={() => onOptionClick({ option: payload, addContext })}
+      >
         {payload}
       </_Option>
     )
@@ -102,7 +106,7 @@ const RenderOptions = ({
     return (
       <_Option
         key={option}
-        onClick={() => onButtonClick(option)}
+        onClick={() => onOptionClick({ option, addContext })}
         number={number}
       >
         {option}
@@ -141,14 +145,25 @@ class Home extends Component {
     elem.scrollTop = elem.scrollHeight
   }
 
-  onOptionClick = async option => {
+  onOptionClick = async ({ option, addContext }) => {
     this.setState(prevState => ({
       conversation: [...prevState.conversation, UserTemplate(option)],
     }))
 
+    const query = (() => {
+      if (addContext) {
+        const context = r.pipe(
+          r.findLast(r.propEq("type", Bot)),
+          r.prop("content")
+        )(this.state.conversation)
+        return `${context} - ${option}`
+      }
+      return option
+    })()
+
     const { data } = await axios.get("/api/user/dialogflow", {
       params: {
-        query: option,
+        query,
       },
     })
 
@@ -240,7 +255,7 @@ class Home extends Component {
             <_OptionContainer number={postback.payload.length}>
               <RenderOptions
                 {...postback}
-                onButtonClick={this.onOptionClick}
+                onOptionClick={this.onOptionClick}
                 number={postback.payload.length}
                 changeView={changeView}
               />
