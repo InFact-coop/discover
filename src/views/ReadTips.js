@@ -44,32 +44,27 @@ const _Main = styled.div.attrs({
   className: "",
 })``
 
-const TapAnywhere = () => {
-  return <_TapAnywhere>Tap anywhere to continue</_TapAnywhere>
-}
-
-const FirstSlide = ({ name, topic }) => {
-  return (
-    <div>
-      <div className="flex align-items justify-center pt2 pb4">
-        <img src={robot} alt="friendly robot" />
-      </div>
-      <h1>Hey {name}!</h1>
-      <_Container>
-        Did I hear you say you need a refersher about{" "}
-        <span className="b">{topic}</span>?
-      </_Container>
-      <_Container>NO PROBLEM!</_Container>
-      <_Container>Here is a quick reminder</_Container>
+const FirstSlide = ({ name, topic }) => (
+  <div>
+    <div className="flex align-items justify-center pt2 pb4">
+      <img src={robot} alt="friendly robot" />
     </div>
-  )
-}
+    <h1>Hey {name}!</h1>
+    <_Container>
+      Did I hear you say you need a refersher about{" "}
+      <span className="b">{topic}</span>?
+    </_Container>
+    <_Container>NO PROBLEM!</_Container>
+    <_Container>Here is a quick reminder</_Container>
+  </div>
+)
 
 class ReadTips extends Component {
   onExitClick = () => {
     const { changeView } = this.props
     changeView(Summary)
   }
+
   onBackClick = index => {
     const prevSlide = index - 1
     const { setPageIndex } = this.props
@@ -127,7 +122,9 @@ class ReadTips extends Component {
             Thanx, got it!
           </ActionButton>
         ) : (
-          <TapAnywhere />
+          <_TapAnywhere onClick={() => this.onAnywhereClick(tips.index)}>
+            Tap anywhere to continue
+          </_TapAnywhere>
         )}
       </div>
     )
