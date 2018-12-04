@@ -9,6 +9,7 @@ import {
 } from "../types"
 
 const verifySucceeded = createAction(VERIFY_SUCCEEDED)
+
 const verifyFailed = err => ({
   type: VERIFY_FAILED,
   payload: { err },

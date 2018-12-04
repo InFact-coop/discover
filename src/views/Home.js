@@ -82,7 +82,6 @@ const RenderConversation = ({ conversation }) =>
   ))
 
 const RenderOptions = ({
-  options,
   payload,
   onOptionClick,
   onInternalLinkClick,
@@ -90,23 +89,12 @@ const RenderOptions = ({
   addContext,
   richContent,
 }) => {
-  if (!options) {
-    return (
-      <_Option
-        number={1}
-        onClick={() => onOptionClick({ option: payload, addContext })}
-      >
-        {payload}
-      </_Option>
-    )
-  }
-
   if (richContent) {
     return payload.map(({ content, type, query, to }) => {
       const onClick = () => {
         switch (type) {
           case NewFlow:
-            return onOptionClick({ option: query, addContext })
+            return onOptionClick({ content, query, addContext })
           case InternalLink:
             return onInternalLinkClick(to)
           default:
@@ -121,13 +109,13 @@ const RenderOptions = ({
     })
   }
 
-  return payload.map(option => (
+  return payload.map(content => (
     <_Option
-      key={option}
-      onClick={() => onOptionClick({ option, addContext })}
+      key={content}
+      onClick={() => onOptionClick({ content, addContext })}
       number={number}
     >
-      {option}
+      {content}
     </_Option>
   ))
 }
@@ -173,25 +161,28 @@ class Home extends Component {
     return changeView(to)
   }
 
-  onOptionClick = async ({ option, addContext }) => {
+  onOptionClick = async ({ content, addContext, query, type }) => {
     this.setState(prevState => ({
-      conversation: [...prevState.conversation, UserTemplate(option)],
+      conversation: [...prevState.conversation, UserTemplate(content)],
     }))
 
-    const query = (() => {
+    const richQuery = (() => {
       if (addContext) {
         const context = r.pipe(
           r.findLast(r.propEq("type", Bot)),
           r.prop("content")
         )(this.state.conversation)
-        return `${context} - ${option}`
+        return `${context} - ${content}`
       }
-      return option
+      if (type === NewFlow) {
+        return query
+      }
+      return content
     })()
 
     const { data } = await axios.get("/api/user/dialogflow", {
       params: {
-        query,
+        query: richQuery,
       },
     })
 
@@ -242,7 +233,7 @@ class Home extends Component {
   componentDidMount = async () => {
     const { data } = await axios.get("/api/user/dialogflow", {
       params: {
-        query: "Hello I'm Ivan and I'm back",
+        query: "Hello I'm back",
       },
     })
 
