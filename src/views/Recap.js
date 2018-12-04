@@ -42,7 +42,7 @@ const Recap = ({ changeView }) => (
       <GoalDetails section={"time"} />
       <GoalDetails section={"duration"} />
     </_InnerContainer>
-    <ActionButton onClick={() => changeView(Spinner)}>
+    <ActionButton onClick={() => changeView(Spinner)} positionBottom="10px">
       COOL LET'S GO
     </ActionButton>
   </_Container>

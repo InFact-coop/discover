@@ -12,8 +12,11 @@ import { getTipSections } from "../components/TipSections"
 import ActionButton from "../components/shared/ActionButton"
 
 const _TapAnywhere = styled.div.attrs({
-  className: "ttu w-100 white sans font-4 pa4",
-})``
+  className: "ttu w-100 tc white sans font-4 pa4",
+})`
+  position: relative;
+  bottom: 20vh;
+`
 
 const _ExitCross = styled.img.attrs({
   className: "absolute top-0 right-0 pa3 z-5",
@@ -112,17 +115,20 @@ class ReadTips extends Component {
               ) : (
                 <Content />
               )}
-              {tips.index === tips.topicMaxIndex ? (
-                <ActionButton onClick={() => this.onExitClick()}>
-                  Thanx, got it!
-                </ActionButton>
-              ) : (
-                <TapAnywhere />
-              )}
             </Fragment>
           </_Main>
         </_TipScreen>
         <NavBar />
+        {tips.index === tips.topicMaxIndex ? (
+          <ActionButton
+            positionBottom="20vh"
+            onClick={() => this.onExitClick()}
+          >
+            Thanx, got it!
+          </ActionButton>
+        ) : (
+          <TapAnywhere />
+        )}
       </div>
     )
   }
