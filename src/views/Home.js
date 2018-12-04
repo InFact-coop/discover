@@ -13,7 +13,7 @@ import { Tips, NewFlow, InternalLink } from "../Constants"
 
 import { ReadTips } from "."
 
-import exit from "../assets/icons/exit_bot.svg"
+import exit from "../assets/icons/refresh_bot.svg"
 import background from "../assets/backgrounds/bg_bot.svg"
 
 const User = "User"
