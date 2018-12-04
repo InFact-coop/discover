@@ -19,6 +19,7 @@ import ProgressBar from "../components/ProgressBar"
 import SaveButton from "../components/SaveButton"
 import BackButton from "../components/BackButton"
 import { _Title } from "../components/Text"
+import OutlineContainer from "../components/shared/OutlineContainer"
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -45,23 +46,29 @@ const _InnerContainer = styled.div.attrs({
   className: "flex flex-wrap justify-center mt2",
 })``
 
-const _Day = styled.div.attrs({
-  className: "flex items-center ma1 justify-center br-100 sans bg-light-yellow",
+const _DayContent = styled.div.attrs({
+  className: "flex items-center justify-center br-100 sans bg-light-yellow",
 })`
   height: 2.5rem;
   width: 2.5rem;
-  border: ${({ selected }) => selected && "0.15rem solid var(--dark-gray)"};
 `
+
+const Day = ({ selected, children, onClick }) => (
+  <OutlineContainer
+    selected={selected}
+    onClick={onClick}
+    br="br-100"
+    margin="1px"
+  >
+    <_DayContent>{children}</_DayContent>
+  </OutlineContainer>
+)
 
 const _Pill = styled.div.attrs({
   className:
-    "flex items-center mv3 mh1 ph3 justify-center br-pill sans bg-light-yellow",
+    "flex items-center ph3 justify-center br-pill sans bg-light-yellow",
 })`
   height: 2.5rem;
-  ${({ selected }) =>
-    selected &&
-    `border: 0.2rem solid var(--dark-gray);
-`};
 `
 
 const _SkipButton = styled.div.attrs({
@@ -131,7 +138,7 @@ class GoalDays extends Component {
     Object.keys(days).forEach(day => {
       days[day].selected = true
     })
-    this.setState({ days })
+    this.setState({ days, everyDaySelected: true })
   }
 
   selectDuration = month => () => {
@@ -181,7 +188,6 @@ class GoalDays extends Component {
       router: { history },
     } = this.props
     const edit = history[history.length - 1] === "EditGoal"
-
     return (
       <_Container>
         <GlobalStyle />
@@ -206,28 +212,34 @@ class GoalDays extends Component {
         </_Description>
         <_InnerContainer>
           {Object.keys(days).map(day => (
-            <_Day
+            <Day
               key={day}
               selected={days[day].selected}
               onClick={this.onDayClick(day)}
             >
               {day.slice(0, 3)}
-            </_Day>
+            </Day>
           ))}
         </_InnerContainer>
-        <_Pill selected={everyDaySelected} onClick={this.onEveryDayClick}>
-          EveryDay
-        </_Pill>
+        <OutlineContainer
+          br="br-pill"
+          selected={everyDaySelected}
+          onClick={this.onEveryDayClick}
+          margin="var(--spacing-medium)"
+        >
+          <_Pill>Every day</_Pill>
+        </OutlineContainer>
         <_Description>for</_Description>
         <_InnerContainer>
           {Object.keys(durations).map(month => (
-            <_Pill
+            <OutlineContainer
+              br="br-pill"
               onClick={this.selectDuration(month)}
               key={month}
               selected={durations[month].selected}
             >
-              {month}
-            </_Pill>
+              <_Pill>{month}</_Pill>
+            </OutlineContainer>
           ))}
         </_InnerContainer>
         {edit ? (

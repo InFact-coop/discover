@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 import PropTypes from "prop-types"
 import { changeView } from "../state/actions/router"
 import * as r from "ramda" //eslint-disable-line import/no-namespace
-import { AllSet, EditGoal, Home } from "."
+import { AllSet, Name, Home } from "."
 import styled, { createGlobalStyle } from "styled-components"
 import spinner from "../assets/icons/spinner_big.svg"
 
@@ -29,7 +29,7 @@ const nextView = previousView => {
       return AllSet
 
     case "NewGoalConfirmation":
-      return EditGoal
+      return Name
 
     default:
       return Home
