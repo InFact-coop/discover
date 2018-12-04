@@ -1,13 +1,17 @@
 import { Component } from "react"
 import { connect } from "react-redux"
-import NavBar from "../components/NavBar"
 import styled, { createGlobalStyle } from "styled-components"
 import axios from "axios"
 import * as r from "ramda" //eslint-disable-line import/no-namespace
 
 import { changeView } from "../state/actions/router"
+import { selectTopic, setPageIndex } from "../state/actions/tips"
 
-import { Help } from "."
+import NavBar from "../components/NavBar"
+
+import { Tips, NewFlow, InternalLink } from "../Constants"
+
+import { ReadTips } from "."
 
 import exit from "../assets/icons/exit_bot.svg"
 import background from "../assets/backgrounds/bg_bot.svg"
@@ -63,7 +67,7 @@ const _OptionContainer = styled.div.attrs({
 `
 
 const RenderConversation = ({ conversation }) =>
-  conversation.map(({ content, type }) => (
+  conversation.map(({ content, type }, i) => (
     <_Message
       className={
         type === User
@@ -71,7 +75,7 @@ const RenderConversation = ({ conversation }) =>
           : "bg-white dark-gray"
       }
       user={type === User}
-      key={content}
+      key={`${content}-${i}`}
     >
       {content}
     </_Message>
@@ -80,35 +84,52 @@ const RenderConversation = ({ conversation }) =>
 const RenderOptions = ({
   options,
   payload,
-  onButtonClick,
+  onOptionClick,
+  onInternalLinkClick,
   number,
-  changeView,
+  addContext,
+  richContent,
 }) => {
   if (!options) {
     return (
-      <_Option number={1} onClick={() => onButtonClick(payload)}>
+      <_Option
+        number={1}
+        onClick={() => onOptionClick({ option: payload, addContext })}
+      >
         {payload}
       </_Option>
     )
   }
-  return payload.map(option => {
-    if (option === "Show me the crisis resources please")
+
+  if (richContent) {
+    return payload.map(({ content, type, query, to }) => {
+      const onClick = () => {
+        switch (type) {
+          case NewFlow:
+            return onOptionClick({ option: query, addContext })
+          case InternalLink:
+            return onInternalLinkClick(to)
+          default:
+            return console.log("No onClick set") //eslint-disable-line
+        }
+      }
       return (
-        <_Option key={option} onClick={() => changeView(Help)} number={number}>
-          {option}
+        <_Option key={content} onClick={onClick} number={number}>
+          {content}
         </_Option>
       )
+    })
+  }
 
-    return (
-      <_Option
-        key={option}
-        onClick={() => onButtonClick(option)}
-        number={number}
-      >
-        {option}
-      </_Option>
-    )
-  })
+  return payload.map(option => (
+    <_Option
+      key={option}
+      onClick={() => onOptionClick({ option, addContext })}
+      number={number}
+    >
+      {option}
+    </_Option>
+  ))
 }
 
 const BotTemplate = content => ({
@@ -141,14 +162,36 @@ class Home extends Component {
     elem.scrollTop = elem.scrollHeight
   }
 
-  onOptionClick = async option => {
+  onInternalLinkClick = to => {
+    const { changeView, selectTopic, setPageIndex } = this.props
+    const isTip = r.includes(to, Tips)
+    if (isTip) {
+      selectTopic(to)
+      setPageIndex(0)
+      return changeView(ReadTips)
+    }
+    return changeView(to)
+  }
+
+  onOptionClick = async ({ option, addContext }) => {
     this.setState(prevState => ({
       conversation: [...prevState.conversation, UserTemplate(option)],
     }))
 
+    const query = (() => {
+      if (addContext) {
+        const context = r.pipe(
+          r.findLast(r.propEq("type", Bot)),
+          r.prop("content")
+        )(this.state.conversation)
+        return `${context} - ${option}`
+      }
+      return option
+    })()
+
     const { data } = await axios.get("/api/user/dialogflow", {
       params: {
-        query: option,
+        query,
       },
     })
 
@@ -240,7 +283,8 @@ class Home extends Component {
             <_OptionContainer number={postback.payload.length}>
               <RenderOptions
                 {...postback}
-                onButtonClick={this.onOptionClick}
+                onInternalLinkClick={this.onInternalLinkClick}
+                onOptionClick={this.onOptionClick}
                 number={postback.payload.length}
                 changeView={changeView}
               />
@@ -255,5 +299,5 @@ class Home extends Component {
 
 export default connect(
   ({ profile }) => ({ profile }),
-  { changeView }
+  { changeView, selectTopic, setPageIndex }
 )(Home)
