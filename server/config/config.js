@@ -7,17 +7,22 @@ const {
   ADMIN_ACCESS_TOKEN,
 } = process.env
 
+const baseVariables = {
+  secret: SECRET,
+  adminAccessToken: ADMIN_ACCESS_TOKEN,
+}
+
 const config = env => {
   if (env === "production") {
     return {
+      ...baseVariables,
       database: PRODUCTION_DATABASE,
-      secret: SECRET,
     }
   }
   return {
+    ...baseVariables,
     database: DEVELOPMENT_DATABASE,
-    secret: SECRET,
-    adminAccessToken: ADMIN_ACCESS_TOKEN,
   }
 }
+
 module.exports = config(NODE_ENV)

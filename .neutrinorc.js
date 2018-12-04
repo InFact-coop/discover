@@ -49,9 +49,21 @@ module.exports = {
         ],
       },
     ],
-
     neutrino =>
       neutrino.config.when(process.env.NODE_ENV === "production", config => {
+        config
+          .plugin("appcache-webpack-plugin")
+          .use(require("appcache-webpack-plugin"), [
+            {
+              cache: [],
+              network: ["*"],
+              fallback: [],
+              settings: ["prefer-online"],
+              exclude: [/.*\.DS_Store$/],
+              output: "discoverbot.appcache",
+            },
+          ])
+
         config
           .plugin("workbox")
           .use(require("workbox-webpack-plugin").GenerateSW, [
@@ -62,5 +74,32 @@ module.exports = {
             },
           ])
       }),
+    [
+      "@neutrinojs/html-template",
+      {
+        title: "DISCOVERbot",
+        links: [{ href: "/manifest.json", rel: "manifest" }],
+        meta: [
+          {
+            name: "viewport",
+            content:
+              "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no",
+          },
+          {
+            name: "apple-mobile-web-app-capable",
+            content: "yes",
+          },
+          {
+            name: "apple-mobile-web-app-status-bar-style",
+            content: "black-translucent",
+          },
+          {
+            name: "apple-mobile-web-app-title",
+            content: "DISCOVERbot",
+          },
+        ],
+        mobile: false,
+      },
+    ],
   ],
 }
