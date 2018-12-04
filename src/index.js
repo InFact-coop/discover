@@ -16,7 +16,13 @@ export const load = () =>
     root
   )
 
-if (process.env.NODE_ENV === "production" && "serviceWorker" in navigator) {
+const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
+
+if (
+  process.env.NODE_ENV === "production" &&
+  "serviceWorker" in navigator &&
+  !iOS
+) {
   window.addEventListener("load", () => {
     navigator.serviceWorker
       .register("/sw.js")
