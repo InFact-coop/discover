@@ -2,9 +2,10 @@ import { Component } from "react"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
 import { changeView } from "../state/actions/router"
-import { Home } from "."
+import * as r from "ramda" //eslint-disable-line import/no-namespace
+import { AllSet, EditGoal, Home } from "."
 import styled, { createGlobalStyle } from "styled-components"
-import welldone from "../assets/icons/welldone.svg"
+import spinner from "../assets/icons/spinner_big.svg"
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -19,39 +20,50 @@ const _Container = styled.div.attrs({
 `
 
 const _Image = styled.img.attrs({
-  className: "ma3",
+  className: "ma3 ",
 })``
 
-const _Text = styled.p.attrs({
-  className: "mono ma3 font-1 dark-gray",
-})`
-  font-weight: 500;
-`
+const nextView = previousView => {
+  switch (previousView) {
+    case "Recap":
+      return AllSet
 
-class AllSet extends Component {
+    case "NewGoalConfirmation":
+      return EditGoal
+
+    default:
+      return Home
+  }
+}
+
+class Spinner extends Component {
   componentDidMount() {
-    const { changeView } = this.props
+    const {
+      changeView,
+      router: { history },
+    } = this.props
+
+    //eslint-disable-next-line
     setTimeout(() => {
-      changeView(Home)
-    }, 1000)
+      changeView(nextView(r.last(history)))
+    }, 2000)
   }
   //eslint-disable-next-line
   render() {
     return (
       <_Container>
         <GlobalStyle />
-        <_Image src={welldone} />
-        <_Text> All set! </_Text>
+        <_Image src={spinner} />
       </_Container>
     )
   }
 }
 
-AllSet.propTypes = {
+Spinner.propTypes = {
   changeView: PropTypes.func.isRequired,
 }
 
 export default connect(
-  null,
+  ({ router }) => ({ router }),
   { changeView }
-)(AllSet)
+)(Spinner)
