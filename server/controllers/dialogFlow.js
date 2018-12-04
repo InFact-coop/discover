@@ -31,6 +31,7 @@ exports.queryDF = (req, res) => {
   sessionClient
     .detectIntent(request)
     .then(responses => {
+      console.log(responses[0].queryResult.intent) // eslint-disable-line
       if (!responses[0].queryResult.intent) {
         console.log(`No intent matched.`) // eslint-disable-line
       }
