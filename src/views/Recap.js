@@ -3,7 +3,7 @@ import styled, { createGlobalStyle } from "styled-components"
 import PropTypes from "prop-types"
 import GoalDetails from "../components/GoalDetails"
 import BackButton from "../components/BackButton"
-import { GoalTime, AllSet } from "."
+import { GoalTime, Spinner } from "."
 import { changeView } from "../state/actions/router"
 import background from "../assets/backgrounds/bg_RECAP.svg"
 import ActionButton from "../components/shared/ActionButton"
@@ -42,7 +42,7 @@ const Recap = ({ changeView }) => (
       <GoalDetails section={"time"} />
       <GoalDetails section={"duration"} />
     </_InnerContainer>
-    <ActionButton onClick={() => changeView(AllSet)}>
+    <ActionButton onClick={() => changeView(Spinner)} positionBottom="10px">
       COOL LET'S GO
     </ActionButton>
   </_Container>

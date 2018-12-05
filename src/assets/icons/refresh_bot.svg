@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="72px" height="72px" viewBox="0 0 72 72" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 52.3 (67297) - http://www.bohemiancoding.com/sketch -->
-    <title>exit_bot</title>
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>refresh_bot</title>
     <desc>Created with Sketch.</desc>
     <defs>
         <circle id="path-1" cx="20" cy="20" r="20"></circle>
@@ -17,12 +17,10 @@
                 <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
                 <use fill="#FFFFFF" xlink:href="#path-1"></use>
             </g>
-            <g id="imagination-dream-passion-motivation-startup" transform="translate(9.000000, 9.000000)" stroke="#118AB2" stroke-linecap="round" stroke-linejoin="round">
-                <g id="Group-5">
-                    <path d="M12,12.75 L22.5,12.75" id="Path"></path>
-                    <polyline id="Path" points="18 8 22.5 12.5 18 17"></polyline>
-                    <polyline id="Path" points="12 6 12 0 0 0 0 16.5 7.5 22.5 7.5 7.5 0 0"></polyline>
-                </g>
+            <g id="loop-30" transform="translate(20.500000, 19.500000) scale(-1, 1) translate(-20.500000, -19.500000) translate(9.000000, 8.000000)" stroke="#118AB2">
+                <path d="M5.60871429,20.9420476 C7.36766667,22.1457143 9.75528571,23 12.047619,23 C18.096619,23 23,18.096619 23,12.047619 C23,5.99861905 18.096619,1.0952381 12.047619,1.0952381 C7.77728571,1.0952381 4.08304762,3.54090476 2.27590476,7.10590476" id="Path"></path>
+                <polyline id="Path" stroke-linecap="square" points="1.39971429 0.644 2.27590476 7.10590476 8.84733333 6.22971429"></polyline>
+                <circle id="Oval" stroke-linecap="square" cx="3.28571429" cy="18.6190476" r="3.28571429"></circle>
             </g>
         </g>
     </g>

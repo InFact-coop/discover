@@ -12,8 +12,11 @@ import { getTipSections } from "../components/TipSections"
 import ActionButton from "../components/shared/ActionButton"
 
 const _TapAnywhere = styled.div.attrs({
-  className: "ttu w-100 white sans font-4 pa4",
-})``
+  className: "ttu w-100 tc white sans font-4 pa4",
+})`
+  position: relative;
+  bottom: 20vh;
+`
 
 const _ExitCross = styled.img.attrs({
   className: "absolute top-0 right-0 pa3 z-5",
@@ -41,32 +44,27 @@ const _Main = styled.div.attrs({
   className: "",
 })``
 
-const TapAnywhere = () => {
-  return <_TapAnywhere>Tap anywhere to continue</_TapAnywhere>
-}
-
-const FirstSlide = ({ name, topic }) => {
-  return (
-    <div>
-      <div className="flex align-items justify-center pt2 pb4">
-        <img src={robot} alt="friendly robot" />
-      </div>
-      <h1>Hey {name}!</h1>
-      <_Container>
-        Did I hear you say you need a refersher about{" "}
-        <span className="b">{topic}</span>?
-      </_Container>
-      <_Container>NO PROBLEM!</_Container>
-      <_Container>Here is a quick reminder</_Container>
+const FirstSlide = ({ name, topic }) => (
+  <div>
+    <div className="flex align-items justify-center pt2 pb4">
+      <img src={robot} alt="friendly robot" />
     </div>
-  )
-}
+    <h1>Hey {name}!</h1>
+    <_Container>
+      Did I hear you say you need a refersher about{" "}
+      <span className="b">{topic}</span>?
+    </_Container>
+    <_Container>NO PROBLEM!</_Container>
+    <_Container>Here is a quick reminder</_Container>
+  </div>
+)
 
 class ReadTips extends Component {
   onExitClick = () => {
     const { changeView } = this.props
     changeView(Summary)
   }
+
   onBackClick = index => {
     const prevSlide = index - 1
     const { setPageIndex } = this.props
@@ -112,17 +110,22 @@ class ReadTips extends Component {
               ) : (
                 <Content />
               )}
-              {tips.index === tips.topicMaxIndex ? (
-                <ActionButton onClick={() => this.onExitClick()}>
-                  Thanx, got it!
-                </ActionButton>
-              ) : (
-                <TapAnywhere />
-              )}
             </Fragment>
           </_Main>
         </_TipScreen>
         <NavBar />
+        {tips.index === tips.topicMaxIndex ? (
+          <ActionButton
+            positionBottom="20vh"
+            onClick={() => this.onExitClick()}
+          >
+            Thanx, got it!
+          </ActionButton>
+        ) : (
+          <_TapAnywhere onClick={() => this.onAnywhereClick(tips.index)}>
+            Tap anywhere to continue
+          </_TapAnywhere>
+        )}
       </div>
     )
   }

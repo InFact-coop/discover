@@ -5,7 +5,7 @@ import SaveButton from "../components/SaveButton"
 import BackButton from "../components/BackButton"
 import { backToPreviousView } from "../state/actions/router"
 import { archiveGoal, clearCurrentGoal } from "../state/actions/pastGoals"
-import { SetGoal } from "."
+import { Spinner } from "."
 import botIcon from "../assets/icons/bot.svg"
 import daysToGo from "../utils/goalDaysToGo"
 
@@ -69,7 +69,7 @@ class NewGoalConfirmation extends Component {
         </_Description>
         <_Hint onClick={() => backToPreviousView()}>TAKE ME BACK</_Hint>
         <SaveButton
-          redirectTo={SetGoal}
+          redirectTo={Spinner}
           saveFunction={this.saveFunction}
           text="I WANT TO CHANGE MY GOAL"
         />

@@ -49,7 +49,7 @@ class GoalProgress extends Component {
     const { currentGoal, pastGoals } = this.props
     return (
       <div>
-        <GlobalStyle/>
+        <GlobalStyle />
         <IconHeader title="Goals progress" icon={icon} />
         <_Wrapper>
           <Goal
@@ -75,8 +75,10 @@ class GoalProgress extends Component {
             />
           ))}
         </_Wrapper>
-        <ActionButton onClick={this.onClick}>Set new goal</ActionButton>
         <NavBar />
+        <ActionButton onClick={this.onClick} positionBottom="10px">
+          Set new goal
+        </ActionButton>
       </div>
     )
   }

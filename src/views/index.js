@@ -21,6 +21,7 @@ export const ReadTips = "ReadTips"
 export const MyGoal = "MyGoal"
 export const EditGoal = "EditGoal"
 export const NewGoalConfirmation = "NewGoalConfirmation"
+export const Spinner = "Spinner"
 
 class Router extends Component {
   componentDidMount() {

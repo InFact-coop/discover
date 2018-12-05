@@ -12,6 +12,7 @@ import ProgressBar from "../components/ProgressBar"
 import SaveButton from "../components/SaveButton"
 import BackButton from "../components/BackButton"
 import { _Title } from "../components/Text"
+import OutlineContainer from "../components/shared/OutlineContainer"
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -30,12 +31,10 @@ const _AvatarsContainer = styled.div.attrs({
 })``
 
 const _Avatar = styled.img.attrs({
-  className: "w-40 br-100 mh2 mv3",
+  className: "br-100",
 })`
-  ${({ selected }) =>
-    selected &&
-    `border: 0.2rem solid var(--dark-gray);
-  `};
+  height: 40vw;
+  width: 40vw;
 `
 
 class Avatar extends Component {
@@ -83,13 +82,15 @@ class Avatar extends Component {
         <_Title className="mt5 w-60">Please choose your avatar</_Title>
         <_AvatarsContainer>
           {avatars.map(({ src, name, selected }) => (
-            <_Avatar
+            <OutlineContainer
+              margin="var(--spacing-medium) var(--spacing-small)"
               key={name}
-              src={src}
-              name={name}
               selected={selected}
               onClick={this.onAvatarClick}
-            />
+              br="br-100"
+            >
+              <_Avatar src={src} name={name} />
+            </OutlineContainer>
           ))}
         </_AvatarsContainer>
         <SaveButton

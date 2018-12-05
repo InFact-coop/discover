@@ -27,10 +27,11 @@ const MyGoal = ({ changeView }) => (
     <GoalDetails section={"days"} />
     <GoalDetails section={"time"} />
     <GoalDetails section={"progress"} />
+
+    <NavBar />
     <ActionButton onClick={() => changeView(EditGoal)}>
       EDIT MY GOAL
     </ActionButton>
-    <NavBar />
   </_Container>
 )
 

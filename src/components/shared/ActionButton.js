@@ -6,6 +6,8 @@ const ActionButton = styled.button.attrs({
   width: 220px;
   height: 55px;
   margin: auto;
+  position: relative;
+  bottom: ${({positionBottom}) => `${positionBottom}`};
 `
 
 export default ActionButton

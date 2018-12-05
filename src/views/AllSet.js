@@ -33,7 +33,7 @@ class AllSet extends Component {
     const { changeView } = this.props
     setTimeout(() => {
       changeView(Home)
-    }, 1500)
+    }, 1000)
   }
   //eslint-disable-next-line
   render() {
