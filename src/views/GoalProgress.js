@@ -4,7 +4,10 @@ import { changeView } from "../state/actions/router"
 import styled, { createGlobalStyle } from "styled-components"
 
 import IconHeader from "../components/shared/IconHeader"
-import ActionButton from "../components/shared/ActionButton"
+import {
+  ActionButton,
+  ActionButtonContainer,
+} from "../components/shared/ActionButton"
 import Goal from "../components/GoalProgressListItem"
 import NavBar from "../components/NavBar"
 import { SetGoal, NewGoalConfirmation } from "."
@@ -75,10 +78,10 @@ class GoalProgress extends Component {
             />
           ))}
         </_Wrapper>
+        <ActionButtonContainer>
+          <ActionButton onClick={this.onClick}>Set new goal</ActionButton>
+        </ActionButtonContainer>
         <NavBar />
-        <ActionButton onClick={this.onClick} positionBottom="10px">
-          Set new goal
-        </ActionButton>
       </div>
     )
   }

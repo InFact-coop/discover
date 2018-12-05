@@ -9,7 +9,7 @@ import close from "../assets/icons/close.svg"
 import back from "../assets/icons/arrow_back.svg"
 import { Summary } from "."
 import { getTipSections } from "../components/TipSections"
-import ActionButton from "../components/shared/ActionButton"
+import { ActionButton } from "../components/shared/ActionButton"
 
 const _TapAnywhere = styled.div.attrs({
   className: "ttu w-100 tc white sans font-4 pa4",

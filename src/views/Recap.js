@@ -6,7 +6,7 @@ import BackButton from "../components/BackButton"
 import { GoalTime, Spinner } from "."
 import { changeView } from "../state/actions/router"
 import background from "../assets/backgrounds/bg_RECAP.svg"
-import ActionButton from "../components/shared/ActionButton"
+import { ActionButton } from "../components/shared/ActionButton"
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -21,6 +21,7 @@ const _Container = styled.div.attrs({
 const _Title = styled.p.attrs({
   className: "mono font-1 tc ma2 mt6 dark-gray fw5",
 })``
+
 const _Description = styled.p.attrs({
   className: "mono font-3 tc ma2",
 })``

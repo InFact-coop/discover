@@ -5,7 +5,10 @@ import NavBar from "../components/NavBar"
 import { changeView } from "../state/actions/router"
 import goalIcon from "../assets/icons/my_goal_big.svg"
 import { EditGoal } from "."
-import ActionButton from "../components/shared/ActionButton"
+import {
+  ActionButton,
+  ActionButtonContainer,
+} from "../components/shared/ActionButton"
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -29,9 +32,11 @@ const MyGoal = ({ changeView }) => (
     <GoalDetails section={"progress"} />
 
     <NavBar />
-    <ActionButton onClick={() => changeView(EditGoal)}>
-      EDIT MY GOAL
-    </ActionButton>
+    <ActionButtonContainer>
+      <ActionButton onClick={() => changeView(EditGoal)}>
+        EDIT MY GOAL
+      </ActionButton>
+    </ActionButtonContainer>
   </_Container>
 )
 
