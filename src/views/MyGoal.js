@@ -4,7 +4,7 @@ import GoalDetails from "../components/GoalDetails"
 import NavBar from "../components/NavBar"
 import { changeView } from "../state/actions/router"
 import goalIcon from "../assets/icons/my_goal_big.svg"
-import { EditGoal } from "."
+import { EditGoal, ReadTips } from "."
 import {
   ActionButton,
   ActionButtonContainer,
@@ -26,7 +26,9 @@ const MyGoal = ({ changeView }) => (
     <GlobalStyle />
     <img src={goalIcon} />
     <GoalDetails section={"description"} />
-    <GoalDetails section={"technique"} />
+    <div onClick={() => changeView(ReadTips)}>
+      <GoalDetails section={"technique"} />
+    </div>
     <GoalDetails section={"days"} />
     <GoalDetails section={"time"} />
     <GoalDetails section={"progress"} />
