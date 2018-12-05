@@ -64,6 +64,7 @@ const FirstSlide = ({ name, topic }) => (
 class ReadTips extends Component {
   state = {
     prevPage: Summary,
+    historyAtPrevPage: [],
   }
 
   componentDidMount() {
@@ -71,12 +72,19 @@ class ReadTips extends Component {
       router: { history },
     } = this.props
 
-    this.setState({ prevPage: r.last(history) })
+    this.setState({
+      prevPage: r.last(history),
+      historyAtPrevPage: r.dropLast(1, history),
+    })
   }
 
   onExitClick = () => {
-    const { changeView } = this.props
-    changeView(this.state.prevPage)
+    const { changeView, setPageIndex } = this.props
+    setPageIndex(0)
+    changeView({
+      page: this.state.prevPage,
+      history: this.state.historyAtPrevPage,
+    })
   }
 
   onBackClick = index => {
