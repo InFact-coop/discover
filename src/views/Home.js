@@ -94,7 +94,7 @@ const RenderOptions = ({
       const onClick = () => {
         switch (type) {
           case NewFlow:
-            return onOptionClick({ content, query, addContext })
+            return onOptionClick({ content, query, addContext, type })
           case InternalLink:
             return onInternalLinkClick(to)
           default:
@@ -174,7 +174,7 @@ class Home extends Component {
         )(this.state.conversation)
         return `${context} - ${content}`
       }
-      if (type === NewFlow) {
+      if (type === NewFlow && query) {
         return query
       }
       return content
