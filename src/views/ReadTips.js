@@ -1,5 +1,7 @@
 import { Component, Fragment } from "react"
 import styled from "styled-components"
+import * as r from "ramda" //eslint-disable-line import/no-namespace
+
 import NavBar from "../components/NavBar"
 import { connect } from "react-redux"
 import { changeView } from "../state/actions/router"
@@ -60,9 +62,21 @@ const FirstSlide = ({ name, topic }) => (
 )
 
 class ReadTips extends Component {
+  state = {
+    prevPage: Summary,
+  }
+
+  componentDidMount() {
+    const {
+      router: { history },
+    } = this.props
+
+    this.setState({ prevPage: r.last(history) })
+  }
+
   onExitClick = () => {
     const { changeView } = this.props
-    changeView(Summary)
+    changeView(this.state.prevPage)
   }
 
   onBackClick = index => {
@@ -132,9 +146,10 @@ class ReadTips extends Component {
 }
 
 export default connect(
-  ({ profile, tips }) => ({
+  ({ profile, tips, router }) => ({
     profile,
     tips,
+    router,
   }),
   { changeView, setPageIndex }
 )(ReadTips)

@@ -54,7 +54,7 @@ class GoalDetails extends Component {
             <_Container>
               <_TextMono>by using</_TextMono>
               <_TextSans>
-                <u>{this.toSentence(techniques)}</u>
+                <p className="blue underline">{this.toSentence(techniques)}</p>
               </_TextSans>
             </_Container>
           )
