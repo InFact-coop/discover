@@ -26,9 +26,8 @@ const MyGoal = ({ changeView }) => (
     <GlobalStyle />
     <img src={goalIcon} />
     <GoalDetails section={"description"} />
-    <div onClick={() => changeView(ReadTips)}>
-      <GoalDetails section={"technique"} />
-    </div>
+    <GoalDetails section={"technique"} />
+
     <GoalDetails section={"days"} />
     <GoalDetails section={"time"} />
     <GoalDetails section={"progress"} />

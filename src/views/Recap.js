@@ -38,9 +38,7 @@ const Recap = ({ changeView }) => (
     <_Description>So let's recap</_Description>
     <_InnerContainer>
       <GoalDetails section={"description"} />
-      <div onClick={() => changeView(ReadTips)}>
-        <GoalDetails section={"technique"} />
-      </div>
+      <GoalDetails section={"technique"} />
       <GoalDetails section={"days"} />
       <GoalDetails section={"time"} />
       <GoalDetails section={"duration"} />
