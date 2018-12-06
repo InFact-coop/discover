@@ -25,7 +25,7 @@ export default (state = INITIAL_STATE, { payload, type }) => {
       }
     case VERIFY_FAILED:
       return {
-        ...INITIAL_STATE,
+        ...state,
         err: payload.err,
       }
     case VERIFY_FAILED_ROLLBACK:
