@@ -37,9 +37,7 @@ const _Question = styled.p.attrs({
 class Name extends Component {
   state = {
     name: "",
-    error: {
-      name: false,
-    },
+    valid: true,
   }
 
   componentDidMount() {
@@ -52,13 +50,13 @@ class Name extends Component {
     const { value } = e.target
     this.setState({
       name: value,
-      error: { name: value.length === 0 },
+      valid: !!value,
     })
   }
 
   onBlur = () => {
     const { name } = this.state
-    this.setState({ error: { name: name.length === 0 } })
+    this.setState({ valid: !!name })
   }
 
   saveFunction = () => {
@@ -67,8 +65,12 @@ class Name extends Component {
     changeName(name)
   }
 
+  setInvalid = () => {
+    this.setState({ valid: false })
+  }
+
   render() {
-    const { name, error } = this.state
+    const { name, valid } = this.state
     return (
       <Fragment>
         <_Container>
@@ -86,12 +88,13 @@ class Name extends Component {
             value={name}
             onChange={this.onInputChange}
             onBlur={this.onBlur}
-            invalid={error.name}
+            valid={valid}
             validateMsg="Surely you have a name!?"
           />
         </_Container>
         <SaveButton
-          disabled={!name}
+          valid={!!name}
+          setInvalid={this.setInvalid}
           text="THAT'S MY NAME!"
           redirectTo={Avatar}
           saveFunction={this.saveFunction}
