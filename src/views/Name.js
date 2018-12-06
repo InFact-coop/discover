@@ -41,11 +41,13 @@ class Name extends Component {
       name: false,
     },
   }
+
   componentDidMount() {
     const { name, clearWelcomeScreen } = this.props
     this.setState({ name })
     clearWelcomeScreen()
   }
+
   onInputChange = e => {
     const { value } = e.target
     this.setState({
@@ -53,6 +55,7 @@ class Name extends Component {
       error: { name: value.length === 0 },
     })
   }
+
   onBlur = () => {
     const { name } = this.state
     this.setState({ error: { name: name.length === 0 } })
@@ -63,6 +66,7 @@ class Name extends Component {
     const { name } = this.state
     changeName(name)
   }
+
   render() {
     const { name, error } = this.state
     return (
@@ -77,11 +81,13 @@ class Name extends Component {
           </_Title>
           <_Question>what's your name my friend?</_Question>
           <Input
-            className="w-80 ma4 pa2 font-2 h2"
+            className="ma4 pa2"
+            width="w-80"
             value={name}
             onChange={this.onInputChange}
             onBlur={this.onBlur}
-            inValid={error.name}
+            invalid={error.name}
+            validateMsg="Surely you have a name!?"
           />
         </_Container>
         <SaveButton
