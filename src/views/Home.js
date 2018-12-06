@@ -222,7 +222,7 @@ class Home extends Component {
 
   onInternalLinkClick = to => {
     const { changeView, selectTopic, setPageIndex } = this.props
-    const isTip = r.includes(to, Tips)
+    const isTip = Tips.includes(to)
     if (isTip) {
       selectTopic(to)
       setPageIndex(0)
