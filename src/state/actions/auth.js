@@ -38,6 +38,6 @@ export const verifyToken = token => async dispatch => {
   try {
     await axios.post("/api/user/codetoken", { token })
   } catch (err) {
-    dispatch(verifyFailed({ err: null }))
+    dispatch(verifyFailed(err))
   }
 }

@@ -1,7 +1,6 @@
 import { createStore, compose, applyMiddleware } from "redux"
 import { offline } from "@redux-offline/redux-offline"
 import offlineConfig from "@redux-offline/redux-offline/lib/defaults"
-import localForage from "localforage"
 import thunk from "redux-thunk"
 import reducer from "./reducers"
 
@@ -16,7 +15,6 @@ const store = createStore(
     offline({
       ...offlineConfig,
       persistCallback: () => load(),
-      persistOptions: { storage: localForage },
     })
   )
 )
