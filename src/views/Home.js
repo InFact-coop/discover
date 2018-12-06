@@ -36,7 +36,7 @@ const _ChatContainer = styled.div.attrs({
 `
 
 const _Message = styled.div.attrs({
-  className: "mono font-4 pv2 ph3 mb2",
+  className: "mono font-5 pv2 ph3 mb2",
 })`
   border-radius: ${({ user }) =>
     user ? `21px 21px 6px 21px` : `21px 21px 21px 6px`};
@@ -62,26 +62,70 @@ const _Option = styled.button.attrs({
 `
 
 const _OptionContainer = styled.div.attrs({
-  className: "border-box w-100 ph2 pb3 mt2 flex",
+  className: "border-box w-100 ph2 pb3 mt2 flex font-5",
 })`
   flex-direction: ${({ number }) => (number === 2 ? "row" : "column")};
   flex-shrink: 0;
 `
 
-const RenderConversation = ({ conversation }) =>
-  conversation.map(({ content, type }, i) => (
-    <_Message
-      className={
-        type === User
-          ? "self-end bg-blue white user-style"
-          : "bg-white dark-gray"
-      }
-      user={type === User}
-      key={`${content}-${i}`}
-    >
-      {content}
-    </_Message>
-  ))
+const _monoText = styled.p.attrs({ className: "mono db" })``
+const _sansText = styled.p.attrs({ className: "sans fw5 font-4 db pb2" })`
+  font-size: 16px;
+`
+const _exampleGoalDiv = styled.div.attrs({
+  className: "tc font-5 db pv2 ph3 mb2 bg-white dark-gray",
+})`
+  border-radius: 21px 21px 21px 6px;
+  max-width: 265px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
+`
+const ExampleGoal = () => {
+  return (
+    <_exampleGoalDiv>
+      <_monoText>Your goal is</_monoText>
+      <_sansText>
+        Stop procrasting and work on my time management skills
+      </_sansText>
+      <_monoText>by using</_monoText>
+      <_sansText className="underline">Procrastination tips</_sansText>
+      <_monoText>and you will do it</_monoText>
+      <_sansText>Every Tuesday and Friday</_sansText>
+      <_monoText>preferably</_monoText>
+      <_sansText>After school, at 16:30</_sansText>
+      <_monoText>for</_monoText>
+      <_sansText>3 months</_sansText>
+    </_exampleGoalDiv>
+  )
+}
+
+const RenderConversation = ({ conversation, onLinkClick }) =>
+  conversation.map(({ content, type }, i) => {
+    if (content === "#your-goal-example") {
+      return <ExampleGoal />
+    } else if (content.includes("#here-privacy-link")) {
+      const [before, after] = content.split("#here-privacy-link")
+      return (
+        <_Message className="bg-white dark-gray">
+          <span>{before}</span>
+          <a className="underline" onClick={() => onLinkClick("Privacy Policy")}>here</a>
+          <span>{after}</span>
+        </_Message>
+      )
+    }
+    return (
+      <_Message
+        className={
+          type === User
+            ? "self-end bg-blue white user-style"
+            : "bg-white dark-gray"
+        }
+        user={type === User}
+        key={`${content}-${i}`}
+      >
+        {content}
+      </_Message>
+    )
+  })
 
 const RenderOptions = ({
   payload,
@@ -273,7 +317,10 @@ class Home extends Component {
         )}
         <_ChatContainer welcome={welcome.welcomeFlow}>
           <_MessageContainer>
-            <RenderConversation conversation={conversation} />
+            <RenderConversation
+              conversation={conversation}
+              onLinkClick={this.onInternalLinkClick}
+            />
           </_MessageContainer>
 
           {r.isEmpty(postback) ? (
