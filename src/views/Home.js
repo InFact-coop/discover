@@ -50,14 +50,20 @@ const _Avatar = styled.img.attrs({
   className: ({ display }) => `br-100 ${display}`,
 })``
 
+const _MessageAvatarWrapper = styled.div.attrs({
+  className: ({ user }) => (user ? "flex justify-end h2" : "flex"),
+})`
+  min-height: fit-content;
+`
+
 const _MessageWithAvatar = ({ messageClass, user, children, userAvatar }) => (
-  <div className={user ? "flex justify-end" : "flex"}>
-    <_Avatar src={botIcon} display={user ? "dn" : "dib mr1"} />
+  <_MessageAvatarWrapper user={user}>
+    <_Avatar src={botIcon} display={user ? "dn" : "mr1"} />
     <_Message className={messageClass} user={user}>
       {children}
     </_Message>
-    <_Avatar src={userIcon} display={user ? "dib ml1" : "dn"} />
-  </div>
+    <_Avatar src={userIcon} display={user ? "ml1" : "dn"} />
+  </_MessageAvatarWrapper>
 )
 
 const _MessageContainer = styled.div.attrs({
