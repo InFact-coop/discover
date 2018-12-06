@@ -5,6 +5,7 @@ import PropTypes from "prop-types"
 
 import { Avatar } from "."
 import { changeName } from "../state/actions/profile"
+import { clearWelcomeScreen } from "../state/actions/welcome"
 import background from "../assets/backgrounds/bg_what_is_your_name.svg"
 import botIcon from "../assets/icons/bot.svg"
 
@@ -41,8 +42,9 @@ class Name extends Component {
     },
   }
   componentDidMount() {
-    const { name } = this.props
+    const { name, clearWelcomeScreen } = this.props
     this.setState({ name })
+    clearWelcomeScreen()
   }
   onInputChange = e => {
     const { value } = e.target
@@ -100,5 +102,5 @@ Name.propTypes = {
 
 export default connect(
   ({ profile: { name } }) => ({ name }),
-  { changeName }
+  { changeName, clearWelcomeScreen }
 )(Name)

@@ -24,13 +24,15 @@ const GlobalStyle = createGlobalStyle`
     background: url(${background}) no-repeat;
     background-size: cover;
     background-attachment: fixed;
+    height: 100vh;
   }
 `
 
 const _ChatContainer = styled.div.attrs({
-  className: "flex flex-column justify-between mb4",
+  className: "flex flex-column justify-between",
 })`
-  height: calc(100vh - 60px);
+  margin-bottom: ${({ welcome }) => (welcome ? "" : "24px")};
+  height: ${({ welcome }) => (welcome ? "100vh" : "calc(100vh - 60px)")};
 `
 
 const _Message = styled.div.attrs({
@@ -201,6 +203,7 @@ class Home extends Component {
   }
 
   onExitClick = async () => {
+    const { welcome } = this.props
     this.setState({
       conversation: [],
       postback: {},
@@ -208,7 +211,7 @@ class Home extends Component {
 
     const { data } = await axios.get("/api/user/dialogflow", {
       params: {
-        query: "Hello I'm Ivan and I'm back",
+        query: welcome.startQuery,
       },
     })
 
@@ -231,9 +234,10 @@ class Home extends Component {
   }
 
   componentDidMount = async () => {
+    const { welcome } = this.props
     const { data } = await axios.get("/api/user/dialogflow", {
       params: {
-        query: "Hello I'm back",
+        query: welcome.startQuery,
       },
     })
 
@@ -253,17 +257,21 @@ class Home extends Component {
 
   render() {
     const { postback, conversation } = this.state
-    const { changeView } = this.props
+    const { changeView, welcome } = this.props
     return (
-      <div>
+      <div className="vh-100">
         <GlobalStyle />
-        <img
-          src={exit}
-          alt="exit chat"
-          className="fixed top-0 right-0"
-          onClick={this.onExitClick}
-        />
-        <_ChatContainer>
+        {welcome.welcomeFlow ? (
+          ""
+        ) : (
+          <img
+            src={exit}
+            alt="exit chat"
+            className="fixed top-0 right-0"
+            onClick={this.onExitClick}
+          />
+        )}
+        <_ChatContainer welcome={welcome.welcomeFlow}>
           <_MessageContainer>
             <RenderConversation conversation={conversation} />
           </_MessageContainer>
@@ -282,13 +290,13 @@ class Home extends Component {
             </_OptionContainer>
           )}
         </_ChatContainer>
-        <NavBar />
+        {welcome.welcomeFlow ? "" : <NavBar />}
       </div>
     )
   }
 }
 
 export default connect(
-  ({ profile }) => ({ profile }),
+  ({ profile, welcome }) => ({ profile, welcome }),
   { changeView, selectTopic, setPageIndex }
 )(Home)
