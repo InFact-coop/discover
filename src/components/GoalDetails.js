@@ -2,7 +2,12 @@ import { Component } from "react"
 import { connect } from "react-redux"
 import styled from "styled-components"
 import PropTypes from "prop-types"
+import * as r from "ramda" //eslint-disable-line import/no-namespace
+
 import goalDaysToGo from "../utils/goalDaysToGo"
+import { ReadTips } from "../views"
+import { selectTopic } from "../state/actions/tips"
+import { changeView } from "../state/actions/router"
 
 const _Container = styled.div.attrs({
   className: "flex flex-column justify-center items-center mb4 ",
@@ -11,7 +16,7 @@ const _Container = styled.div.attrs({
 const _TextMono = styled.p.attrs({
   className: "mono font-4 tc mb1 dark-gray",
 })``
-const _TextSans = styled.p.attrs({
+const _TextSans = styled.div.attrs({
   className: "sans font-3 tc dark-gray",
 })`
   font-weight: 500;
@@ -22,6 +27,12 @@ class GoalDetails extends Component {
     daysString: "",
     techniquesString: "",
     daysToGo: "",
+  }
+
+  goToTips = technique => {
+    const { selectTopic, changeView } = this.props
+    selectTopic(technique)
+    changeView(ReadTips)
   }
 
   toSentence = arr =>
@@ -40,6 +51,36 @@ class GoalDetails extends Component {
       techniques,
     } = this.props
 
+    const techniqueToLink = technique => {
+      const _LinkToTips = () => (
+        <u className="blue" onClick={() => this.goToTips(technique)}>
+          {technique}
+        </u>
+      )
+
+      if (techniques.length > 2 && r.indexOf(technique, techniques) > 0) {
+        return (
+          <p key={r.indexOf(technique, techniques)}>
+            <_LinkToTips />
+            ,&nbsp;
+          </p>
+        )
+      } else if (r.indexOf(technique, techniques) === techniques.length - 1) {
+        return (
+          <p key={r.indexOf(technique, techniques)}>
+            and&nbsp;
+            <_LinkToTips />
+          </p>
+        )
+      }
+      return (
+        <p key={r.indexOf(technique, techniques)}>
+          <_LinkToTips />
+          &nbsp;
+        </p>
+      )
+    }
+
     switch (section) {
       case "description":
         return (
@@ -53,9 +94,7 @@ class GoalDetails extends Component {
           return (
             <_Container>
               <_TextMono>by using</_TextMono>
-              <_TextSans>
-                <u>{this.toSentence(techniques)}</u>
-              </_TextSans>
+              <_TextSans>{r.map(techniqueToLink)(techniques)}</_TextSans>
             </_Container>
           )
         return <div />
@@ -131,5 +170,6 @@ export default connect(
     techniques,
     timeOfDay,
     scheduledFinishDate,
-  })
+  }),
+  { selectTopic, changeView }
 )(GoalDetails)

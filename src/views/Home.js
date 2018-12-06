@@ -19,6 +19,8 @@ import background from "../assets/backgrounds/bg_bot.svg"
 const User = "User"
 const Bot = "Bot"
 
+const initQuery = "Hello I'm back"
+
 const GlobalStyle = createGlobalStyle`
   body {
     background: url(${background}) no-repeat;
@@ -208,7 +210,7 @@ class Home extends Component {
 
     const { data } = await axios.get("/api/user/dialogflow", {
       params: {
-        query: "Hello I'm Ivan and I'm back",
+        query: initQuery,
       },
     })
 
@@ -233,7 +235,7 @@ class Home extends Component {
   componentDidMount = async () => {
     const { data } = await axios.get("/api/user/dialogflow", {
       params: {
-        query: "Hello I'm back",
+        query: initQuery,
       },
     })
 
