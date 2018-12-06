@@ -38,3 +38,6 @@ export const ARCHIVE_GOAL = "ARCHIVE_GOAL"
 // tips
 export const SELECT_TOPIC = "SELECT_TOPIC"
 export const SET_PAGE_INDEX = "SET_PAGE_INDEX"
+
+// initial flow
+export const CLEAR_WELCOME_SCREEN = "CLEAR_WELCOME_SCREEN"

@@ -1,5 +1,5 @@
 import { CHANGE_VIEW, VERIFY_SUCCEEDED, BACK_TO_PREVIOUS_VIEW } from "../types"
-import { Loading, Name } from "../../views"
+import { Loading, Home } from "../../views"
 
 const INITIAL_STATE = {
   currentView: Loading,
@@ -29,7 +29,7 @@ export default (state = INITIAL_STATE, { payload, type }) => {
     case VERIFY_SUCCEEDED:
       return {
         ...state,
-        currentView: Name,
+        currentView: Home,
       }
     default:
       return state
