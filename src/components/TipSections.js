@@ -52,7 +52,7 @@ const _Container = styled.div.attrs({
   }
 `
 const _Title = styled.h1.attrs({
-  className: "mono font-2 tc w-75",
+  className: "mono font-2 tc w-90",
 })`
   margin: 0 auto;
 `

@@ -56,8 +56,12 @@ const _ButtonBanner = styled.div`
   height: 60px;
 `
 const _Main = styled.div.attrs({
-  className: "",
-})``
+  className: "h-100",
+})`
+  padding-top: ${({ tipIndex }) => {
+    return tipIndex === 1 ? "100px" : "0px"
+  }};
+`
 
 const FirstSlide = ({ name, topic }) => (
   <div>
@@ -136,7 +140,10 @@ class ReadTips extends Component {
               ""
             )}
           </_ButtonBanner>
-          <_Main onClick={() => this.onAnywhereClick(tips.index)}>
+          <_Main
+            onClick={() => this.onAnywhereClick(tips.index)}
+            tipIndex={tips.index}
+          >
             <Fragment>
               {tips.index === 0 ? (
                 <FirstSlide name={profile.name} topic={tips.topic} />
