@@ -11,7 +11,7 @@ import avatar1 from "../assets/icons/avatar_round.svg"
 import ProgressBar from "../components/ProgressBar"
 import SaveButton from "../components/SaveButton"
 import BackButton from "../components/BackButton"
-import { _Title } from "../components/Text"
+import { _Title, _ValidateMsg } from "../components/Text"
 import OutlineContainer from "../components/shared/OutlineContainer"
 
 const GlobalStyle = createGlobalStyle`
@@ -37,6 +37,26 @@ const _Avatar = styled.img.attrs({
   width: 40vw;
 `
 
+const Wrapper = styled.div`
+  position: absolute;
+  left: 50%;
+  width: 100%;
+  bottom: -8px;
+`
+
+const InnerWrapper = styled.div`
+  position: relative;
+  left: -50%;
+`
+
+const Validation = ({ children }) => (
+  <Wrapper>
+    <InnerWrapper>
+      <_ValidateMsg>{children}</_ValidateMsg>
+    </InnerWrapper>
+  </Wrapper>
+)
+
 class Avatar extends Component {
   state = {
     avatars: [
@@ -46,9 +66,9 @@ class Avatar extends Component {
       { name: "avatar4", src: avatar1, selected: false },
     ],
     selectedAvatar: "",
+    valid: true,
   }
 
-  // to add border on selected avatar
   componentDidMount() {
     const { avatar } = this.props
     const { avatars } = this.state
@@ -64,6 +84,7 @@ class Avatar extends Component {
     this.setState({
       avatars: avatars.map(a => ({ ...a, selected: a.name === name })),
       selectedAvatar: name,
+      valid: true,
     })
   }
 
@@ -72,14 +93,26 @@ class Avatar extends Component {
     const { selectedAvatar } = this.state
     changeAvatar(selectedAvatar)
   }
+
+  setInvalid = () => {
+    this.setState({ valid: false })
+  }
+
   render() {
-    const { avatars, selectedAvatar } = this.state
+    const { avatars, selectedAvatar, valid } = this.state
     return (
       <_Container>
         <GlobalStyle />
         <ProgressBar progress={2} />
         <BackButton />
-        <_Title className="mt5 w-60">Please choose your avatar</_Title>
+        <div className="relative">
+          <_Title className="mt5 w-60">Please choose your avatar</_Title>
+          {valid ? (
+            <div />
+          ) : (
+            <Validation>Pick an avatar to continue!</Validation>
+          )}
+        </div>
         <_AvatarsContainer>
           {avatars.map(({ src, name, selected }) => (
             <OutlineContainer
@@ -94,7 +127,8 @@ class Avatar extends Component {
           ))}
         </_AvatarsContainer>
         <SaveButton
-          disabled={!selectedAvatar}
+          valid={!!selectedAvatar}
+          setInvalid={this.setInvalid}
           saveFunction={this.saveFunction}
           redirectTo={SetGoal}
           text="THAT'S MY AVATAR!"
