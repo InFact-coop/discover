@@ -73,7 +73,7 @@ const _sansText = styled.p.attrs({ className: "sans fw5 font-4 db pb2" })`
   font-size: 16px;
 `
 const _exampleGoalDiv = styled.div.attrs({
-  className: "tc font-5 db pv2 ph3 mb2 bg-white dark-gray",
+  className: "tc font-5 db pt3 pb2 ph3 mb2 bg-white dark-gray",
 })`
   border-radius: 21px 21px 21px 6px;
   max-width: 265px;

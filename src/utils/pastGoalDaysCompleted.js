@@ -1,6 +1,6 @@
 import normalizeDate from "./normalizeDate"
 
-const getCurrentGoalProgress = (startDate, scheduledEnd, actualEnd) => {
+const pastGoalDaysCompleteed = (startDate, scheduledEnd, actualEnd) => {
   const start = normalizeDate(Date.parse(startDate))
   const scheduled = normalizeDate(Date.parse(scheduledEnd))
   const actual = normalizeDate(Date.parse(actualEnd))
@@ -11,4 +11,4 @@ const getCurrentGoalProgress = (startDate, scheduledEnd, actualEnd) => {
   return `${daysCompleted} days out of ${totalDays}`
 }
 
-export default getCurrentGoalProgress
+export default pastGoalDaysCompleteed
