@@ -9,6 +9,12 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, { payload, type }) => {
   switch (type) {
     case CHANGE_VIEW:
+      if (payload.page)
+        return {
+          ...state,
+          history: payload.history,
+          currentView: payload.page,
+        }
       return {
         ...state,
         history: [...state.history, state.currentView],

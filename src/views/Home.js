@@ -79,24 +79,22 @@ const _exampleGoalDiv = styled.div.attrs({
   max-width: 265px;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
 `
-const ExampleGoal = () => {
-  return (
-    <_exampleGoalDiv>
-      <_monoText>Your goal is</_monoText>
-      <_sansText>
-        Stop procrasting and work on my time management skills
-      </_sansText>
-      <_monoText>by using</_monoText>
-      <_sansText className="underline">Procrastination tips</_sansText>
-      <_monoText>and you will do it</_monoText>
-      <_sansText>Every Tuesday and Friday</_sansText>
-      <_monoText>preferably</_monoText>
-      <_sansText>After school, at 16:30</_sansText>
-      <_monoText>for</_monoText>
-      <_sansText>3 months</_sansText>
-    </_exampleGoalDiv>
-  )
-}
+const ExampleGoal = () => (
+  <_exampleGoalDiv>
+    <_monoText>Your goal is</_monoText>
+    <_sansText>
+      Stop procrasting and work on my time management skills
+    </_sansText>
+    <_monoText>by using</_monoText>
+    <_sansText className="underline">Procrastination tips</_sansText>
+    <_monoText>and you will do it</_monoText>
+    <_sansText>Every Tuesday and Friday</_sansText>
+    <_monoText>preferably</_monoText>
+    <_sansText>After school, at 16:30</_sansText>
+    <_monoText>for</_monoText>
+    <_sansText>3 months</_sansText>
+  </_exampleGoalDiv>
+)
 
 const RenderConversation = ({ conversation, onLinkClick }) =>
   conversation.map(({ content, type }, i) => {
@@ -107,7 +105,12 @@ const RenderConversation = ({ conversation, onLinkClick }) =>
       return (
         <_Message className="bg-white dark-gray">
           <span>{before}</span>
-          <a className="underline" onClick={() => onLinkClick("Privacy Policy")}>here</a>
+          <a
+            className="underline"
+            onClick={() => onLinkClick("Privacy Policy")}
+          >
+            here
+          </a>
           <span>{after}</span>
         </_Message>
       )

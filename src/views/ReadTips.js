@@ -1,5 +1,7 @@
 import { Component, Fragment } from "react"
 import styled from "styled-components"
+import * as r from "ramda" //eslint-disable-line import/no-namespace
+
 import NavBar from "../components/NavBar"
 import { connect } from "react-redux"
 import { changeView } from "../state/actions/router"
@@ -9,7 +11,7 @@ import close from "../assets/icons/close.svg"
 import back from "../assets/icons/arrow_back.svg"
 import { Summary } from "."
 import { getTipSections } from "../components/TipSections"
-import ActionButton from "../components/shared/ActionButton"
+import { ActionButton } from "../components/shared/ActionButton"
 
 const _TapAnywhere = styled.div.attrs({
   className: "ttu w-100 tc white sans font-4 pa4",
@@ -60,9 +62,27 @@ const FirstSlide = ({ name, topic }) => (
 )
 
 class ReadTips extends Component {
+  constructor(props) {
+    super(props)
+
+    const {
+      router: { history },
+    } = this.props
+
+    this.state = {
+      prevPage: r.last(history),
+      historyAtPrevPage: r.dropLast(1, history),
+    }
+  }
+
   onExitClick = () => {
-    const { changeView } = this.props
-    changeView(Summary)
+    const { changeView, setPageIndex } = this.props
+
+    setPageIndex(0)
+    changeView({
+      page: this.state.prevPage,
+      history: this.state.historyAtPrevPage,
+    })
   }
 
   onBackClick = index => {
@@ -132,9 +152,10 @@ class ReadTips extends Component {
 }
 
 export default connect(
-  ({ profile, tips }) => ({
+  ({ profile, tips, router }) => ({
     profile,
     tips,
+    router,
   }),
   { changeView, setPageIndex }
 )(ReadTips)

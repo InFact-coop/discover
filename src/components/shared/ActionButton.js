@@ -7,7 +7,14 @@ const ActionButton = styled.button.attrs({
   height: 55px;
   margin: auto;
   position: relative;
-  bottom: ${({positionBottom}) => `${positionBottom}`};
+  bottom: ${({ positionBottom }) => `${positionBottom}`};
 `
 
-export default ActionButton
+const ActionButtonContainer = styled.div.attrs({
+  className: "flex justify-center w-100",
+})`
+  position: fixed;
+  bottom: 75px;
+`
+
+export { ActionButton, ActionButtonContainer }
