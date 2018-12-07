@@ -21,7 +21,7 @@ class SaveButton extends Component {
       setInvalid,
     } = this.props
 
-    if (!valid) return setInvalid()
+    if (!valid && setInvalid) return setInvalid()
 
     if (saveFunction) saveFunction()
     changeView(redirectTo)

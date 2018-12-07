@@ -5,7 +5,7 @@ import PropTypes from "prop-types"
 import SaveButton from "../components/SaveButton"
 import BackButton from "../components/BackButton"
 import { changeView } from "../state/actions/router"
-import { Home, SetGoal, Technique, GoalDays, GoalTime } from "."
+import { MyGoal, SetGoal, Technique, GoalDays, GoalTime } from "."
 import botIcon from "../assets/icons/bot.svg"
 
 const GlobalStyle = createGlobalStyle`
@@ -61,7 +61,7 @@ class EditGoal extends Component {
             {text}
           </_Button>
         ))}
-        <SaveButton text="DONE" redirectTo={Home} />
+        <SaveButton text="DONE" redirectTo={MyGoal} />
       </_Container>
     )
   }
