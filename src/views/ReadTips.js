@@ -9,9 +9,13 @@ import { setPageIndex } from "../state/actions/tips"
 import robot from "../assets/icons/robot_round.png"
 import close from "../assets/icons/close.svg"
 import back from "../assets/icons/arrow_back.svg"
-import { Summary } from "."
 import { getTipSections } from "../components/TipSections"
 import { ActionButton } from "../components/shared/ActionButton"
+import tips0 from "../assets/backgrounds/tips0.svg"
+import tips1 from "../assets/backgrounds/tips1.svg"
+import tips2 from "../assets/backgrounds/tips2.svg"
+import tips3 from "../assets/backgrounds/tips3.svg"
+import tips4 from "../assets/backgrounds/tips4.svg"
 
 const _TapAnywhere = styled.div.attrs({
   className: "ttu w-100 tc white sans font-4 pa4",
@@ -30,9 +34,18 @@ const _BackArrow = styled.img.attrs({
   height: 60px;
 `
 
+const backgrounds = [tips0, tips1, tips2, tips3, tips4]
+
 const _TipScreen = styled.div.attrs({
-  className: "bg-light-blue w-100 vh-100 mono white tc ph3",
-})``
+  className: "w-100 vh-100 mono white tc ph3",
+})`
+  background: ${({ bgIndex, maxIndex }) => {
+    if (bgIndex === maxIndex) return `url(${backgrounds[4]}), var(--light-blue)`
+    return `url(${backgrounds[bgIndex]}), var(--light-blue)`
+  }};
+  background-size: cover;
+  background-repeat: none;
+`
 
 const _Container = styled.p.attrs({
   className: "pb4 w-75",
@@ -43,8 +56,12 @@ const _ButtonBanner = styled.div`
   height: 60px;
 `
 const _Main = styled.div.attrs({
-  className: "",
-})``
+  className: "h-100",
+})`
+  padding-top: ${({ tipIndex }) => {
+    return tipIndex === 1 ? "100px" : "0px"
+  }};
+`
 
 const FirstSlide = ({ name, topic }) => (
   <div>
@@ -102,7 +119,7 @@ class ReadTips extends Component {
     const Content = getTipSections(tips.topic)[tips.index - 1]
     return (
       <div>
-        <_TipScreen backgroundIndex={tips.index}>
+        <_TipScreen bgIndex={tips.index} maxIndex={tips.topicMaxIndex}>
           <_ButtonBanner className="relative">
             {tips.index !== 0 ? (
               <_BackArrow
@@ -123,7 +140,10 @@ class ReadTips extends Component {
               ""
             )}
           </_ButtonBanner>
-          <_Main onClick={() => this.onAnywhereClick(tips.index)}>
+          <_Main
+            onClick={() => this.onAnywhereClick(tips.index)}
+            tipIndex={tips.index}
+          >
             <Fragment>
               {tips.index === 0 ? (
                 <FirstSlide name={profile.name} topic={tips.topic} />
