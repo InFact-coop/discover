@@ -27,7 +27,7 @@ class CodeInput extends Component {
       ...this.state,
       formState: {
         ...this.state.formState,
-        [e.target.name]: e.target.value,
+        [e.target.name]: e.target.value.trim(),
       },
     })
   }

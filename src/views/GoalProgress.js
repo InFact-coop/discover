@@ -13,7 +13,10 @@ import NavBar from "../components/NavBar"
 import { SetGoal, NewGoalConfirmation } from "."
 import { archiveGoal, clearCurrentGoal } from "../state/actions/pastGoals"
 
-import getCurrentGoalProgress from "../utils/currentGoalProgress"
+import {
+  getCurrentGoalProgress,
+  getPastGoalProgress,
+} from "../utils/goalProgress"
 import daysToGo from "../utils/goalDaysToGo"
 import pastGoalDaysCompleted from "../utils/pastGoalDaysCompleted"
 
@@ -67,7 +70,11 @@ class GoalProgress extends Component {
           {pastGoals.map((goal, key) => (
             <Goal
               key={key}
-              width={100}
+              width={getPastGoalProgress(
+                goal.startDate,
+                goal.actualFinishDate,
+                goal.scheduledFinishDate
+              )}
               color={fillColours[key % 3]}
               goal={goal.description}
               progressText={pastGoalDaysCompleted(

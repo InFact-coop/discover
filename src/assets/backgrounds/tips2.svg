@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="375px" height="651px" viewBox="0 0 375 651" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.4 (67378) - http://www.bohemiancoding.com/sketch -->
+    <title>Time management_3</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M12.0286017,46.9238072 C18.2523309,33.9871902 36.5610027,20.6139447 48.2224375,11.4180296 C66.5317642,-3.02024639 101.366341,-2.73239645 127.537117,6.51860793 C142.081328,11.6597834 157.352462,22.9647238 166.732491,32.2405718 C193.095112,58.3103929 190.124309,93.6841004 183.235228,128.667685 C173.609939,177.546066 88.859025,203.864603 48.2224375,179.566814 C28.7589206,167.929016 4.08377039,135.425669 0.152153407,94.3737471 C-0.851179638,83.8974597 3.10763646,68.0808131 12.0286017,46.9238072 Z" id="path-1"></path>
+    </defs>
+    <g id="Time-management_3" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect fill="#FAFAFA" x="0" y="0" width="375" height="651"></rect>
+        <rect id="Rectangle-6" fill="#118AB2" fill-rule="nonzero" opacity="0.5" x="0" y="0" width="375" height="651"></rect>
+        <g id="Group-2" transform="translate(188.000000, 454.500000) scale(-1, 1) translate(-188.000000, -454.500000) translate(94.000000, 360.000000)">
+            <g>
+                <g>
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="Mask" fill="#EFEFEF" xlink:href="#path-1"></use>
+                    <g mask="url(#mask-2)">
+                        <g transform="translate(93.500000, 131.000000) scale(-1, 1) translate(-93.500000, -131.000000) translate(2.000000, 24.000000)">
+                            <path d="M153.5,161.5 L153.5,213.5 L170.5,213.5 L170.5,161.5 L153.5,161.5 Z" id="Rectangle-2" stroke="#979797" fill="#D8D8D8" fill-rule="nonzero"></path>
+                            <circle id="Oval-2" stroke="#979797" fill="#D8D8D8" fill-rule="nonzero" cx="161.5" cy="146.5" r="21.5"></circle>
+                            <path d="M56,115.5 C33.0801829,115.5 14.5,134.080183 14.5,157 L14.5,188 C14.5,193.79899 19.2010101,198.5 25,198.5 L151,198.5 C156.79899,198.5 161.5,193.79899 161.5,188 L161.5,157 C161.5,134.080183 142.919817,115.5 120,115.5 L56,115.5 Z" id="Rectangle" stroke="#979797" fill="#D8D8D8" fill-rule="nonzero"></path>
+                            <path d="M12.5,161.5 L12.5,213.5 L29.5,213.5 L29.5,161.5 L12.5,161.5 Z" id="Rectangle-2" stroke="#979797" fill="#D8D8D8" fill-rule="nonzero"></path>
+                            <g id="Group-3" stroke="none" fill="none" fill-rule="evenodd" transform="translate(129.000000, 18.500000) scale(-1, 1) rotate(-315.000000) translate(-129.000000, -18.500000) translate(109.000000, 13.000000)">
+                                <path d="M8.9170688,4.53708498 L34.0642933,0.167810957 C37.2328305,0.167810957 39.8014374,2.56661814 39.8014374,5.52569676 C39.8014374,8.424036 37.337197,10.7848685 34.2586344,10.8805664 L8.91820275,6.50775979 C8.37396171,6.41384423 8.00890078,5.89651609 8.10281634,5.35227505 C8.17468854,4.93577533 8.50065208,4.60943645 8.9170688,4.53708498 Z" id="Combined-Shape" stroke="#979797" fill="#D8D8D8" fill-rule="nonzero"></path>
+                                <ellipse id="Oval-2" stroke="#979797" fill="#D8D8D8" fill-rule="nonzero" cx="3.22714357" cy="5.52531974" rx="3.22714357" ry="3.01381077"></ellipse>
+                            </g>
+                            <path d="M43.0007723,59.6969697 C43.0002577,59.6103292 43,59.5236287 43,59.4368687 C43,35.4473485 62.699471,16 87,16 C111.300529,16 131,35.4473485 131,59.4368687 C131,59.5236287 130.999742,59.6103292 130.999228,59.6969697 L131,119 L43,119 L43,59.6969697 L43.0007723,59.6969697 Z" id="Combined-Shape" stroke="#979797" fill="#D8D8D8" fill-rule="nonzero"></path>
+                            <g id="Group-3" stroke="none" fill="none" fill-rule="evenodd" transform="translate(49.000000, 18.500000) rotate(-315.000000) translate(-49.000000, -18.500000) translate(29.000000, 13.000000)">
+                                <path d="M8.9170688,4.53708498 L34.0642933,0.167810957 C37.2328305,0.167810957 39.8014374,2.56661814 39.8014374,5.52569676 C39.8014374,8.424036 37.337197,10.7848685 34.2586344,10.8805664 L8.91820275,6.50775979 C8.37396171,6.41384423 8.00890078,5.89651609 8.10281634,5.35227505 C8.17468854,4.93577533 8.50065208,4.60943645 8.9170688,4.53708498 Z" id="Combined-Shape" stroke="#979797" fill="#D8D8D8" fill-rule="nonzero"></path>
+                                <ellipse id="Oval-2" stroke="#979797" fill="#D8D8D8" fill-rule="nonzero" cx="3.22714357" cy="5.52531974" rx="3.22714357" ry="3.01381077"></ellipse>
+                            </g>
+                            <path d="M112.487501,95.5 L80.5124987,95.5 C80.7910728,101.060316 85.6913493,105.5 91.7096774,105.5 L101.290323,105.5 C107.308651,105.5 112.208927,101.060316 112.487501,95.5000055 Z" id="Combined-Shape" stroke="#979797" fill="#D8D8D8" fill-rule="nonzero"></path>
+                            <circle id="Oval" stroke="#979797" fill="#D8D8D8" fill-rule="nonzero" cx="94" cy="62" r="18"></circle>
+                            <circle id="Oval" stroke="#979797" fill="#D8D8D8" fill-rule="nonzero" cx="95" cy="61" r="9"></circle>
+                            <circle id="Oval-2" stroke="#979797" fill="#D8D8D8" fill-rule="nonzero" cx="21.5" cy="146.5" r="21.5"></circle>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
