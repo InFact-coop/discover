@@ -89,7 +89,12 @@ class Technique extends Component {
             and which technique will you choose to achieve your goal?
           </_Question>
           <_Hint>&#40;you can choose more than one!&#41;</_Hint>
-          <Carousel>
+          <Carousel
+            initialIndex={
+              selectedTechniques.length !== 0 &&
+              techniques.map(t => t.title).indexOf(selectedTechniques[0])
+            }
+          >
             {techniques.map(
               ({ title, description, image, backgroundColor, selected }) => {
                 const onClick =

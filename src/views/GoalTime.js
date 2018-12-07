@@ -104,6 +104,7 @@ class GoalTime extends Component {
     const { times, hours, minutes } = this.state
     const {
       changeView,
+      timeOfDay,
       router: { history },
     } = this.props
     const edit = history[history.length - 1] === "EditGoal"
@@ -129,7 +130,12 @@ class GoalTime extends Component {
             Okay, And when do you think you are most likely to work on your
             goal?
           </_Description>
-          <Carousel>
+          <Carousel
+            initialIndex={
+              timeOfDay.description &&
+              times.map(t => t.title).indexOf(timeOfDay.description)
+            }
+          >
             {times.map(({ title, image, backgroundColor, selected }) => (
               <Card
                 key={title}
