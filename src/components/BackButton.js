@@ -12,6 +12,7 @@ const _Button = styled.div.attrs({
   top: 1.5rem;
   left: 1rem;
   background: url(${arrowBack}) no-repeat center center;
+  z-index: 2;
 `
 
 class BackButton extends Component {
@@ -19,6 +20,7 @@ class BackButton extends Component {
     const { backToPreviousView } = this.props
     backToPreviousView()
   }
+
   render() {
     return <_Button onClick={this.onClick} />
   }
@@ -27,8 +29,6 @@ class BackButton extends Component {
 BackButton.propTypes = {
   changeView: PropTypes.func.isRequired,
   backToPreviousView: PropTypes.func.isRequired,
-  to: PropTypes.string.isRequired,
-  action: PropTypes.string.isRequired,
 }
 
 export default connect(
