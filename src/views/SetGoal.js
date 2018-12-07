@@ -32,22 +32,22 @@ const _Question = styled.p.attrs({
 class SetGoal extends Component {
   state = {
     goal: "",
-    error: {
-      goal: false,
-    },
+    valid: true,
   }
 
   componentDidMount() {
     const { description } = this.props
     this.setState({ goal: description })
   }
+
   onInputChange = e => {
     const { value } = e.target
-    this.setState({ goal: value })
+    this.setState({ goal: value, valid: !!value })
   }
+
   onBlur = () => {
     const { goal } = this.state
-    this.setState({ error: { goal: goal.length === 0 } })
+    this.setState({ valid: !!goal })
   }
 
   saveFunction = () => {
@@ -55,13 +55,19 @@ class SetGoal extends Component {
     const { goal } = this.state
     changeGoal(goal)
   }
+
+  setInvalid = () => {
+    this.setState({ valid: false })
+  }
+
   render() {
     const {
       name,
       router: { history },
     } = this.props
-    const { goal, error } = this.state
+    const { goal, valid } = this.state
     const edit = history[history.length - 1] === "EditGoal"
+
     return (
       <_Container>
         <GlobalStyle />
@@ -71,28 +77,22 @@ class SetGoal extends Component {
         <_Question>What should I set as your DISCOVER goal?</_Question>
         <Input
           as="textarea"
-          className="w-90 ba ph3 pv2 font-3 br4 h5"
+          className="ba ph3 pv2 font-3 br4 h5"
+          width="w-90"
           placeholder="My goal is..."
           value={goal}
           onBlur={this.onBlur}
           onChange={this.onInputChange}
-          inValid={error.goal}
+          valid={valid}
+          validateMsg="You'll have to set your goal before we continue"
         />
-        {edit ? (
-          <SaveButton
-            disabled={!goal}
-            saveFunction={this.saveFunction}
-            redirectTo={EditGoal}
-            text="SAVE"
-          />
-        ) : (
-          <SaveButton
-            disabled={!goal}
-            saveFunction={this.saveFunction}
-            redirectTo={Technique}
-            text="YUP, NEXT"
-          />
-        )}
+        <SaveButton
+          valid={!!goal}
+          setInvalid={this.setInvalid}
+          saveFunction={this.saveFunction}
+          redirectTo={edit ? EditGoal : Technique}
+          text={edit ? "SAVE" : "YUP, NEXT"}
+        />
       </_Container>
     )
   }
@@ -103,6 +103,7 @@ SetGoal.propTypes = {
   description: PropTypes.string,
   changeGoal: PropTypes.func.isRequired,
 }
+
 export default connect(
   ({ router, profile: { name }, currentGoal: { description } }) => ({
     name,
