@@ -11,8 +11,9 @@ import avatar1 from "../assets/icons/avatar_round.svg"
 import ProgressBar from "../components/ProgressBar"
 import SaveButton from "../components/SaveButton"
 import BackButton from "../components/BackButton"
-import { _Title, _ValidateMsg } from "../components/Text"
+import { _Title } from "../components/Text"
 import OutlineContainer from "../components/shared/OutlineContainer"
+import ValidationMsg from "../components/ValidationMsg"
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -36,26 +37,6 @@ const _Avatar = styled.img.attrs({
   height: 40vw;
   width: 40vw;
 `
-
-const Wrapper = styled.div`
-  position: absolute;
-  left: 50%;
-  width: 100%;
-  bottom: -8px;
-`
-
-const InnerWrapper = styled.div`
-  position: relative;
-  left: -50%;
-`
-
-const Validation = ({ children }) => (
-  <Wrapper>
-    <InnerWrapper>
-      <_ValidateMsg>{children}</_ValidateMsg>
-    </InnerWrapper>
-  </Wrapper>
-)
 
 class Avatar extends Component {
   state = {
@@ -107,11 +88,9 @@ class Avatar extends Component {
         <BackButton />
         <div className="relative">
           <_Title className="mt5 w-60">Please choose your avatar</_Title>
-          {valid ? (
-            <div />
-          ) : (
-            <Validation>Pick an avatar to continue!</Validation>
-          )}
+          <ValidationMsg valid={valid}>
+            Pick an avatar to continue!
+          </ValidationMsg>
         </div>
         <_AvatarsContainer>
           {avatars.map(({ src, name, selected }) => (
