@@ -15,6 +15,8 @@ import { ReadTips } from "."
 
 import exit from "../assets/icons/refresh_bot.svg"
 import background from "../assets/backgrounds/bg_bot.svg"
+import botIcon from "../assets/icons/bot.svg"
+import userIcon from "../assets/icons/user.svg"
 
 const User = "User"
 const Bot = "Bot"
@@ -43,6 +45,26 @@ const _Message = styled.div.attrs({
   max-width: 210px;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
 `
+
+const _Avatar = styled.img.attrs({
+  className: ({ display }) => `br-100 ${display}`,
+})``
+
+const _MessageAvatarWrapper = styled.div.attrs({
+  className: ({ user }) => (user ? "flex justify-end h2" : "flex"),
+})`
+  min-height: fit-content;
+`
+
+const _MessageWithAvatar = ({ messageClass, user, children, userAvatar }) => (
+  <_MessageAvatarWrapper user={user}>
+    <_Avatar src={botIcon} display={user ? "dn" : "mr1"} />
+    <_Message className={messageClass} user={user}>
+      {children}
+    </_Message>
+    <_Avatar src={userIcon} display={user ? "ml1" : "dn"} />
+  </_MessageAvatarWrapper>
+)
 
 const _MessageContainer = styled.div.attrs({
   className: "flex flex-column message-container pb3 mh3",
@@ -96,14 +118,14 @@ const ExampleGoal = () => (
   </_exampleGoalDiv>
 )
 
-const RenderConversation = ({ conversation, onLinkClick }) =>
+const RenderConversation = ({ conversation, onLinkClick, userAvatar }) =>
   conversation.map(({ content, type }, i) => {
     if (content === "#your-goal-example") {
       return <ExampleGoal />
     } else if (content.includes("#here-privacy-link")) {
       const [before, after] = content.split("#here-privacy-link")
       return (
-        <_Message className="bg-white dark-gray">
+        <_MessageWithAvatar messageClass="bg-white dark-gray">
           <span>{before}</span>
           <a
             className="underline"
@@ -112,21 +134,20 @@ const RenderConversation = ({ conversation, onLinkClick }) =>
             here
           </a>
           <span>{after}</span>
-        </_Message>
+        </_MessageWithAvatar>
       )
     }
     return (
-      <_Message
-        className={
-          type === User
-            ? "self-end bg-blue white user-style"
-            : "bg-white dark-gray"
+      <_MessageWithAvatar
+        messageClass={
+          type === User ? "bg-blue white user-style" : "bg-white dark-gray"
         }
         user={type === User}
         key={`${content}-${i}`}
+        userAvatar={userAvatar}
       >
         {content}
-      </_Message>
+      </_MessageWithAvatar>
     )
   })
 
@@ -201,7 +222,7 @@ class Home extends Component {
 
   onInternalLinkClick = to => {
     const { changeView, selectTopic, setPageIndex } = this.props
-    const isTip = r.includes(to, Tips)
+    const isTip = Tips.includes(to)
     if (isTip) {
       selectTopic(to)
       setPageIndex(0)
@@ -304,7 +325,7 @@ class Home extends Component {
 
   render() {
     const { postback, conversation } = this.state
-    const { changeView, welcome } = this.props
+    const { changeView, welcome, profile } = this.props
     return (
       <div className="vh-100">
         <GlobalStyle />
@@ -323,6 +344,7 @@ class Home extends Component {
             <RenderConversation
               conversation={conversation}
               onLinkClick={this.onInternalLinkClick}
+              userAvatar={profile.avatar}
             />
           </_MessageContainer>
 
