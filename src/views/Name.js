@@ -12,7 +12,7 @@ import botIcon from "../assets/icons/bot.svg"
 import ProgressBar from "../components/ProgressBar"
 import SaveButton from "../components/SaveButton"
 import { _Title } from "../components/Text"
-import Input from "../components/Input"
+import { InputWithValidation } from "../components/Input"
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -82,7 +82,7 @@ class Name extends Component {
             <br /> First things first!
           </_Title>
           <_Question>what's your name my friend?</_Question>
-          <Input
+          <InputWithValidation
             className="ma4 pa2"
             width="w-80"
             value={name}

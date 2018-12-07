@@ -11,7 +11,7 @@ import ProgressBar from "../components/ProgressBar"
 import BackButton from "../components/BackButton"
 import SaveButton from "../components/SaveButton"
 import { _Title } from "../components/Text"
-import Input from "../components/Input"
+import { InputWithValidation } from "../components/Input"
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -75,7 +75,7 @@ class SetGoal extends Component {
         <BackButton action="back" to={Avatar} />
         <_Title>It's goal time, {name}!</_Title>
         <_Question>What should I set as your DISCOVER goal?</_Question>
-        <Input
+        <InputWithValidation
           as="textarea"
           className="ba ph3 pv2 font-3 br4 h5"
           width="w-90"

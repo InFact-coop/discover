@@ -17,7 +17,13 @@ const StyledInput = styled.input.attrs({
   outline: none;
 `
 
-const Input = ({ children, valid, validateMsg, width, ...inputProps }) => (
+const InputWithValidation = ({
+  children,
+  valid,
+  validateMsg,
+  width,
+  ...inputProps
+}) => (
   <div className={`ma2 center ${width}`}>
     <StyledInput {...inputProps} valid={valid}>
       {children}
@@ -26,4 +32,4 @@ const Input = ({ children, valid, validateMsg, width, ...inputProps }) => (
   </div>
 )
 
-export default Input
+export { StyledInput, InputWithValidation }
