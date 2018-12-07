@@ -9,7 +9,7 @@ import { selectTopic, setPageIndex } from "../state/actions/tips"
 
 import NavBar from "../components/NavBar"
 
-import { Tips, NewFlow, InternalLink } from "../Constants"
+import { Tips, NewFlow, InternalLink, ExternalLink } from "../Constants"
 
 import { ReadTips } from "."
 
@@ -160,13 +160,15 @@ const RenderOptions = ({
   richContent,
 }) => {
   if (richContent) {
-    return payload.map(({ content, type, query, to }) => {
+    return payload.map(({ content, type, query, to, url }) => {
       const onClick = () => {
         switch (type) {
           case NewFlow:
             return onOptionClick({ content, query, addContext, type })
           case InternalLink:
             return onInternalLinkClick(to)
+          case ExternalLink:
+            return window.location.href = url
           default:
             return console.log("No onClick set") //eslint-disable-line
         }
@@ -208,7 +210,6 @@ class Home extends Component {
 
   addMetaDataToMsgs = content => {
     const { profile } = this.props
-
     return r.pipe(
       r.replace(/\$name/g, profile.name),
       r.replace(/\$crisis-icon/g, "life ring")
