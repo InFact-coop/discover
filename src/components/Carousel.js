@@ -17,7 +17,6 @@ class Carousel extends Component {
   render() {
     const { Flickity } = this.state
     const { children, initialIndex } = this.props
-    console.log("INITIAL INDEX:", initialIndex)
     return (
       <_FlickityContainer>
         {Flickity && (
