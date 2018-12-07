@@ -73,6 +73,7 @@ class Technique extends Component {
   }
   render() {
     const { techniques, selectedTechniques } = this.state
+    console.log("SELECTED! ", selectedTechniques)
     const {
       changeView,
       router: { history },
@@ -91,7 +92,7 @@ class Technique extends Component {
           <_Hint>&#40;you can choose more than one!&#41;</_Hint>
           <Carousel
             initialIndex={
-              selectedTechniques &&
+              selectedTechniques.length !== 0 &&
               techniques.map(t => t.title).indexOf(selectedTechniques[0])
             }
           >

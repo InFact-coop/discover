@@ -131,9 +131,10 @@ class GoalTime extends Component {
             goal?
           </_Description>
           <Carousel
-            initialIndex={times
-              .map(t => t.title)
-              .indexOf(timeOfDay.description)}
+            initialIndex={
+              timeOfDay.description &&
+              times.map(t => t.title).indexOf(timeOfDay.description)
+            }
           >
             {times.map(({ title, image, backgroundColor, selected }) => (
               <Card

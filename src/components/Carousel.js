@@ -17,6 +17,7 @@ class Carousel extends Component {
   render() {
     const { Flickity } = this.state
     const { children, initialIndex } = this.props
+    console.log("INITIAL INDEX:", initialIndex)
     return (
       <_FlickityContainer>
         {Flickity && (
@@ -24,7 +25,7 @@ class Carousel extends Component {
             options={{
               prevNextButtons: false,
               wrapAround: true,
-              initialIndex: initialIndex || 0 
+              initialIndex: initialIndex || 0,
             }}
             className={"outline-0 w-100 overflow-hidden"}
             disableImagesLoaded={true}
