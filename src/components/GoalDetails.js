@@ -58,6 +58,15 @@ class GoalDetails extends Component {
         </u>
       )
 
+      if (techniques.length === 1) {
+        return (
+          <p key={r.indexOf(technique, techniques)}>
+            <_LinkToTips />
+            &nbsp;
+          </p>
+        )
+      }
+
       if (techniques.length > 2 && r.indexOf(technique, techniques) > 0) {
         return (
           <p key={r.indexOf(technique, techniques)}>
@@ -65,7 +74,9 @@ class GoalDetails extends Component {
             ,&nbsp;
           </p>
         )
-      } else if (r.indexOf(technique, techniques) === techniques.length - 1) {
+      }
+
+      if (r.indexOf(technique, techniques) === techniques.length - 1) {
         return (
           <p key={r.indexOf(technique, techniques)}>
             and&nbsp;
@@ -73,6 +84,7 @@ class GoalDetails extends Component {
           </p>
         )
       }
+
       return (
         <p key={r.indexOf(technique, techniques)}>
           <_LinkToTips />
