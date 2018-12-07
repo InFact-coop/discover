@@ -6,7 +6,7 @@ const Wrapper = styled.div`
   position: absolute;
   left: 50%;
   width: 100%;
-  bottom: -8px;
+  bottom: ${({ bottom }) => bottom};
 `
 
 const InnerWrapper = styled.div`
@@ -14,10 +14,10 @@ const InnerWrapper = styled.div`
   left: -50%;
 `
 
-const ValidateMsg = ({ valid, children }) => {
+const ValidationMsg = ({ valid, children, bottom }) => {
   if (valid) return <div />
   return (
-    <Wrapper>
+    <Wrapper bottom={bottom}>
       <InnerWrapper>
         <_ValidateMsg>{children}</_ValidateMsg>
       </InnerWrapper>
@@ -25,4 +25,4 @@ const ValidateMsg = ({ valid, children }) => {
   )
 }
 
-export default ValidateMsg
+export default ValidationMsg
