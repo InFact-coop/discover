@@ -38,6 +38,7 @@ class Name extends Component {
   state = {
     name: "",
     valid: true,
+    submitted: false,
   }
 
   componentDidMount() {
@@ -48,15 +49,15 @@ class Name extends Component {
 
   onInputChange = e => {
     const { value } = e.target
-    this.setState({
+    this.setState(prevState => ({
       name: value,
-      valid: !!value,
-    })
+      valid: prevState.submitted ? !!value : true,
+    }))
   }
 
   onBlur = () => {
-    const { name } = this.state
-    this.setState({ valid: !!name })
+    const { name, submitted } = this.state
+    this.setState({ valid: submitted ? !!name : true })
   }
 
   saveFunction = () => {
@@ -66,7 +67,7 @@ class Name extends Component {
   }
 
   setInvalid = () => {
-    this.setState({ valid: false })
+    this.setState({ valid: false, submitted: true })
   }
 
   render() {
