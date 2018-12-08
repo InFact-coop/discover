@@ -42,6 +42,7 @@ class Technique extends Component {
     techniques: [],
     selectedTechniques: [],
     valid: true,
+    submitted: false,
   }
 
   componentDidMount() {
@@ -56,7 +57,7 @@ class Technique extends Component {
   }
 
   onCardClick = title => () => {
-    const { techniques } = this.state
+    const { techniques, submitted } = this.state
     const updatedTechniques = techniques.map(technique => {
       const { selected } = technique
       if (technique.title === title) {
@@ -72,7 +73,7 @@ class Technique extends Component {
     this.setState({
       techniques: updatedTechniques,
       selectedTechniques,
-      valid: !r.isEmpty(selectedTechniques),
+      valid: submitted ? !r.isEmpty(selectedTechniques) : true,
     })
   }
 
@@ -83,7 +84,7 @@ class Technique extends Component {
   }
 
   setInvalid = () => {
-    this.setState({ valid: false })
+    this.setState({ valid: false, submitted: true })
   }
 
   render() {
