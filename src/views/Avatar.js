@@ -13,6 +13,7 @@ import SaveButton from "../components/SaveButton"
 import BackButton from "../components/BackButton"
 import { _Title } from "../components/Text"
 import OutlineContainer from "../components/shared/OutlineContainer"
+import ValidationMsg from "../components/ValidationMsg"
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -46,9 +47,9 @@ class Avatar extends Component {
       { name: "avatar4", src: avatar1, selected: false },
     ],
     selectedAvatar: "",
+    valid: true,
   }
 
-  // to add border on selected avatar
   componentDidMount() {
     const { avatar } = this.props
     const { avatars } = this.state
@@ -64,6 +65,7 @@ class Avatar extends Component {
     this.setState({
       avatars: avatars.map(a => ({ ...a, selected: a.name === name })),
       selectedAvatar: name,
+      valid: true,
     })
   }
 
@@ -72,14 +74,24 @@ class Avatar extends Component {
     const { selectedAvatar } = this.state
     changeAvatar(selectedAvatar)
   }
+
+  setInvalid = () => {
+    this.setState({ valid: false })
+  }
+
   render() {
-    const { avatars, selectedAvatar } = this.state
+    const { avatars, selectedAvatar, valid } = this.state
     return (
       <_Container>
         <GlobalStyle />
         <ProgressBar progress={2} />
         <BackButton />
-        <_Title className="mt5 w-60">Please choose your avatar</_Title>
+        <div className="relative">
+          <_Title className="mt5 w-60">Please choose your avatar</_Title>
+          <ValidationMsg valid={valid} bottom="-20px">
+            Pick an avatar to continue!
+          </ValidationMsg>
+        </div>
         <_AvatarsContainer>
           {avatars.map(({ src, name, selected }) => (
             <OutlineContainer
@@ -94,7 +106,8 @@ class Avatar extends Component {
           ))}
         </_AvatarsContainer>
         <SaveButton
-          disabled={!selectedAvatar}
+          valid={!!selectedAvatar}
+          setInvalid={this.setInvalid}
           saveFunction={this.saveFunction}
           redirectTo={SetGoal}
           text="THAT'S MY AVATAR!"

@@ -18,7 +18,7 @@ import tips3 from "../assets/backgrounds/tips3.svg"
 import tips4 from "../assets/backgrounds/tips4.svg"
 
 const _TapAnywhere = styled.div.attrs({
-  className: "ttu w-100 tc white sans font-4 pa4",
+  className: "ttu w-100 tc white sans font-5 pa4",
 })`
   position: relative;
   bottom: 20vh;
@@ -48,7 +48,7 @@ const _TipScreen = styled.div.attrs({
 `
 
 const _Container = styled.p.attrs({
-  className: "pb4 w-75",
+  className: "pb4 w-75 font-4",
 })`
   margin: 0 auto;
 `
@@ -58,9 +58,7 @@ const _ButtonBanner = styled.div`
 const _Main = styled.div.attrs({
   className: "h-100",
 })`
-  padding-top: ${({ tipIndex }) => {
-    return tipIndex === 1 ? "100px" : "0px"
-  }};
+  padding-top: ${({ tipIndex }) => (tipIndex === 1 ? "100px" : "0px")};
 `
 
 const FirstSlide = ({ name, topic }) => (
@@ -68,7 +66,7 @@ const FirstSlide = ({ name, topic }) => (
     <div className="flex align-items justify-center pt2 pb4">
       <img src={robot} alt="friendly robot" />
     </div>
-    <h1>Hey {name}!</h1>
+    <h1 className="mono font-1 mt2 mb3">Hey {name}!</h1>
     <_Container>
       Did I hear you say you need a refersher about{" "}
       <span className="b">{topic}</span>?

@@ -2,6 +2,7 @@ import { Component, Fragment } from "react"
 import { connect } from "react-redux"
 import styled, { createGlobalStyle } from "styled-components"
 import PropTypes from "prop-types"
+import * as r from "ramda" //eslint-disable-line
 
 import { GoalTime, EditGoal } from "."
 import {
@@ -20,6 +21,7 @@ import SaveButton from "../components/SaveButton"
 import BackButton from "../components/BackButton"
 import { _Title } from "../components/Text"
 import OutlineContainer from "../components/shared/OutlineContainer"
+import ValidationMsg from "../components/ValidationMsg"
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -82,11 +84,21 @@ const _SkipButton = styled.div.attrs({
 
 class GoalDays extends Component {
   state = {
-    days: {},
+    days: {
+      Monday: { selected: false },
+      Tuesday: { selected: false },
+      Wednesday: { selected: false },
+      Thursday: { selected: false },
+      Friday: { selected: false },
+      Saturday: { selected: false },
+      Sunday: { selected: false },
+    },
     durations: {},
     everyDaySelected: false,
     startDate: "",
-    endDate: "",
+    scheduledFinishDate: "",
+    valid: true,
+    submitted: false,
   }
 
   // get static data from redux and change days array to object to make it easier to edit
@@ -122,39 +134,61 @@ class GoalDays extends Component {
   }
 
   onDayClick = day => () => {
-    const { days } = this.state
+    const { days, scheduledFinishDate, submitted } = this.state
     const { selected } = days[day]
 
     days[day].selected = !selected
 
-    this.setState({
+    const noDaysHaveBeenSelected = r.all(r.propEq("selected", false))(
+      r.values(days)
+    )
+
+    this.setState(prevState => ({
       days,
       everyDaySelected:
         Object.keys(days).filter(day => days[day].selected).length === 7,
-    })
+      valid: submitted
+        ? !(!scheduledFinishDate || noDaysHaveBeenSelected)
+        : true,
+    }))
   }
+
   onEveryDayClick = () => {
-    const { days } = this.state
+    const { days, scheduledFinishDate, submitted } = this.state
     Object.keys(days).forEach(day => {
       days[day].selected = true
     })
-    this.setState({ days, everyDaySelected: true })
+    this.setState(prevState => ({
+      days,
+      everyDaySelected: true,
+      valid: submitted ? !!scheduledFinishDate : true,
+    }))
   }
 
   selectDuration = month => () => {
-    const { startDate, durations } = this.state
+    const { startDate, durations, submitted, days } = this.state
+
     const numOfMonth = month[0]
     // start date is only set one time
     const _startDate = startDate || new Date()
     const scheduledFinishDate = new Date()
+
+    const noDaysHaveBeenSelected = r.all(r.propEq("selected", false))(
+      r.values(days)
+    )
+
     scheduledFinishDate.setDate(scheduledFinishDate.getDate() + numOfMonth * 30)
     Object.keys(durations).forEach(d => {
       durations[d].selected = d === month
     })
+
     this.setState({
       startDate: _startDate,
       scheduledFinishDate,
       durations,
+      valid: submitted
+        ? !(!scheduledFinishDate || noDaysHaveBeenSelected)
+        : true,
     })
   }
 
@@ -176,18 +210,25 @@ class GoalDays extends Component {
     setDuration(selectedDuration)
   }
 
+  setInvalid = () => this.setState({ valid: false, submitted: true })
+
   render() {
     const {
       days,
       durations,
       everyDaySelected,
       scheduledFinishDate,
+      valid,
     } = this.state
     const {
       changeView,
       router: { history },
     } = this.props
     const edit = history[history.length - 1] === "EditGoal"
+    const noDaysHaveBeenSelected = r.all(r.propEq("selected", false))(
+      r.values(days)
+    )
+
     return (
       <_Container>
         <GlobalStyle />
@@ -205,11 +246,17 @@ class GoalDays extends Component {
         )}
         <BackButton />
         <_BotIcon src={botIcon} />
-        <_Title>Perfect!</_Title>
-        <_Description>
-          On <u>which days</u> and for <u>how long</u> will you be working on
-          your goal?
-        </_Description>
+
+        <div className="relative mb4">
+          <_Title className="mv2">Perfect!</_Title>
+          <_Description>
+            On <u>which days</u> and for <u>how long</u> will you be working on
+            your goal?
+          </_Description>
+          <ValidationMsg valid={valid} bottom="-22px">
+            Please make a selection or skip
+          </ValidationMsg>
+        </div>
         <_InnerContainer>
           {Object.keys(days).map(day => (
             <Day
@@ -242,21 +289,13 @@ class GoalDays extends Component {
             </OutlineContainer>
           ))}
         </_InnerContainer>
-        {edit ? (
-          <SaveButton
-            disabled={!scheduledFinishDate}
-            saveFunction={this.saveFunction}
-            redirectTo={EditGoal}
-            text="SAVE"
-          />
-        ) : (
-          <SaveButton
-            disabled={!scheduledFinishDate}
-            saveFunction={this.saveFunction}
-            text="NEXT"
-            redirectTo={GoalTime}
-          />
-        )}
+        <SaveButton
+          valid={!(!scheduledFinishDate || noDaysHaveBeenSelected)}
+          saveFunction={this.saveFunction}
+          redirectTo={edit ? EditGoal : GoalTime}
+          text={edit ? "SAVE" : "NEXT"}
+          setInvalid={this.setInvalid}
+        />
       </_Container>
     )
   }

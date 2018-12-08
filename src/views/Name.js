@@ -12,7 +12,7 @@ import botIcon from "../assets/icons/bot.svg"
 import ProgressBar from "../components/ProgressBar"
 import SaveButton from "../components/SaveButton"
 import { _Title } from "../components/Text"
-import Input from "../components/Input"
+import { InputWithValidation } from "../components/Input"
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -37,25 +37,27 @@ const _Question = styled.p.attrs({
 class Name extends Component {
   state = {
     name: "",
-    error: {
-      name: false,
-    },
+    valid: true,
+    submitted: false,
   }
+
   componentDidMount() {
     const { name, clearWelcomeScreen } = this.props
     this.setState({ name })
     clearWelcomeScreen()
   }
+
   onInputChange = e => {
     const { value } = e.target
-    this.setState({
+    this.setState(prevState => ({
       name: value,
-      error: { name: value.length === 0 },
-    })
+      valid: prevState.submitted ? !!value : true,
+    }))
   }
+
   onBlur = () => {
-    const { name } = this.state
-    this.setState({ error: { name: name.length === 0 } })
+    const { name, submitted } = this.state
+    this.setState({ valid: submitted ? !!name : true })
   }
 
   saveFunction = () => {
@@ -63,8 +65,13 @@ class Name extends Component {
     const { name } = this.state
     changeName(name)
   }
+
+  setInvalid = () => {
+    this.setState({ valid: false, submitted: true })
+  }
+
   render() {
-    const { name, error } = this.state
+    const { name, valid } = this.state
     return (
       <Fragment>
         <_Container>
@@ -76,16 +83,19 @@ class Name extends Component {
             <br /> First things first!
           </_Title>
           <_Question>what's your name my friend?</_Question>
-          <Input
-            className="w-80 ma4 pa2 font-2 h2"
+          <InputWithValidation
+            className="ma4 pa2"
+            width="w-80"
             value={name}
             onChange={this.onInputChange}
             onBlur={this.onBlur}
-            inValid={error.name}
+            valid={valid}
+            validateMsg="Surely you have a name!?"
           />
         </_Container>
         <SaveButton
-          disabled={!name}
+          valid={!!name}
+          setInvalid={this.setInvalid}
           text="THAT'S MY NAME!"
           redirectTo={Avatar}
           saveFunction={this.saveFunction}

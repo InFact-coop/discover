@@ -619,7 +619,7 @@ export const ThinkingTraps = [
 ]
 export const ThoughtChallenging = [ThoughtChallenging1, ThoughtChallenging2]
 export const ProblemSolving = [Problems1, Problems2]
-export const SleepTips = [Sleep1, Sleep2]
+export const SleepTips = [Sleep1, Sleep2, Sleep3]
 export const BreathingTechs = [Breathing1, Breathing2]
 export const RelaxationTips = [Relaxation1, Relaxation2]
 export const ThoughtSwitching = [Thoughts1, Thoughts2]

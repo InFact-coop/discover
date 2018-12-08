@@ -5,7 +5,7 @@ import PropTypes from "prop-types"
 import SaveButton from "../components/SaveButton"
 import BackButton from "../components/BackButton"
 import { changeView } from "../state/actions/router"
-import { Home, SetGoal, Technique, GoalDays, GoalTime } from "."
+import { MyGoal, SetGoal, Technique, GoalDays, GoalTime } from "."
 import botIcon from "../assets/icons/bot.svg"
 
 const GlobalStyle = createGlobalStyle`
@@ -53,7 +53,7 @@ class EditGoal extends Component {
       <_Container>
         <GlobalStyle />
         <_BotIcon src={botIcon} />
-        <BackButton />
+        <BackButton redirectTo={MyGoal} />
         <_Title> Hey {name},</_Title>
         <_Question> What part of your goal you would like to edit? </_Question>
         {views.map(({ text, view }) => (
@@ -61,7 +61,7 @@ class EditGoal extends Component {
             {text}
           </_Button>
         ))}
-        <SaveButton text="DONE" redirectTo={Home} />
+        <SaveButton text="DONE" redirectTo={MyGoal} />
       </_Container>
     )
   }

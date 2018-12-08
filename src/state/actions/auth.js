@@ -30,7 +30,8 @@ export const verifyCode = code => async dispatch => {
       r.lensPath(["response", "data", "message"]),
       err
     )
-    if (errorMessage) return dispatch(verifyFailed({ err: errorMessage }))
+    if (errorMessage) dispatch(verifyFailed({ err: errorMessage }))
+    return { err: true }
   }
 }
 

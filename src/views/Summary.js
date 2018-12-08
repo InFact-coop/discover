@@ -20,6 +20,7 @@ class Summary extends Component {
   state = {
     techniques: [],
   }
+
   componentDidMount() {
     const { staticData } = this.props
     this.setState({
@@ -27,17 +28,17 @@ class Summary extends Component {
         .map(t => ({
           ...t,
         }))
-        .filter(t => {
-          return t.title !== "I want to SKIP this bit!"
-        }),
+        .filter(t => t.title !== "I want to SKIP this bit!"),
     })
   }
+
   onCardClick = title => {
     const { changeView, selectTopic, setPageIndex } = this.props
     selectTopic(title)
     setPageIndex(0)
     changeView(ReadTips)
   }
+
   render() {
     const { techniques } = this.state
     return (
@@ -45,20 +46,18 @@ class Summary extends Component {
         <GlobalStyle />
         <IconHeader title="Summary of DISCOVER tips" icon={icon} />
         <Carousel>
-          {techniques.map(({ title, description, image, backgroundColor }) => {
-            return (
-              <Card
-                key={title}
-                width="17rem"
-                height="22rem"
-                title={title}
-                description={description}
-                image={image}
-                backgroundColor={backgroundColor}
-                onCardClick={() => this.onCardClick(title)}
-              />
-            )
-          })}
+          {techniques.map(({ title, description, image, backgroundColor }) => (
+            <Card
+              key={title}
+              width="17rem"
+              height="22rem"
+              title={title}
+              description={description}
+              image={image}
+              backgroundColor={backgroundColor}
+              onCardClick={() => this.onCardClick(title)}
+            />
+          ))}
         </Carousel>
         <NavBar />
       </div>
