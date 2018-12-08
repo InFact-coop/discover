@@ -5,7 +5,6 @@ import { changeView } from "../state/actions/router"
 
 export const Home = "Home"
 export const Code = "Code"
-export const Loading = "Loading"
 export const Technique = "Technique"
 export const Name = "Name"
 export const Avatar = "Avatar"
