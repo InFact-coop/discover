@@ -208,12 +208,17 @@ class Home extends Component {
 
   componentDidMount = () => {
     if (!window.navigator.onLine) return this.setBotOffline()
+    window.removeEventListener("online", this.initBot)
     this.initBot()
   }
 
   componentDidUpdate = () => {
     const elem = document.querySelector(".message-container")
     elem.scrollTop = elem.scrollHeight
+  }
+
+  componentWillUnmount = () => {
+    window.removeEventListener("online", this.initBot)
   }
 
   initBot = async () => {
@@ -251,6 +256,7 @@ class Home extends Component {
 
   onExitClick = async () => {
     if (!window.navigator.onLine) return this.setBotOffline()
+    window.removeEventListener("online", this.initBot)
 
     this.setState({
       conversation: [],
