@@ -204,11 +204,13 @@ class Home extends Component {
   state = {
     conversation: [],
     postback: {},
+    sessionId: "",
   }
 
   componentDidMount = () => {
     if (!window.navigator.onLine) return this.setBotOffline()
     window.removeEventListener("online", this.initBot)
+
     this.initBot()
   }
 
@@ -223,9 +225,14 @@ class Home extends Component {
 
   initBot = async () => {
     const { welcome } = this.props
+    const sessionId = Math.random()
+      .toString(36)
+      .substr(2, 10)
+
     const { data } = await axios.get("/api/user/dialogflow", {
       params: {
         query: welcome.startQuery,
+        sessionId,
       },
     })
 
@@ -240,6 +247,7 @@ class Home extends Component {
         )(data.responses),
       ],
       postback: data.postback,
+      sessionId,
     }))
   }
 
@@ -286,6 +294,8 @@ class Home extends Component {
   }
 
   onOptionClick = async ({ content, addContext, query, type }) => {
+    const { sessionId } = this.state
+
     this.setState(prevState => ({
       conversation: [...prevState.conversation, UserTemplate(content)],
     }))
@@ -305,6 +315,7 @@ class Home extends Component {
     const { data } = await axios.get("/api/user/dialogflow", {
       params: {
         query: richQuery,
+        sessionId,
       },
     })
 
