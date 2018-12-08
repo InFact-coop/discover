@@ -58,9 +58,7 @@ const _ButtonBanner = styled.div`
 const _Main = styled.div.attrs({
   className: "h-100",
 })`
-  padding-top: ${({ tipIndex }) => {
-    return tipIndex === 1 ? "100px" : "0px"
-  }};
+  padding-top: ${({ tipIndex }) => (tipIndex === 1 ? "100px" : "0px")};
 `
 
 const FirstSlide = ({ name, topic }) => (
