@@ -17,7 +17,8 @@ const _Button = styled.div.attrs({
 
 class BackButton extends Component {
   onClick = () => {
-    const { backToPreviousView } = this.props
+    const { backToPreviousView, redirectTo, changeView } = this.props
+    if (redirectTo) return changeView(redirectTo)
     backToPreviousView()
   }
 

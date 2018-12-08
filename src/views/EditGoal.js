@@ -53,7 +53,7 @@ class EditGoal extends Component {
       <_Container>
         <GlobalStyle />
         <_BotIcon src={botIcon} />
-        <BackButton />
+        <BackButton redirectTo={MyGoal} />
         <_Title> Hey {name},</_Title>
         <_Question> What part of your goal you would like to edit? </_Question>
         {views.map(({ text, view }) => (
