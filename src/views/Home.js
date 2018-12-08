@@ -206,6 +206,59 @@ class Home extends Component {
     postback: {},
   }
 
+  componentDidMount = () => {
+    if (!window.navigator.onLine) return this.setBotOffline()
+    this.initBot()
+  }
+
+  componentDidUpdate = () => {
+    const elem = document.querySelector(".message-container")
+    elem.scrollTop = elem.scrollHeight
+  }
+
+  initBot = async () => {
+    const { welcome } = this.props
+    const { data } = await axios.get("/api/user/dialogflow", {
+      params: {
+        query: welcome.startQuery,
+      },
+    })
+
+    this.setState(prevState => ({
+      conversation: [
+        ...prevState.conversation,
+        ...r.map(
+          r.pipe(
+            this.addMetaDataToMsgs,
+            BotTemplate
+          )
+        )(data.responses),
+      ],
+      postback: data.postback,
+    }))
+  }
+
+  setBotOffline = () => {
+    window.addEventListener("online", this.initBot)
+    this.setState({
+      conversation: [
+        "Ooops looks like you're not online",
+        "DISCOVERbot m-a-l-f-u-n-c-t-i-o-n-i-n-g 🙀",
+        "Hehe come back when you're back online! 🤖",
+      ].map(BotTemplate),
+    })
+  }
+
+  onExitClick = async () => {
+    if (!window.navigator.onLine) return this.setBotOffline()
+
+    this.setState({
+      conversation: [],
+      postback: {},
+    })
+    this.initBot()
+  }
+
   addMetaDataToMsgs = content => {
     const { profile } = this.props
 
@@ -213,11 +266,6 @@ class Home extends Component {
       r.replace(/\$name/g, profile.name),
       r.replace(/\$crisis-icon/g, "life ring")
     )(content)
-  }
-
-  scrollToBottom = () => {
-    const elem = document.querySelector(".message-container")
-    elem.scrollTop = elem.scrollHeight
   }
 
   onInternalLinkClick = to => {
@@ -244,90 +292,13 @@ class Home extends Component {
         )(this.state.conversation)
         return `${context} - ${content}`
       }
-      if (type === NewFlow && query) {
-        return query
-      }
+      if (type === NewFlow && query) return query
       return content
     })()
 
     const { data } = await axios.get("/api/user/dialogflow", {
       params: {
         query: richQuery,
-      },
-    })
-
-    this.setState(prevState => ({
-      conversation: [
-        ...prevState.conversation,
-        ...r.map(
-          r.pipe(
-            this.addMetaDataToMsgs,
-            BotTemplate
-          )
-        )(data.responses),
-      ],
-      postback: data.postback,
-    }))
-  }
-
-  onExitClick = async () => {
-    const { welcome } = this.props
-
-    if (!window.navigator.onLine) {
-      return this.setState({
-        conversation: [
-          "Ooops looks like you're not online",
-          "DISCOVERbot m-a-l-f-u-n-c-t-i-o-n-i-n-g 🙀",
-          "Hehe come back when you're back online! 🤖",
-        ].map(BotTemplate),
-      })
-    }
-
-    this.setState({
-      conversation: [],
-      postback: {},
-    })
-
-    const { data } = await axios.get("/api/user/dialogflow", {
-      params: {
-        query: welcome.startQuery,
-      },
-    })
-
-    this.setState(prevState => ({
-      conversation: [
-        ...prevState.conversation,
-        ...r.map(
-          r.pipe(
-            this.addMetaDataToMsgs,
-            BotTemplate
-          )
-        )(data.responses),
-      ],
-      postback: data.postback,
-    }))
-  }
-
-  componentDidUpdate() {
-    this.scrollToBottom()
-  }
-
-  componentDidMount = async () => {
-    const { welcome } = this.props
-
-    if (!window.navigator.onLine) {
-      return this.setState({
-        conversation: [
-          "Ooops looks like you're not online",
-          "DISCOVERbot m-a-l-f-u-n-c-t-i-o-n-i-n-g 🙀",
-          "Hehe come back when you're back online! 🤖",
-        ].map(BotTemplate),
-      })
-    }
-
-    const { data } = await axios.get("/api/user/dialogflow", {
-      params: {
-        query: welcome.startQuery,
       },
     })
 
