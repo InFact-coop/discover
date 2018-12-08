@@ -15,8 +15,8 @@ module.exports = {
         manifest: {
           seed: {
             lang: "en",
-            short_name: "Discover",
-            name: "Discover",
+            short_name: "DISCOVERbot",
+            name: "DISCOVERbot",
             start_url: "/index.html",
             display: "standalone",
             orientation: "portrait",
@@ -91,7 +91,7 @@ module.exports = {
           },
           {
             name: "apple-mobile-web-app-status-bar-style",
-            content: "black-translucent",
+            content: "default",
           },
           {
             name: "apple-mobile-web-app-title",
