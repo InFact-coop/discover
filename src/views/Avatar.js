@@ -88,7 +88,7 @@ class Avatar extends Component {
         <BackButton />
         <div className="relative">
           <_Title className="mt5 w-60">Please choose your avatar</_Title>
-          <ValidationMsg valid={valid}>
+          <ValidationMsg valid={valid} bottom="-20px">
             Pick an avatar to continue!
           </ValidationMsg>
         </div>

@@ -33,6 +33,7 @@ class SetGoal extends Component {
   state = {
     goal: "",
     valid: true,
+    submitted: false,
   }
 
   componentDidMount() {
@@ -42,12 +43,13 @@ class SetGoal extends Component {
 
   onInputChange = e => {
     const { value } = e.target
-    this.setState({ goal: value, valid: !!value })
+    const { submitted } = this.state
+    this.setState({ goal: value, valid: submitted ? !!value : true })
   }
 
   onBlur = () => {
-    const { goal } = this.state
-    this.setState({ valid: !!goal })
+    const { goal, submitted } = this.state
+    this.setState({ valid: submitted ? !!goal : true })
   }
 
   saveFunction = () => {
@@ -57,7 +59,7 @@ class SetGoal extends Component {
   }
 
   setInvalid = () => {
-    this.setState({ valid: false })
+    this.setState({ valid: false, submitted: true })
   }
 
   render() {

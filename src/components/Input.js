@@ -1,13 +1,6 @@
 import styled from "styled-components"
 
-import { _ValidateMsg } from "./Text"
-
-const ValidationMsg = ({ valid, validateMsg }) => {
-  if (!valid) {
-    return <_ValidateMsg>{validateMsg}</_ValidateMsg>
-  }
-  return <div />
-}
+import ValidationMsg from "./ValidationMsg"
 
 const StyledInput = styled.input.attrs({
   className: "sans dark-gray bg-white-30 ba br3 mb1 font-2 w-100 center",
@@ -28,7 +21,7 @@ const InputWithValidation = ({
     <StyledInput {...inputProps} valid={valid}>
       {children}
     </StyledInput>
-    <ValidationMsg valid={valid} validateMsg={validateMsg} />
+    <ValidationMsg valid={valid}>{validateMsg}</ValidationMsg>
   </div>
 )
 
