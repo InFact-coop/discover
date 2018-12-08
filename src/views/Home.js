@@ -46,13 +46,13 @@ const _Message = styled.div.attrs({
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
 `
 
-const _Avatar = styled.img.attrs({
-  className: ({ display }) => `br-100 ${display}`,
-})``
+const _Avatar = styled.img.attrs(({ display }) => ({
+  className: `br-100 ${display}`,
+}))``
 
-const _MessageAvatarWrapper = styled.div.attrs({
-  className: ({ user }) => (user ? "flex justify-end h2" : "flex"),
-})`
+const _MessageAvatarWrapper = styled.div.attrs(({ user }) => ({
+  className: user ? "flex justify-end h2" : "flex",
+}))`
   min-height: fit-content;
 `
 
@@ -272,6 +272,17 @@ class Home extends Component {
 
   onExitClick = async () => {
     const { welcome } = this.props
+
+    if (!window.navigator.onLine) {
+      return this.setState({
+        conversation: [
+          "Ooops looks like you're not online",
+          "DISCOVERbot m-a-l-f-u-n-c-t-i-o-n-i-n-g 🙀",
+          "Hehe come back when you're back online! 🤖",
+        ].map(BotTemplate),
+      })
+    }
+
     this.setState({
       conversation: [],
       postback: {},
@@ -303,6 +314,17 @@ class Home extends Component {
 
   componentDidMount = async () => {
     const { welcome } = this.props
+
+    if (!window.navigator.onLine) {
+      return this.setState({
+        conversation: [
+          "Ooops looks like you're not online",
+          "DISCOVERbot m-a-l-f-u-n-c-t-i-o-n-i-n-g 🙀",
+          "Hehe come back when you're back online! 🤖",
+        ].map(BotTemplate),
+      })
+    }
+
     const { data } = await axios.get("/api/user/dialogflow", {
       params: {
         query: welcome.startQuery,
