@@ -46,13 +46,13 @@ const _Message = styled.div.attrs({
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
 `
 
-const _Avatar = styled.img.attrs({
-  className: ({ display }) => `br-100 ${display}`,
-})``
+const _Avatar = styled.img.attrs(({ display }) => ({
+  className: `br-100 ${display}`,
+}))``
 
-const _MessageAvatarWrapper = styled.div.attrs({
-  className: ({ user }) => (user ? "flex justify-end h2" : "flex"),
-})`
+const _MessageAvatarWrapper = styled.div.attrs(({ user }) => ({
+  className: user ? "flex justify-end h2" : "flex",
+}))`
   min-height: fit-content;
 `
 
@@ -204,6 +204,73 @@ class Home extends Component {
   state = {
     conversation: [],
     postback: {},
+    sessionId: "",
+  }
+
+  componentDidMount = () => {
+    if (!window.navigator.onLine) return this.setBotOffline()
+    window.removeEventListener("online", this.initBot)
+
+    this.initBot()
+  }
+
+  componentDidUpdate = () => {
+    const elem = document.querySelector(".message-container")
+    elem.scrollTop = elem.scrollHeight
+  }
+
+  componentWillUnmount = () => {
+    window.removeEventListener("online", this.initBot)
+  }
+
+  initBot = async () => {
+    const { welcome } = this.props
+    const sessionId = Math.random()
+      .toString(36)
+      .substr(2, 10)
+
+    const { data } = await axios.get("/api/user/dialogflow", {
+      params: {
+        query: welcome.startQuery,
+        sessionId,
+      },
+    })
+
+    this.setState(prevState => ({
+      conversation: [
+        ...prevState.conversation,
+        ...r.map(
+          r.pipe(
+            this.addMetaDataToMsgs,
+            BotTemplate
+          )
+        )(data.responses),
+      ],
+      postback: data.postback,
+      sessionId,
+    }))
+  }
+
+  setBotOffline = () => {
+    window.addEventListener("online", this.initBot)
+    this.setState({
+      conversation: [
+        "Ooops looks like you're not online",
+        "DISCOVERbot m-a-l-f-u-n-c-t-i-o-n-i-n-g 🙀",
+        "Hehe come back when you're back online! 🤖",
+      ].map(BotTemplate),
+    })
+  }
+
+  onExitClick = async () => {
+    if (!window.navigator.onLine) return this.setBotOffline()
+    window.removeEventListener("online", this.initBot)
+
+    this.setState({
+      conversation: [],
+      postback: {},
+    })
+    this.initBot()
   }
 
   addMetaDataToMsgs = content => {
@@ -213,11 +280,6 @@ class Home extends Component {
       r.replace(/\$name/g, profile.name),
       r.replace(/\$crisis-icon/g, "life ring")
     )(content)
-  }
-
-  scrollToBottom = () => {
-    const elem = document.querySelector(".message-container")
-    elem.scrollTop = elem.scrollHeight
   }
 
   onInternalLinkClick = to => {
@@ -232,6 +294,8 @@ class Home extends Component {
   }
 
   onOptionClick = async ({ content, addContext, query, type }) => {
+    const { sessionId } = this.state
+
     this.setState(prevState => ({
       conversation: [...prevState.conversation, UserTemplate(content)],
     }))
@@ -244,68 +308,14 @@ class Home extends Component {
         )(this.state.conversation)
         return `${context} - ${content}`
       }
-      if (type === NewFlow && query) {
-        return query
-      }
+      if (type === NewFlow && query) return query
       return content
     })()
 
     const { data } = await axios.get("/api/user/dialogflow", {
       params: {
         query: richQuery,
-      },
-    })
-
-    this.setState(prevState => ({
-      conversation: [
-        ...prevState.conversation,
-        ...r.map(
-          r.pipe(
-            this.addMetaDataToMsgs,
-            BotTemplate
-          )
-        )(data.responses),
-      ],
-      postback: data.postback,
-    }))
-  }
-
-  onExitClick = async () => {
-    const { welcome } = this.props
-    this.setState({
-      conversation: [],
-      postback: {},
-    })
-
-    const { data } = await axios.get("/api/user/dialogflow", {
-      params: {
-        query: welcome.startQuery,
-      },
-    })
-
-    this.setState(prevState => ({
-      conversation: [
-        ...prevState.conversation,
-        ...r.map(
-          r.pipe(
-            this.addMetaDataToMsgs,
-            BotTemplate
-          )
-        )(data.responses),
-      ],
-      postback: data.postback,
-    }))
-  }
-
-  componentDidUpdate() {
-    this.scrollToBottom()
-  }
-
-  componentDidMount = async () => {
-    const { welcome } = this.props
-    const { data } = await axios.get("/api/user/dialogflow", {
-      params: {
-        query: welcome.startQuery,
+        sessionId,
       },
     })
 

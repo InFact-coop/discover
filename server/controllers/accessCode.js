@@ -9,6 +9,7 @@ exports.generateCode = async (req, res) => {
   const randomCode = Math.random()
     .toString(36)
     .substr(2, 10)
+
   try {
     const docs = await AccessCode.create({ code: randomCode })
     res.render("generate", { code: docs.code })

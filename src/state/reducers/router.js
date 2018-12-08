@@ -1,8 +1,8 @@
 import { CHANGE_VIEW, VERIFY_SUCCEEDED, BACK_TO_PREVIOUS_VIEW } from "../types"
-import { Loading, Home } from "../../views"
+import { Code, Home } from "../../views"
 
 const INITIAL_STATE = {
-  currentView: Loading,
+  currentView: Code,
   history: [],
 }
 
