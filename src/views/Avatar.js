@@ -6,7 +6,10 @@ import PropTypes from "prop-types"
 import { SetGoal } from "."
 import { changeAvatar } from "../state/actions/profile"
 import background from "../assets/backgrounds/bg_avatar.svg"
-import avatar1 from "../assets/icons/avatar_round.svg"
+import blue_avatar from "../assets/icons/blue_avatar.png"
+import red_avatar from "../assets/icons/red_avatar.png"
+import purple_avatar from "../assets/icons/purple_avatar.png"
+import green_avatar from "../assets/icons/green_avatar.png"
 
 import ProgressBar from "../components/ProgressBar"
 import SaveButton from "../components/SaveButton"
@@ -41,10 +44,10 @@ const _Avatar = styled.img.attrs({
 class Avatar extends Component {
   state = {
     avatars: [
-      { name: "avatar1", src: avatar1, selected: false },
-      { name: "avatar2", src: avatar1, selected: false },
-      { name: "avatar3", src: avatar1, selected: false },
-      { name: "avatar4", src: avatar1, selected: false },
+      { name: "purple_avatar", src: purple_avatar, selected: false },
+      { name: "blue_avatar", src: blue_avatar, selected: false },
+      { name: "green_avatar", src: green_avatar, selected: false },
+      { name: "red_avatar", src: red_avatar, selected: false },
     ],
     selectedAvatar: "",
     valid: true,
