@@ -166,6 +166,7 @@ const RenderConversation = ({ conversation, onLinkClick, userAvatar }) =>
     )
   })
 
+
 const RenderOptions = ({
   payload,
   onOptionClick,
@@ -334,18 +335,27 @@ class Home extends Component {
       },
     })
 
-    this.setState(prevState => ({
-      conversation: [
-        ...prevState.conversation,
-        ...r.map(
-          r.pipe(
-            this.addMetaDataToMsgs,
-            BotTemplate
-          )
-        )(data.responses),
-      ],
-      postback: data.postback,
-    }))
+    // this.setState(prevState => ({
+    //   conversation: [
+    //     ...prevState.conversation,
+    //     ...r.map(
+    //       r.pipe(
+    //         this.addMetaDataToMsgs,
+    //         BotTemplate
+    //       )
+    //     )(data.responses),
+    //   ],
+    //   postback: data.postback,
+    // }))
+
+    data.responses.forEach(message =>
+      setTimeout(() => {
+        const newMessage = BotTemplate(this.addMetaDataToMsgs(message))
+        this.setState(prevState => ({
+          conversation: [...prevState.conversation, newMessage],
+        }))
+      }, 1000)
+    )
   }
 
   render() {
