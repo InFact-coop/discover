@@ -13,6 +13,7 @@
     "heroku-postbuild": "yarn run build"
   },
   "dependencies": {
+    "@neutrinojs/copy": "^8.3.0",
     "@neutrinojs/style-loader": "^8.3.0",
     "@redux-offline/redux-offline": "^2.5.0",
     "appcache-webpack-plugin": "^1.4.0",
