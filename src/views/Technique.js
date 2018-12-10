@@ -2,6 +2,7 @@ import { Component, Fragment } from "react"
 import { connect } from "react-redux"
 import styled, { createGlobalStyle } from "styled-components"
 import PropTypes from "prop-types"
+import * as r from "ramda" // eslint-disable-line
 
 import { GoalDays, EditGoal } from "."
 import { changeTechniques } from "../state/actions/currentGoal"
@@ -14,6 +15,7 @@ import SaveButton from "../components/SaveButton"
 import Card from "../components/Card"
 import Carousel from "../components/Carousel"
 import { _Title } from "../components/Text"
+import ValidationMsg from "../components/ValidationMsg"
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -28,18 +30,21 @@ const _Container = styled.div.attrs({
 `
 
 const _Question = styled.p.attrs({
-  className: "mono font-4 w-90 tc mt1 dark-gray",
+  className: "mono font-4 w-90 tc mt1 dark-gray center",
 })``
 
 const _Hint = styled.p.attrs({
-  className: "mono font-4 b mt1 mb3 dark-gray",
+  className: "mono font-4 b mt1 dark-gray center tc",
 })``
 
 class Technique extends Component {
   state = {
     techniques: [],
     selectedTechniques: [],
+    valid: true,
+    submitted: false,
   }
+
   componentDidMount() {
     const { staticData, currentGoal } = this.props
     this.setState({
@@ -50,19 +55,25 @@ class Technique extends Component {
       selectedTechniques: currentGoal.techniques,
     })
   }
+
   onCardClick = title => () => {
-    const { techniques } = this.state
+    const { techniques, submitted } = this.state
+    const updatedTechniques = techniques.map(technique => {
+      const { selected } = technique
+      if (technique.title === title) {
+        technique.selected = !selected
+      }
+      return technique
+    })
+
+    const selectedTechniques = updatedTechniques
+      .filter(({ selected }) => selected)
+      .map(({ title }) => title)
+
     this.setState({
-      techniques: techniques.map(technique => {
-        const { selected } = technique
-        if (technique.title === title) {
-          technique.selected = !selected
-        }
-        return technique
-      }),
-      selectedTechniques: techniques
-        .filter(({ selected }) => selected)
-        .map(({ title }) => title),
+      techniques: updatedTechniques,
+      selectedTechniques,
+      valid: submitted ? !r.isEmpty(selectedTechniques) : true,
     })
   }
 
@@ -71,24 +82,35 @@ class Technique extends Component {
     const { selectedTechniques } = this.state
     changeTechniques(selectedTechniques)
   }
+
+  setInvalid = () => {
+    this.setState({ valid: false, submitted: true })
+  }
+
   render() {
-    const { techniques, selectedTechniques } = this.state
+    const { techniques, selectedTechniques, valid } = this.state
     const {
       changeView,
       router: { history },
     } = this.props
     const edit = history[history.length - 1] === "EditGoal"
+
     return (
       <Fragment>
         <GlobalStyle />
         <_Container>
           {!edit && <ProgressBar progress={4} />}
           <BackButton />
-          <_Title>Great!</_Title>
-          <_Question>
-            and which technique will you choose to achieve your goal?
-          </_Question>
-          <_Hint>&#40;you can choose more than one!&#41;</_Hint>
+          <div className="relative mb4">
+            <_Title className="mb2 mt1">Great!</_Title>
+            <_Question>
+              and which technique will you choose to achieve your goal?
+            </_Question>
+            <_Hint>&#40;you can choose more than one!&#41;</_Hint>
+            <ValidationMsg valid={valid} bottom="-22px">
+              Choose a technique or 'skip'
+            </ValidationMsg>
+          </div>
           <Carousel
             initialIndex={
               selectedTechniques.length !== 0 &&
@@ -118,21 +140,13 @@ class Technique extends Component {
             )}
           </Carousel>
         </_Container>
-        {edit ? (
-          <SaveButton
-            disabled={!selectedTechniques.length}
-            saveFunction={this.saveFunction}
-            redirectTo={EditGoal}
-            text="SAVE"
-          />
-        ) : (
-          <SaveButton
-            disabled={!selectedTechniques.length}
-            saveFunction={this.saveFunction}
-            redirectTo={GoalDays}
-            text="NEXT"
-          />
-        )}
+        <SaveButton
+          valid={!r.isEmpty(selectedTechniques)}
+          saveFunction={this.saveFunction}
+          redirectTo={edit ? EditGoal : GoalDays}
+          text={edit ? "SAVE" : "NEXT"}
+          setInvalid={this.setInvalid}
+        />
       </Fragment>
     )
   }

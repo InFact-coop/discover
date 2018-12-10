@@ -1,24 +1,27 @@
 import { Component, Fragment } from "react"
 import styled from "styled-components"
 import * as r from "ramda" //eslint-disable-line import/no-namespace
-
-import NavBar from "../components/NavBar"
 import { connect } from "react-redux"
+
 import { changeView } from "../state/actions/router"
 import { setPageIndex } from "../state/actions/tips"
+
+import { getTipSections } from "../components/TipSections"
+import { ActionButton } from "../components/shared/ActionButton"
+import NavBar from "../components/NavBar"
+import _BackgroundImg from "../components/BackgroundImg"
+
 import robot from "../assets/icons/robot_round.png"
 import close from "../assets/icons/close.svg"
 import back from "../assets/icons/arrow_back.svg"
-import { getTipSections } from "../components/TipSections"
-import { ActionButton } from "../components/shared/ActionButton"
 import tips0 from "../assets/backgrounds/tips0.svg"
-import tips1 from "../assets/backgrounds/tips1.svg"
+import tips1 from "../assets/backgrounds/tips1.png"
 import tips2 from "../assets/backgrounds/tips2.svg"
-import tips3 from "../assets/backgrounds/tips3.svg"
-import tips4 from "../assets/backgrounds/tips4.svg"
+import tips3 from "../assets/backgrounds/tips3.png"
+import tips4 from "../assets/backgrounds/tips4.png"
 
 const _TapAnywhere = styled.div.attrs({
-  className: "ttu w-100 tc white sans font-4 pa4",
+  className: "ttu w-100 tc white sans font-5 pa4",
 })`
   position: relative;
   bottom: 20vh;
@@ -44,11 +47,13 @@ const _TipScreen = styled.div.attrs({
     return `url(${backgrounds[bgIndex]}), var(--light-blue)`
   }};
   background-size: cover;
-  background-repeat: none;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
 `
 
 const _Container = styled.p.attrs({
-  className: "pb4 w-75",
+  className: "pb4 w-75 font-4",
 })`
   margin: 0 auto;
 `
@@ -58,17 +63,18 @@ const _ButtonBanner = styled.div`
 const _Main = styled.div.attrs({
   className: "h-100",
 })`
-  padding-top: ${({ tipIndex }) => {
-    return tipIndex === 1 ? "100px" : "0px"
-  }};
+  padding-top: ${({ tipIndex }) => (tipIndex === 1 ? "100px" : "0px")};
 `
 
 const FirstSlide = ({ name, topic }) => (
   <div>
-    <div className="flex align-items justify-center pt2 pb4">
-      <img src={robot} alt="friendly robot" />
-    </div>
-    <h1>Hey {name}!</h1>
+    <_BackgroundImg
+      url={robot}
+      width="190px"
+      height="190px"
+      className="center mb4"
+    />
+    <h1 className="mono font-1 mt2 mb3">Hey {name}!</h1>
     <_Container>
       Did I hear you say you need a refersher about{" "}
       <span className="b">{topic}</span>?
@@ -107,6 +113,7 @@ class ReadTips extends Component {
     const { setPageIndex } = this.props
     setPageIndex(prevSlide)
   }
+
   onAnywhereClick = index => {
     const { setPageIndex, tips } = this.props
     if (index < tips.topicMaxIndex) {

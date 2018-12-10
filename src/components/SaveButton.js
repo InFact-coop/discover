@@ -13,18 +13,23 @@ const _Button = styled.button.attrs({
 
 class SaveButton extends Component {
   onClick = () => {
-    const { changeView, redirectTo, saveFunction } = this.props
+    const {
+      changeView,
+      redirectTo,
+      saveFunction,
+      valid,
+      setInvalid,
+    } = this.props
+
+    if (!valid && setInvalid) return setInvalid()
+
     if (saveFunction) saveFunction()
     changeView(redirectTo)
   }
   render() {
-    const { text, disabled } = this.props
+    const { text } = this.props
 
-    return (
-      <_Button disabled={disabled} onClick={this.onClick}>
-        {text}
-      </_Button>
-    )
+    return <_Button onClick={this.onClick}>{text}</_Button>
   }
 }
 

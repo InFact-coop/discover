@@ -115,7 +115,7 @@ const INITIAL_STATE = {
   durations: ["1 month", "2 months", "3 months"],
   times: [
     {
-      title: "Before school ",
+      title: "Before school",
       image: circle,
       backgroundColor: "--light-green",
     },

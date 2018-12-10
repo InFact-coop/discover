@@ -4,7 +4,7 @@ import GoalDetails from "../components/GoalDetails"
 import NavBar from "../components/NavBar"
 import { changeView } from "../state/actions/router"
 import goalIcon from "../assets/icons/my_goal_big.svg"
-import { EditGoal, ReadTips } from "."
+import { EditGoal } from "."
 import {
   ActionButton,
   ActionButtonContainer,

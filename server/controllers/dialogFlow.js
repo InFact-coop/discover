@@ -3,13 +3,11 @@ const r = require("ramda")
 const structToJson = require("../utils/structToJson")
 
 const projectId = "discover-b86c1"
-const sessionId = "session1"
 const languageCode = "en-GB"
 
 const sessionClient = new dialogflow.SessionsClient({
   credentials: JSON.parse(process.env.GCS_KEYFILE),
 })
-const sessionPath = sessionClient.sessionPath(projectId, sessionId)
 
 const getPayload = r.pipe(
   r.view(r.lensPath([0, "queryResult", "fulfillmentMessages", 0, "payload"])),
@@ -17,6 +15,7 @@ const getPayload = r.pipe(
 )
 
 exports.queryDF = (req, res) => {
+  const sessionPath = sessionClient.sessionPath(projectId, req.query.sessionId)
   const request = {
     session: sessionPath,
     queryInput: {

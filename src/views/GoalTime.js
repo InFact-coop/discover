@@ -2,6 +2,7 @@ import { Component, Fragment } from "react"
 import { connect } from "react-redux"
 import styled, { createGlobalStyle } from "styled-components"
 import PropTypes from "prop-types"
+import * as r from "ramda" //eslint-disable-line
 
 import { Recap, EditGoal } from "."
 import { selectTimeOfDay, changeTime } from "../state/actions/currentGoal"
@@ -14,6 +15,7 @@ import BackButton from "../components/BackButton"
 import Card from "../components/Card"
 import Carousel from "../components/Carousel"
 import { _Title } from "../components/Text"
+import ValidationMsg from "../components/ValidationMsg"
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -28,20 +30,24 @@ const _Container = styled.div.attrs({
 `
 
 const _Description = styled.p.attrs({
-  className: "mono font-4 w-90 tc mt1 mb3 dark-gray",
+  className: "mono font-4 w-90 tc mt1 dark-gray center",
 })``
+
 const _Hint = styled.p.attrs({
-  className: "sans font-3 tc mt4 mb2 dark-green",
+  className: "sans font-3 tc mt4 mb2 dark-green center",
 })``
+
 const _TimeContainer = styled.div.attrs({
   className: "flex justify-center items-center",
 })``
+
 const _TimeDiv = styled.div.attrs({
   className: "flex items-center ma1 justify-center br-100 bg-yellow",
 })`
   height: 3.5rem;
   width: 3.5rem;
 `
+
 const _TimeInput = styled.select.attrs({
   className: "w-60 h-50 tc font-3 sans bg-yellow center outline-0 dark-gray",
 })`
@@ -65,6 +71,8 @@ class GoalTime extends Component {
     times: [],
     hours: "",
     minutes: "",
+    valid: true,
+    submitted: false,
   }
 
   componentDidMount() {
@@ -81,9 +89,17 @@ class GoalTime extends Component {
   }
 
   onCardClick = title => () => {
-    const { times } = this.state
+    const { times, submitted } = this.state
+    const updatedTimes = times.map(time => ({
+      ...time,
+      selected: time.title === title,
+    }))
+
+    const timeHasBeenSelected = r.any(r.propEq("selected", true))(updatedTimes)
+
     this.setState({
-      times: times.map(time => ({ ...time, selected: time.title === title })),
+      times: updatedTimes,
+      valid: submitted ? timeHasBeenSelected : true,
     })
   }
 
@@ -93,6 +109,7 @@ class GoalTime extends Component {
       [name]: value,
     })
   }
+
   saveFunction = () => {
     const { selectTimeOfDay, changeTime } = this.props
     const { times, hours, minutes } = this.state
@@ -100,14 +117,19 @@ class GoalTime extends Component {
     selectTimeOfDay(selectedTime)
     changeTime(`${hours}:${minutes}`)
   }
+
+  setInvalid = () => this.setState({ valid: false, submitted: true })
+
   render() {
-    const { times, hours, minutes } = this.state
+    const { times, hours, minutes, valid } = this.state
     const {
       changeView,
       timeOfDay,
       router: { history },
     } = this.props
     const edit = history[history.length - 1] === "EditGoal"
+    const timeHasBeenSelected = r.any(r.propEq("selected", true))(times)
+
     return (
       <Fragment>
         <GlobalStyle />
@@ -125,11 +147,16 @@ class GoalTime extends Component {
         )}
         <BackButton />
         <_Container>
-          <_Title>Awesome!</_Title>
-          <_Description>
-            Okay, And when do you think you are most likely to work on your
-            goal?
-          </_Description>
+          <div className="relative mb4">
+            <_Title className="mv2">Awesome!</_Title>
+            <_Description>
+              Okay, And when do you think you are most likely to work on your
+              goal?
+            </_Description>
+            <ValidationMsg valid={valid} bottom="-22px">
+              Please make a selection or skip
+            </ValidationMsg>
+          </div>
           <Carousel
             initialIndex={
               timeOfDay.description &&
@@ -206,19 +233,13 @@ class GoalTime extends Component {
             </_TimeDiv>
           </_TimeContainer>
         </_Container>
-        {edit ? (
-          <SaveButton
-            saveFunction={this.saveFunction}
-            redirectTo={EditGoal}
-            text="SAVE"
-          />
-        ) : (
-          <SaveButton
-            saveFunction={this.saveFunction}
-            text="NEXT"
-            redirectTo={Recap}
-          />
-        )}
+        <SaveButton
+          saveFunction={this.saveFunction}
+          redirectTo={edit ? EditGoal : Recap}
+          text={edit ? "SAVE" : "NEXT"}
+          valid={timeHasBeenSelected}
+          setInvalid={this.setInvalid}
+        />
       </Fragment>
     )
   }
