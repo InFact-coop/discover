@@ -3,10 +3,11 @@ import { connect } from "react-redux"
 import styled, { createGlobalStyle } from "styled-components"
 import PropTypes from "prop-types"
 
+import { Avatars, getAvatarImg } from "../utils/avatar"
+
 import { SetGoal } from "."
 import { changeAvatar } from "../state/actions/profile"
 import background from "../assets/backgrounds/bg_avatar.svg"
-import avatar1 from "../assets/icons/avatar_round.svg"
 
 import ProgressBar from "../components/ProgressBar"
 import SaveButton from "../components/SaveButton"
@@ -40,12 +41,11 @@ const _Avatar = styled.img.attrs({
 
 class Avatar extends Component {
   state = {
-    avatars: [
-      { name: "avatar1", src: avatar1, selected: false },
-      { name: "avatar2", src: avatar1, selected: false },
-      { name: "avatar3", src: avatar1, selected: false },
-      { name: "avatar4", src: avatar1, selected: false },
-    ],
+    avatars: Avatars.map(avatar => ({
+      name: avatar,
+      src: getAvatarImg(avatar),
+      selected: false,
+    })),
     selectedAvatar: "",
     valid: true,
   }

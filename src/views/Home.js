@@ -4,6 +4,8 @@ import styled, { createGlobalStyle } from "styled-components"
 import axios from "axios"
 import * as r from "ramda" //eslint-disable-line import/no-namespace
 
+import { getAvatarImg } from "../utils/avatar"
+
 import { changeView } from "../state/actions/router"
 import { selectTopic, setPageIndex } from "../state/actions/tips"
 
@@ -16,7 +18,6 @@ import { ReadTips } from "."
 import exit from "../assets/icons/refresh_bot.svg"
 import background from "../assets/backgrounds/bg_bot.svg"
 import botIcon from "../assets/icons/bot.svg"
-import userIcon from "../assets/icons/user.svg"
 
 const User = "User"
 const Bot = "Bot"
@@ -46,23 +47,37 @@ const _Message = styled.div.attrs({
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
 `
 
-const _Avatar = styled.img.attrs(({ display }) => ({
-  className: `br-100 ${display}`,
-}))``
+const _BotAvatar = styled.img.attrs({
+  className: "br-100",
+})``
+
+const _UserAvatar = styled.div.attrs({
+  className: "",
+})`
+  width: 40px;
+  height: 40px;
+  background: ${({ src }) => `url(${src})`};
+  background-size: cover;
+  background-repeat: none;
+  background-position: center;
+`
 
 const _MessageAvatarWrapper = styled.div.attrs(({ user }) => ({
-  className: user ? "flex justify-end h2" : "flex",
+  className: `flex items-center ${user && "justify-end"}`,
 }))`
   min-height: fit-content;
 `
 
 const _MessageWithAvatar = ({ messageClass, user, children, userAvatar }) => (
   <_MessageAvatarWrapper user={user}>
-    <_Avatar src={botIcon} display={user ? "dn" : "mr1"} />
+    <_BotAvatar src={botIcon} className={user ? "dn" : "mr1"} />
     <_Message className={messageClass} user={user}>
       {children}
     </_Message>
-    <_Avatar src={userIcon} display={user ? "ml1" : "dn"} />
+    <_UserAvatar
+      src={getAvatarImg(userAvatar)}
+      className={user ? "ml1" : "dn"}
+    />
   </_MessageAvatarWrapper>
 )
 
