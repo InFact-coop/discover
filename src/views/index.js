@@ -21,6 +21,7 @@ export const MyGoal = "MyGoal"
 export const EditGoal = "EditGoal"
 export const NewGoalConfirmation = "NewGoalConfirmation"
 export const Spinner = "Spinner"
+export const Privacy = "Privacy"
 
 class Router extends Component {
   componentDidMount() {
