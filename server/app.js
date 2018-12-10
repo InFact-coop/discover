@@ -4,6 +4,7 @@ const bodyParser = require("body-parser")
 const cookieParser = require("cookie-parser")
 const path = require("path")
 const morgan = require("morgan")
+const forceSSL = require("express-force-ssl")
 
 const router = require("./routes")
 const { secret } = require("./config/config")
@@ -13,6 +14,7 @@ const app = express()
 app.set("port", process.env.PORT || 4000)
 
 // middleware
+app.use(forceSSL)
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser(secret))
