@@ -22,8 +22,13 @@ module.exports = {
             orientation: "portrait",
             icons: [
               {
-                src: "/bot.svg",
+                src: "/android-icon-192x192.png",
                 sizes: "192x192",
+                type: "image/png",
+              },
+              {
+                src: "/android-icon-512x512.png",
+                sizes: "512x512",
                 type: "image/png",
               },
             ],
@@ -47,6 +52,12 @@ module.exports = {
             },
           },
         ],
+      },
+    ],
+    [
+      "@neutrinojs/copy",
+      {
+        patterns: ["src/assets/phone-icons"],
       },
     ],
     neutrino =>
@@ -78,7 +89,17 @@ module.exports = {
       "@neutrinojs/html-template",
       {
         title: "DISCOVERbot",
-        links: [{ href: "/manifest.json", rel: "manifest" }],
+        links: [
+          {
+            href: "/manifest.json",
+            rel: "manifest",
+          },
+          {
+            href: "/iphone-icon.png",
+            rel: "apple-touch-icon",
+            sizes: "180x180",
+          },
+        ],
         meta: [
           {
             name: "viewport",
