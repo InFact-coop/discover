@@ -1,5 +1,5 @@
 import { Component, Fragment } from "react"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import * as r from "ramda" //eslint-disable-line import/no-namespace
 import { connect } from "react-redux"
 
@@ -8,7 +8,6 @@ import { setPageIndex } from "../state/actions/tips"
 
 import { getTipSections } from "../components/TipSections"
 import { ActionButton } from "../components/shared/ActionButton"
-import NavBar from "../components/NavBar"
 import _BackgroundImg from "../components/BackgroundImg"
 
 import robot from "../assets/icons/robot_round.png"
@@ -24,7 +23,7 @@ const _TapAnywhere = styled.div.attrs({
   className: "ttu w-100 tc white sans font-5 pa4",
 })`
   position: relative;
-  bottom: 20vh;
+  bottom: 12vh;
 `
 
 const _ExitCross = styled.img.attrs({
@@ -60,10 +59,11 @@ const _Container = styled.p.attrs({
 const _ButtonBanner = styled.div`
   height: 60px;
 `
-const _Main = styled.div.attrs({
-  className: "h-100",
-})`
-  padding-top: ${({ tipIndex }) => (tipIndex === 1 ? "100px" : "0px")};
+const _Main = styled.div.attrs({})`
+   ${css`
+     height: calc(100vh - 60px);
+   `}
+  padding-top: ${({ tipIndex }) => (tipIndex === 1 ? "150px" : "0px")};
 `
 
 const FirstSlide = ({ name, topic }) => (
@@ -76,11 +76,11 @@ const FirstSlide = ({ name, topic }) => (
     />
     <h1 className="mono font-1 mt2 mb3">Hey {name}!</h1>
     <_Container>
-      Did I hear you say you need a refersher about{" "}
-      <span className="b">{topic}</span>?
+      Did I hear you say you need a refresher about{" "}
+      <p className="b">{topic}?</p>
     </_Container>
     <_Container>NO PROBLEM!</_Container>
-    <_Container>Here is a quick reminder</_Container>
+    <_Container>Here is a quick reminder.</_Container>
   </div>
 )
 
@@ -159,20 +159,19 @@ class ReadTips extends Component {
               )}
             </Fragment>
           </_Main>
+          {tips.index === tips.topicMaxIndex ? (
+            <ActionButton
+              positionBottom="12vh"
+              onClick={() => this.onExitClick()}
+            >
+              Thanx, got it!
+            </ActionButton>
+          ) : (
+            <_TapAnywhere onClick={() => this.onAnywhereClick(tips.index)}>
+              Tap anywhere to continue
+            </_TapAnywhere>
+          )}
         </_TipScreen>
-        <NavBar />
-        {tips.index === tips.topicMaxIndex ? (
-          <ActionButton
-            positionBottom="20vh"
-            onClick={() => this.onExitClick()}
-          >
-            Thanx, got it!
-          </ActionButton>
-        ) : (
-          <_TapAnywhere onClick={() => this.onAnywhereClick(tips.index)}>
-            Tap anywhere to continue
-          </_TapAnywhere>
-        )}
       </div>
     )
   }

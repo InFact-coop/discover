@@ -52,9 +52,10 @@ const _Container = styled.div.attrs({
   }
 `
 const _Title = styled.h1.attrs({
-  className: "mono font-2 tc w-90",
+  className: "mono font-2 tc w-90 ",
 })`
   margin: 0 auto;
+  margin-bottom: var(--spacing-small);
 `
 const _Link = styled.a.attrs({
   className: "b underline white",
@@ -70,10 +71,29 @@ const _Bold = styled.span.attrs({
 const _Italics = styled.span.attrs({
   className: "i",
 })``
+
 const _Bullets = styled.ul`
   list-style-type: "-";
   li::before {
     content: "– ";
+  }
+`
+
+const _Numbers = styled.ol.attrs({
+  className: "",
+})`
+  list-style-type: decimal;
+
+  li {
+    margin-left: var(--spacing-medium);
+  }
+`
+
+const _TipParagraph = styled.p`
+  margin-bottom: var(--spacing-small);
+
+  &:last-child {
+    margin-bottom: 0;
   }
 `
 
@@ -126,37 +146,37 @@ const TMTwo = () => (
 const TMThree = () => (
   <_Container>
     <_SubTitle>Thinking</_SubTitle>
-    <p>
+    <_TipParagraph>
       Don’t keep thinking about what to do next, or what you haven’t done. This
       will stress you out. Keep focussing your mind on the task you are doing
       right now.
-    </p>
-    <p>
+    </_TipParagraph>
+    <_TipParagraph>
       Don’t be hard on yourself, and don’t begin the day by telling yourself
       off; try being kind to yourself! You’re doing your best.{" "}
-    </p>
-    <p>
+    </_TipParagraph>
+    <_TipParagraph>
       If your mind starts drifting, gently bring it back, and only take planned
       breaks.
-    </p>
+    </_TipParagraph>
   </_Container>
 )
 
 const TMFour = () => (
   <_Container>
     <_SubTitle>Reviewing</_SubTitle>
-    <p>
+    <_TipParagraph>
       At the end of the day, look back and congratulate yourself on what you
       have achieved.
-    </p>
-    <p>
+    </_TipParagraph>
+    <_TipParagraph>
       If there is more stuff to do, start roughly planning for the next day,
       remembering to sort out the most important from the least important tasks.
-    </p>
-    <p>
+    </_TipParagraph>
+    <_TipParagraph>
       Be realistic, and remember we only have limited amounts of energy and
       time!
-    </p>
+    </_TipParagraph>
   </_Container>
 )
 
@@ -262,85 +282,85 @@ const ProcFour = () => (
 const ThinkingTraps1 = () => (
   <_Container>
     <_Title>Thinking traps top tips!</_Title>
-    <p>
+    <_TipParagraph>
       Here is a reminder of the common thinking traps that we all fall into at
       times. It can be helpful to recognise when we are falling into these.
-    </p>
+    </_TipParagraph>
     <_SubTitle>Mindreading</_SubTitle>
-    <p>
+    <_TipParagraph>
       When we assume that we know what another person is thinking. This includes
       assuming that another person is thinking the same as you.{" "}
       <_Italics>
         E.g. Ben gave me a funny look, he must think I’m stupid
       </_Italics>
-    </p>
+    </_TipParagraph>
   </_Container>
 )
 
 const ThinkingTraps2 = () => (
   <_Container>
     <_SubTitle>Fortune teller</_SubTitle>
-    <p>
+    <_TipParagraph>
       When we assume we know what will happen in the future, and assuming that
       the worst will definitely happen.{" "}
       <_Italics>
         E.g. My mum is late home, she must have been in an accident
       </_Italics>
-    </p>
+    </_TipParagraph>
     <_SubTitle>Disaster Thinker</_SubTitle>
-    <p>
+    <_TipParagraph>
       When we assume from one particular situation that the same will happen in
       all similar situations.{" "}
       <_Italics>
         E.g. That girl laughed when I asked her to the cinema; that means that
         no-one will ever go out with me{" "}
       </_Italics>
-    </p>
+    </_TipParagraph>
   </_Container>
 )
 
 const ThinkingTraps3 = () => (
   <_Container>
     <_SubTitle>Self Blamer</_SubTitle>
-    <p>
+    <_TipParagraph>
       Taking too much responsibility for things that go wrong, or could go
       wrong.
       <_Italics>
         E.g. My brother and I argued, and he stormed out the house, and now my
         parents are angry. It’s my fault.
       </_Italics>
-    </p>
+    </_TipParagraph>
     <_SubTitle>Negative Glasses</_SubTitle>
-    <p>
+    <_TipParagraph>
       Only noticing the bad in a situation and not noticing or caring about the
       good.
       <_Italics>
         E.g. Out of my 9 GCSEs I got 4 A*s, 4 As and one D. I’m such a failure.
       </_Italics>
-    </p>
+    </_TipParagraph>
   </_Container>
 )
 
 const ThinkingTraps4 = () => (
   <_Container>
     <_SubTitle>Comparing to others</_SubTitle>
-    <p>
+    <_TipParagraph>
       Comparing yourself to people, and seeing them as better than you.
       <_Italics>
         E.g. Everyone else gets this new subject so easily; I’m so stupid in
         comparison.
       </_Italics>
-    </p>
+    </_TipParagraph>
   </_Container>
 )
 
 const Sleep1 = () => (
   <_Container>
     <_Title>Sleep top tips!</_Title>
-    <p>
+    <_TipParagraph>
       Here are some sleep tips, which are based on the science behind getting to
       sleep (and what keeps us awake!).
-    </p>
+    </_TipParagraph>
     <_SubTitle>Wind Down</_SubTitle>
     <_Bullets>
       <li>Start winding down 1-2 hours before you go to bed</li>
@@ -402,210 +422,210 @@ const Sleep3 = () => (
 const ThoughtChallenging1 = () => (
   <_Container>
     <_Title>Thought challenging top tips!</_Title>
-    <p>
+    <_TipParagraph>
       It can be helpful to challenge our negative thoughts, as they can lead us
       to feel low, anxious, or stressed, but often they are based on wrong
       assumptions. Try asking yourselves the following questions, in order to
       challenge your negative thought(s):
-    </p>
-    <ol>
+    </_TipParagraph>
+    <_Numbers>
       <li>Is this opinion or fact?</li>
       <li>What evidence goes against that thought?</li>
       <li>Are you jumping to conclusions?</li>
       <li>What would you say to a friend in the same situation?</li>
       <li>Is there another way of looking at this?</li>
       <li>Is it really that important?</li>
-    </ol>
+    </_Numbers>
   </_Container>
 )
 
 const ThoughtChallenging2 = () => (
   <_Container>
-    <p>
+    <_TipParagraph>
       <_Bold>
         You may now be able to re-frame your negative thought into a more
         helpful, balanced one.
       </_Bold>
-    </p>
+    </_TipParagraph>
   </_Container>
 )
 
 const Problems1 = () => (
   <_Container>
     <_Title>Problem Solving top tips!</_Title>
-    <p>
+    <_TipParagraph>
       Problem solving can be used when you have you have a practical problem to
       solve. Here’s a reminder of the steps:
-    </p>
-    <ol>
+    </_TipParagraph>
+    <_Numbers>
       <li>Define the exact problem you want to solve.</li>
       <li>Brainstorm all the solutions you can think of.</li>
       <li>
         Think of the pros and cons of each option. Then eliminate the options
         that won’t work!
       </li>
-    </ol>
+    </_Numbers>
   </_Container>
 )
 
 const Problems2 = () => (
   <_Container>
-    <ol>
+    <_Numbers>
       <li>Choose one option.</li>
       <li>Prepare all the steps to do it.</li>
       <li>Do it!</li>
       <li>
         Review. Did it work? If not, work through an alternative solution.
       </li>
-    </ol>
+    </_Numbers>
   </_Container>
 )
 
 const Breathing1 = () => (
   <_Container>
     <_Title>Breathing technique top tips!</_Title>
-    <p>
+    <_TipParagraph>
       When you’re feeling stressed, your body is likely to respond by breathing
       in a more shallow, rapid way. Actively changing your breathing pattern is
       a really good way to calm yourself, and lower your stress levels.
-    </p>
+    </_TipParagraph>
   </_Container>
 )
 
 const Breathing2 = () => (
   <_Container>
-    <p>
+    <_TipParagraph>
       Start by breathing in more slowly and deeply than usual, through your
       nose, for a count of 3, and then breathe out for a count of 3. Continue
       breathing in and out very slowly and deeply for a few minutes. Try to
       imagine that you are breathing in calm and light, and breathing out
       stress; allow the calm to reach your mind. Gently bring your breathing
       back to the normal rate when you are ready.
-    </p>
-    <p>
+    </_TipParagraph>
+    <_TipParagraph>
       If you find it hard to do this on your own, you could try follow a guided
       breathing technique, e.g. on the <_Link href="/">Breathe app.</_Link>
-    </p>
+    </_TipParagraph>
   </_Container>
 )
 
 const Relaxation1 = () => (
   <_Container>
     <_Title>Relaxation top tips!</_Title>
-    <p>
+    <_TipParagraph>
       Aside from the relaxed breathing technique, there are other ways to calm
       ourselves.
-    </p>
-    <p>
+    </_TipParagraph>
+    <_TipParagraph>
       One of these is called <_Bold>progressive muscle relaxation</_Bold>. This
       is helpful as one of the major effects of stress is muscle tension. This
       exercise can help relax your muscles, which in turn relaxes your mind.
       Starting from your toes, you work your way around your body slowing,
       tensing each muscle, and then letting go. This can be a good one to try
       when you’re trying to fall asleep.
-    </p>
+    </_TipParagraph>
   </_Container>
 )
 
 const Relaxation2 = () => (
   <_Container>
-    <p>
+    <_TipParagraph>
       Another way to calm yourself and feel more relaxed is by visualisation.
       Here, you close your eyes and picture yourself in a relaxing situation.
       Use your senses to imagine the sights, smells, and sounds in your
       imagination. Calm your breathing too, and then take the time to re-engage
       back with your day.
-    </p>
+    </_TipParagraph>
   </_Container>
 )
 
 const Thoughts1 = () => (
   <_Container>
     <_Title>Thought Switching top tips!</_Title>
-    <p>
+    <_TipParagraph>
       Thought switching can be helpful to take our mind off worries. Doing a
       mental activity can help switch your attention very effectively. This can
       be especially helpful when you're worrying at night.
-    </p>
-    <p>
+    </_TipParagraph>
+    <_TipParagraph>
       You could try doing a simple mental exercise to switch your thoughts. This
       could be a numerical exercise like counting back in 7s from 100, or trying
       to list animals, games, football teams (or any other category!) through
       each letter of the alphabet (A-Z).
-    </p>
+    </_TipParagraph>
   </_Container>
 )
 
 const Thoughts2 = () => (
   <_Container>
     <_Title>Thought Switching top tips!</_Title>
-    <p>
+    <_TipParagraph>
       You could also try switching activity to distract yourself, e.g. phoning a
       friend for a chat, playing a computer game, watching TV, or going for a
       jog.
-    </p>
-    <p>
+    </_TipParagraph>
+    <_TipParagraph>
       <_Bold>Give it a go!</_Bold>
-    </p>
+    </_TipParagraph>
   </_Container>
 )
 
 const Fears1 = () => (
   <_Container>
     <_Title>Facing my fears top tips!</_Title>
-    <p>
+    <_TipParagraph>
       When we’re scared of something (e.g. dogs, public speaking, or anything
       else!), it’s very common to try and avoid the situation completely.
       However, this means that our fear remains, and we are never are able to
       learn that we may actually be able to cope with it. A really helpful way
       to overcome our fears is to gradually and slowly expose ourselves to them
       over time.
-    </p>
+    </_TipParagraph>
   </_Container>
 )
 
 const Fears2 = () => (
   <_Container>
-    <p>
+    <_TipParagraph>
       To do this, draw a ladder on a piece of paper, with 6 steps on it. Write
       down your feared situation at the top step of the ladder. Then, try and
       break this fear down into smaller, gradual steps in order. Start at the
       bottom and work your way up, facing your feared situations in a gradual
       way. Remember to cross off and reward yourself for each step as you
       achieve it!
-    </p>
+    </_TipParagraph>
   </_Container>
 )
 
 const Mindfullness1 = () => (
   <_Container>
     <_Title>Mindfulness top tips!</_Title>
-    <p>
+    <_TipParagraph>
       Mindfulness is a way to focus on the here-and-now. Our minds our very
       busy, we have 70,000 thoughts a day! Often these thoughts are about what
       might go wrong in the future, or things we've done in the past.
-    </p>
-    <p>
+    </_TipParagraph>
+    <_TipParagraph>
       Mindfulness is the act of concentrating on your breathing, being aware of
       your breath, and being aware of what is going on around you in the present
       moment. Practising mindfulness creates a peaceful mental environment.
-    </p>
-    <p>
+    </_TipParagraph>
+    <_TipParagraph>
       The more you do it, the easier it gets, and the more you will notice the
       benefits!
-    </p>
+    </_TipParagraph>
   </_Container>
 )
 
 const Mindfullness2 = () => (
   <_Container>
-    <p>
+    <_TipParagraph>
       Try it by taking 5-minutes to focus on each breath as it flows in and out
       of your body. Focusing on your breath like this allows you to observe your
       thoughts as they arise in your mind, and to let go of struggling with
       them. You could also try a mindfulness exercise on an app like Headspace
       or Breathe.
-    </p>
+    </_TipParagraph>
   </_Container>
 )
 

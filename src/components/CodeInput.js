@@ -1,9 +1,11 @@
 import { Component } from "react"
+import { connect } from "react-redux"
 import styled from "styled-components"
 import PropTypes from "prop-types"
 import arrowGo from "../assets/icons/arrow_go.svg"
 import { StyledInput } from "./Input"
 import { _ValidateMsg } from "./Text"
+import { verifyCode } from "../state/actions/auth"
 
 const _InputWithButton = styled.div.attrs({
   className: "flex justify-center items-center",
@@ -55,7 +57,7 @@ class CodeInput extends Component {
       formState: { code },
     } = this.state
     const { verifyCode } = this.props
-    const { err } = await verifyCode(code)
+    const err = await verifyCode(code)
     if (err) this.setState({ valid: false })
   }
 
@@ -94,4 +96,7 @@ CodeInput.propTypes = {
   verifyCode: PropTypes.func.isRequired,
 }
 
-export default CodeInput
+export default connect(
+  null,
+  { verifyCode }
+)(CodeInput)
