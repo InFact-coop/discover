@@ -1,6 +1,6 @@
 import { Component } from "react"
 import { connect } from "react-redux"
-import styled, { createGlobalStyle } from "styled-components"
+import styled, { createGlobalStyle, css, keyframes } from "styled-components"
 import axios from "axios"
 import * as r from "ramda" //eslint-disable-line import/no-namespace
 
@@ -38,6 +38,12 @@ const _ChatContainer = styled.div.attrs({
   height: ${({ welcome }) => (welcome ? "100vh" : "calc(100vh - 60px)")};
 `
 
+const ellipsis = keyframes`
+  to {
+    width: 3em;
+  }
+`
+
 const _Message = styled.div.attrs({
   className: "mono font-5 pv2 ph3 mb2",
 })`
@@ -45,6 +51,19 @@ const _Message = styled.div.attrs({
     user ? `21px 21px 6px 21px` : `21px 21px 21px 6px`};
   max-width: 210px;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
+
+  ${props =>
+    props.dotty &&
+    css`
+      &:after {
+        overflow: hidden;
+        display: block;
+        vertical-align: bottom;
+        animation: ${ellipsis} steps(4, end) 1000ms infinite;
+        content: "...";
+        width: 0px;
+      }
+    `};
 `
 
 const _BotAvatar = styled.img.attrs({
@@ -68,10 +87,16 @@ const _MessageAvatarWrapper = styled.div.attrs(({ user }) => ({
   min-height: fit-content;
 `
 
-const _MessageWithAvatar = ({ messageClass, user, children, userAvatar }) => (
+const _MessageWithAvatar = ({
+  messageClass,
+  user,
+  children,
+  userAvatar,
+  dotty,
+}) => (
   <_MessageAvatarWrapper user={user}>
     <_BotAvatar src={botIcon} className={user ? "dn" : "mr1"} />
-    <_Message className={messageClass} user={user}>
+    <_Message dotty={dotty} className={messageClass} user={user}>
       {children}
     </_Message>
     <_UserAvatar
