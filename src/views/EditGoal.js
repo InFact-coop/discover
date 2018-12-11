@@ -6,7 +6,7 @@ import SaveButton from "../components/SaveButton"
 import BackButton from "../components/BackButton"
 import { changeView } from "../state/actions/router"
 import { MyGoal, SetGoal, Technique, GoalDays, GoalTime } from "."
-import botIcon from "../assets/icons/bot.svg"
+import botIcon from "../assets/icons/robot_round.png"
 
 const GlobalStyle = createGlobalStyle`
   body {

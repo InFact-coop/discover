@@ -89,6 +89,8 @@ class Technique extends Component {
 
   render() {
     const { techniques, selectedTechniques, valid } = this.state
+
+    console.log("state", this.state)
     const {
       changeView,
       router: { history },

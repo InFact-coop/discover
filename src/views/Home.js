@@ -17,7 +17,7 @@ import { ReadTips, Privacy } from "."
 
 import exit from "../assets/icons/refresh_bot.svg"
 import background from "../assets/backgrounds/bg_bot.svg"
-import botIcon from "../assets/icons/bot.svg"
+import botIcon from "../assets/icons/robot_round.png"
 
 const User = "User"
 const Bot = "Bot"
@@ -47,11 +47,7 @@ const _Message = styled.div.attrs({
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
 `
 
-const _BotAvatar = styled.img.attrs({
-  className: "br-100",
-})``
-
-const _UserAvatar = styled.div.attrs({
+const _Avatar = styled.div.attrs({
   className: "",
 })`
   width: 40px;
@@ -70,14 +66,11 @@ const _MessageAvatarWrapper = styled.div.attrs(({ user }) => ({
 
 const _MessageWithAvatar = ({ messageClass, user, children, userAvatar }) => (
   <_MessageAvatarWrapper user={user}>
-    <_BotAvatar src={botIcon} className={user ? "dn" : "mr1"} />
+    <_Avatar src={botIcon} className={user ? "dn" : "mr1"} />
     <_Message className={messageClass} user={user}>
       {children}
     </_Message>
-    <_UserAvatar
-      src={getAvatarImg(userAvatar)}
-      className={user ? "ml1" : "dn"}
-    />
+    <_Avatar src={getAvatarImg(userAvatar)} className={user ? "ml1" : "dn"} />
   </_MessageAvatarWrapper>
 )
 

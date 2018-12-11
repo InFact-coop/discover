@@ -7,7 +7,7 @@ import { Avatar } from "."
 import { changeName } from "../state/actions/profile"
 import { clearWelcomeScreen } from "../state/actions/welcome"
 import background from "../assets/backgrounds/bg_what_is_your_name.svg"
-import botIcon from "../assets/icons/bot.svg"
+import botIcon from "../assets/icons/robot_round.png"
 
 import ProgressBar from "../components/ProgressBar"
 import SaveButton from "../components/SaveButton"
