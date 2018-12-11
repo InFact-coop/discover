@@ -1,6 +1,6 @@
 import { Component } from "react"
 import { connect } from "react-redux"
-import styled, { createGlobalStyle } from "styled-components"
+import styled, { createGlobalStyle, css, keyframes } from "styled-components"
 import axios from "axios"
 import * as r from "ramda" //eslint-disable-line import/no-namespace
 
@@ -10,6 +10,7 @@ import { changeView } from "../state/actions/router"
 import { selectTopic, setPageIndex } from "../state/actions/tips"
 
 import NavBar from "../components/NavBar"
+import ExampleGoal from "../components/ExampleGoal"
 
 import { Tips, NewFlow, InternalLink, ExternalLink } from "../Constants"
 
@@ -21,6 +22,22 @@ import botIcon from "../assets/icons/bot.svg"
 
 const User = "User"
 const Bot = "Bot"
+const Typing = "Typing"
+
+const BotTemplate = content => ({
+  content,
+  type: Bot,
+})
+
+const UserTemplate = content => ({
+  content,
+  type: User,
+})
+
+const TypingTemplate = {
+  type: Typing,
+  content: "",
+}
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -38,13 +55,33 @@ const _ChatContainer = styled.div.attrs({
   height: ${({ welcome }) => (welcome ? "100vh" : "calc(100vh - 60px)")};
 `
 
+const ellipsis = keyframes`
+  to {
+    width: 3em;
+  }
+`
+
 const _Message = styled.div.attrs({
   className: "mono font-5 pv2 ph3 mb2",
 })`
   border-radius: ${({ user }) =>
     user ? `21px 21px 6px 21px` : `21px 21px 21px 6px`};
   max-width: 210px;
+  min-width: 65px;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
+
+  ${props =>
+    props.dotty &&
+    css`
+      &:after {
+        overflow: hidden;
+        display: block;
+        vertical-align: bottom;
+        animation: ${ellipsis} steps(4, end) 800ms infinite;
+        content: "...";
+        width: 0px;
+      }
+    `};
 `
 
 const _BotAvatar = styled.img.attrs({
@@ -68,10 +105,16 @@ const _MessageAvatarWrapper = styled.div.attrs(({ user }) => ({
   min-height: fit-content;
 `
 
-const _MessageWithAvatar = ({ messageClass, user, children, userAvatar }) => (
+const _MessageWithAvatar = ({
+  messageClass,
+  user,
+  children,
+  userAvatar,
+  dotty,
+}) => (
   <_MessageAvatarWrapper user={user}>
     <_BotAvatar src={botIcon} className={user ? "dn" : "mr1"} />
-    <_Message className={messageClass} user={user}>
+    <_Message dotty={dotty} className={messageClass} user={user}>
       {children}
     </_Message>
     <_UserAvatar
@@ -105,34 +148,6 @@ const _OptionContainer = styled.div.attrs({
   flex-shrink: 0;
 `
 
-const _monoText = styled.p.attrs({ className: "mono db" })``
-const _sansText = styled.p.attrs({ className: "sans fw5 font-4 db pb2" })`
-  font-size: 16px;
-`
-const _exampleGoalDiv = styled.div.attrs({
-  className: "tc font-5 db pt3 pb2 ph3 mb2 bg-white dark-gray",
-})`
-  border-radius: 21px 21px 21px 6px;
-  max-width: 265px;
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
-`
-const ExampleGoal = () => (
-  <_exampleGoalDiv>
-    <_monoText>Your goal is</_monoText>
-    <_sansText>
-      Stop procrasting and work on my time management skills
-    </_sansText>
-    <_monoText>by using</_monoText>
-    <_sansText className="underline">Procrastination tips</_sansText>
-    <_monoText>and you will do it</_monoText>
-    <_sansText>Every Tuesday and Friday</_sansText>
-    <_monoText>preferably</_monoText>
-    <_sansText>After school, at 16:30</_sansText>
-    <_monoText>for</_monoText>
-    <_sansText>3 months</_sansText>
-  </_exampleGoalDiv>
-)
-
 const RenderConversation = ({ conversation, onLinkClick, userAvatar }) =>
   conversation.map(({ content, type }, i) => {
     if (content === "#your-goal-example") {
@@ -157,6 +172,7 @@ const RenderConversation = ({ conversation, onLinkClick, userAvatar }) =>
         user={type === User}
         key={`${content}-${i}`}
         userAvatar={userAvatar}
+        dotty={type === Typing}
       >
         {content}
       </_MessageWithAvatar>
@@ -203,16 +219,6 @@ const RenderOptions = ({
     </_Option>
   ))
 }
-
-const BotTemplate = content => ({
-  content,
-  type: Bot,
-})
-
-const UserTemplate = content => ({
-  content,
-  type: User,
-})
 
 class Home extends Component {
   state = {
@@ -312,6 +318,7 @@ class Home extends Component {
 
     this.setState(prevState => ({
       conversation: [...prevState.conversation, UserTemplate(content)],
+      postback: {},
     }))
 
     const richQuery = (() => {
@@ -333,18 +340,32 @@ class Home extends Component {
       },
     })
 
-    this.setState(prevState => ({
-      conversation: [
-        ...prevState.conversation,
-        ...r.map(
-          r.pipe(
-            this.addMetaDataToMsgs,
-            BotTemplate
-          )
-        )(data.responses),
-      ],
-      postback: data.postback,
-    }))
+    const setMessageDelay = messages => {
+      if (r.isEmpty(messages)) return
+
+      this.setState(prevState => ({
+        conversation: [...prevState.conversation, TypingTemplate],
+      }))
+
+      setTimeout(() => {
+        const newMessage = BotTemplate(this.addMetaDataToMsgs(r.head(messages)))
+        if (r.length(messages) === 1) {
+          return this.setState(prevState => ({
+            conversation: [
+              ...r.dropLast(1, prevState.conversation),
+              newMessage,
+            ],
+            postback: data.postback,
+          }))
+        }
+        this.setState(prevState => ({
+          conversation: [...r.dropLast(1, prevState.conversation), newMessage],
+        }))
+        setMessageDelay(r.drop(1, messages))
+      }, Math.floor(Math.random() * 2000) + 500)
+    }
+
+    setMessageDelay(data.responses)
   }
 
   render() {
