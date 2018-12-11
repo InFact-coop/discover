@@ -60,7 +60,7 @@ class Card extends Component {
         >
           <_CardTitle>{title}</_CardTitle>
           <_CardDescription>{description}</_CardDescription>
-          <_CardImage src={image} height={height} />
+          <_CardImage src={image} />
         </_Card>
       </_CardContainer>
     )
