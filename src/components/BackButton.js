@@ -8,7 +8,7 @@ import arrowBack from "../assets/icons/arrow_back.svg"
 const _Button = styled.div.attrs({
   className: "flex justify-center items-center sans h2 w2",
 })`
-  position: fixed;
+  position: absolute;
   top: 1.5rem;
   left: 1rem;
   background: url(${arrowBack}) no-repeat center center;

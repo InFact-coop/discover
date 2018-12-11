@@ -55,8 +55,8 @@ class CodeInput extends Component {
       formState: { code },
     } = this.state
     const { verifyCode } = this.props
-    const { err } = await verifyCode(code)
-    if (err) this.setState({ valid: false })
+    const response = await verifyCode(code)
+    if (response && response.err) this.setState({ valid: false })
   }
 
   setInvalid = () => this.setState({ valid: false })
