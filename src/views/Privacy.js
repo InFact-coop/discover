@@ -1,7 +1,11 @@
 import styled, { createGlobalStyle } from "styled-components"
-import NavBar from "../components/NavBar"
+
 import IconHeader from "../components/shared/IconHeader"
+import BackButton from "../components/BackButton"
+
 import icon from "../assets/icons/privacy_icon.svg"
+
+import { Home } from "."
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -41,6 +45,7 @@ const _List = styled.ul.attrs({
 const Privacy = () => (
   <div>
     <GlobalStyle />
+    <BackButton redirectTo={Home} />
     <IconHeader title="Privacy Policy" icon={icon} />
     <_Container>
       <_SmallSection>
@@ -278,7 +283,6 @@ const Privacy = () => (
         </ul>
       </_SmallSection>
     </_Container>
-    <NavBar />
   </div>
 )
 
