@@ -17,22 +17,28 @@ const GlobalStyle = createGlobalStyle`
 
 const _Container = styled.div.attrs({
   className: "flex flex-column items-center justify-center",
-})``
+})`
+  height: calc(100vh - 4.5rem);
+`
+
 const _BotIcon = styled.img.attrs({
   className: "mb1",
 })`
   width: 10rem;
 `
+
 const _Title = styled.p.attrs({
   className: "mono font-1 tc ma4 dark-gray",
 })`
   font-weight: 500;
 `
+
 const _Description = styled.p.attrs({
   className: "mono w-70 font-4 tc mb3 dark-gray",
 })`
   font-weight: 500;
 `
+
 const _Hint = styled.p.attrs({
   className: "sans b underline font-4 ma3 dark-gray",
 })``
