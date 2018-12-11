@@ -20,9 +20,10 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 const _Container = styled.div.attrs({
-  className: "flex flex-column items-center justify-center",
+  className: "flex flex-column items-center justify-center center",
 })`
-  height: 90vh;
+  height: calc(100vh - 4.5rem);
+  width: 99%;
 `
 
 const _Question = styled.p.attrs({
@@ -75,19 +76,21 @@ class SetGoal extends Component {
         <GlobalStyle />
         {!edit && <ProgressBar progress={3} />}
         <BackButton action="back" to={Avatar} />
-        <_Title>It's goal time, {name}!</_Title>
-        <_Question>What should I set as your DISCOVER goal?</_Question>
-        <InputWithValidation
-          as="textarea"
-          className="ba ph3 pv2 font-3 br4 h5"
-          width="w-90"
-          placeholder="My goal is..."
-          value={goal}
-          onBlur={this.onBlur}
-          onChange={this.onInputChange}
-          valid={valid}
-          validateMsg="You'll have to set your goal before we continue"
-        />
+        <div>
+          <_Title>It's goal time, {name}!</_Title>
+          <_Question>What should I set as your DISCOVER goal?</_Question>
+          <InputWithValidation
+            as="textarea"
+            className="ba ph3 pv2 font-3 br4 h5"
+            width="w-90"
+            placeholder="My goal is..."
+            value={goal}
+            onBlur={this.onBlur}
+            onChange={this.onInputChange}
+            valid={valid}
+            validateMsg="You'll have to set your goal before we continue"
+          />
+        </div>
         <SaveButton
           valid={!!goal}
           setInvalid={this.setInvalid}

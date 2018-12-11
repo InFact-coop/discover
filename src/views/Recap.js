@@ -12,6 +12,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     background: url(${background}) no-repeat;
     background-size: cover;
+    min-height: 100vh;
   }
 `
 const _Container = styled.div.attrs({
@@ -43,7 +44,11 @@ const Recap = ({ changeView }) => (
       <GoalDetails section={"time"} />
       <GoalDetails section={"duration"} />
     </_InnerContainer>
-    <ActionButton onClick={() => changeView(Spinner)} positionBottom="10px">
+    <ActionButton
+      className="mv2"
+      onClick={() => changeView(Spinner)}
+      positionBottom="10px"
+    >
       COOL LET'S GO
     </ActionButton>
   </_Container>
