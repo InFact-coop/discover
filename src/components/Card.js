@@ -10,7 +10,7 @@ const _CardContainer = styled.div.attrs({
 `
 
 const _Card = styled.div.attrs({
-  className: "flex flex-column ma1 items-center justify-center br4",
+  className: "flex flex-column ma1 items-center br4",
 })`
   ${({ width, height, backgroundColor }) =>
     `background-color: var(${backgroundColor});
@@ -30,10 +30,11 @@ const _CardDescription = styled.p.attrs({
   color: var(--dark-gray);
 `
 const _CardImage = styled.img.attrs({
-  className: "ma2",
+  className: "ph4 mb4",
 })`
-  height: 40%;
-  width: 40%;
+  height: 9rem;
+  position: absolute;
+  bottom: 0;
 `
 
 class Card extends Component {

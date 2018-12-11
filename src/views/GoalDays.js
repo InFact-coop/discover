@@ -14,7 +14,7 @@ import {
 import { changeView } from "../state/actions/router"
 
 import background from "../assets/backgrounds/bg_how_many_times.svg"
-import botIcon from "../assets/icons/bot.svg"
+import botIcon from "../assets/icons/robot_round.png"
 
 import ProgressBar from "../components/ProgressBar"
 import SaveButton from "../components/SaveButton"

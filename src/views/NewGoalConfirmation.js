@@ -6,7 +6,7 @@ import BackButton from "../components/BackButton"
 import { backToPreviousView } from "../state/actions/router"
 import { archiveGoal, clearCurrentGoal } from "../state/actions/pastGoals"
 import { Spinner } from "."
-import botIcon from "../assets/icons/bot.svg"
+import botIcon from "../assets/icons/robot_round.png"
 import daysToGo from "../utils/goalDaysToGo"
 
 const GlobalStyle = createGlobalStyle`
