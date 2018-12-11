@@ -3,8 +3,8 @@
 */
 
 /* CSS reset */
-@import "./_reset";
 @import "tachyons-custom/src/_normalize";
+@import "./_reset";
 
 /* imports all tachyons modules
    (postcss looks for them from node_modules)
@@ -68,6 +68,9 @@
 /* fonts */
 @import "./_fonts";
 
+/* flickity */
+@import "./_flickity";
+
 /* your own custom styles */
 @import "./_custom";
 
@@ -76,4 +79,4 @@
 @import "tachyons-custom/src/_debug-grid";
 
 /* Uncomment out the line below to help debug layout issues */
-/* @import "./_debug"; */
+/* @import "tachyons-custom/src/_debug"; */

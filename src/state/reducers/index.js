@@ -1,6 +1,21 @@
 import { combineReducers } from "redux"
-import app from "./app"
+
+import router from "./router"
+import auth from "./auth"
+import staticData from "./staticData"
+import profile from "./profile"
+import currentGoal from "./currentGoal"
+import pastGoals from "./pastGoals"
+import tips from "./tips"
+import welcome from "./welcome"
 
 export default combineReducers({
-  app,
+  router,
+  auth,
+  staticData,
+  profile,
+  currentGoal,
+  pastGoals,
+  tips,
+  welcome,
 })

@@ -1,5 +1,4 @@
 import { render } from "react-dom"
-import { AppContainer } from "react-hot-loader"
 import { Provider } from "react-redux"
 import store from "./state"
 import App from "./App"
@@ -7,32 +6,31 @@ import App from "./App"
 import "./styles/index.css"
 
 const root = document.getElementById("root")
-const load = () =>
+
+//eslint-disable-next-line
+export const load = () =>
   render(
     <Provider store={store}>
-      <AppContainer>
-        <App />
-      </AppContainer>
+      <App />
     </Provider>,
     root
   )
 
-// This is needed for Hot Module Replacement
-if (module.hot) {
-  module.hot.accept("./App", load)
-}
+const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
 
-if ("serviceWorker" in navigator) {
+if (
+  process.env.NODE_ENV === "production" &&
+  "serviceWorker" in navigator &&
+  !iOS
+) {
   window.addEventListener("load", () => {
     navigator.serviceWorker
       .register("/sw.js")
       .then(registration => {
-        console.log("SW registered: ", registration)
+        console.log("SW registered: ", registration) // eslint-disable-line no-console
       })
       .catch(registrationError => {
-        console.log("SW registration failed: ", registrationError)
+        console.log("SW registration failed: ", registrationError) // eslint-disable-line no-console
       })
   })
 }
-
-load()

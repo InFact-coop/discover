@@ -1,23 +1,43 @@
 {
-  "name": "discover",
+  "name": "DISCOVERbot",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "neutrino build",
-    "start": "neutrino start",
-    "server": "nodemon server/app.js"
+    "start": "node server",
+    "build": "neutrino build --options.env.NODE_ENV production",
+    "neutrino-start": "neutrino start",
+    "server": "nodemon server",
+    "lint": "eslint src --quiet",
+    "format": "prettier --list-different  \"src/**/*.{js,jsx}\"",
+    "heroku-postbuild": "yarn run build"
   },
   "dependencies": {
+    "@neutrinojs/copy": "^8.3.0",
     "@neutrinojs/style-loader": "^8.3.0",
+    "@redux-offline/redux-offline": "^2.5.0",
+    "appcache-webpack-plugin": "^1.4.0",
+    "axios": "^0.18.0",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
+    "dialogflow": "^0.7.0",
+    "env2": "^2.2.2",
     "express": "^4.16.4",
+    "express-handlebars": "^3.0.0",
+    "express-sslify": "^1.2.0",
+    "jsonwebtoken": "^8.3.0",
+    "localforage": "^1.7.3",
+    "mongoose": "^5.3.9",
     "prop-types": "^15.6.2",
+    "ramda": "^0.26.1",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
-    "react-hot-loader": "^4.3.11",
+    "react-flickity-component": "^3.1.0",
+    "react-hot-loader": "^4.3.12",
     "react-redux": "^5.1.0",
     "redux": "^4.0.1",
+    "redux-actions": "^2.6.4",
     "redux-thunk": "^2.3.0",
     "styled-components": "^4.0.2",
     "workbox-webpack-plugin": "^3.6.3"
@@ -26,6 +46,7 @@
     "@neutrinojs/react": "^8.3.0",
     "autoprefixer": "^9.3.1",
     "babel-eslint": "^10.0.1",
+    "babel-plugin-styled-components": "^1.9.2",
     "body-parser": "^1.18.3",
     "eslint": "^5.8.0",
     "eslint-config-esnext": "^4.0.0",
@@ -40,6 +61,8 @@
     "postcss-custom-properties": "^8.0.8",
     "postcss-import": "^12.0.1",
     "postcss-loader": "^3.0.0",
-    "tachyons-custom": "^4.9.6"
+    "prettier": "1.14.3",
+    "tachyons-custom": "^4.9.6",
+    "webpack-manifest-plugin": "^2.0.4"
   }
 }

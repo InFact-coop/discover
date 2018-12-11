@@ -1,5 +1,69 @@
 /* Fonts */
 
+@font-face {
+  font-family: "IBMPlexMono";
+  src: url("../assets/fonts/IBMPlexMono-Regular.ttf") format("truetype"); /* Safari, Android, iOS */
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "IBMPlexMono";
+  src: url("../assets/fonts/IBMPlexMono-Medium.ttf") format("truetype"); /* Safari, Android, iOS */
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "IBMPlexMono";
+  src: url("../assets/fonts/IBMPlexMono-Bold.ttf") format("truetype"); /* Safari, Android, iOS */
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "IBMPlexMono";
+  src: url("../assets/fonts/IBMPlexMono-Italic.ttf") format("truetype"); /* Safari, Android, iOS */
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "IBMPlexSans";
+  src: url("../assets/fonts/IBMPlexSans-Regular.ttf") format("truetype"); /* Safari, Android, iOS */
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "IBMPlexSans";
+  src: url("../assets/fonts/IBMPlexSans-Medium.ttf") format("truetype"); /* Safari, Android, iOS */
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "IBMPlexSans";
+  src: url("../assets/fonts/IBMPlexSans-SemiBold.ttf") format("truetype"); /* Safari, Android, iOS */
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "IBMPlexSans";
+  src: url("../assets/fonts/IBMPlexSans-Bold.ttf") format("truetype"); /* Safari, Android, iOS */
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "IBMPlexSans";
+  src: url("../assets/fonts/IBMPlexSans-Italic.ttf") format("truetype"); /* Safari, Android, iOS */
+  font-weight: normal;
+  font-style: italic;
+}
+
+.sans {
+  font-family: IBMPlexSans;
+}
+
+.mono {
+  font-family: IBMPlexMono;
+}
+
 .headline {
   line-height: var(--line-height-headline);
   font-size: var(--font-size-headline);

@@ -1,31 +1,7 @@
-import { Component } from "react"
-import { connect } from "react-redux"
-import styled from "styled-components"
+import { hot } from "react-hot-loader"
 
-const Title = styled.div.attrs({
-  className: "flex justify-center bg-light-purple",
-})``
+import Router from "./views"
 
-class App extends Component {
-  state = {
-    name: "discover",
-  }
+const App = () => <Router />
 
-  render() {
-    return (
-      <Title className="App">
-        <h1 style={{ color: this.props.titleColor }}>
-          Welcome to {this.state.name}
-        </h1>
-      </Title>
-    )
-  }
-}
-
-const mapStateToProps = ({ app }) => {
-  return {
-    titleColor: app.titleColor,
-  }
-}
-
-export default connect(mapStateToProps)(App)
+export default hot(module)(App)
