@@ -306,6 +306,30 @@ class Home extends Component {
     return changeView(to)
   }
 
+  setMessageDelay = data => {
+    if (r.isEmpty(data.responses)) return
+
+    this.setState(prevState => ({
+      conversation: [...prevState.conversation, TypingTemplate],
+    }))
+
+    setTimeout(() => {
+      const newMessage = BotTemplate(
+        this.addMetaDataToMsgs(r.head(data.responses))
+      )
+      if (r.length(data.responses) === 1) {
+        return this.setState(prevState => ({
+          conversation: [...r.dropLast(1, prevState.conversation), newMessage],
+          postback: data.postback,
+        }))
+      }
+      this.setState(prevState => ({
+        conversation: [...r.dropLast(1, prevState.conversation), newMessage],
+      }))
+      this.setMessageDelay({ ...data, responses: r.drop(1, data.responses) })
+    }, Math.floor(Math.random() * 2000) + 500)
+  }
+
   onOptionClick = async ({ content, addContext, query, type }) => {
     const { sessionId } = this.state
 
@@ -333,32 +357,7 @@ class Home extends Component {
       },
     })
 
-    const setMessageDelay = messages => {
-      if (r.isEmpty(messages)) return
-
-      this.setState(prevState => ({
-        conversation: [...prevState.conversation, TypingTemplate],
-      }))
-
-      setTimeout(() => {
-        const newMessage = BotTemplate(this.addMetaDataToMsgs(r.head(messages)))
-        if (r.length(messages) === 1) {
-          return this.setState(prevState => ({
-            conversation: [
-              ...r.dropLast(1, prevState.conversation),
-              newMessage,
-            ],
-            postback: data.postback,
-          }))
-        }
-        this.setState(prevState => ({
-          conversation: [...r.dropLast(1, prevState.conversation), newMessage],
-        }))
-        setMessageDelay(r.drop(1, messages))
-      }, Math.floor(Math.random() * 2000) + 500)
-    }
-
-    setMessageDelay(data.responses)
+    this.setMessageDelay(data)
   }
 
   render() {
