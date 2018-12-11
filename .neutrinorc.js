@@ -120,6 +120,10 @@ module.exports = {
           },
         ],
         mobile: false,
+        googleAnalytics : 
+        {
+          trackingId: "UA-130717881-1"
+        },
       },
     ],
   ],

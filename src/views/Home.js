@@ -255,13 +255,17 @@ class Home extends Component {
 
   setBotOffline = () => {
     window.addEventListener("online", this.initBot)
-    this.setState({
-      conversation: [
+
+    const data = {
+      responses: [
         "Ooops looks like you're not online",
         "DISCOVERbot m-a-l-f-u-n-c-t-i-o-n-i-n-g 🙀",
         "Hehe come back when you're back online! 🤖",
-      ].map(BotTemplate),
-    })
+      ],
+      postback: "",
+    }
+
+    this.setMessageDelay(data)
   }
 
   onExitClick = async () => {
