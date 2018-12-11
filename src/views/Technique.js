@@ -94,7 +94,10 @@ class Technique extends Component {
       changeView,
       router: { history },
     } = this.props
+
     const edit = history[history.length - 1] === "EditGoal"
+
+    const techniquesToMap = edit ? r.dropLast(1, techniques) : techniques
 
     return (
       <Fragment>
@@ -109,16 +112,16 @@ class Technique extends Component {
             </_Question>
             <_Hint>&#40;you can choose more than one!&#41;</_Hint>
             <ValidationMsg valid={valid} bottom="-22px">
-              Choose a technique or 'skip'
+              Choose a technique {edit ? "" :  "or 'skip'"}
             </ValidationMsg>
           </div>
           <Carousel
             initialIndex={
               selectedTechniques.length !== 0 &&
-              techniques.map(t => t.title).indexOf(selectedTechniques[0])
+              techniquesToMap.map(t => t.title).indexOf(selectedTechniques[0])
             }
           >
-            {techniques.map(
+            {techniquesToMap.map(
               ({ title, description, image, backgroundColor, selected }) => {
                 const onClick =
                   title === "I want to SKIP this bit!"
