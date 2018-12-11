@@ -249,19 +249,8 @@ class Home extends Component {
       },
     })
 
-    this.setState(prevState => ({
-      conversation: [
-        ...prevState.conversation,
-        ...r.map(
-          r.pipe(
-            this.addMetaDataToMsgs,
-            BotTemplate
-          )
-        )(data.responses),
-      ],
-      postback: data.postback,
-      sessionId,
-    }))
+    this.setState({ sessionId })
+    this.setMessageDelay(data)
   }
 
   setBotOffline = () => {
