@@ -1,0 +1,39 @@
+.admin_body {
+  background-color: var(--lightest-blue);
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  min-width: 100vw;
+  position: absolute;
+  top: 0;
+}
+
+.admin_form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 var(--spacing-large) 0 var(--spacing-large);
+}
+
+.admin_form_input {
+  padding: var(--spacing-small);
+  margin: var(--spacing-small) var(--spacing-large);
+  width: 100%;
+  color: var(--dark-gray);
+}
+
+.admin_p {
+  margin: var(--spacing-small) var(--spacing-large);
+  text-align: left;
+  width: 100%;
+}
+
+.admin_button {
+  background-color: var(--dark-gray);
+  font-size: var(--font-size-3);
+  width: 60%;
+  padding: var(--spacing-medium);
+  margin: var(--spacing-medium);
+  border-radius: var(--border-radius-pill);
+  color: white;
+}

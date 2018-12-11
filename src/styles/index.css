@@ -74,6 +74,9 @@
 /* your own custom styles */
 @import "./_custom";
 
+/* styles for the admin screens */
+@import "./_admin";
+
 /* Debugging */
 @import "tachyons-custom/src/_debug-children";
 @import "tachyons-custom/src/_debug-grid";
