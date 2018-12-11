@@ -22,6 +22,22 @@ import botIcon from "../assets/icons/bot.svg"
 
 const User = "User"
 const Bot = "Bot"
+const Typing = "Typing"
+
+const BotTemplate = content => ({
+  content,
+  type: Bot,
+})
+
+const UserTemplate = content => ({
+  content,
+  type: User,
+})
+
+const TypingTemplate = {
+  type: Typing,
+  content: "",
+}
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -51,6 +67,7 @@ const _Message = styled.div.attrs({
   border-radius: ${({ user }) =>
     user ? `21px 21px 6px 21px` : `21px 21px 21px 6px`};
   max-width: 210px;
+  min-width: 65px;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
 
   ${props =>
@@ -60,7 +77,7 @@ const _Message = styled.div.attrs({
         overflow: hidden;
         display: block;
         vertical-align: bottom;
-        animation: ${ellipsis} steps(4, end) 1000ms infinite;
+        animation: ${ellipsis} steps(4, end) 800ms infinite;
         content: "...";
         width: 0px;
       }
@@ -155,12 +172,12 @@ const RenderConversation = ({ conversation, onLinkClick, userAvatar }) =>
         user={type === User}
         key={`${content}-${i}`}
         userAvatar={userAvatar}
+        dotty={type === Typing}
       >
         {content}
       </_MessageWithAvatar>
     )
   })
-
 
 const RenderOptions = ({
   payload,
@@ -202,16 +219,6 @@ const RenderOptions = ({
     </_Option>
   ))
 }
-
-const BotTemplate = content => ({
-  content,
-  type: Bot,
-})
-
-const UserTemplate = content => ({
-  content,
-  type: User,
-})
 
 class Home extends Component {
   state = {
@@ -311,6 +318,7 @@ class Home extends Component {
 
     this.setState(prevState => ({
       conversation: [...prevState.conversation, UserTemplate(content)],
+      postback: {},
     }))
 
     const richQuery = (() => {
@@ -332,27 +340,32 @@ class Home extends Component {
       },
     })
 
-    // this.setState(prevState => ({
-    //   conversation: [
-    //     ...prevState.conversation,
-    //     ...r.map(
-    //       r.pipe(
-    //         this.addMetaDataToMsgs,
-    //         BotTemplate
-    //       )
-    //     )(data.responses),
-    //   ],
-    //   postback: data.postback,
-    // }))
+    const setMessageDelay = messages => {
+      if (r.isEmpty(messages)) return
 
-    data.responses.forEach(message =>
+      this.setState(prevState => ({
+        conversation: [...prevState.conversation, TypingTemplate],
+      }))
+
       setTimeout(() => {
-        const newMessage = BotTemplate(this.addMetaDataToMsgs(message))
+        const newMessage = BotTemplate(this.addMetaDataToMsgs(r.head(messages)))
+        if (r.length(messages) === 1) {
+          return this.setState(prevState => ({
+            conversation: [
+              ...r.dropLast(1, prevState.conversation),
+              newMessage,
+            ],
+            postback: data.postback,
+          }))
+        }
         this.setState(prevState => ({
-          conversation: [...prevState.conversation, newMessage],
+          conversation: [...r.dropLast(1, prevState.conversation), newMessage],
         }))
-      }, 1000)
-    )
+        setMessageDelay(r.drop(1, messages))
+      }, Math.floor(Math.random() * 2000) + 500)
+    }
+
+    setMessageDelay(data.responses)
   }
 
   render() {
