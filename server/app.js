@@ -15,7 +15,10 @@ app.set("port", process.env.PORT || 4000)
 
 // middleware
 
-app.use(enforce.HTTPS({ trustProtoHeader: true }))
+if (process.env.NODE_ENV === "production") {
+  app.use(enforce.HTTPS({ trustProtoHeader: true }))
+}
+
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser(secret))
