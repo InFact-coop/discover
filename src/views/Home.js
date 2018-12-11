@@ -13,7 +13,7 @@ import NavBar from "../components/NavBar"
 
 import { Tips, NewFlow, InternalLink, ExternalLink } from "../Constants"
 
-import { ReadTips } from "."
+import { ReadTips, Privacy } from "."
 
 import exit from "../assets/icons/refresh_bot.svg"
 import background from "../assets/backgrounds/bg_bot.svg"
@@ -142,10 +142,7 @@ const RenderConversation = ({ conversation, onLinkClick, userAvatar }) =>
       return (
         <_MessageWithAvatar messageClass="bg-white dark-gray">
           <span>{before}</span>
-          <a
-            className="underline"
-            onClick={() => onLinkClick("Privacy Policy")}
-          >
+          <a className="underline" onClick={() => onLinkClick(Privacy)}>
             here
           </a>
           <span>{after}</span>
