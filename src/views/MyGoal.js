@@ -16,15 +16,13 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 const _Container = styled.div.attrs({
-  className: "flex flex-column mt5 items-center",
-})`
-  height: 90vh;
-`
+  className: "flex flex-column items-center",
+})``
 
 const MyGoal = ({ changeView }) => (
   <_Container>
     <GlobalStyle />
-    <img src={goalIcon} />
+    <img src={goalIcon} className="mv3" />
     <GoalDetails section={"description"} />
     <GoalDetails section={"technique"} />
 
