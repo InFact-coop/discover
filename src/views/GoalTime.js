@@ -25,9 +25,7 @@ const GlobalStyle = createGlobalStyle`
 `
 const _Container = styled.div.attrs({
   className: "flex flex-column items-center justify-center mt3",
-})`
-  height: 90vh;
-`
+})``
 
 const _Description = styled.p.attrs({
   className: "mono font-4 w-90 tc mt1 dark-gray center",

@@ -28,7 +28,6 @@ const _Message = styled.p.attrs({
 const _Form = styled.div.attrs({
   className: "flex flex-column items-center",
 })`
-  height: 90vh;
   margin-top: 5rem;
 `
 
