@@ -32,7 +32,6 @@ const GlobalStyle = createGlobalStyle`
 const _Container = styled.div.attrs({
   className: "flex flex-column items-center center mt5",
 })`
-  height: 90vh;
   width: 95%;
 `
 

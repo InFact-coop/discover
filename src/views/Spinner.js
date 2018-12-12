@@ -15,7 +15,7 @@ const GlobalStyle = createGlobalStyle`
 const _Container = styled.div.attrs({
   className: "flex flex-column justify-center items-center",
 })`
-  height: 90vh;
+  height: 100vh;
 `
 
 const nextView = previousView => {

@@ -14,21 +14,25 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 const _Container = styled.div.attrs({
-  className: "flex flex-column items-center justify-center",
+  className: "flex flex-column items-center justify-center center",
 })`
-  height: 90vh;
+  height: calc(100vh - 4.5rem);
 `
+
 const _BotIcon = styled.img.attrs({
   className: "mb1",
 })`
   width: 10rem;
 `
+
 const _Title = styled.p.attrs({
   className: "mono font-1 tc ma2 fw5 dark-gray",
 })``
+
 const _Question = styled.p.attrs({
   className: "mono w-70 font-4 tc mb3 fw5 dark-gray",
 })``
+
 const _Button = styled.div.attrs({
   className:
     "flex justify-center items-center ba br2 mv1 sans font-4 bg-white blue b--blue",
@@ -52,15 +56,20 @@ class EditGoal extends Component {
     return (
       <_Container>
         <GlobalStyle />
-        <_BotIcon src={botIcon} />
-        <BackButton redirectTo={MyGoal} />
-        <_Title> Hey {name},</_Title>
-        <_Question> What part of your goal you would like to edit? </_Question>
-        {views.map(({ text, view }) => (
-          <_Button key={text} onClick={() => changeView(view)}>
-            {text}
-          </_Button>
-        ))}
+        <div className="flex items-center flex-column">
+          <_BotIcon src={botIcon} />
+          <BackButton redirectTo={MyGoal} />
+          <_Title> Hey {name},</_Title>
+          <_Question>
+            {" "}
+            What part of your goal you would like to edit?{" "}
+          </_Question>
+          {views.map(({ text, view }) => (
+            <_Button key={text} onClick={() => changeView(view)}>
+              {text}
+            </_Button>
+          ))}
+        </div>
         <SaveButton text="DONE" redirectTo={MyGoal} />
       </_Container>
     )

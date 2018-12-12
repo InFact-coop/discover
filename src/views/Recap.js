@@ -12,10 +12,11 @@ const GlobalStyle = createGlobalStyle`
   body {
     background: url(${background}) no-repeat;
     background-size: cover;
+    min-height: 100vh;
   }
 `
 const _Container = styled.div.attrs({
-  className: "flex flex-column items-center justify-center center vh-100",
+  className: "flex flex-column items-center justify-center center",
 })``
 
 const _Title = styled.p.attrs({
@@ -43,7 +44,11 @@ const Recap = ({ changeView }) => (
       <GoalDetails section={"time"} />
       <GoalDetails section={"duration"} />
     </_InnerContainer>
-    <ActionButton onClick={() => changeView(Spinner)} positionBottom="10px">
+    <ActionButton
+      className="mv2"
+      onClick={() => changeView(Spinner)}
+      positionBottom="10px"
+    >
       COOL LET'S GO
     </ActionButton>
   </_Container>
