@@ -26,7 +26,7 @@ const GlobalStyle = createGlobalStyle`
 const _Container = styled.div.attrs({
   className: "flex flex-column items-center justify-center mt3",
 })`
-  height: 90vh;
+  height: calc(100vh - 4.5rem);
 `
 
 const _Description = styled.p.attrs({
@@ -49,12 +49,12 @@ const _TimeDiv = styled.div.attrs({
 `
 
 const _TimeInput = styled.select.attrs({
-  className: "w-60 h-50 tc font-3 sans bg-yellow center outline-0 dark-gray",
+  className: "w-60 h-50 tc sans bg-yellow center outline-0 dark-gray",
 })`
+  font-size: 17.2px;
   border-style: hidden;
   -webkit-appearance: none;
   -moz-appearance: none;
-  text-indent: 1px;
 `
 
 const _SkipButton = styled.div.attrs({

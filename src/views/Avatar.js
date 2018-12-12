@@ -24,9 +24,7 @@ const GlobalStyle = createGlobalStyle`
 `
 const _Container = styled.div.attrs({
   className: "flex flex-column items-center mt5",
-})`
-  height: 90vh;
-`
+})``
 
 const _AvatarsContainer = styled.div.attrs({
   className: "flex items-center justify-center flex-wrap mv2",

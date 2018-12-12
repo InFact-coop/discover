@@ -11,8 +11,8 @@ const _Message = styled.p.attrs({
 const DevelopedByContainer = styled.div.attrs({
   className: "flex flex-column items-center",
 })`
-  position: fixed;
-  bottom: 10vh;
+  position: absolute;
+  bottom: 20px;
 `
 
 const DevelopedBy = () => (

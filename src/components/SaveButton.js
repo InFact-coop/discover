@@ -6,7 +6,7 @@ import { changeView } from "../state/actions/router"
 
 const _Button = styled.button.attrs({
   className:
-    "w-100 sans font-4 br flex items-center justify-center white bg-dark-gray fw6 ttu fixed bottom-0 bn",
+    "w-100 sans font-4 br flex items-center justify-center white bg-dark-gray fw6 ttu absolute bottom-0 bn",
 })`
   height: 4.5rem;
 `

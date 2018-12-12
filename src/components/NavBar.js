@@ -14,7 +14,7 @@ import { Home, MyGoal, GoalProgress, Summary, Help } from "../views"
 import { changeView } from "../state/actions/router"
 
 const _Container = styled.div.attrs({
-  className: "flex w-100 ",
+  className: "flex w-100",
 })`
   position: fixed;
   bottom: 0;
@@ -25,32 +25,30 @@ const _Icon = styled.img.attrs({
   className: "flex items-center justify-center w-20 pa2",
 })``
 
-const NavBar = ({ currentView, changeView }) => {
-  return (
-    <_Container>
-      <_Icon
-        src={currentView === GoalProgress ? listOfGoalsActive : listOfGoals}
-        onClick={() => changeView(GoalProgress)}
-      />
-      <_Icon
-        src={currentView === MyGoal ? myGoalActive : myGoal}
-        onClick={() => changeView(MyGoal)}
-      />
-      <_Icon
-        src={currentView === Home ? botIconActive : botIcon}
-        onClick={() => changeView(Home)}
-      />
-      <_Icon
-        src={currentView === Help ? helpActive : help}
-        onClick={() => changeView(Help)}
-      />
-      <_Icon
-        src={currentView === Summary ? tipsActive : tips}
-        onClick={() => changeView(Summary)}
-      />
-    </_Container>
-  )
-}
+const NavBar = ({ currentView, changeView }) => (
+  <_Container>
+    <_Icon
+      src={currentView === GoalProgress ? listOfGoalsActive : listOfGoals}
+      onClick={() => changeView(GoalProgress)}
+    />
+    <_Icon
+      src={currentView === MyGoal ? myGoalActive : myGoal}
+      onClick={() => changeView(MyGoal)}
+    />
+    <_Icon
+      src={currentView === Home ? botIconActive : botIcon}
+      onClick={() => changeView(Home)}
+    />
+    <_Icon
+      src={currentView === Help ? helpActive : help}
+      onClick={() => changeView(Help)}
+    />
+    <_Icon
+      src={currentView === Summary ? tipsActive : tips}
+      onClick={() => changeView(Summary)}
+    />
+  </_Container>
+)
 
 export default connect(
   ({ router: { currentView } }) => ({ currentView }),
