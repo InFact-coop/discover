@@ -15,7 +15,7 @@ import close from "../assets/icons/close.svg"
 import back from "../assets/icons/arrow_back.svg"
 import tips0 from "../assets/backgrounds/tips0.svg"
 import tips1 from "../assets/backgrounds/tips1.png"
-import tips2 from "../assets/backgrounds/tips2.svg"
+import tips2 from "../assets/backgrounds/tips2.png"
 import tips3 from "../assets/backgrounds/tips3.png"
 import tips4 from "../assets/backgrounds/tips4.png"
 

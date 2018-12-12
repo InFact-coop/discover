@@ -16,6 +16,15 @@ export const load = () =>
     root
   )
 
+document
+  .querySelector("meta[name=viewport]")
+  .setAttribute(
+    "content",
+    `height=${window.innerHeight}, width=${
+      window.innerWidth
+    }, initial-scale=1, maximum-scale=1, user-scalable=no`
+  )
+
 const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
 
 if (

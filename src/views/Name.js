@@ -23,9 +23,7 @@ const GlobalStyle = createGlobalStyle`
 
 const _Container = styled.div.attrs({
   className: "flex flex-column items-center mt3",
-})`
-  height: 90vh;
-`
+})``
 const _BotIcon = styled.img.attrs({
   className: "w-50 mt5 mb1",
 })``

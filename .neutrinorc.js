@@ -5,6 +5,8 @@ module.exports = {
       {
         babel: { plugins: ["babel-plugin-styled-components"] },
         devServer: {
+          host: "0.0.0.0",
+          allowedHosts: [".local"],
           proxy: {
             "/api/*": {
               target: "http://localhost:4000",
@@ -120,6 +122,9 @@ module.exports = {
           },
         ],
         mobile: false,
+        googleAnalytics: {
+          trackingId: "UA-130717881-1",
+        },
       },
     ],
   ],
