@@ -91,6 +91,16 @@ module.exports = {
       "@neutrinojs/html-template",
       {
         title: "DISCOVERbot",
+        headHtmlSnippet: `
+          <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130717881-1"></script>
+          <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-130717881-1');
+          </script>
+        `,
         links: [
           {
             href: "/manifest.json",
@@ -122,9 +132,6 @@ module.exports = {
           },
         ],
         mobile: false,
-        googleAnalytics: {
-          trackingId: "UA-130717881-1",
-        },
       },
     ],
   ],
