@@ -1,8 +1,8 @@
-import { CHANGE_VIEW, VERIFY_SUCCEEDED, BACK_TO_PREVIOUS_VIEW } from "../types"
-import { Code, Home } from "../../views"
+import { CHANGE_VIEW, BACK_TO_PREVIOUS_VIEW } from "../types"
+import { Home } from "../../views"
 
 const INITIAL_STATE = {
-  currentView: Code,
+  currentView: Home,
   history: [],
 }
 
@@ -26,11 +26,6 @@ export default (state = INITIAL_STATE, { payload, type }) => {
         currentView: state.history.pop(),
       }
     }
-    case VERIFY_SUCCEEDED:
-      return {
-        ...state,
-        currentView: Home,
-      }
     default:
       return state
   }
