@@ -5,7 +5,7 @@ const INITIAL_STATE = {
   startQuery: "Initial flow",
 }
 
-export default (state = INITIAL_STATE, { type, payload }) => {
+export default (state = INITIAL_STATE, { type }) => {
   switch (type) {
     case CLEAR_WELCOME_SCREEN:
       return {

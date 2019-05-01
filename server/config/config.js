@@ -1,11 +1,4 @@
-require("env2")("./.env")
-const {
-  NODE_ENV,
-  DEVELOPMENT_DATABASE,
-  PRODUCTION_DATABASE,
-  SECRET,
-  ADMIN_ACCESS_TOKEN,
-} = process.env
+const { NODE_ENV, SECRET, ADMIN_ACCESS_TOKEN } = process.env
 
 const baseVariables = {
   secret: SECRET,
@@ -16,12 +9,10 @@ const config = env => {
   if (env === "production") {
     return {
       ...baseVariables,
-      database: PRODUCTION_DATABASE,
     }
   }
   return {
     ...baseVariables,
-    database: DEVELOPMENT_DATABASE,
   }
 }
 
