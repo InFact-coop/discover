@@ -54,7 +54,7 @@ const Privacy = () => (
         </p>
         <p className="mb1">
           We are committed to protecting and respecting your privacy. The
-          following Privacy Policy applies to DiscoverBOT, which is owned by
+          following Privacy Policy applies to DISCOVERbot, which is owned by
           South London and Maudsley NHS Foundation Trust “SLaM” and sets out how
           your personal data is handled by us. We strongly recommend that you
           take some time to read this policy carefully to understand how we
@@ -155,7 +155,7 @@ const Privacy = () => (
           </_BoldHeading>
         </p>
         <p>
-          Personal data you add to the DiscoverBOT app is not retained by SLaM.
+          Personal data you add to the DISCOVERbot app is not retained by SLaM.
           If you choose to delete the app, the data will also be deleted.
         </p>
       </_SmallSection>
