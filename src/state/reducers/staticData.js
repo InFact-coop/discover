@@ -41,42 +41,42 @@ const INITIAL_STATE = {
     {
       title: PROCRASTINATION_TIPS,
       description:
-        "Tips to overcome delaying or postponing tasks, to help you get started and stay focussed.",
+        "Tips that will stop you putting things off, and help you get started and stay focused.",
       image: procrastination,
       backgroundColor: "--light-purple",
     },
     {
       title: TIME_MANAGEMENT_TIPS,
       description:
-        "Planning how to manage your time can help when you’re feeling overloaded with tasks, and you don’t know where to start.",
+        "Managing your time can help you when you’re feeling overloaded with tasks, and you don’t know where to start.",
       image: time_management,
       backgroundColor: "--light-yellow",
     },
     {
       title: THINKING_TRAPS,
       description:
-        "Noticing when you are falling into thinking traps can be helpful to change your perspectives, to think more objectively, and to feel better.",
+        "Noticing when you are falling into thinking traps can help you to change your perspective, to think more objectively, and to feel better.",
       image: thinking_traps,
       backgroundColor: "--light-red",
     },
     {
       title: THOUGHT_CHALLENGING,
       description:
-        "Challenging your negative thoughts can help you feel better by questioning some of the assumptions your thoughts are based on. It can be helpful to stop and unpick these.",
+        "Challenging your negative thoughts can help you feel better if you can question the assumptions that these thoughts are based on.",
       image: thought_challenging,
       backgroundColor: "--light-green",
     },
     {
       title: PROBLEM_SOLVING,
       description:
-        "These steps can help when you have practical issues to overcome.",
+        "These simple steps can help you tackle practical issues and find solutions.",
       image: problem_solving,
       backgroundColor: "--light-blue",
     },
     {
       title: SLEEP_TIPS,
       description:
-        "Follow these tips to improve your sleep. Getting a better night’s sleep should have a positive impact on your mood and stress levels the next day.",
+        "Getting a better night’s sleep, using these tips, will have a positive impact on your mood and stress levels the next day.",
       image: sleep_tips,
       backgroundColor: "--light-purple",
     },
