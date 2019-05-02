@@ -295,9 +295,9 @@ const ThinkingTraps1 = () => (
     <_Title>Thinking traps top tips!</_Title>
     <_TipParagraph>
       Here is a reminder of the common thinking traps that we all fall into at
-      times. It can be helpful to recognise when we are falling into these.
+      times.
     </_TipParagraph>
-    <_SubTitle>Mindreading</_SubTitle>
+    <_SubTitle>Mind Reading</_SubTitle>
     <_TipParagraph>
       When we assume that we know what another person is thinking. This includes
       assuming that another person is thinking the same as you.{" "}
@@ -312,8 +312,8 @@ const ThinkingTraps2 = () => (
   <_Container>
     <_SubTitle>Fortune teller</_SubTitle>
     <_TipParagraph>
-      When we assume we know what will happen in the future, and assuming that
-      the worst will definitely happen.{" "}
+      When we assume we know what will happen in the future, and that the worst
+      will definitely happen.{" "}
       <_Italics>
         E.g. My mum is late home, she must have been in an accident
       </_Italics>
@@ -324,7 +324,7 @@ const ThinkingTraps2 = () => (
       all similar situations.{" "}
       <_Italics>
         E.g. That girl laughed when I asked her to the cinema; that means that
-        no-one will ever go out with me{" "}
+        no-one will ever go out with me
       </_Italics>
     </_TipParagraph>
   </_Container>
@@ -335,7 +335,7 @@ const ThinkingTraps3 = () => (
     <_SubTitle>Self Blamer</_SubTitle>
     <_TipParagraph>
       Taking too much responsibility for things that go wrong, or could go
-      wrong.
+      wrong.{" "}
       <_Italics>
         E.g. My brother and I argued, and he stormed out the house, and now my
         parents are angry. It’s my fault.
@@ -343,8 +343,8 @@ const ThinkingTraps3 = () => (
     </_TipParagraph>
     <_SubTitle>Negative Glasses</_SubTitle>
     <_TipParagraph>
-      Only noticing the bad in a situation and not noticing or caring about the
-      good.
+      Only noticing the bad in a situation, and not noticing or caring about the
+      good.{" "}
       <_Italics>
         E.g. Out of my 9 GCSEs I got 4 A*s, 4 As and one D. I’m such a failure.
       </_Italics>
@@ -356,7 +356,7 @@ const ThinkingTraps4 = () => (
   <_Container>
     <_SubTitle>Comparing to others</_SubTitle>
     <_TipParagraph>
-      Comparing yourself to people, and seeing them as better than you.
+      Comparing yourself to people, and seeing them as better than you.{" "}
       <_Italics>
         E.g. Everyone else gets this new subject so easily; I’m so stupid in
         comparison.
