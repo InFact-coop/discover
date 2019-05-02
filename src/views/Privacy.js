@@ -84,26 +84,6 @@ const Privacy = () => (
       </_SmallSection>
       <_SmallSection>
         <p>
-          <_BoldHeading>Work well may use this information to:</_BoldHeading>
-        </p>
-        <p>
-          <_Bold>Communicate with you</_Bold>
-        </p>
-        <p className="mb1">
-          We use your information to send you communications about our service
-          or to let you know about any changes to our privacy policy. We also
-          use your information to respond to you if you contact us.
-        </p>
-        <p>
-          <_Bold>Improvement and development</_Bold>
-        </p>
-        <p>
-          From time to time we may conduct surveys to better understand how to
-          improve features.
-        </p>
-      </_SmallSection>
-      <_SmallSection>
-        <p>
           <_BoldHeading>How is your information shared?</_BoldHeading>
         </p>
         <p className="mb1">
@@ -275,11 +255,11 @@ const Privacy = () => (
           feel free to contact us at: discoverworkshops@slam.nhs.uk
         </p>
         <ul className="mb7">
-          <li> Discover Team </li>
+          <li>DISCOVER team</li>
           <li>South London and Maudsley NHS Foundation Trust</li>
           <li>Maudsley Hospital</li>
-          <li> London</li>
-          <li> SE5 8AZ</li>
+          <li>London</li>
+          <li>SE5 8AZ</li>
         </ul>
       </_SmallSection>
     </_Container>
