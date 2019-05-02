@@ -434,10 +434,9 @@ const ThoughtChallenging1 = () => (
   <_Container>
     <_Title>Thought challenging top tips!</_Title>
     <_TipParagraph>
-      It can be helpful to challenge our negative thoughts, as they can lead us
-      to feel low, anxious, or stressed, but often they are based on wrong
-      assumptions. Try asking yourselves the following questions, in order to
-      challenge your negative thought(s):
+      Our negative thoughts can lead us to feel low, anxious, or stressed, but
+      often they are based on wrong assumptions. Try asking yourselves the
+      following questions, in order to challenge your negative thought(s):
     </_TipParagraph>
     <_Numbers>
       <li>Is this opinion or fact?</li>
@@ -454,8 +453,8 @@ const ThoughtChallenging2 = () => (
   <_Container>
     <_TipParagraph>
       <_Bold>
-        You may now be able to re-frame your negative thought into a more
-        helpful, balanced one.
+        These can help to re-frame your negative thought into a more helpful,
+        balanced one.
       </_Bold>
     </_TipParagraph>
   </_Container>
