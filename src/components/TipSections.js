@@ -37,7 +37,7 @@ export const getTipSections = title => {
     case FACING_MY_FEARS:
       return FacingFears
     case MINDFULNESS_EXERCISE:
-      return Mindfullness
+      return Mindfulness
   }
 }
 
@@ -607,34 +607,36 @@ const Fears2 = () => (
   </_Container>
 )
 
-const Mindfullness1 = () => (
+const Mindfulness1 = () => (
   <_Container>
     <_Title>Mindfulness top tips!</_Title>
     <_TipParagraph>
-      Mindfulness is a way to focus on the here-and-now. Our minds our very
-      busy, we have 70,000 thoughts a day! Often these thoughts are about what
-      might go wrong in the future, or things we've done in the past.
+      Our minds our very busy. We have 70,000 thoughts a day! Our thoughts can
+      drift to what might go wrong in the future, or to things that we think
+      we've done badly or had done to us in the past. Mindfulness is a way to
+      focus on the here-and-now.
     </_TipParagraph>
     <_TipParagraph>
-      Mindfulness is the act of concentrating on your breathing, being aware of
-      your breath, and being aware of what is going on around you in the present
-      moment. Practising mindfulness creates a peaceful mental environment.
+      Mindfulness is the act of concentrating on your breathing and body
+      sensations, and letting distressing thoughts go. Be aware of your breath,
+      and what is going on around you in the present moment. Practicing
+      mindfulness creates a peaceful mental environment.
     </_TipParagraph>
     <_TipParagraph>
       The more you do it, the easier it gets, and the more you will notice the
-      benefits!
+      benefits! You could also try a mindfulness exercise on an app like
+      Headspace, Smiling Mind or Breathe.
     </_TipParagraph>
   </_Container>
 )
 
-const Mindfullness2 = () => (
+const Mindfulness2 = () => (
   <_Container>
     <_TipParagraph>
-      Try it by taking 5-minutes to focus on each breath as it flows in and out
-      of your body. Focusing on your breath like this allows you to observe your
-      thoughts as they arise in your mind, and to let go of struggling with
-      them. You could also try a mindfulness exercise on an app like Headspace
-      or Breathe.
+      Take five minutes to focus on each breath as it flows in and out of your
+      body. You don’t have to alter your breath. Focusing on your breath like
+      this allows you to stand back and observe your thoughts as they arise in
+      your mind, rather than getting caught up with them.
     </_TipParagraph>
   </_Container>
 )
@@ -654,4 +656,4 @@ export const BreathingTechs = [Breathing1, Breathing2]
 export const RelaxationTips = [Relaxation1, Relaxation2]
 export const ThoughtSwitching = [Thoughts1, Thoughts2]
 export const FacingFears = [Fears1, Fears2]
-export const Mindfullness = [Mindfullness1, Mindfullness2]
+export const Mindfulness = [Mindfulness1, Mindfulness2]
