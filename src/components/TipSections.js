@@ -63,7 +63,7 @@ const _Link = styled.a.attrs({
   rel: "noopener noreferrer",
 })``
 const _SubTitle = styled.h2.attrs({
-  className: "b ttu pv3 tl",
+  className: "b ttu pv1 tl",
 })``
 const _Bold = styled.span.attrs({
   className: "b",
@@ -77,6 +77,7 @@ const _Bullets = styled.ul`
   li::before {
     content: "– ";
   }
+  margin-left: ${({ marginLeft }) => marginLeft && "1em"};
 `
 
 const _Numbers = styled.ol.attrs({
@@ -99,27 +100,30 @@ const _TipParagraph = styled.p`
 
 const TMOne = () => (
   <_Container>
-    <_Title>Time management top tips!</_Title>
+    <_Title>Time management tips!</_Title>
     <_SubTitle>Planning</_SubTitle>
     <_Bullets>
       <li>
-        <_Bold>Decide on tasks</_Bold> that need to be done, breaking big tasks
-        down into smaller chunks. Write a weekly <_Bold>‘to do’ list</_Bold>.
-        Make the list specific and clear.
+        <_Bold>Decide on tasks that need to be done.</_Bold> Break big tasks
+        down into smaller, manageable chunks.
       </li>
       <li>
-        <_Bold>Prioritise:</_Bold> decide what must be done today, and be
-        realistic about what you can do!
+        <_Bold>Write a weekly ‘to do’ list.</_Bold> Make the list specific and
+        clear.
+      </li>
+      <li>
+        <_Bold>Prioritise the work:</_Bold> decide what must be done today, and
+        be realistic about what you can do!
       </li>
       <li>
         <_Bold>Form a plan:</_Bold> Put the most important things at the top of
-        the list, and the least important at the end.
+        the list. Leave the least important to the end.
       </li>
       <li>
-        Include <_Bold>breaks</_Bold>, including mealtimes, in your plan, so you
-        have something nice to look forward to.
+        Include <_Bold>breaks</_Bold>, and mealtimes, in your plan, so you have
+        something nice to look forward to.
       </li>
-      <li>Remember you can use free periods at school.</li>
+      <li>Remember you can use free periods at school to get work done.</li>
     </_Bullets>
   </_Container>
 )
@@ -137,7 +141,8 @@ const TMTwo = () => (
         before bedtime.
       </li>
       <li>
-        <_Bold>Relax</_Bold> or have a well-deserved treat once you finish.
+        <_Bold>Relax</_Bold> or have a well-deserved treat once you finish the
+        work.
       </li>
     </_Bullets>
   </_Container>
@@ -153,7 +158,7 @@ const TMThree = () => (
     </_TipParagraph>
     <_TipParagraph>
       Don’t be hard on yourself, and don’t begin the day by telling yourself
-      off; try being kind to yourself! You’re doing your best.{" "}
+      off. Try being kind to yourself! You’re doing your best.
     </_TipParagraph>
     <_TipParagraph>
       If your mind starts drifting, gently bring it back, and only take planned
@@ -183,26 +188,27 @@ const TMFour = () => (
 const ProcOne = () => (
   <_Container>
     <_Title>Procrastination top tips!</_Title>
-    <_SubTitle>Just do it!</_SubTitle>
+    <_SubTitle>Get going!</_SubTitle>
     <_Bullets>
       <li>
-        <_Bold>Start today</_Bold>
+        <_Bold>Start today! "Just do it"!</_Bold>
       </li>
       <li>
         <_Bold>The 5-minute miracle</_Bold>. Once you’ve identified an action,
-        set a timer for 5 minutes, and spend this time working on this task.
+        set a timer for five minutes, and spend this time working. You may be
+        surprised to manage more than you expected!
       </li>
       <li>
         <_Bold>
           Stop things getting blown out of proportion in your mind, and then
-          getting to feel impossible
+          feeling impossible. Often, it’s easier to do than we imagined.
         </_Bold>
       </li>
       <li>
-        <_Bold>Face your fears about a task.</_Bold> Avoiding something that you
-        need to do might make you feel better in the short term. But in the long
-        term, this will affect your confidence by giving you the message that
-        you are not doing well, and this can then demotivate you.
+        <_Bold>Face your fears about a task, rather than avoid it.</_Bold>{" "}
+        Avoiding something that has to be done can be a relief. But in the long
+        term, this just gives you more problems to deal with, and also can
+        affect your motivation and your self-confidence.
       </li>
     </_Bullets>
   </_Container>
@@ -213,12 +219,16 @@ const ProcTwo = () => (
     <_SubTitle>Maintain your focus!</_SubTitle>
     <_Bullets>
       <li>
-        <_Bold>Set a timer for a specific amount of time</_Bold>, e.g. 30
-        minutes. Try the Forest app here!
+        <_Bold>Set mini-deadlines for each small task.</_Bold>
+        Take it step by step.
+      </li>
+      <li>
+        <_Bold>Set a timer for a specific amount of time</_Bold>, e.g. for 30
+        minutes and get working. Try the Forest app here! Or Clockwork Tomato.
       </li>
       <li>
         <_Bold>Change your environment.</_Bold> Be creative with where you work
-        – e.g. if home isn’t working, try the library.
+        – if home isn’t working, try the library.
       </li>
       <li>
         <_Bold>Remove distractions</_Bold>. Put your phone on airplane mode, or
@@ -231,10 +241,11 @@ const ProcTwo = () => (
 
 const ProcThree = () => (
   <_Container>
-    <_SubTitle>Maintain your focus!</_SubTitle>
+    <_SubTitle>Motivate yourself to get the work done!</_SubTitle>
     <_Bullets>
       <li>
-        <_Bold>Remember your goals</_Bold>
+        <_Bold>Remember your life goals.</_Bold> Put a photo of this on your
+        desk, or write a message to yourself.
       </li>
       <li>
         <_Bold>Give yourself a sense of achievement.</_Bold> Write weekly lists
@@ -255,14 +266,14 @@ const ProcFour = () => (
     <_Bullets>
       <li>
         <_Bold>Inspire yourself.</_Bold> Remind yourself of phrases or quotes
-        that encourage you to keep going. Try to watch motivational speeches or
+        that encourage you to keep going. Watch motivational speeches or
         inspiring talks on YouTube, TED talks or podcasts.
       </li>
       <li>
-        <_Bold>Do things that energise you</_Bold>
-        <_Bullets>
+        <_Bold>Do things that energise you.</_Bold>
+        <_Bullets marginLeft>
           <li>
-            Listen to music which helps you focus, stay motivated or energised.{" "}
+            Listen to music that helps you focus, stay motivated or energised.
           </li>
           <li>Take a run, or a brisk walk.</li>
           <li>Eat healthily.</li>
