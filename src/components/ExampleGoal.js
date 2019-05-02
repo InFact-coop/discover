@@ -1,7 +1,9 @@
 import styled from "styled-components"
 
 const _monoText = styled.p.attrs({ className: "mono db" })``
-const _sansText = styled.p.attrs({ className: "sans fw5 font-4 db pb2" })`
+const _sansText = styled.p.attrs(({ pb0 }) => ({
+  className: `sans fw5 font-4 db ${pb0 ? "pb0" : "pb2"}`,
+}))`
   font-size: 16px;
 `
 const _exampleGoalDiv = styled.div.attrs({
@@ -15,10 +17,14 @@ const ExampleGoal = () => (
   <_exampleGoalDiv>
     <_monoText>Your goal is</_monoText>
     <_sansText>
-      Stop procrasting and work on my time management skills
+      Stop procrastinating and work on my time management skills
     </_sansText>
     <_monoText>by using</_monoText>
-    <_sansText className="underline">Procrastination tips</_sansText>
+    <_sansText pb0>
+      <u className="blue">Procrastination tips</u>
+      &nbsp;and
+    </_sansText>
+    <_sansText className="underline blue">Time management tips</_sansText>
     <_monoText>and you will do it</_monoText>
     <_sansText>Every Tuesday and Friday</_sansText>
     <_monoText>preferably</_monoText>
