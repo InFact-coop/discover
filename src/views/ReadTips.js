@@ -20,10 +20,10 @@ import tips3 from "../assets/backgrounds/tips3.png"
 import tips4 from "../assets/backgrounds/tips4.png"
 
 const _TapAnywhere = styled.div.attrs({
-  className: "ttu w-100 tc white sans font-5 pa4",
+  className: "ttu w-100 tc white sans font-5 pv2",
 })`
   position: relative;
-  bottom: 12vh;
+  bottom: 40px;
 `
 
 const _ExitCross = styled.img.attrs({
@@ -51,7 +51,7 @@ const _TipScreen = styled.div.attrs({
   background-attachment: fixed;
 `
 
-const _Container = styled.p.attrs({
+const _Container = styled.div.attrs({
   className: "pb4 w-75 font-4",
 })`
   margin: 0 auto;
@@ -164,7 +164,7 @@ class ReadTips extends Component {
               positionBottom="12vh"
               onClick={() => this.onExitClick()}
             >
-              Thanx, got it!
+              Thanks, got it!
             </ActionButton>
           ) : (
             <_TapAnywhere onClick={() => this.onAnywhereClick(tips.index)}>
