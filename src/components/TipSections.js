@@ -499,9 +499,10 @@ const Breathing1 = () => (
   <_Container>
     <_Title>Breathing technique top tips!</_Title>
     <_TipParagraph>
-      When you’re feeling stressed, your body is likely to respond by breathing
-      in a more shallow, rapid way. Actively changing your breathing pattern is
-      a really good way to calm yourself, and lower your stress levels.
+      When you’re feeling stressed, you are likely to breathe in a more shallow,
+      rapid way. Actively slowing down your breathing pattern calms your
+      emotions, sends signals to your brain to unwind and feel safe, and will
+      lower your stress levels.
     </_TipParagraph>
   </_Container>
 )
@@ -510,15 +511,16 @@ const Breathing2 = () => (
   <_Container>
     <_TipParagraph>
       Start by breathing in more slowly and deeply than usual, through your
-      nose, for a count of 3, and then breathe out for a count of 3. Continue
-      breathing in and out very slowly and deeply for a few minutes. Try to
-      imagine that you are breathing in calm and light, and breathing out
-      stress; allow the calm to reach your mind. Gently bring your breathing
-      back to the normal rate when you are ready.
+      nose, maybe for a count of 3, and then breathe out slowly, for a count of
+      3. Continue breathing in and out slowly and deeply for a few minutes,
+      focusing on the air and your lungs. Try to imagine that you are breathing
+      in calm and light, and breathing out stress; allow the calm to spread
+      across your body and reach your mind. Gently bring your breathing back to
+      a normal rate when you are ready.
     </_TipParagraph>
     <_TipParagraph>
       If you find it hard to do this on your own, you could try follow a guided
-      breathing technique, e.g. on the <_Link href="/">Breathe app.</_Link>
+      breathing technique, e.g. on the Breathe app.
     </_TipParagraph>
   </_Container>
 )
@@ -531,12 +533,13 @@ const Relaxation1 = () => (
       ourselves.
     </_TipParagraph>
     <_TipParagraph>
-      One of these is called <_Bold>progressive muscle relaxation</_Bold>. This
-      is helpful as one of the major effects of stress is muscle tension. This
-      exercise can help relax your muscles, which in turn relaxes your mind.
-      Starting from your toes, you work your way around your body slowing,
-      tensing each muscle, and then letting go. This can be a good one to try
-      when you’re trying to fall asleep.
+      One of these is called <_Bold>progressive muscle relaxation</_Bold>. One
+      of the major effects of stress is muscle tension in your body, which sends
+      signals to your brain to be alert for threats. This exercise can help
+      relax your muscles, which in turn relaxes your mind. Starting from your
+      toes, you work your way around your body tensing each muscle group, and
+      then letting go. You can also unwind those tense muscles in your shoulders
+      or your whole body by stretching and releasing.
     </_TipParagraph>
   </_Container>
 )
@@ -544,11 +547,10 @@ const Relaxation1 = () => (
 const Relaxation2 = () => (
   <_Container>
     <_TipParagraph>
-      Another way to calm yourself and feel more relaxed is by visualisation.
-      Here, you close your eyes and picture yourself in a relaxing situation.
-      Use your senses to imagine the sights, smells, and sounds in your
-      imagination. Calm your breathing too, and then take the time to re-engage
-      back with your day.
+      Another way to calm yourself and feel more relaxed is by doing something
+      you enjoy, like walking across a park, playing sport, drawing or painting,
+      playing a musical instrument or singing. Calm your breathing too, and then
+      take the time to re-engage back with your day.
     </_TipParagraph>
   </_Container>
 )
