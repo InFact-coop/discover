@@ -54,7 +54,7 @@ const Privacy = () => (
         </p>
         <p className="mb1">
           We are committed to protecting and respecting your privacy. The
-          following Privacy Policy applies to DiscoverBOT, which is owned by
+          following Privacy Policy applies to DISCOVERbot, which is owned by
           South London and Maudsley NHS Foundation Trust “SLaM” and sets out how
           your personal data is handled by us. We strongly recommend that you
           take some time to read this policy carefully to understand how we
@@ -81,26 +81,6 @@ const Privacy = () => (
           <_Bold>Why we hold this information:</_Bold>
         </p>
         <p> To address you properly and to identify you</p>
-      </_SmallSection>
-      <_SmallSection>
-        <p>
-          <_BoldHeading>Work well may use this information to:</_BoldHeading>
-        </p>
-        <p>
-          <_Bold>Communicate with you</_Bold>
-        </p>
-        <p className="mb1">
-          We use your information to send you communications about our service
-          or to let you know about any changes to our privacy policy. We also
-          use your information to respond to you if you contact us.
-        </p>
-        <p>
-          <_Bold>Improvement and development</_Bold>
-        </p>
-        <p>
-          From time to time we may conduct surveys to better understand how to
-          improve features.
-        </p>
       </_SmallSection>
       <_SmallSection>
         <p>
@@ -155,7 +135,7 @@ const Privacy = () => (
           </_BoldHeading>
         </p>
         <p>
-          Personal data you add to the DiscoverBOT app is not retained by SLaM.
+          Personal data you add to the DISCOVERbot app is not retained by SLaM.
           If you choose to delete the app, the data will also be deleted.
         </p>
       </_SmallSection>
@@ -275,11 +255,11 @@ const Privacy = () => (
           feel free to contact us at: discoverworkshops@slam.nhs.uk
         </p>
         <ul className="mb7">
-          <li> Discover Team </li>
+          <li>DISCOVER team</li>
           <li>South London and Maudsley NHS Foundation Trust</li>
           <li>Maudsley Hospital</li>
-          <li> London</li>
-          <li> SE5 8AZ</li>
+          <li>London</li>
+          <li>SE5 8AZ</li>
         </ul>
       </_SmallSection>
     </_Container>
