@@ -369,15 +369,19 @@ const Sleep1 = () => (
   <_Container>
     <_Title>Sleep top tips!</_Title>
     <_TipParagraph>
-      Here are some sleep tips, which are based on the science behind getting to
-      sleep (and what keeps us awake!).
+      These sleep tips really work. They are based on the science of sleep (and
+      what keeps us awake!).
     </_TipParagraph>
     <_SubTitle>Wind Down</_SubTitle>
     <_Bullets>
-      <li>Start winding down 1-2 hours before you go to bed</li>
+      <li>
+        Start winding down 1-2 hours before you go to bed, and quieten things
+        down
+      </li>
       <li>This helps calm your brain and mind</li>
       <li>Don’t drink caffeine for at least 4 hours before you go to bed</li>
       <li>Don’t exercise right before bed (earlier is better!)</li>
+      <li>Turn off your phone, computer or tablet before bedtime</li>
     </_Bullets>
   </_Container>
 )
@@ -391,23 +395,28 @@ const Sleep2 = () => (
         Try to go to bed and wake up at the same every day (at least during the
         week!)
       </li>
-      <li>Aim for 8 hours a night</li>
-      <li>Don’t nap in the daytime! This can mess up your sleep cycle</li>
-    </_Bullets>
-    <_SubTitle>Your Room</_SubTitle>
-    <_Bullets>
-      <li> Make sure your room is the right temperature for you</li>
-      <li>Try to make sure there isn’t too much light</li>
-      <li>Try to have a quiet room</li>
+      <li>Aim for 8 hours a night and plan a realistic bedtime</li>
       <li>
-        Get your bed as comfy as possible! Don’t do school work in or around
-        your bed
+        Don’t nap in the daytime! This can mess up your sleep cycle and body
+        clock
       </li>
     </_Bullets>
   </_Container>
 )
 
 const Sleep3 = () => (
+  <_Container>
+    <_SubTitle>Your Room</_SubTitle>
+    <_Bullets>
+      <li>Make sure your room is the right temperature for you</li>
+      <li>Try to make sure there isn’t too much light</li>
+      <li>Try to have a quiet room</li>
+      <li>Get your bed as comfortable as possible!</li>
+      <li>Don’t do school work in or around your bed</li>
+    </_Bullets>
+  </_Container>
+)
+const Sleep4 = () => (
   <_Container>
     <_SubTitle>Thought and worries</_SubTitle>
     <_Bullets>
@@ -417,14 +426,13 @@ const Sleep3 = () => (
         you awake
       </li>
       <li>
-        If you are worrying, try switch your attention to something else. This
-        could be remembering a happy memory, reciting the alphabet backwards, or
-        listing boys/girls names beginning with A thorough to Z!
+        If you are worrying, switch your attention to something else. Count
+        backwards from 100, or list boys/girls names (or anything else)
+        beginning with A through to Z!
       </li>
       <li>
-        If you really can’t sleep, it may be a good idea to get up, some and do
-        something relaxing like reading, then go back to bed when you start to
-        feel sleepy
+        If you really can’t sleep, just get up, and do something calm and
+        relaxing like reading, then go back to bed when you start to feel sleepy
       </li>
     </_Bullets>
   </_Container>
@@ -651,7 +659,7 @@ export const ThinkingTraps = [
 ]
 export const ThoughtChallenging = [ThoughtChallenging1, ThoughtChallenging2]
 export const ProblemSolving = [Problems1, Problems2]
-export const SleepTips = [Sleep1, Sleep2, Sleep3]
+export const SleepTips = [Sleep1, Sleep2, Sleep3, Sleep4]
 export const BreathingTechs = [Breathing1, Breathing2]
 export const RelaxationTips = [Relaxation1, Relaxation2]
 export const ThoughtSwitching = [Thoughts1, Thoughts2]
