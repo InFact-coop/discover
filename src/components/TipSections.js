@@ -472,26 +472,22 @@ const Problems1 = () => (
   <_Container>
     <_Title>Problem Solving top tips!</_Title>
     <_TipParagraph>
-      Problem solving can be used when you have you have a practical problem to
-      solve. Here’s a reminder of the steps:
+      Problem solving has several key steps: Here they are:
     </_TipParagraph>
     <_Numbers>
       <li>Define the exact problem you want to solve.</li>
       <li>Brainstorm all the solutions you can think of.</li>
-      <li>
-        Think of the pros and cons of each option. Then eliminate the options
-        that won’t work!
-      </li>
+      <li>Think of the pros and cons of each option.</li>
     </_Numbers>
   </_Container>
 )
 
 const Problems2 = () => (
   <_Container>
-    <_Numbers>
-      <li>Choose one option.</li>
-      <li>Prepare all the steps to do it.</li>
-      <li>Do it!</li>
+    <_Numbers start="4">
+      <li>Eliminate all the options that won’t work, and choose one option.</li>
+      <li>Prepare all the steps and do it in the right order.</li>
+      <li>Just do it!</li>
       <li>
         Review. Did it work? If not, work through an alternative solution.
       </li>
