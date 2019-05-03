@@ -23,7 +23,7 @@ const _Container = styled.div.attrs({
   className: "flex flex-column items-center justify-center center",
 })`
   height: calc(100vh - 4.5rem);
-  width: 99%;
+  width: 100%;
 `
 
 const _Question = styled.p.attrs({
