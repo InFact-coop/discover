@@ -14,39 +14,59 @@ import { Home, MyGoal, GoalProgress, Summary, Help } from "../views"
 import { changeView } from "../state/actions/router"
 
 const _Container = styled.div.attrs({
-  className: "flex w-100",
+  className: "flex w-100 justify-between",
 })`
   position: fixed;
   bottom: 0;
   background-color: var(--near-white);
+  height: 10%;
 `
 
-const _Icon = styled.img.attrs({
-  className: "flex items-center justify-center w-20 pa2",
+const _IconContainer = styled.div.attrs({
+  className: "flex-column w-20",
 })``
+
+const _IconLabel = styled.p.attrs({
+  className: "w-100 tc pb1 sans font-6",
+})``
+
+const _Icon = styled.img.attrs({
+  className: "flex items-center w-100 justify-center pa1",
+})`
+  height: 70%;
+`
+
+const labelIconsPage = [
+  ["Goal", listOfGoals, listOfGoalsActive, GoalProgress],
+  ["Edit", myGoal, myGoalActive, MyGoal],
+  ["Bot", botIcon, botIconActive, Home],
+  ["Crisis", help, helpActive, Help],
+  ["Tips", tips, tipsActive, Summary],
+]
+
+const Icon = ({ currentView, changeView, label, icon, iconActive, page }) => (
+  <_IconContainer>
+    <_Icon
+      src={currentView === page ? iconActive : icon}
+      onClick={() => changeView(page)}
+    />
+    <_IconLabel>{label}</_IconLabel>
+  </_IconContainer>
+)
 
 const NavBar = ({ currentView, changeView }) => (
   <_Container>
-    <_Icon
-      src={currentView === GoalProgress ? listOfGoalsActive : listOfGoals}
-      onClick={() => changeView(GoalProgress)}
-    />
-    <_Icon
-      src={currentView === MyGoal ? myGoalActive : myGoal}
-      onClick={() => changeView(MyGoal)}
-    />
-    <_Icon
-      src={currentView === Home ? botIconActive : botIcon}
-      onClick={() => changeView(Home)}
-    />
-    <_Icon
-      src={currentView === Help ? helpActive : help}
-      onClick={() => changeView(Help)}
-    />
-    <_Icon
-      src={currentView === Summary ? tipsActive : tips}
-      onClick={() => changeView(Summary)}
-    />
+    {labelIconsPage.map(([label, icon, iconActive, page], key) => (
+      <Icon
+        key={key}
+        currentView={currentView}
+        changeView={changeView}
+        label={label}
+        icon={icon}
+        iconActive={iconActive}
+        page={page}
+      />
+    ))}
   </_Container>
 )
 
