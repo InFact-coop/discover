@@ -559,9 +559,10 @@ const Thoughts1 = () => (
   <_Container>
     <_Title>Thought Switching top tips!</_Title>
     <_TipParagraph>
-      Thought switching can be helpful to take our mind off worries. Doing a
-      mental activity can help switch your attention very effectively. This can
-      be especially helpful when you're worrying at night.
+      Thought switching can be helpful to take our mind off worries, when we
+      have little control over the situation. Doing a mental activity can help
+      switch your attention very effectively. This can be especially helpful
+      when you're worrying at night.
     </_TipParagraph>
     <_TipParagraph>
       You could try doing a simple mental exercise to switch your thoughts. This
@@ -591,11 +592,14 @@ const Fears1 = () => (
     <_Title>Facing my fears top tips!</_Title>
     <_TipParagraph>
       When we’re scared of something (e.g. dogs, public speaking, or anything
-      else!), it’s very common to try and avoid the situation completely.
-      However, this means that our fear remains, and we are never are able to
-      learn that we may actually be able to cope with it. A really helpful way
-      to overcome our fears is to gradually and slowly expose ourselves to them
-      over time.
+      else!), it’s very common to avoid the situation completely. However, this
+      means that our fear remains, and maybe even builds up. And we may never
+      learn that we may actually be able to cope with the thing we are scared
+      of. A really helpful way to overcome our fears is to gradually and slowly
+      expose ourselves to them over time.
+    </_TipParagraph>
+    <_TipParagraph>
+      <_Bold>Show me how!</_Bold>
     </_TipParagraph>
   </_Container>
 )
@@ -603,12 +607,11 @@ const Fears1 = () => (
 const Fears2 = () => (
   <_Container>
     <_TipParagraph>
-      To do this, draw a ladder on a piece of paper, with 6 steps on it. Write
-      down your feared situation at the top step of the ladder. Then, try and
-      break this fear down into smaller, gradual steps in order. Start at the
-      bottom and work your way up, facing your feared situations in a gradual
-      way. Remember to cross off and reward yourself for each step as you
-      achieve it!
+      Draw a ladder on a piece of paper, with 6 steps on it. Write down your
+      feared situation at the top step of the ladder. Then, try and break this
+      fear down into smaller, gradual steps. Start at the bottom of the ladder
+      and work your way up, facing each feared situations in a gradual way.
+      Remember to cross off and reward yourself for each step as you achieve it!
     </_TipParagraph>
   </_Container>
 )
