@@ -35,7 +35,7 @@ const Recap = ({ changeView }) => (
   <_Container>
     <GlobalStyle />
     <BackButton action="back" to={GoalTime} />
-    <_Title>Oky, Doky!</_Title>
+    <_Title>Great!</_Title>
     <_Description>So let's recap</_Description>
     <_InnerContainer>
       <GoalDetails section={"description"} />
@@ -49,7 +49,7 @@ const Recap = ({ changeView }) => (
       onClick={() => changeView(Spinner)}
       positionBottom="10px"
     >
-      COOL LET'S GO
+      COOL, LET'S GO
     </ActionButton>
   </_Container>
 )

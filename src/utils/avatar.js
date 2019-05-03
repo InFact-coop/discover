@@ -25,7 +25,7 @@ const getAvatarImg = avatar => {
     case grey_avatar:
       return grey_avatar_img
     default:
-      return grey_avatar_img
+      return red_avatar_img
   }
 }
 

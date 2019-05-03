@@ -80,7 +80,7 @@ class Name extends Component {
             OK,
             <br /> First things first!
           </_Title>
-          <_Question>what's your name my friend?</_Question>
+          <_Question>What's your name my friend?</_Question>
           <InputWithValidation
             className="ma4 pa2"
             width="w-80"
