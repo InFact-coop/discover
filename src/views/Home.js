@@ -12,6 +12,7 @@ import { addQuotesData } from "../state/actions/staticData"
 
 import NavBar from "../components/NavBar"
 import ExampleGoal from "../components/ExampleGoal"
+import Quote from "../components/Quote"
 
 import { Tips, NewFlow, InternalLink, ExternalLink } from "../Constants"
 
@@ -220,6 +221,7 @@ class Home extends Component {
     postback: {},
     sessionId: "",
     quote: {},
+    displayQuote: true,
   }
 
   componentDidMount = () => {
@@ -340,6 +342,8 @@ class Home extends Component {
     }, Math.floor(Math.random() * 2000) + 500)
   }
 
+  onQuoteClick = () => this.setState({ displayQuote: false })
+
   onOptionClick = async ({ content, addContext, query, type }) => {
     const { sessionId } = this.state
 
@@ -371,11 +375,16 @@ class Home extends Component {
   }
 
   render() {
-    const { postback, conversation } = this.state
+    const { postback, conversation, quote, displayQuote } = this.state
     const { changeView, welcome, profile } = this.props
 
     return (
       <div className="vh-100">
+        <Quote
+          quote={quote}
+          displayQuote={displayQuote}
+          onClick={this.onQuoteClick}
+        />
         <GlobalStyle />
         {welcome.welcomeFlow ? (
           ""
