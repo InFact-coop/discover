@@ -36,6 +36,8 @@ import {
   SKIP_THIS_BIT,
 } from "../../Constants"
 
+import { ADD_QUOTES_DATA } from "../types"
+
 const INITIAL_STATE = {
   techniques: [
     {
@@ -178,8 +180,13 @@ const INITIAL_STATE = {
   ],
 }
 
-export default (state = INITIAL_STATE, { type }) => {
+export default (state = INITIAL_STATE, { payload, type }) => {
   switch (type) {
+    case ADD_QUOTES_DATA:
+      return {
+        ...state,
+        quotes: payload,
+      }
     default:
       return state
   }

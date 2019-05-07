@@ -8,6 +8,7 @@ import { getAvatarImg } from "../utils/avatar"
 
 import { changeView } from "../state/actions/router"
 import { selectTopic, setPageIndex } from "../state/actions/tips"
+import { addQuotesData } from "../state/actions/staticData"
 
 import NavBar from "../components/NavBar"
 import ExampleGoal from "../components/ExampleGoal"
@@ -218,6 +219,7 @@ class Home extends Component {
     conversation: [],
     postback: {},
     sessionId: "",
+    quote: {},
   }
 
   componentDidMount = () => {
@@ -225,6 +227,8 @@ class Home extends Component {
     window.removeEventListener("online", this.initBot)
 
     this.initBot()
+    this.getSheet()
+    this.setQuote()
   }
 
   componentDidUpdate = () => {
@@ -234,6 +238,19 @@ class Home extends Component {
 
   componentWillUnmount = () => {
     window.removeEventListener("online", this.initBot)
+  }
+
+  getSheet = async () => {
+    await axios
+      .get("/api/user/sheets")
+      .then(res => res.data)
+      .then(quotes => this.props.addQuotesData(quotes))
+  }
+
+  setQuote = () => {
+    const { quotes } = this.props
+    const random = Math.floor(Math.random() * quotes.length)
+    this.setState({ quote: r.nth(random, quotes) })
   }
 
   initBot = async () => {
@@ -356,6 +373,7 @@ class Home extends Component {
   render() {
     const { postback, conversation } = this.state
     const { changeView, welcome, profile } = this.props
+
     return (
       <div className="vh-100">
         <GlobalStyle />
@@ -399,6 +417,10 @@ class Home extends Component {
 }
 
 export default connect(
-  ({ profile, welcome }) => ({ profile, welcome }),
-  { changeView, selectTopic, setPageIndex }
+  ({ profile, welcome, staticData: { quotes } }) => ({
+    profile,
+    welcome,
+    quotes,
+  }),
+  { changeView, selectTopic, setPageIndex, addQuotesData }
 )(Home)
