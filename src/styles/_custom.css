@@ -5,3 +5,7 @@
 body {
   color: var(--dark-gray);
 }
+
+.pointer-events-none {
+  pointer-events: none;
+}
