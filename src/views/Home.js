@@ -154,11 +154,11 @@ const _OptionContainer = styled.div.attrs({
 const RenderConversation = ({ conversation, onLinkClick, userAvatar }) =>
   conversation.map(({ content, type }, i) => {
     if (content === "#your-goal-example") {
-      return <ExampleGoal />
+      return <ExampleGoal key={i} />
     } else if (content.includes("#here-privacy-link")) {
       const [before, after] = content.split("#here-privacy-link")
       return (
-        <_MessageWithAvatar messageClass="bg-white dark-gray">
+        <_MessageWithAvatar messageClass="bg-white dark-gray" key={i}>
           <span>{before}</span>
           <a className="underline" onClick={() => onLinkClick(Privacy)}>
             here
