@@ -3,13 +3,14 @@ import styled from "styled-components"
 
 const _QuoteContainer = styled.div.attrs({
   className: ({ displayClasses }) =>
-    `w-100 sans flex-column fixed justify-center items-center h4 bg-white shadow-2 z-2 tc ${displayClasses}`,
+    `w-100 sans flex-column fixed justify-center items-center ph4 pv4 bg-white shadow-2 z-2 tc ${displayClasses}`,
 })`
+  min-height: var(--height-4);
   transition: 0.5s;
 `
 
 const _Quote = styled.div.attrs({
-  className: "font-4 bold dark-gray mb2 ph2",
+  className: "font-4 bold dark-gray mb2",
 })``
 
 const _Author = styled.div.attrs({
