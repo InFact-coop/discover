@@ -14,7 +14,15 @@ import NavBar from "../components/NavBar"
 import ExampleGoal from "../components/ExampleGoal"
 import Quote from "../components/Quote"
 
-import { Tips, NewFlow, InternalLink, ExternalLink } from "../Constants"
+import {
+  Tips,
+  NewFlow,
+  InternalLink,
+  ExternalLink,
+  NotInitialised,
+  Initialising,
+  Initialised,
+} from "../Constants"
 
 import { ReadTips, Privacy } from "."
 
@@ -219,15 +227,18 @@ class Home extends Component {
   state = {
     conversation: [],
     postback: {},
-    sessionId: "",
+    botInitialised: NotInitialised,
     quote: {},
   }
 
   componentDidMount = () => {
+    const { welcome } = this.props
+
     if (!window.navigator.onLine) return this.setBotOffline()
     window.removeEventListener("online", this.initBot)
 
-    this.initBot()
+    if (welcome.welcomeFlow) this.initBot()
+
     this.getSheet()
     this.setQuote()
   }
@@ -255,20 +266,25 @@ class Home extends Component {
   }
 
   initBot = async () => {
-    const { welcome } = this.props
-    const sessionId = Math.random()
-      .toString(36)
-      .substr(2, 10)
+    if (this.state.botInitialised === NotInitialised) {
+      this.setState({ botInitialised: Initialising })
 
-    const { data } = await axios.get("/api/user/dialogflow", {
-      params: {
-        query: welcome.startQuery,
-        sessionId,
-      },
-    })
+      const { welcome } = this.props
+      const sessionId = Math.random()
+        .toString(36)
+        .substr(2, 10)
 
-    this.setState({ sessionId })
-    this.setMessageDelay(data)
+      const { data } = await axios.get("/api/user/dialogflow", {
+        params: {
+          query: welcome.startQuery,
+          sessionId,
+        },
+      })
+
+      this.setState({ sessionId })
+      this.setState({ botInitialised: Initialised })
+      this.setMessageDelay(data)
+    }
   }
 
   setBotOffline = () => {
@@ -377,7 +393,11 @@ class Home extends Component {
 
     return (
       <div className="vh-100">
-        <Quote quote={quote} />
+        <Quote
+          quote={quote}
+          initBot={this.initBot}
+          welcomeFlow={welcome.welcomeFlow}
+        />
         <GlobalStyle />
         {welcome.welcomeFlow ? (
           ""

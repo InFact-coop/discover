@@ -5,11 +5,11 @@ const _QuoteContainer = styled.div.attrs({
   className: ({ displayClasses }) =>
     `w-100 sans flex-column fixed justify-center items-center h4 bg-white shadow-2 z-2 tc ${displayClasses}`,
 })`
-  transition: 0.7s;
+  transition: 0.5s;
 `
 
 const _Quote = styled.div.attrs({
-  className: "font-4 bold dark-gray mb2",
+  className: "font-4 bold dark-gray mb2 ph2",
 })``
 
 const _Author = styled.div.attrs({
@@ -18,37 +18,40 @@ const _Author = styled.div.attrs({
 
 class Quote extends Component {
   state = {
-    displayClasses: "flex",
+    displayClasses: "flex up-0rem",
   }
 
   componentDidMount() {
-    setTimeout(() => {
-      this.setState(prevState => ({
-        displayClasses: prevState.displayClasses === "dn" ? "dn" : "flex o-80",
-      }))
-    }, 4000)
+    const { welcomeFlow } = this.props
 
-    setTimeout(
-      () => this.setState({ displayClasses: "flex o-0 pointer-events-none" }),
-      6000
-    )
+    if (welcomeFlow) return this.setState({ displayClasses: "dn" })
+    setTimeout(this.hideQuoteShowBot, 3000)
   }
 
-  onQuoteClick = () => {
-    this.setState({ displayClasses: "dn" })
+  hideQuoteShowBot = () => {
+    const { initBot } = this.props
+    initBot()
+    this.setState({
+      displayClasses: "flex o-0 pointer-events-none up-8rem",
+    })
   }
 
   render() {
     const {
-      props: { quote },
+      props: {
+        quote: { quote, author },
+      },
       state: { displayClasses },
-      onQuoteClick,
+      hideQuoteShowBot,
     } = this
 
     return (
-      <_QuoteContainer displayClasses={displayClasses} onClick={onQuoteClick}>
-        <_Quote>{quote.quote}</_Quote>
-        <_Author> – {quote.author}</_Author>
+      <_QuoteContainer
+        displayClasses={displayClasses}
+        onTouchStart={hideQuoteShowBot}
+      >
+        <_Quote>{quote}</_Quote>
+        <_Author> – {author}</_Author>
       </_QuoteContainer>
     )
   }
