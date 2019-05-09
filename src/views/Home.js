@@ -300,7 +300,9 @@ class Home extends Component {
   }
 
   setMessageDelay = data => {
-    if (r.isEmpty(data.responses)) return
+    if (r.isEmpty(data.responses)) {
+      return this.setState({ postback: data.postback })
+    }
 
     this.setState(prevState => ({
       conversation: [...prevState.conversation, TypingTemplate],

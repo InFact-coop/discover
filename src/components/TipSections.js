@@ -62,12 +62,15 @@ const _Link = styled.a.attrs({
   target: "_blank",
   rel: "noopener noreferrer",
 })``
+
 const _SubTitle = styled.h2.attrs({
   className: "b ttu pv1 tl",
 })``
+
 const _Bold = styled.span.attrs({
   className: "b",
 })``
+
 const _Italics = styled.span.attrs({
   className: "i",
 })``
@@ -520,7 +523,12 @@ const Breathing2 = () => (
     </_TipParagraph>
     <_TipParagraph>
       If you find it hard to do this on your own, you could try follow a guided
-      breathing technique, e.g. on the Breathe app.
+      breathing technique. You can find these on apps such as{" "}
+      <_Link href="http://onelink.to/vaypg4">Smiling Mind</_Link>, or on{" "}
+      <_Link href="https://www.youtube.com/results?search_query=relaxed+breathing+exercises">
+        Youtube
+      </_Link>
+      .
     </_TipParagraph>
   </_Container>
 )
