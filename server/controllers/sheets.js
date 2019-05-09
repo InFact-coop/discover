@@ -1,12 +1,13 @@
-const request = require("request-promise")
+const axios = require("axios")
 const r = require("ramda")
 
 exports.querySheets = (req, res) => {
-  request(
-    `https://sheets.googleapis.com/v4/spreadsheets/${
-      process.env.SHEET_ID
-    }/values/Sheet1?key=${process.env.SHEETS_API_KEY}`
-  )
+  axios
+    .get(
+      `https://sheets.googleapis.com/v4/spreadsheets/${
+        process.env.SHEET_ID
+      }/values/Sheet1?key=${process.env.SHEETS_API_KEY}`
+    )
     .then(responses => {
       const values = JSON.parse(responses).values
       const quotes = r.map(
