@@ -261,8 +261,10 @@ class Home extends Component {
 
   setQuote = () => {
     const { quotes } = this.props
-    const random = Math.floor(Math.random() * quotes.length)
-    this.setState({ quote: r.nth(random, quotes) })
+    if (quotes) {
+      const random = Math.floor(Math.random() * quotes.length)
+      this.setState({ quote: r.nth(random, quotes) })
+    }
   }
 
   initBot = async () => {

@@ -38,6 +38,8 @@ class Quote extends Component {
   }
 
   render() {
+    if (!this.props.quote) return <div />
+
     const {
       props: {
         quote: { quote, author },
