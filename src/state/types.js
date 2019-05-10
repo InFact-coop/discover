@@ -33,5 +33,8 @@ export const ARCHIVE_GOAL = "ARCHIVE_GOAL"
 export const SELECT_TOPIC = "SELECT_TOPIC"
 export const SET_PAGE_INDEX = "SET_PAGE_INDEX"
 
+// staticData
+export const ADD_QUOTES_DATA = "ADD_QUOTES_DATA"
+
 // initial flow
 export const CLEAR_WELCOME_SCREEN = "CLEAR_WELCOME_SCREEN"
