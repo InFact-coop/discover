@@ -178,6 +178,7 @@ const INITIAL_STATE = {
       backgroundColor: "--light-yellow",
     },
   ],
+  quotes: [],
 }
 
 export default (state = INITIAL_STATE, { payload, type }) => {
