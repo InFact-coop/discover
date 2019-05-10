@@ -304,15 +304,18 @@ class Home extends Component {
     this.setMessageDelay(data)
   }
 
-  onExitClick = async () => {
+  onRestartClick = async () => {
     if (!window.navigator.onLine) return this.setBotOffline()
     window.removeEventListener("online", this.initBot)
 
-    this.setState({
-      conversation: [],
-      postback: {},
-    })
-    this.initBot()
+    this.setState(
+      {
+        botInitialised: NotInitialised,
+        conversation: [],
+        postback: {},
+      },
+      () => this.initBot()
+    )
   }
 
   addMetaDataToMsgs = content => {
@@ -408,7 +411,7 @@ class Home extends Component {
             src={exit}
             alt="exit chat"
             className="fixed top-0 right-0"
-            onClick={this.onExitClick}
+            onClick={this.onRestartClick}
           />
         )}
         <_ChatContainer welcome={welcome.welcomeFlow}>
