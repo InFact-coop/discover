@@ -8,6 +8,7 @@ import { archiveGoal, clearCurrentGoal } from "../state/actions/pastGoals"
 import { Spinner } from "."
 import botIcon from "../assets/icons/robot_round.png"
 import daysToGo from "../utils/goalDaysToGo"
+import { breakpoint } from "../styles/utils"
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -25,6 +26,10 @@ const _BotIcon = styled.img.attrs({
   className: "mb1",
 })`
   width: 10rem;
+
+  ${breakpoint.supersmall`
+  width: 7rem;
+  `};
 `
 
 const _Title = styled.p.attrs({
