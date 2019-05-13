@@ -8,11 +8,21 @@ import { getAvatarImg } from "../utils/avatar"
 
 import { changeView } from "../state/actions/router"
 import { selectTopic, setPageIndex } from "../state/actions/tips"
+import { addQuotesData } from "../state/actions/staticData"
 
 import NavBar from "../components/NavBar"
 import ExampleGoal from "../components/ExampleGoal"
+import Quote from "../components/Quote"
 
-import { Tips, NewFlow, InternalLink, ExternalLink } from "../Constants"
+import {
+  Tips,
+  NewFlow,
+  InternalLink,
+  ExternalLink,
+  NotInitialised,
+  Initialising,
+  Initialised,
+} from "../Constants"
 
 import { ReadTips, Privacy } from "."
 
@@ -144,11 +154,11 @@ const _OptionContainer = styled.div.attrs({
 const RenderConversation = ({ conversation, onLinkClick, userAvatar }) =>
   conversation.map(({ content, type }, i) => {
     if (content === "#your-goal-example") {
-      return <ExampleGoal />
+      return <ExampleGoal key={i} />
     } else if (content.includes("#here-privacy-link")) {
       const [before, after] = content.split("#here-privacy-link")
       return (
-        <_MessageWithAvatar messageClass="bg-white dark-gray">
+        <_MessageWithAvatar messageClass="bg-white dark-gray" key={i}>
           <span>{before}</span>
           <a className="underline" onClick={() => onLinkClick(Privacy)}>
             here
@@ -217,14 +227,20 @@ class Home extends Component {
   state = {
     conversation: [],
     postback: {},
-    sessionId: "",
+    botInitialised: NotInitialised,
+    quote: {},
   }
 
   componentDidMount = () => {
+    const { welcome } = this.props
+
     if (!window.navigator.onLine) return this.setBotOffline()
     window.removeEventListener("online", this.initBot)
 
-    this.initBot()
+    if (welcome.welcomeFlow) this.initBot()
+
+    this.getSheet()
+    this.setQuote()
   }
 
   componentDidUpdate = () => {
@@ -236,21 +252,41 @@ class Home extends Component {
     window.removeEventListener("online", this.initBot)
   }
 
+  getSheet = async () => {
+    await axios
+      .get("/api/user/sheets")
+      .then(res => res.data)
+      .then(quotes => this.props.addQuotesData(quotes))
+  }
+
+  setQuote = () => {
+    const { quotes } = this.props
+    if (quotes) {
+      const random = Math.floor(Math.random() * quotes.length)
+      this.setState({ quote: r.nth(random, quotes) })
+    }
+  }
+
   initBot = async () => {
-    const { welcome } = this.props
-    const sessionId = Math.random()
-      .toString(36)
-      .substr(2, 10)
+    if (this.state.botInitialised === NotInitialised) {
+      this.setState({ botInitialised: Initialising })
 
-    const { data } = await axios.get("/api/user/dialogflow", {
-      params: {
-        query: welcome.startQuery,
-        sessionId,
-      },
-    })
+      const { welcome } = this.props
+      const sessionId = Math.random()
+        .toString(36)
+        .substr(2, 10)
 
-    this.setState({ sessionId })
-    this.setMessageDelay(data)
+      const { data } = await axios.get("/api/user/dialogflow", {
+        params: {
+          query: welcome.startQuery,
+          sessionId,
+        },
+      })
+
+      this.setState({ sessionId })
+      this.setState({ botInitialised: Initialised })
+      this.setMessageDelay(data)
+    }
   }
 
   setBotOffline = () => {
@@ -268,15 +304,18 @@ class Home extends Component {
     this.setMessageDelay(data)
   }
 
-  onExitClick = async () => {
+  onRestartClick = async () => {
     if (!window.navigator.onLine) return this.setBotOffline()
     window.removeEventListener("online", this.initBot)
 
-    this.setState({
-      conversation: [],
-      postback: {},
-    })
-    this.initBot()
+    this.setState(
+      {
+        botInitialised: NotInitialised,
+        conversation: [],
+        postback: {},
+      },
+      () => this.initBot()
+    )
   }
 
   addMetaDataToMsgs = content => {
@@ -356,10 +395,16 @@ class Home extends Component {
   }
 
   render() {
-    const { postback, conversation } = this.state
+    const { postback, conversation, quote } = this.state
     const { changeView, welcome, profile } = this.props
+
     return (
       <div className="vh-100">
+        <Quote
+          quote={quote}
+          initBot={this.initBot}
+          welcomeFlow={welcome.welcomeFlow}
+        />
         <GlobalStyle />
         {welcome.welcomeFlow ? (
           ""
@@ -368,7 +413,7 @@ class Home extends Component {
             src={exit}
             alt="exit chat"
             className="fixed top-0 right-0"
-            onClick={this.onExitClick}
+            onClick={this.onRestartClick}
           />
         )}
         <_ChatContainer welcome={welcome.welcomeFlow}>
@@ -401,6 +446,10 @@ class Home extends Component {
 }
 
 export default connect(
-  ({ profile, welcome }) => ({ profile, welcome }),
-  { changeView, selectTopic, setPageIndex }
+  ({ profile, welcome, staticData: { quotes } }) => ({
+    profile,
+    welcome,
+    quotes,
+  }),
+  { changeView, selectTopic, setPageIndex, addQuotesData }
 )(Home)

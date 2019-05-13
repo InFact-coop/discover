@@ -32,3 +32,8 @@ export const Tips = [
 export const InternalLink = "InternalLink"
 export const ExternalLink = "ExternalLink"
 export const NewFlow = "NewFlow"
+
+// bot initialisation status
+export const NotInitialised = "NotInitialised"
+export const Initialising = "Initialising"
+export const Initialised = "Initialised"
