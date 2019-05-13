@@ -8,6 +8,7 @@ import { getAvatarImg } from "../utils/avatar"
 
 import { changeView } from "../state/actions/router"
 import { selectTopic, setPageIndex } from "../state/actions/tips"
+import { saveConversation } from "../state/actions/chatbot"
 import { addQuotesData } from "../state/actions/staticData"
 
 import NavBar from "../components/NavBar"
@@ -227,6 +228,7 @@ class Home extends Component {
   state = {
     conversation: [],
     postback: {},
+    sessionId: "",
     botInitialised: NotInitialised,
     quote: {},
   }
@@ -366,6 +368,8 @@ class Home extends Component {
 
   onOptionClick = async ({ content, addContext, query, type }) => {
     const { sessionId } = this.state
+    const { saveConversation } = this.props
+    const prevState = { ...this.state }
 
     this.setState(prevState => ({
       conversation: [...prevState.conversation, UserTemplate(content)],
@@ -392,6 +396,12 @@ class Home extends Component {
     })
 
     this.setMessageDelay(data)
+
+    saveConversation({
+      ...prevState,
+      conversation: [...prevState.conversation, UserTemplate(content)],
+      postBack: data.postBack,
+    })
   }
 
   render() {
@@ -451,5 +461,5 @@ export default connect(
     welcome,
     quotes,
   }),
-  { changeView, selectTopic, setPageIndex, addQuotesData }
+  { changeView, selectTopic, setPageIndex, addQuotesData, saveConversation }
 )(Home)
