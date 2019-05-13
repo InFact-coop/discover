@@ -16,7 +16,7 @@ const INITIAL_STATE = {
   daysOfWeek: [],
   timeOfDay: {
     description: "",
-    time: "00:00",
+    time: ":",
   },
   startDate: "",
   scheduledFinishDate: "",
