@@ -78,7 +78,6 @@ class GoalTime extends Component {
   componentDidMount() {
     const { staticData, timeOfDay } = this.props
 
-    console.log(timeOfDay.time)
     const [hours, minutes] =
       timeOfDay.time === ":" ? ["", ""] : timeOfDay.time.split(":")
     this.setState({
