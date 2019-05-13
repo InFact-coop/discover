@@ -22,6 +22,7 @@ import BackButton from "../components/BackButton"
 import { _Title } from "../components/Text"
 import OutlineContainer from "../components/shared/OutlineContainer"
 import ValidationMsg from "../components/ValidationMsg"
+import { breakpoint } from "../styles/utils"
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -33,11 +34,20 @@ const _Container = styled.div.attrs({
   className: "flex flex-column items-center center mt5",
 })`
   width: 95%;
+
+  ${breakpoint.supersmall`
+  font-size: 14px;
+
+    `};
 `
 
 const _BotIcon = styled.img.attrs({
   className: "w-40 mt5 mb1",
-})``
+})`
+  ${breakpoint.supersmall`
+width: 26%;
+`};
+`
 
 const _Description = styled.p.attrs({
   className: "mono font-4 tc",
@@ -52,6 +62,11 @@ const _DayContent = styled.div.attrs({
 })`
   height: 2.5rem;
   width: 2.5rem;
+
+  ${breakpoint.supersmall`
+  height: 2rem;
+  width: 2rem;
+    `};
 `
 
 const Day = ({ selected, children, onClick }) => (
