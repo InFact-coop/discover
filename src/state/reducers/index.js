@@ -7,7 +7,7 @@ import currentGoal from "./currentGoal"
 import pastGoals from "./pastGoals"
 import tips from "./tips"
 import welcome from "./welcome"
-import chatbot from "./chatbot"
+import chatBot from "./chatBot"
 
 export default combineReducers({
   router,
@@ -17,5 +17,5 @@ export default combineReducers({
   pastGoals,
   tips,
   welcome,
-  chatbot,
+  chatBot,
 })

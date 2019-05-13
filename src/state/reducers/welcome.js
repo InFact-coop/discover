@@ -1,8 +1,8 @@
 import { CLEAR_WELCOME_SCREEN } from "../types"
 
 const INITIAL_STATE = {
-  welcomeFlow: true,
-  startQuery: "Initial flow",
+  welcomeFlow: false,
+  startQuery: "Hey I'm back",
 }
 
 export default (state = INITIAL_STATE, { type }) => {

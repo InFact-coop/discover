@@ -6,6 +6,7 @@ const INITIAL_STATE = {
   sessionId: "",
   botInitialised: "NotInitialised",
   quote: {},
+  lastMessageSentAt: 0,
 }
 
 export default (state = INITIAL_STATE, { payload, type }) => {

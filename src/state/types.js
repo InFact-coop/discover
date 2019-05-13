@@ -39,5 +39,5 @@ export const ADD_QUOTES_DATA = "ADD_QUOTES_DATA"
 // initial flow
 export const CLEAR_WELCOME_SCREEN = "CLEAR_WELCOME_SCREEN"
 
-//chatbot
+//chatBot
 export const SAVE_CONVERSATION = "SAVE_CONVERSATION"

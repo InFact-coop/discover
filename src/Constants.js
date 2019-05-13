@@ -34,6 +34,13 @@ export const ExternalLink = "ExternalLink"
 export const NewFlow = "NewFlow"
 
 // bot initialisation status
+
 export const NotInitialised = "NotInitialised"
 export const Initialising = "Initialising"
 export const Initialised = "Initialised"
+
+// bot message states
+
+export const User = "User"
+export const Bot = "Bot"
+export const Typing = "Typing"
