@@ -4,4 +4,9 @@
 
 body {
   color: var(--dark-gray);
+  overflow-y: hidden;
+}
+
+html {
+  overflow-y: hidden;
 }
