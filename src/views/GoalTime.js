@@ -77,7 +77,9 @@ class GoalTime extends Component {
 
   componentDidMount() {
     const { staticData, timeOfDay } = this.props
-    const [hours, minutes] = timeOfDay.time.split(":")
+
+    const [hours, minutes] =
+      timeOfDay.time === ":" ? ["", ""] : timeOfDay.time.split(":")
     this.setState({
       hours,
       minutes,
@@ -115,7 +117,13 @@ class GoalTime extends Component {
     const { times, hours, minutes } = this.state
     const selectedTime = times.filter(({ selected }) => selected)[0].title
     selectTimeOfDay(selectedTime)
-    changeTime(`${hours}:${minutes}`)
+
+    let time = ""
+    if (hours === "") time = `:`
+    else if (hours && minutes === "") time = `${hours}:00`
+    else time = `${hours}:${minutes}`
+
+    changeTime(time)
   }
 
   setInvalid = () => this.setState({ valid: false, submitted: true })
@@ -150,7 +158,7 @@ class GoalTime extends Component {
           <div className="relative mb4">
             <_Title className="mv2">Awesome!</_Title>
             <_Description>
-              Okay, And when do you think you are most likely to work on your
+              Okay, and when do you think you are most likely to work on your
               goal?
             </_Description>
             <ValidationMsg valid={valid} bottom="-22px">
@@ -184,6 +192,9 @@ class GoalTime extends Component {
                 value={hours}
                 onChange={this.onInputChange}
               >
+                <option value="" selected>
+                  --
+                </option>
                 <option value="00">00</option>
                 <option value="01">01</option>
                 <option value="02">02</option>
@@ -217,6 +228,9 @@ class GoalTime extends Component {
                 value={minutes}
                 onChange={this.onInputChange}
               >
+                <option value="" selected>
+                  --
+                </option>
                 <option value="00">00</option>
                 <option value="05">05</option>
                 <option value="10">10</option>

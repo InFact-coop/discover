@@ -51,6 +51,8 @@ class GoalDetails extends Component {
       techniques,
     } = this.props
 
+    const timeOfDaySet = timeOfDay.time !== ":"
+
     const techniqueToLink = technique => {
       const _LinkToTips = () => (
         <u className="blue" onClick={() => this.goToTips(technique)}>
@@ -122,9 +124,13 @@ class GoalDetails extends Component {
           return (
             <_Container>
               <_TextMono>preferably</_TextMono>
-              <_TextSans>
-                {timeOfDay.description}, at {timeOfDay.time}
-              </_TextSans>
+              {timeOfDaySet ? (
+                <_TextSans>
+                  {timeOfDay.description}, at {timeOfDay.time}
+                </_TextSans>
+              ) : (
+                <_TextSans>{timeOfDay.description}</_TextSans>
+              )}
             </_Container>
           )
         return <div />
