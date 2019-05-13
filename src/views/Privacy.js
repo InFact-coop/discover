@@ -18,7 +18,7 @@ const _Bold = styled.span.attrs({
 })``
 
 const _BoldHeading = styled.p.attrs({
-  className: "b mb2",
+  className: "b mb2 blue",
 })``
 
 const _Container = styled.div.attrs({
@@ -66,7 +66,7 @@ const Privacy = () => (
           seriously and all personal data is treated as confidential.
         </p>
         <p className="mb1">
-          This policy was last reviewed and updated in December 2018.
+          This policy was last reviewed and updated in May 2019.
         </p>
       </_SmallSection>
       <_SmallSection>
@@ -102,7 +102,7 @@ const Privacy = () => (
           <_Bold>Data it processes and why:</_Bold>
         </p>
         <p className="mb1">
-          Google analytics is a business analytics tool which collects
+          Google Analytics is a business analytics tool which collects
           analytical data from the website. This data is used for service
           improvement. Google analytics privacy policy can be found&nbsp;
           <a href="https://policies.google.com/privacy">here.</a>
@@ -110,7 +110,7 @@ const Privacy = () => (
         <p>
           Before you submit any information, it will be made clear to you why we
           are asking for specific information, and it is up to you whether you
-          provide it. The trust does not and will never sell any data.
+          provide it. The Trust does not and will never sell any data.
         </p>
       </_SmallSection>
       <_SmallSection>
@@ -241,7 +241,19 @@ const Privacy = () => (
         <p>
           We may amend this policy in the future to ensure it is kept up to date
           with legal requirements. We will notify you when we make any changes
-          to this policy and invite you to review
+          to this policy.
+        </p>
+      </_SmallSection>
+      <_SmallSection>
+        <p>
+          <_BoldHeading>Copyright Statement</_BoldHeading>
+        </p>
+        <p className="mb1"> ©South London and Maudsley NHS Foundation Trust </p>
+        <p>
+          All rights reserved. No part of this app may be reproduced or
+          transmitted in any form or by any means without the prior permission
+          of the DISCOVER Team in accordance with the provisions of the
+          Copyright, Designs and Patents Act 1988.
         </p>
       </_SmallSection>
       <_SmallSection>
