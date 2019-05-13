@@ -1,12 +1,17 @@
 import { Component } from "react"
 import styled from "styled-components"
 import PropTypes from "prop-types"
+import { breakpoint } from "../styles/utils"
 
 const _CardContainer = styled.div.attrs({
   className: "br4 ma1",
 })`
   border: ${({ selected }) =>
     selected ? "thin solid var(--gray)" : "thin solid transparent"};
+
+  ${breakpoint.supersmall`
+  margin-top: var(--spacing-small);
+  `};
 `
 
 const _Card = styled.div.attrs({
@@ -17,7 +22,12 @@ const _Card = styled.div.attrs({
     width: ${width};
     height: ${height};
   `};
+
+  ${breakpoint.supersmall`
+  ${({ height }) => (height === "15rem" ? `height: 5rem` : `height: 12rem`)};
+  `};
 `
+
 const _CardTitle = styled.p.attrs({
   className: "font-3 sans mt4 mb2 tc",
 })`
@@ -32,6 +42,10 @@ const _CardDescription = styled.p.attrs({
 const _CardImage = styled.img.attrs({
   className: "ph4 mb4",
 })`
+  ${breakpoint.supersmall`
+display: none;
+`};
+
   height: 9rem;
   position: absolute;
   bottom: 0;

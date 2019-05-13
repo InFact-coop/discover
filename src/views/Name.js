@@ -78,7 +78,7 @@ class Name extends Component {
           <_BotIcon src={botIcon} />
           <_Title className="ma2">
             OK,
-            <br /> First things first!
+            <br /> first things first!
           </_Title>
           <_Question>What's your name my friend?</_Question>
           <InputWithValidation
