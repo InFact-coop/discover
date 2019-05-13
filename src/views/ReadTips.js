@@ -66,10 +66,9 @@ const _TipScreen = styled.div.attrs({
 
   ${breakpoint.supersmall`
   background: ${({ bgIndex, maxIndex, topic }) => {
-    console.log("index", bgIndex, maxIndex, bgIndex === 4)
-    // if (bgIndex === maxIndex) return `url(${backgrounds[4]}), var(--light-blue)`
-    if ((bgIndex === 4) & (topic === "Procrastination tips"))
+    if (bgIndex === 4 && topic === "Procrastination tips")
       return `var(--light-blue)`
+    if (bgIndex === maxIndex) return `url(${backgrounds[4]}), var(--light-blue)`
     return `url(${backgrounds[bgIndex]}), var(--light-blue)`
   }};  
   background-size: cover;
@@ -97,7 +96,7 @@ const _Main = styled.div.attrs({})`
    `}
   padding-top: ${({ tipIndex }) => (tipIndex === 1 ? "150px" : "0px")};
   ${breakpoint.supersmall`
-  padding-top: ${({ tipIndex }) => (tipIndex === 1 ? "110px" : "0px")};
+  padding-top: ${({ tipIndex }) => (tipIndex === 1 ? "35vw" : "0px")};
   `};
 `
 

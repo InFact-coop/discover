@@ -3,7 +3,7 @@ import { css } from "styled-components"
 const breakpoint = {
   supersmall: (...args) =>
     css`
-      @media screen and (max-width: 320px) {
+      @media screen and (max-width: 360px) {
         ${css(...args)};
       }
     `,
