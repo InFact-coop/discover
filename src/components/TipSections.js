@@ -639,21 +639,21 @@ const Mindfulness1 = () => (
   <_Container>
     <_Title>Mindfulness top tips!</_Title>
     <_TipParagraph>
-      Our minds are very busy. We have 70,000 thoughts a day! Our thoughts can
-      drift to what might go wrong in the future, or to things that we think
-      we've done badly or had done to us in the past. Mindfulness is a way to
-      focus on the here-and-now.
+      Our minds are very busy. Research suggests we have over 70,000 thoughts a
+      day! Our thoughts can drift to what has happened in the past, or to what
+      might go wrong in the future. Mindfulness is a way to focus on the
+      here-and-now.
     </_TipParagraph>
     <_TipParagraph>
       Mindfulness is the act of concentrating on your breathing and body
-      sensations, and letting distressing thoughts go. Be aware of your breath,
-      and what is going on around you in the present moment. Practicing
-      mindfulness creates a peaceful mental environment.
+      sensations, and letting distressing thoughts go. That means being aware of
+      your breath, and what is going on around you in the present moment.
+      Practicing mindfulness creates a peaceful mental environment.
     </_TipParagraph>
     <_TipParagraph>
       The more you do it, the easier it gets, and the more you will notice the
       benefits! You could also try a mindfulness exercise on an app like
-      Headspace, Smiling Mind or Breathe.
+      Headspace or Smiling Mind.
     </_TipParagraph>
   </_Container>
 )
