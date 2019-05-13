@@ -652,8 +652,9 @@ const Mindfulness1 = () => (
     </_TipParagraph>
     <_TipParagraph>
       The more you do it, the easier it gets, and the more you will notice the
-      benefits! You could also try a mindfulness exercise on an app like
-      Headspace or Smiling Mind.
+      benefits! You could also try a mindfulness exercise on an app like{" "}
+      <_Link href="http://onelink.to/geu6gt">Headspace</_Link> or{" "}
+      <_Link href="http://onelink.to/vaypg4">Smiling Mind</_Link>.
     </_TipParagraph>
   </_Container>
 )
