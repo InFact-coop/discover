@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { breakpoint } from "../styles/utils"
 
 import {
   PROCRASTINATION_TIPS,
@@ -50,12 +51,17 @@ const _Container = styled.div.attrs({
     text-align: left;
     line-height: 20px;
   }
+  ${breakpoint.supersmall`
+font-size: 14px;
+line-height: 18px;`};
 `
 const _Title = styled.h1.attrs({
   className: "mono font-2 tc w-90 ",
 })`
   margin: 0 auto;
   margin-bottom: var(--spacing-small);
+  ${breakpoint.supersmall`
+  display: none`};
 `
 const _Link = styled.a.attrs({
   className: "b underline white",
@@ -475,7 +481,7 @@ const Problems1 = () => (
   <_Container>
     <_Title>Problem Solving top tips!</_Title>
     <_TipParagraph>
-      Problem solving has several key steps: Here they are:
+      Problem solving has several key steps. Here they are:
     </_TipParagraph>
     <_Numbers>
       <li>Define the exact problem you want to solve.</li>
@@ -521,6 +527,11 @@ const Breathing2 = () => (
       across your body and reach your mind. Gently bring your breathing back to
       a normal rate when you are ready.
     </_TipParagraph>
+  </_Container>
+)
+
+const Breathing3 = () => (
+  <_Container>
     <_TipParagraph>
       If you find it hard to do this on your own, you could try follow a guided
       breathing technique. You can find these on apps such as{" "}
@@ -628,7 +639,7 @@ const Mindfulness1 = () => (
   <_Container>
     <_Title>Mindfulness top tips!</_Title>
     <_TipParagraph>
-      Our minds our very busy. We have 70,000 thoughts a day! Our thoughts can
+      Our minds are very busy. We have 70,000 thoughts a day! Our thoughts can
       drift to what might go wrong in the future, or to things that we think
       we've done badly or had done to us in the past. Mindfulness is a way to
       focus on the here-and-now.
@@ -669,7 +680,7 @@ export const ThinkingTraps = [
 export const ThoughtChallenging = [ThoughtChallenging1, ThoughtChallenging2]
 export const ProblemSolving = [Problems1, Problems2]
 export const SleepTips = [Sleep1, Sleep2, Sleep3, Sleep4]
-export const BreathingTechs = [Breathing1, Breathing2]
+export const BreathingTechs = [Breathing1, Breathing2, Breathing3]
 export const RelaxationTips = [Relaxation1, Relaxation2]
 export const ThoughtSwitching = [Thoughts1, Thoughts2]
 export const FacingFears = [Fears1, Fears2]
