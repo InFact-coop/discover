@@ -1,6 +1,8 @@
 import { Component } from "react"
 import styled from "styled-components"
 
+import { isToday } from "../utils/date"
+
 const _QuoteContainer = styled.div.attrs({
   className: ({ displayClasses }) =>
     `w-100 sans flex-column fixed justify-center items-center ph4 pv4 bg-white shadow-2 z-2 tc ${displayClasses}`,
@@ -23,9 +25,9 @@ class Quote extends Component {
   }
 
   componentDidMount() {
-    const { welcomeFlow } = this.props
+    const { welcomeFlow, lastLoggedOn } = this.props
 
-    if (welcomeFlow) return this.setState({ displayClasses: "dn" })
+    if (welcomeFlow || isToday(lastLoggedOn)) return this.setState({ displayClasses: "dn" })
     setTimeout(this.hideQuoteShowBot, 3000)
   }
 

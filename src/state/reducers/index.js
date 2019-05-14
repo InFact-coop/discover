@@ -7,6 +7,7 @@ import currentGoal from "./currentGoal"
 import pastGoals from "./pastGoals"
 import tips from "./tips"
 import welcome from "./welcome"
+import date from "./date"
 
 export default combineReducers({
   router,
@@ -16,4 +17,5 @@ export default combineReducers({
   pastGoals,
   tips,
   welcome,
+  date
 })

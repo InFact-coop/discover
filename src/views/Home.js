@@ -5,10 +5,12 @@ import axios from "axios"
 import * as r from "ramda" //eslint-disable-line import/no-namespace
 
 import { getAvatarImg } from "../utils/avatar"
+import { isToday } from "../utils/date"
 
 import { changeView } from "../state/actions/router"
 import { selectTopic, setPageIndex } from "../state/actions/tips"
 import { addQuotesData } from "../state/actions/staticData"
+import { setLoggedOnDate } from "../state/actions/date"
 
 import NavBar from "../components/NavBar"
 import ExampleGoal from "../components/ExampleGoal"
@@ -118,14 +120,14 @@ const _MessageWithAvatar = ({
   userAvatar,
   dotty,
 }) => (
-  <_MessageAvatarWrapper user={user}>
-    <_Avatar src={botIcon} className={user ? "dn" : "mr1"} />
-    <_Message dotty={dotty} className={messageClass} user={user}>
-      {children}
-    </_Message>
-    <_Avatar src={getAvatarImg(userAvatar)} className={user ? "ml1" : "dn"} />
-  </_MessageAvatarWrapper>
-)
+    <_MessageAvatarWrapper user={user}>
+      <_Avatar src={botIcon} className={user ? "dn" : "mr1"} />
+      <_Message dotty={dotty} className={messageClass} user={user}>
+        {children}
+      </_Message>
+      <_Avatar src={getAvatarImg(userAvatar)} className={user ? "ml1" : "dn"} />
+    </_MessageAvatarWrapper>
+  )
 
 const _MessageContainer = styled.div.attrs({
   className: "flex flex-column message-container pb3 mh3",
@@ -232,7 +234,9 @@ class Home extends Component {
   }
 
   componentDidMount = () => {
-    const { welcome } = this.props
+    const { welcome, date: { lastLoggedOn } } = this.props
+
+    if (!isToday(lastLoggedOn)) this.setAppOnline(new Date())
 
     if (!window.navigator.onLine) return this.setBotOffline()
     window.removeEventListener("online", this.initBot)
@@ -252,6 +256,10 @@ class Home extends Component {
     window.removeEventListener("online", this.initBot)
   }
 
+  setAppOnline = (date) => {
+    this.props.setLoggedOnDate && this.props.setLoggedOnDate(date)
+  }
+
   getSheet = async () => {
     await axios
       .get("/api/user/sheets")
@@ -260,8 +268,8 @@ class Home extends Component {
   }
 
   setQuote = () => {
-    const { quotes } = this.props
-    if (quotes) {
+    const { quotes, date } = this.props
+    if (quotes && isToday(date.lastLoggedOn)) {
       const random = Math.floor(Math.random() * quotes.length)
       this.setState({ quote: r.nth(random, quotes) })
     }
@@ -396,7 +404,7 @@ class Home extends Component {
 
   render() {
     const { postback, conversation, quote } = this.state
-    const { changeView, welcome, profile } = this.props
+    const { changeView, welcome, profile, date } = this.props
 
     return (
       <div className="vh-100">
@@ -404,18 +412,19 @@ class Home extends Component {
           quote={quote}
           initBot={this.initBot}
           welcomeFlow={welcome.welcomeFlow}
+          lastLoggedOn={date.lastLoggedOn}
         />
         <GlobalStyle />
         {welcome.welcomeFlow ? (
           ""
         ) : (
-          <img
-            src={exit}
-            alt="exit chat"
-            className="fixed top-0 right-0"
-            onClick={this.onRestartClick}
-          />
-        )}
+            <img
+              src={exit}
+              alt="exit chat"
+              className="fixed top-0 right-0"
+              onClick={this.onRestartClick}
+            />
+          )}
         <_ChatContainer welcome={welcome.welcomeFlow}>
           <_MessageContainer>
             <RenderConversation
@@ -428,16 +437,16 @@ class Home extends Component {
           {r.isEmpty(postback) ? (
             <div />
           ) : (
-            <_OptionContainer number={postback.payload.length}>
-              <RenderOptions
-                {...postback}
-                onInternalLinkClick={this.onInternalLinkClick}
-                onOptionClick={this.onOptionClick}
-                number={postback.payload.length}
-                changeView={changeView}
-              />
-            </_OptionContainer>
-          )}
+              <_OptionContainer number={postback.payload.length}>
+                <RenderOptions
+                  {...postback}
+                  onInternalLinkClick={this.onInternalLinkClick}
+                  onOptionClick={this.onOptionClick}
+                  number={postback.payload.length}
+                  changeView={changeView}
+                />
+              </_OptionContainer>
+            )}
         </_ChatContainer>
         {welcome.welcomeFlow ? "" : <NavBar />}
       </div>
@@ -446,10 +455,11 @@ class Home extends Component {
 }
 
 export default connect(
-  ({ profile, welcome, staticData: { quotes } }) => ({
+  ({ profile, welcome, staticData: { quotes }, date }) => ({
     profile,
     welcome,
     quotes,
+    date
   }),
-  { changeView, selectTopic, setPageIndex, addQuotesData }
+  { changeView, selectTopic, setPageIndex, addQuotesData, setLoggedOnDate }
 )(Home)

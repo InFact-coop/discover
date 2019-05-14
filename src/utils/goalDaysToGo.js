@@ -1,4 +1,4 @@
-import normalizeDate from "./normalizeDate"
+import { normalizeDate } from "./date"
 
 const daysToGo = (endDate) => {
   const deadline = Date.parse(endDate);

@@ -1,4 +1,4 @@
-import normalizeDate from "./normalizeDate"
+import { normalizeDate } from "./date"
 
 const getCurrentGoalProgress = (startDate, endDate) => {
   const deadline = normalizeDate(Date.parse(endDate))

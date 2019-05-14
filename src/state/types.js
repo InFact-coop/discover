@@ -38,3 +38,6 @@ export const ADD_QUOTES_DATA = "ADD_QUOTES_DATA"
 
 // initial flow
 export const CLEAR_WELCOME_SCREEN = "CLEAR_WELCOME_SCREEN"
+
+// date
+export const SET_LOGGED_ON_DATE = "SET_LOGGED_ON_DATE"
