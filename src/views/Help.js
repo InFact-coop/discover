@@ -18,7 +18,7 @@ const _BoldUnderline = styled.a.attrs({
 })``
 
 const _Container = styled.div.attrs({
-  className: "mh3 font-4 sans dark-gray",
+  className: "mh3 font-4 sans dark-gray pb6",
 })``
 
 const _SmallSection = styled.div.attrs({

@@ -138,12 +138,7 @@ const INITIAL_STATE = {
   durations: ["1 month", "2 months", "3 months"],
   times: [
     {
-      title: "Before school",
-      image: before_school,
-      backgroundColor: "--light-green",
-    },
-    {
-      title: "After School",
+      title: "All day",
       image: after_school,
       backgroundColor: "--light-red",
     },
@@ -153,8 +148,8 @@ const INITIAL_STATE = {
       backgroundColor: "--light-yellow",
     },
     {
-      title: "In the evening",
-      image: in_the_evening,
+      title: "At lunch time",
+      image: at_lunch_time,
       backgroundColor: "--light-purple",
     },
     {
@@ -163,19 +158,9 @@ const INITIAL_STATE = {
       backgroundColor: "--light-blue",
     },
     {
-      title: "Before going to bed",
+      title: "In the evening",
       image: before_bed,
       backgroundColor: "--light-green",
-    },
-    {
-      title: "When I wake up",
-      image: when_wake_up,
-      backgroundColor: "--light-red",
-    },
-    {
-      title: "At lunch time",
-      image: at_lunch_time,
-      backgroundColor: "--light-yellow",
     },
   ],
   quotes: [],
