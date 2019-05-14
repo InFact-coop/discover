@@ -10,7 +10,7 @@ import { isToday } from "../utils/date"
 import { changeView } from "../state/actions/router"
 import { selectTopic, setPageIndex } from "../state/actions/tips"
 import { addQuotesData } from "../state/actions/staticData"
-import { setLoggedOnDate } from "../state/actions/date"
+import { setLoggedOnDate } from "../state/actions/profile"
 
 import NavBar from "../components/NavBar"
 import ExampleGoal from "../components/ExampleGoal"
@@ -120,14 +120,14 @@ const _MessageWithAvatar = ({
   userAvatar,
   dotty,
 }) => (
-    <_MessageAvatarWrapper user={user}>
-      <_Avatar src={botIcon} className={user ? "dn" : "mr1"} />
-      <_Message dotty={dotty} className={messageClass} user={user}>
-        {children}
-      </_Message>
-      <_Avatar src={getAvatarImg(userAvatar)} className={user ? "ml1" : "dn"} />
-    </_MessageAvatarWrapper>
-  )
+  <_MessageAvatarWrapper user={user}>
+    <_Avatar src={botIcon} className={user ? "dn" : "mr1"} />
+    <_Message dotty={dotty} className={messageClass} user={user}>
+      {children}
+    </_Message>
+    <_Avatar src={getAvatarImg(userAvatar)} className={user ? "ml1" : "dn"} />
+  </_MessageAvatarWrapper>
+)
 
 const _MessageContainer = styled.div.attrs({
   className: "flex flex-column message-container pb3 mh3",
@@ -232,20 +232,34 @@ class Home extends Component {
     postback: {},
     botInitialised: NotInitialised,
     quote: {},
+    quoteVanished: false,
   }
 
-  componentDidMount = () => {
-    const { welcome, date: { lastLoggedOn } } = this.props
+  componentDidMount = async () => {
+    const {
+      profile: { welcomeFlow, lastLoggedOn },
+      quotes,
+    } = this.props
 
-    if (!isToday(lastLoggedOn)) this.setAppOnline(new Date())
+    if (welcomeFlow) this.initBot()
+
+    if (!welcomeFlow && !isToday(lastLoggedOn)) {
+      this.props.setLoggedOnDate(new Date())
+    }
 
     if (!window.navigator.onLine) return this.setBotOffline()
+
     window.removeEventListener("online", this.initBot)
 
-    if (welcome.welcomeFlow) this.initBot()
+    await axios
+      .get("/api/user/sheets")
+      .then(res => res.data)
+      .then(quotes => this.props.addQuotesData(quotes))
 
-    this.getSheet()
-    this.setQuote()
+    if (quotes && isToday(lastLoggedOn)) {
+      const random = Math.floor(Math.random() * quotes.length)
+      this.setState({ quote: r.nth(random, quotes) })
+    }
   }
 
   componentDidUpdate = () => {
@@ -257,37 +271,18 @@ class Home extends Component {
     window.removeEventListener("online", this.initBot)
   }
 
-  setAppOnline = (date) => {
-    this.props.setLoggedOnDate && this.props.setLoggedOnDate(date)
-  }
-
-  getSheet = async () => {
-    await axios
-      .get("/api/user/sheets")
-      .then(res => res.data)
-      .then(quotes => this.props.addQuotesData(quotes))
-  }
-
-  setQuote = () => {
-    const { quotes, date } = this.props
-    if (quotes && isToday(date.lastLoggedOn)) {
-      const random = Math.floor(Math.random() * quotes.length)
-      this.setState({ quote: r.nth(random, quotes) })
-    }
-  }
-
   initBot = async () => {
     if (this.state.botInitialised === NotInitialised) {
       this.setState({ botInitialised: Initialising })
 
-      const { welcome } = this.props
+      const { profile } = this.props
       const sessionId = Math.random()
         .toString(36)
         .substr(2, 10)
 
       const { data } = await axios.get("/api/user/dialogflow", {
         params: {
-          query: welcome.startQuery,
+          query: profile.startQuery,
           sessionId,
         },
       })
@@ -370,7 +365,7 @@ class Home extends Component {
         conversation: [...r.dropLast(1, prevState.conversation), newMessage],
       }))
       this.setMessageDelay({ ...data, responses: r.drop(1, data.responses) })
-    }, Math.floor(Math.random() * 2000) + 500)
+    }, 0)
   }
 
   onOptionClick = async ({ content, addContext, query, type }) => {
@@ -403,30 +398,34 @@ class Home extends Component {
     this.setMessageDelay(data)
   }
 
+  setQuoteVanished = () => {
+    this.setState({ quoteVanished: true })
+  }
+
   render() {
     const { postback, conversation, quote } = this.state
-    const { changeView, welcome, profile, date } = this.props
+    const { changeView, profile } = this.props
 
     return (
       <div className="vh-100">
         <Quote
           quote={quote}
-          initBot={this.initBot}
-          welcomeFlow={welcome.welcomeFlow}
-          lastLoggedOn={date.lastLoggedOn}
+          setQuoteVanished={this.setQuoteVanished}
+          welcomeFlow={profile.welcomeFlow}
+          lastLoggedOn={profile.lastLoggedOn}
         />
         <GlobalStyle />
-        {welcome.welcomeFlow ? (
+        {profile.welcomeFlow ? (
           ""
         ) : (
-            <img
-              src={exit}
-              alt="exit chat"
-              className="fixed top-0 right-0"
-              onClick={this.onRestartClick}
-            />
-          )}
-        <_ChatContainer welcome={welcome.welcomeFlow}>
+          <img
+            src={exit}
+            alt="exit chat"
+            className="fixed top-0 right-0"
+            onClick={this.onRestartClick}
+          />
+        )}
+        <_ChatContainer welcome={profile.welcomeFlow}>
           <_MessageContainer>
             <RenderConversation
               conversation={conversation}
@@ -438,29 +437,27 @@ class Home extends Component {
           {r.isEmpty(postback) ? (
             <div />
           ) : (
-              <_OptionContainer number={postback.payload.length}>
-                <RenderOptions
-                  {...postback}
-                  onInternalLinkClick={this.onInternalLinkClick}
-                  onOptionClick={this.onOptionClick}
-                  number={postback.payload.length}
-                  changeView={changeView}
-                />
-              </_OptionContainer>
-            )}
+            <_OptionContainer number={postback.payload.length}>
+              <RenderOptions
+                {...postback}
+                onInternalLinkClick={this.onInternalLinkClick}
+                onOptionClick={this.onOptionClick}
+                number={postback.payload.length}
+                changeView={changeView}
+              />
+            </_OptionContainer>
+          )}
         </_ChatContainer>
-        {welcome.welcomeFlow ? "" : <NavBar />}
+        {profile.welcomeFlow ? "" : <NavBar />}
       </div>
     )
   }
 }
 
 export default connect(
-  ({ profile, welcome, staticData: { quotes }, date }) => ({
+  ({ profile, staticData: { quotes } }) => ({
     profile,
-    welcome,
     quotes,
-    date
   }),
   { changeView, selectTopic, setPageIndex, addQuotesData, setLoggedOnDate }
 )(Home)
