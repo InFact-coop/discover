@@ -44,11 +44,11 @@ The `GCS_KEYFILE` env variable is for accessing [Dialogflow](https://dialogflow.
 
 3. Run `yarn install` to install dependencies.
 
-4. To start the app locally, run `yarn run server` and `yarn run neutrino-start` - the app will then be accessible on http://localhost:5000
+4. To start the app locally, run `yarn server` and `yarn neutrino-start` - the app will then be accessible on http://localhost:5000
 
 5. In development, you may wish to increase the speed of the bot messages and skip the onboarding phase. To do so:
 
    - navigate to src/views/Home.js and replace `Math.floor(Math.random() * 2000) + 500` on line 364 with `0`
    - navigate to src/state/reducers/welcome.js and replace lines 4 and 5 with `welcomeFlow: false, startQuery: "Hey I'm back",`
 
-6. If you wish to debug the production build: `yarn run build`
+6. If you wish to debug the production build run `yarn build` and `yarn server` and then go to `localhost:4000`
