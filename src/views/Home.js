@@ -8,7 +8,6 @@ import { getAvatarImg } from "../utils/avatar"
 
 import { changeView } from "../state/actions/router"
 import { selectTopic, setPageIndex } from "../state/actions/tips"
-import { addQuotesData } from "../state/actions/staticData"
 
 import NavBar from "../components/NavBar"
 import ExampleGoal from "../components/ExampleGoal"
@@ -229,57 +228,48 @@ class Home extends Component {
     conversation: [],
     postback: {},
     botInitialised: NotInitialised,
-    quote: {},
+    quoteVanished: false,
   }
 
-  componentDidMount = () => {
-    const { welcome } = this.props
+  componentDidMount = async () => {
+    const {
+      profile: { welcomeFlow },
+    } = this.props
+
+    if (welcomeFlow) {
+      this.initBot()
+    }
 
     if (!window.navigator.onLine) return this.setBotOffline()
+
     window.removeEventListener("online", this.initBot)
-
-    if (welcome.welcomeFlow) this.initBot()
-
-    this.getSheet()
-    this.setQuote()
   }
 
-  componentDidUpdate = () => {
+  componentDidUpdate = (prevProps, prevState) => {
     const elem = document.querySelector(".message-container")
     elem.scrollTop = elem.scrollHeight
+
+    if (prevState.quoteVanished !== this.state.quoteVanished) {
+      this.initBot()
+    }
   }
 
   componentWillUnmount = () => {
     window.removeEventListener("online", this.initBot)
   }
 
-  getSheet = async () => {
-    await axios
-      .get("/api/user/sheets")
-      .then(res => res.data)
-      .then(quotes => this.props.addQuotesData(quotes))
-  }
-
-  setQuote = () => {
-    const { quotes } = this.props
-    if (quotes) {
-      const random = Math.floor(Math.random() * quotes.length)
-      this.setState({ quote: r.nth(random, quotes) })
-    }
-  }
-
   initBot = async () => {
     if (this.state.botInitialised === NotInitialised) {
       this.setState({ botInitialised: Initialising })
 
-      const { welcome } = this.props
+      const { profile } = this.props
       const sessionId = Math.random()
         .toString(36)
         .substr(2, 10)
 
       const { data } = await axios.get("/api/user/dialogflow", {
         params: {
-          query: welcome.startQuery,
+          query: profile.startQuery,
           sessionId,
         },
       })
@@ -362,7 +352,7 @@ class Home extends Component {
         conversation: [...r.dropLast(1, prevState.conversation), newMessage],
       }))
       this.setMessageDelay({ ...data, responses: r.drop(1, data.responses) })
-    }, Math.floor(Math.random() * 2000) + 500)
+    }, 0)
   }
 
   onOptionClick = async ({ content, addContext, query, type }) => {
@@ -395,19 +385,27 @@ class Home extends Component {
     this.setMessageDelay(data)
   }
 
+  setQuoteVanished = () => {
+    this.setState({ quoteVanished: true })
+  }
+
   render() {
-    const { postback, conversation, quote } = this.state
-    const { changeView, welcome, profile } = this.props
+    const { postback, conversation } = this.state
+    const {
+      changeView,
+      profile: { quote, welcomeFlow, lastLoggedOn, avatar },
+    } = this.props
 
     return (
       <div className="vh-100">
         <Quote
           quote={quote}
-          initBot={this.initBot}
-          welcomeFlow={welcome.welcomeFlow}
+          setQuoteVanished={this.setQuoteVanished}
+          welcomeFlow={welcomeFlow}
+          lastLoggedOn={lastLoggedOn}
         />
         <GlobalStyle />
-        {welcome.welcomeFlow ? (
+        {welcomeFlow ? (
           ""
         ) : (
           <img
@@ -417,12 +415,12 @@ class Home extends Component {
             onClick={this.onRestartClick}
           />
         )}
-        <_ChatContainer welcome={welcome.welcomeFlow}>
+        <_ChatContainer welcome={welcomeFlow}>
           <_MessageContainer>
             <RenderConversation
               conversation={conversation}
               onLinkClick={this.onInternalLinkClick}
-              userAvatar={profile.avatar}
+              userAvatar={avatar}
             />
           </_MessageContainer>
 
@@ -440,17 +438,20 @@ class Home extends Component {
             </_OptionContainer>
           )}
         </_ChatContainer>
-        {welcome.welcomeFlow ? "" : <NavBar />}
+        {welcomeFlow ? "" : <NavBar />}
       </div>
     )
   }
 }
 
 export default connect(
-  ({ profile, welcome, staticData: { quotes } }) => ({
+  ({ profile, staticData: { quotes } }) => ({
     profile,
-    welcome,
     quotes,
   }),
-  { changeView, selectTopic, setPageIndex, addQuotesData }
+  {
+    changeView,
+    selectTopic,
+    setPageIndex,
+  }
 )(Home)

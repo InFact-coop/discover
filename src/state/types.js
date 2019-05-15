@@ -25,6 +25,9 @@ export const TOGGLE_SELECT_TECHNIQUE = "TOGGLE_SELECT_TECHNIQUE"
 // profile
 export const CHANGE_NAME = "CHANGE_NAME"
 export const CHANGE_AVATAR = "CHANGE_AVATAR"
+export const CLEAR_WELCOME_SCREEN = "CLEAR_WELCOME_SCREEN"
+export const SET_LOGGED_ON_DATE = "SET_LOGGED_ON_DATE"
+export const SET_DAILY_QUOTE = "SET_DAILY_QUOTE"
 
 //previous goals
 export const ARCHIVE_GOAL = "ARCHIVE_GOAL"
@@ -35,6 +38,3 @@ export const SET_PAGE_INDEX = "SET_PAGE_INDEX"
 
 // staticData
 export const ADD_QUOTES_DATA = "ADD_QUOTES_DATA"
-
-// initial flow
-export const CLEAR_WELCOME_SCREEN = "CLEAR_WELCOME_SCREEN"
