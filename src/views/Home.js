@@ -9,8 +9,7 @@ import { isToday } from "../utils/date"
 
 import { changeView } from "../state/actions/router"
 import { selectTopic, setPageIndex } from "../state/actions/tips"
-import { addQuotesData } from "../state/actions/staticData"
-import { setLoggedOnDate } from "../state/actions/profile"
+import { setLoggedOnDate, setDailyQuote } from "../state/actions/profile"
 
 import NavBar from "../components/NavBar"
 import ExampleGoal from "../components/ExampleGoal"
@@ -231,40 +230,33 @@ class Home extends Component {
     conversation: [],
     postback: {},
     botInitialised: NotInitialised,
-    quote: {},
     quoteVanished: false,
   }
 
   componentDidMount = async () => {
     const {
       profile: { welcomeFlow, lastLoggedOn },
+      setLoggedOnDate,
+      setDailyQuote,
       quotes,
     } = this.props
 
-    if (welcomeFlow) this.initBot()
-
-    if (!welcomeFlow && !isToday(lastLoggedOn)) {
-      this.props.setLoggedOnDate(new Date())
+    if (welcomeFlow) {
+      this.initBot()
     }
 
     if (!window.navigator.onLine) return this.setBotOffline()
 
     window.removeEventListener("online", this.initBot)
-
-    await axios
-      .get("/api/user/sheets")
-      .then(res => res.data)
-      .then(quotes => this.props.addQuotesData(quotes))
-
-    if (quotes && isToday(lastLoggedOn)) {
-      const random = Math.floor(Math.random() * quotes.length)
-      this.setState({ quote: r.nth(random, quotes) })
-    }
   }
 
-  componentDidUpdate = () => {
+  componentDidUpdate = (prevProps, prevState) => {
     const elem = document.querySelector(".message-container")
     elem.scrollTop = elem.scrollHeight
+
+    if (prevState.quoteVanished !== this.state.quoteVanished) {
+      this.initBot()
+    }
   }
 
   componentWillUnmount = () => {
@@ -403,19 +395,22 @@ class Home extends Component {
   }
 
   render() {
-    const { postback, conversation, quote } = this.state
-    const { changeView, profile } = this.props
+    const { postback, conversation } = this.state
+    const {
+      changeView,
+      profile: { quote, welcomeFlow, lastLoggedOn, avatar },
+    } = this.props
 
     return (
       <div className="vh-100">
         <Quote
           quote={quote}
           setQuoteVanished={this.setQuoteVanished}
-          welcomeFlow={profile.welcomeFlow}
-          lastLoggedOn={profile.lastLoggedOn}
+          welcomeFlow={welcomeFlow}
+          lastLoggedOn={lastLoggedOn}
         />
         <GlobalStyle />
-        {profile.welcomeFlow ? (
+        {welcomeFlow ? (
           ""
         ) : (
           <img
@@ -425,12 +420,12 @@ class Home extends Component {
             onClick={this.onRestartClick}
           />
         )}
-        <_ChatContainer welcome={profile.welcomeFlow}>
+        <_ChatContainer welcome={welcomeFlow}>
           <_MessageContainer>
             <RenderConversation
               conversation={conversation}
               onLinkClick={this.onInternalLinkClick}
-              userAvatar={profile.avatar}
+              userAvatar={avatar}
             />
           </_MessageContainer>
 
@@ -448,7 +443,7 @@ class Home extends Component {
             </_OptionContainer>
           )}
         </_ChatContainer>
-        {profile.welcomeFlow ? "" : <NavBar />}
+        {welcomeFlow ? "" : <NavBar />}
       </div>
     )
   }
@@ -459,5 +454,11 @@ export default connect(
     profile,
     quotes,
   }),
-  { changeView, selectTopic, setPageIndex, addQuotesData, setLoggedOnDate }
+  {
+    changeView,
+    selectTopic,
+    setPageIndex,
+    setLoggedOnDate,
+    setDailyQuote,
+  }
 )(Home)

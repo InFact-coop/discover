@@ -3,6 +3,7 @@ import {
   CHANGE_AVATAR,
   CLEAR_WELCOME_SCREEN,
   SET_LOGGED_ON_DATE,
+  SET_DAILY_QUOTE,
 } from "../types"
 
 const INITIAL_STATE = {
@@ -10,7 +11,7 @@ const INITIAL_STATE = {
   avatar: "",
   welcomeFlow: true,
   startQuery: "Initial flow",
-  quote: "",
+  quote: { author: "", quote: "" },
   lastLoggedOn: new Date("1970-01-01"),
 }
 
@@ -28,6 +29,8 @@ export default (state = INITIAL_STATE, { payload, type }) => {
       }
     case SET_LOGGED_ON_DATE:
       return { ...state, lastLoggedOn: payload }
+    case SET_DAILY_QUOTE:
+      return { ...state, quote: payload }
     default:
       return state
   }

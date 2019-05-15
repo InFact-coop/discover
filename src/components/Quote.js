@@ -25,15 +25,16 @@ class Quote extends Component {
   }
 
   componentDidMount() {
-    const { welcomeFlow, lastLoggedOn } = this.props
+    const { welcomeFlow } = this.props
 
-    if (welcomeFlow || isToday(lastLoggedOn)) return this.setState({ displayClasses: "dn" })
+    if (welcomeFlow) return this.setState({ displayClasses: "dn" })
+
     setTimeout(this.hideQuoteShowBot, 3000)
   }
 
   hideQuoteShowBot = () => {
-    const { initBot } = this.props
-    initBot()
+    const { setQuoteVanished } = this.props
+    setQuoteVanished()
     this.setState({
       displayClasses: "flex o-0 pointer-events-none up-8rem",
     })
