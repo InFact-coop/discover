@@ -5,11 +5,9 @@ import axios from "axios"
 import * as r from "ramda" //eslint-disable-line import/no-namespace
 
 import { getAvatarImg } from "../utils/avatar"
-import { isToday } from "../utils/date"
 
 import { changeView } from "../state/actions/router"
 import { selectTopic, setPageIndex } from "../state/actions/tips"
-import { setLoggedOnDate, setDailyQuote } from "../state/actions/profile"
 
 import NavBar from "../components/NavBar"
 import ExampleGoal from "../components/ExampleGoal"
@@ -235,10 +233,7 @@ class Home extends Component {
 
   componentDidMount = async () => {
     const {
-      profile: { welcomeFlow, lastLoggedOn },
-      setLoggedOnDate,
-      setDailyQuote,
-      quotes,
+      profile: { welcomeFlow },
     } = this.props
 
     if (welcomeFlow) {
@@ -458,7 +453,5 @@ export default connect(
     changeView,
     selectTopic,
     setPageIndex,
-    setLoggedOnDate,
-    setDailyQuote,
   }
 )(Home)

@@ -48,6 +48,20 @@ class Router extends Component {
     }
   }
 
+  componentDidUpdate() {
+    const {
+      setDailyQuote,
+      setLoggedOnDate,
+      profile,
+      staticData: { quotes },
+    } = this.props
+
+    if (!isToday(profile.lastLoggedOn)) {
+      const random = Math.floor(Math.random() * quotes.length)
+      setDailyQuote(r.nth(random, quotes))
+      setLoggedOnDate(new Date())
+    }
+  }
   render() {
     const { router } = this.props
     const CurrentView = require(`./${router.currentView}`).default
@@ -56,9 +70,10 @@ class Router extends Component {
 }
 
 export default connect(
-  ({ router, profile }) => ({
+  ({ router, profile, staticData }) => ({
     router,
     profile,
+    staticData,
   }),
   { addQuotesData, setDailyQuote, setLoggedOnDate }
 )(Router)
