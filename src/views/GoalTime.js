@@ -4,6 +4,11 @@ import styled, { createGlobalStyle } from "styled-components"
 import PropTypes from "prop-types"
 import * as r from "ramda" //eslint-disable-line
 
+import {
+  addStopBounceListener,
+  removeStopBounceListener,
+} from "../utils/preventBounce"
+
 import { Recap, EditGoal } from "."
 import { selectTimeOfDay, changeTime } from "../state/actions/currentGoal"
 import { changeView } from "../state/actions/router"
@@ -88,6 +93,12 @@ class GoalTime extends Component {
         selected: timeOfDay.description === time.title,
       })),
     })
+
+    addStopBounceListener()
+  }
+
+  componentWillUnmount() {
+    removeStopBounceListener()
   }
 
   onCardClick = title => () => {

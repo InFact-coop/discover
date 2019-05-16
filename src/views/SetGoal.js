@@ -3,10 +3,15 @@ import { connect } from "react-redux"
 import styled, { createGlobalStyle } from "styled-components"
 import PropTypes from "prop-types"
 
-import { Avatar, Technique, EditGoal } from "."
+import {
+  addStopBounceListener,
+  removeStopBounceListener,
+} from "../utils/preventBounce"
+
 import { changeGoal } from "../state/actions/currentGoal"
 import background from "../assets/backgrounds/bg_what_is_your_goal.svg"
 
+import { Avatar, Technique, EditGoal } from "."
 import ProgressBar from "../components/ProgressBar"
 import BackButton from "../components/BackButton"
 import SaveButton from "../components/SaveButton"
@@ -40,6 +45,11 @@ class SetGoal extends Component {
   componentDidMount() {
     const { description } = this.props
     this.setState({ goal: description })
+    addStopBounceListener()
+  }
+
+  componentWillUnmount() {
+    removeStopBounceListener()
   }
 
   onInputChange = e => {

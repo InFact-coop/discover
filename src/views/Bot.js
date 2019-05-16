@@ -90,6 +90,14 @@ class Bot extends Component {
 
   componentDidUpdate = (prevProps, prevState) => {
     const elem = document.querySelector(".message-container")
+    if (
+      elem &&
+      prevState.initialised === false &&
+      this.state.initialised === true
+    ) {
+      elem.scrollTop = elem.scrollHeight
+    }
+
     if (elem) {
       scroller.scrollTo("msg-container-bottom", {
         duration: 1000,
@@ -274,7 +282,7 @@ class Bot extends Component {
         <img
           src={exit}
           alt="exit chat"
-          className="fixed top-0 right-0"
+          className="fixed top-0 right-0 z-1"
           onClick={this.onRestartClick}
         />
         <_ChatContainer welcome={welcomeFlow}>

@@ -93,6 +93,7 @@ const _MessageContainer = styled.div.attrs({
 })`
   padding-top: 60px;
   overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 `
 
 const _Option = styled.button.attrs({
