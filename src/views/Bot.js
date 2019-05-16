@@ -195,7 +195,7 @@ class Bot extends Component {
         conversation: [...r.dropLast(1, prevState.conversation), newMessage],
       }))
       this.setMessageDelay({ ...data, responses: r.drop(1, data.responses) })
-    }, 0)
+    }, Math.floor(Math.random() * 2000) + 500)
   }
 
   onOptionClick = async ({ content, addContext, query, type }) => {
