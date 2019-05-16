@@ -5,11 +5,10 @@ import * as r from "ramda" //eslint-disable-line import/no-namespace
 
 import { changeView } from "../state/actions/router"
 import { selectTopic, setPageIndex } from "../state/actions/tips"
-import { saveConversation } from "../state/actions/chatBot"
-import { addQuotesData } from "../state/actions/staticData"
+import { saveConversation } from "../state/actions/chatbot"
 
 import NavBar from "../components/NavBar"
-// import Quote from "../components/Quote"
+import Quote from "../components/Quote"
 
 import {
   GlobalStyle,
@@ -60,34 +59,41 @@ class Home extends Component {
     postback: {},
     sessionId: "",
     botInitialised: NotInitialised,
-    quote: {},
+    quoteVanished: false,
     lastMessageSentAt: Date.now(),
   })
 
-  componentDidMount = () => {
-    const { welcome, chatBot } = this.props
+  componentDidMount = async () => {
+    const {
+      profile: { welcomeFlow },
+      chatbot,
+    } = this.props
 
-    if (!window.navigator.onLine) return this.setBotOffline()
-    window.removeEventListener("online", this.initBot)
-
-    // if (welcome.welcomeFlow) this.initBot()
-
-    if (Date.now() - chatBot.lastMessageSentAt > 5000) {
+    if (welcomeFlow) {
       this.setState({ ...this.initialState(), initialised: true }, () =>
         this.initBot()
       )
+    } else if (Date.now() - chatbot.lastMessageSentAt > 5000) {
+      this.setState({ ...this.initialState(), initialised: true })
     } else {
-      this.setState({ ...chatBot })
+      this.setState({ ...chatbot })
     }
 
-    this.getSheet()
-    this.setQuote()
+    if (!window.navigator.onLine) return this.setBotOffline()
+
+    window.removeEventListener("online", this.initBot)
   }
 
-  componentDidUpdate = () => {
+  componentDidUpdate = (prevProps, prevState) => {
     const elem = document.querySelector(".message-container")
     if (elem) {
       elem.scrollTop = elem.scrollHeight
+    }
+    if (
+      prevState.quoteVanished === false &&
+      this.state.quoteVanished === true
+    ) {
+      this.initBot()
     }
   }
 
@@ -95,33 +101,18 @@ class Home extends Component {
     window.removeEventListener("online", this.initBot)
   }
 
-  getSheet = async () => {
-    await axios
-      .get("/api/user/sheets")
-      .then(res => res.data)
-      .then(quotes => this.props.addQuotesData(quotes))
-  }
-
-  setQuote = () => {
-    const { quotes } = this.props
-    if (quotes) {
-      const random = Math.floor(Math.random() * quotes.length)
-      this.setState({ quote: r.nth(random, quotes) })
-    }
-  }
-
   initBot = async () => {
     if (this.state.botInitialised === NotInitialised) {
       this.setState({ botInitialised: Initialising })
 
-      const { welcome } = this.props
+      const { profile } = this.props
       const sessionId = Math.random()
         .toString(36)
         .substr(2, 10)
 
       const { data } = await axios.get("/api/user/dialogflow", {
         params: {
-          query: welcome.startQuery,
+          query: profile.startQuery,
           sessionId,
         },
       })
@@ -236,10 +227,6 @@ class Home extends Component {
       },
     })
 
-    this.setState({
-      lastMessageSentAt: Date.now(),
-    })
-
     this.setMessageDelay(data)
 
     saveConversation({
@@ -251,20 +238,23 @@ class Home extends Component {
   }
 
   render() {
-    const { postback, conversation, quote, initialised } = this.state
-    const { changeView, welcome, profile } = this.props
+    const { postback, conversation, initialised } = this.state
+    const {
+      changeView,
+      profile: { welcomeFlow, avatar, quote },
+    } = this.props
 
     if (!initialised) return <div />
 
     return (
       <div className="vh-100">
-        {/* <Quote
+        <Quote
           quote={quote}
-          initBot={this.initBot}
-          welcomeFlow={welcome.welcomeFlow}
-        /> */}
+          welcomeFlow={welcomeFlow}
+          setQuoteVanished={() => this.setState({ quoteVanished: true })}
+        />
         <GlobalStyle />
-        {welcome.welcomeFlow ? (
+        {welcomeFlow ? (
           ""
         ) : (
           <img
@@ -274,12 +264,12 @@ class Home extends Component {
             onClick={this.onRestartClick}
           />
         )}
-        <_ChatContainer welcome={welcome.welcomeFlow}>
+        <_ChatContainer welcome={welcomeFlow}>
           <_MessageContainer>
             <RenderConversation
               conversation={conversation}
               onLinkClick={this.onInternalLinkClick}
-              userAvatar={profile.avatar}
+              userAvatar={avatar}
             />
           </_MessageContainer>
 
@@ -297,18 +287,22 @@ class Home extends Component {
             </_OptionContainer>
           )}
         </_ChatContainer>
-        {welcome.welcomeFlow ? "" : <NavBar />}
+        {welcomeFlow ? "" : <NavBar />}
       </div>
     )
   }
 }
 
 export default connect(
-  ({ profile, welcome, staticData: { quotes }, chatBot }) => ({
+  ({ profile, staticData: { quotes }, chatbot }) => ({
     profile,
-    welcome,
     quotes,
-    chatBot,
+    chatbot,
   }),
-  { changeView, selectTopic, setPageIndex, addQuotesData, saveConversation }
+  {
+    changeView,
+    selectTopic,
+    setPageIndex,
+    saveConversation,
+  }
 )(Home)

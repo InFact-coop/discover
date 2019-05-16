@@ -4,8 +4,7 @@ import styled, { createGlobalStyle } from "styled-components"
 import PropTypes from "prop-types"
 
 import { Avatar } from "."
-import { changeName } from "../state/actions/profile"
-import { clearWelcomeScreen } from "../state/actions/welcome"
+import { clearWelcomeScreen, changeName } from "../state/actions/profile"
 import background from "../assets/backgrounds/bg_what_is_your_name.svg"
 import botIcon from "../assets/icons/robot_round.png"
 

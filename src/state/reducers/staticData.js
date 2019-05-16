@@ -15,11 +15,8 @@ import time_management from "../../assets/images/technique-card-images/time_mana
 import after_school from "../../assets/images/time-card-images/after_school.png"
 import at_lunch_time from "../../assets/images/time-card-images/at_lunch_time.png"
 import before_bed from "../../assets/images/time-card-images/before_bed.png"
-import before_school from "../../assets/images/time-card-images/before_school.png"
 import in_the_afternoon from "../../assets/images/time-card-images/in_the_afternoon.png"
-import in_the_evening from "../../assets/images/time-card-images/in_the_evening.png"
 import in_the_morning from "../../assets/images/time-card-images/in_the_morning.png"
-import when_wake_up from "../../assets/images/time-card-images/when_wake_up.png"
 
 import {
   PROCRASTINATION_TIPS,

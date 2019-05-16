@@ -7,6 +7,7 @@ import BackButton from "../components/BackButton"
 import { changeView } from "../state/actions/router"
 import { MyGoal, SetGoal, Technique, GoalDays, GoalTime } from "."
 import botIcon from "../assets/icons/robot_round.png"
+import { breakpoint } from "../styles/utils"
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -23,6 +24,10 @@ const _BotIcon = styled.img.attrs({
   className: "mb1",
 })`
   width: 10rem;
+
+  ${breakpoint.supersmall`
+  width: 7rem;
+  `};
 `
 
 const _Title = styled.p.attrs({
@@ -37,7 +42,7 @@ const _Button = styled.div.attrs({
   className:
     "flex justify-center items-center ba br2 mv1 sans font-4 bg-white blue b--blue",
 })`
-  width: 22rem;
+  width: 95%;
   height: 3rem;
 `
 

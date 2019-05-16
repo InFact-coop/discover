@@ -1,4 +1,4 @@
-import normalizeDate from "./normalizeDate"
+import { normalizeDate } from "./date"
 
 const pastGoalDaysCompleteed = (startDate, scheduledEnd, actualEnd) => {
   const start = normalizeDate(Date.parse(startDate))

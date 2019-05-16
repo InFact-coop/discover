@@ -5,8 +5,8 @@ const INITIAL_STATE = {
   postback: {},
   sessionId: "",
   botInitialised: "NotInitialised",
-  quote: {},
-  lastMessageSentAt: 0,
+  quote: { author: "", quote: "" },
+  lastMessageSentAt: new Date("1970-01-01").getTime(),
 }
 
 export default (state = INITIAL_STATE, { payload, type }) => {
