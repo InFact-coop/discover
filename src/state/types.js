@@ -39,5 +39,5 @@ export const SET_PAGE_INDEX = "SET_PAGE_INDEX"
 // staticData
 export const ADD_QUOTES_DATA = "ADD_QUOTES_DATA"
 
-//chatbot
-export const SAVE_CONVERSATION = "SAVE_CONVERSATION"
+//bot
+export const SAVE_BOT_STATE = "SAVE_BOT_STATE"

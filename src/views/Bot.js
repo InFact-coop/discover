@@ -5,7 +5,9 @@ import * as r from "ramda" //eslint-disable-line import/no-namespace
 
 import { changeView } from "../state/actions/router"
 import { selectTopic, setPageIndex } from "../state/actions/tips"
-import { saveConversation } from "../state/actions/chatbot"
+import { saveBotState } from "../state/actions/bot"
+
+import { BOT_INIT_STATE } from "../state/reducers/bot"
 
 import NavBar from "../components/NavBar"
 import Quote from "../components/Quote"
@@ -17,7 +19,7 @@ import {
   _MessageContainer,
   _OptionContainer,
   RenderConversation,
-} from "../components/Home"
+} from "../components/Bot"
 
 import {
   Tips,
@@ -26,7 +28,7 @@ import {
   Initialising,
   Initialised,
   User,
-  Bot,
+  DISCOVERbot,
   Typing,
 } from "../Constants"
 
@@ -36,7 +38,7 @@ import exit from "../assets/icons/refresh_bot.svg"
 
 const BotTemplate = content => ({
   content,
-  type: Bot,
+  type: DISCOVERbot,
 })
 
 const UserTemplate = content => ({
@@ -49,34 +51,30 @@ const TypingTemplate = {
   content: "",
 }
 
-class Home extends Component {
+class Bot extends Component {
   state = {
     initialised: false,
+    quoteVanished: false,
   }
 
-  initialState = () => ({
-    conversation: [],
-    postback: {},
-    sessionId: "",
-    botInitialised: NotInitialised,
-    quoteVanished: false,
-    lastMessageSentAt: Date.now(),
+  botInitState = () => ({
+    ...BOT_INIT_STATE,
   })
 
   componentDidMount = async () => {
     const {
       profile: { welcomeFlow },
-      chatbot,
+      bot,
     } = this.props
 
     if (welcomeFlow) {
-      this.setState({ ...this.initialState(), initialised: true }, () =>
+      this.setState({ ...this.botInitState(), initialised: true }, () =>
         this.initBot()
       )
-    } else if (Date.now() - chatbot.lastMessageSentAt > 5000) {
-      this.setState({ ...this.initialState(), initialised: true })
+    } else if (Date.now() - bot.lastMessageSentAt > 15 * 60 * 1000) {
+      this.setState({ ...this.botInitState(), initialised: true })
     } else {
-      this.setState({ ...chatbot })
+      this.setState({ ...bot })
     }
 
     if (!window.navigator.onLine) return this.setBotOffline()
@@ -98,6 +96,9 @@ class Home extends Component {
   }
 
   componentWillUnmount = () => {
+    if (this.props.profile.welcomeFlow) {
+      this.props.saveBotState({ ...this.botInitState() })
+    }
     window.removeEventListener("online", this.initBot)
   }
 
@@ -142,14 +143,8 @@ class Home extends Component {
     if (!window.navigator.onLine) return this.setBotOffline()
     window.removeEventListener("online", this.initBot)
 
-    this.setState(
-      {
-        botInitialised: NotInitialised,
-        conversation: [],
-        postback: {},
-      },
-      () => this.initBot()
-    )
+    this.setState({ ...this.botInitState() }, () => this.initBot())
+    this.props.saveBotState({ ...this.botInitState() })
   }
 
   addMetaDataToMsgs = content => {
@@ -200,7 +195,7 @@ class Home extends Component {
 
   onOptionClick = async ({ content, addContext, query, type }) => {
     const { sessionId } = this.state
-    const { saveConversation } = this.props
+    const { saveBotState } = this.props
     const prevState = { ...this.state }
 
     this.setState(prevState => ({
@@ -229,10 +224,20 @@ class Home extends Component {
 
     this.setMessageDelay(data)
 
-    saveConversation({
+    saveBotState({
       ...prevState,
       lastMessageSentAt: Date.now(),
-      conversation: [...prevState.conversation, UserTemplate(content)],
+      conversation: [
+        ...prevState.conversation,
+        UserTemplate(content),
+        ...r.map(
+          r.pipe(
+            this.addMetaDataToMsgs,
+            BotTemplate
+          ),
+          data.responses
+        ),
+      ],
       postback: data.postback,
     })
   }
@@ -254,16 +259,12 @@ class Home extends Component {
           setQuoteVanished={() => this.setState({ quoteVanished: true })}
         />
         <GlobalStyle />
-        {welcomeFlow ? (
-          ""
-        ) : (
-          <img
-            src={exit}
-            alt="exit chat"
-            className="fixed top-0 right-0"
-            onClick={this.onRestartClick}
-          />
-        )}
+        <img
+          src={exit}
+          alt="exit chat"
+          className="fixed top-0 right-0"
+          onClick={this.onRestartClick}
+        />
         <_ChatContainer welcome={welcomeFlow}>
           <_MessageContainer>
             <RenderConversation
@@ -294,15 +295,15 @@ class Home extends Component {
 }
 
 export default connect(
-  ({ profile, staticData: { quotes }, chatbot }) => ({
+  ({ profile, staticData: { quotes }, bot }) => ({
     profile,
     quotes,
-    chatbot,
+    bot,
   }),
   {
     changeView,
     selectTopic,
     setPageIndex,
-    saveConversation,
+    saveBotState,
   }
-)(Home)
+)(Bot)

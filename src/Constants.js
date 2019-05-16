@@ -42,5 +42,5 @@ export const Initialised = "Initialised"
 // bot message states
 
 export const User = "User"
-export const Bot = "Bot"
+export const DISCOVERbot = "DISCOVERbot"
 export const Typing = "Typing"
