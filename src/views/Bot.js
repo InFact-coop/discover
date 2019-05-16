@@ -90,6 +90,14 @@ class Bot extends Component {
 
   componentDidUpdate = (prevProps, prevState) => {
     const elem = document.querySelector(".message-container")
+    if (
+      elem &&
+      prevState.initialised === false &&
+      this.state.initialised === true
+    ) {
+      elem.scrollTop = elem.scrollHeight
+    }
+
     if (elem) {
       scroller.scrollTo("msg-container-bottom", {
         duration: 1000,
