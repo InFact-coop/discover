@@ -32,7 +32,7 @@ import {
   Typing,
 } from "../Constants"
 
-import { ReadTips } from "."
+import { ReadTips, Name } from "."
 
 import exit from "../assets/icons/refresh_bot.svg"
 
@@ -67,11 +67,14 @@ class Bot extends Component {
       bot,
     } = this.props
 
-    if (welcomeFlow) {
+    if (welcomeFlow && r.isEmpty(bot.conversation)) {
       this.setState({ ...this.botInitState(), initialised: true }, () =>
         this.initBot()
       )
-    } else if (Date.now() - bot.lastMessageSentAt > 15 * 60 * 1000) {
+    } else if (
+      !welcomeFlow &&
+      Date.now() - bot.lastMessageSentAt > 15 * 60 * 1000
+    ) {
       this.setState({ ...this.botInitState(), initialised: true })
     } else {
       this.setState({ ...bot })
@@ -96,9 +99,6 @@ class Bot extends Component {
   }
 
   componentWillUnmount = () => {
-    if (this.props.profile.welcomeFlow) {
-      this.props.saveBotState({ ...this.botInitState() })
-    }
     window.removeEventListener("online", this.initBot)
   }
 
@@ -157,13 +157,18 @@ class Bot extends Component {
   }
 
   onInternalLinkClick = to => {
-    const { changeView, selectTopic, setPageIndex } = this.props
+    const { changeView, selectTopic, setPageIndex, profile } = this.props
     const isTip = Tips.includes(to)
     if (isTip) {
       selectTopic(to)
       setPageIndex(0)
       return changeView(ReadTips)
     }
+
+    if (profile.welcomeFlow && to === Name) {
+      this.props.saveBotState({ ...this.botInitState() })
+    }
+
     return changeView(to)
   }
 
