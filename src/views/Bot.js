@@ -282,7 +282,7 @@ class Bot extends Component {
         <img
           src={exit}
           alt="exit chat"
-          className="fixed top-0 right-0"
+          className="fixed top-0 right-0 z-1"
           onClick={this.onRestartClick}
         />
         <_ChatContainer welcome={welcomeFlow}>
