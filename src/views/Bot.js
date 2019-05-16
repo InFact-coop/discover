@@ -206,7 +206,7 @@ class Bot extends Component {
     const richQuery = (() => {
       if (addContext) {
         const context = r.pipe(
-          r.findLast(r.propEq("type", Bot)),
+          r.findLast(r.propEq("type", DISCOVERbot)),
           r.prop("content")
         )(this.state.conversation)
         return `${context} - ${content}`
