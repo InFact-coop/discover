@@ -4,6 +4,11 @@ import styled, { createGlobalStyle } from "styled-components"
 import PropTypes from "prop-types"
 import * as r from "ramda" //eslint-disable-line
 
+import {
+  addStopBounceListener,
+  removeStopBounceListener,
+} from "../utils/preventBounce"
+
 import { GoalTime, EditGoal } from "."
 import {
   selectDay,
@@ -145,6 +150,12 @@ class GoalDays extends Component {
       startDate,
       scheduledFinishDate,
     })
+
+    addStopBounceListener()
+  }
+
+  componentWillUnmount() {
+    removeStopBounceListener()
   }
 
   onDayClick = day => () => {
@@ -157,14 +168,14 @@ class GoalDays extends Component {
       r.values(days)
     )
 
-    this.setState(prevState => ({
+    this.setState({
       days,
       everyDaySelected:
         Object.keys(days).filter(day => days[day].selected).length === 7,
       valid: submitted
         ? !(!scheduledFinishDate || noDaysHaveBeenSelected)
         : true,
-    }))
+    })
   }
 
   onEveryDayClick = () => {
@@ -172,11 +183,11 @@ class GoalDays extends Component {
     Object.keys(days).forEach(day => {
       days[day].selected = true
     })
-    this.setState(prevState => ({
+    this.setState({
       days,
       everyDaySelected: true,
       valid: submitted ? !!scheduledFinishDate : true,
-    }))
+    })
   }
 
   selectDuration = month => () => {

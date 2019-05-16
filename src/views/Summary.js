@@ -1,14 +1,22 @@
 import { Component } from "react"
-import icon from "../assets/icons/tips_big.svg"
-import IconHeader from "../components/shared/IconHeader"
 import { connect } from "react-redux"
-import { changeView } from "../state/actions/router"
+import { createGlobalStyle } from "styled-components"
+
+import icon from "../assets/icons/tips_big.svg"
+
 import { selectTopic, setPageIndex } from "../state/actions/tips"
+import { changeView } from "../state/actions/router"
+
+import { ReadTips } from "."
 import NavBar from "../components/NavBar"
+import IconHeader from "../components/shared/IconHeader"
 import Carousel from "../components/Carousel"
 import Card from "../components/Card"
-import { ReadTips } from "."
-import { createGlobalStyle } from "styled-components"
+
+import {
+  addStopBounceListener,
+  removeStopBounceListener,
+} from "../utils/preventBounce"
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -30,6 +38,11 @@ class Summary extends Component {
         }))
         .filter(t => t.title !== "I want to SKIP this bit!"),
     })
+    addStopBounceListener()
+  }
+
+  componentWillUnmount() {
+    removeStopBounceListener()
   }
 
   onCardClick = title => {

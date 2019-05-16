@@ -1,10 +1,18 @@
 import { Component } from "react"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
-import { changeView } from "../state/actions/router"
-import { Bot } from "."
 import styled, { createGlobalStyle } from "styled-components"
+
+import {
+  addStopBounceListener,
+  removeStopBounceListener,
+} from "../utils/preventBounce"
+
 import welldone from "../assets/icons/welldone.svg"
+
+import { changeView } from "../state/actions/router"
+
+import { Bot } from "."
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -34,7 +42,13 @@ class AllSet extends Component {
     setTimeout(() => {
       changeView(Bot)
     }, 1000)
+    addStopBounceListener()
   }
+
+  componentWillUnmount() {
+    removeStopBounceListener()
+  }
+
   //eslint-disable-next-line
   render() {
     return (

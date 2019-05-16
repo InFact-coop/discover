@@ -3,6 +3,11 @@ import { connect } from "react-redux"
 import styled, { createGlobalStyle } from "styled-components"
 import PropTypes from "prop-types"
 
+import {
+  addStopBounceListener,
+  removeStopBounceListener,
+} from "../utils/preventBounce"
+
 import { Avatar } from "."
 import { clearWelcomeScreen, changeName } from "../state/actions/profile"
 import background from "../assets/backgrounds/bg_what_is_your_name.svg"
@@ -42,6 +47,11 @@ class Name extends Component {
     const { name, clearWelcomeScreen } = this.props
     this.setState({ name })
     clearWelcomeScreen()
+    addStopBounceListener()
+  }
+
+  componentWillUnmount() {
+    removeStopBounceListener()
   }
 
   onInputChange = e => {
