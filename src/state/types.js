@@ -38,3 +38,6 @@ export const SET_PAGE_INDEX = "SET_PAGE_INDEX"
 
 // staticData
 export const ADD_QUOTES_DATA = "ADD_QUOTES_DATA"
+
+//bot
+export const SAVE_BOT_STATE = "SAVE_BOT_STATE"

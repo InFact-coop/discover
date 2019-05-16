@@ -5,7 +5,7 @@ import BackButton from "../components/BackButton"
 
 import icon from "../assets/icons/privacy_icon.svg"
 
-import { Home } from "."
+import { Bot } from "."
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -45,7 +45,7 @@ const _List = styled.ul.attrs({
 const Privacy = () => (
   <div>
     <GlobalStyle />
-    <BackButton redirectTo={Home} />
+    <BackButton redirectTo={Bot} />
     <IconHeader title="Privacy Policy" icon={icon} />
     <_Container>
       <_SmallSection>

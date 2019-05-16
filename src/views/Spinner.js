@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 import PropTypes from "prop-types"
 import { changeView } from "../state/actions/router"
 import * as r from "ramda" //eslint-disable-line import/no-namespace
-import { AllSet, Name, Home } from "."
+import { AllSet, Name, Bot } from "."
 import styled, { createGlobalStyle } from "styled-components"
 
 const GlobalStyle = createGlobalStyle`
@@ -27,7 +27,7 @@ const nextView = previousView => {
       return Name
 
     default:
-      return Home
+      return Bot
   }
 }
 

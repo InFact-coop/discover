@@ -1,8 +1,8 @@
 import { CHANGE_VIEW, BACK_TO_PREVIOUS_VIEW } from "../types"
-import { Home } from "../../views"
+import { Bot } from "../../views"
 
 const INITIAL_STATE = {
-  currentView: Home,
+  currentView: Bot,
   history: [],
 }
 

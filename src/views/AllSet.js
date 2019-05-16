@@ -2,7 +2,7 @@ import { Component } from "react"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
 import { changeView } from "../state/actions/router"
-import { Home } from "."
+import { Bot } from "."
 import styled, { createGlobalStyle } from "styled-components"
 import welldone from "../assets/icons/welldone.svg"
 
@@ -32,7 +32,7 @@ class AllSet extends Component {
   componentDidMount() {
     const { changeView } = this.props
     setTimeout(() => {
-      changeView(Home)
+      changeView(Bot)
     }, 1000)
   }
   //eslint-disable-next-line

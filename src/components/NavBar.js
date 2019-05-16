@@ -10,7 +10,7 @@ import myGoalActive from "../assets/icons/my_goal_active.svg"
 import botIconActive from "../assets/icons/bot_icon_active.svg"
 import helpActive from "../assets/icons/help_active.svg"
 import tipsActive from "../assets/icons/tips_active.svg"
-import { Home, MyGoal, GoalProgress, Summary, Help } from "../views"
+import { Bot, MyGoal, GoalProgress, Summary, Help } from "../views"
 import { changeView } from "../state/actions/router"
 
 const _Container = styled.div.attrs({
@@ -39,7 +39,7 @@ const _Icon = styled.img.attrs({
 const labelIconsPage = [
   ["Goal", listOfGoals, listOfGoalsActive, GoalProgress],
   ["Edit", myGoal, myGoalActive, MyGoal],
-  ["Bot", botIcon, botIconActive, Home],
+  ["Bot", botIcon, botIconActive, Bot],
   ["Crisis", help, helpActive, Help],
   ["Tips", tips, tipsActive, Summary],
 ]

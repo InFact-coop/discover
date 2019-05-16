@@ -8,7 +8,7 @@ import { addQuotesData } from "../state/actions/staticData"
 
 import { isToday } from "../utils/date"
 
-export const Home = "Home"
+export const Bot = "Bot"
 export const Technique = "Technique"
 export const Name = "Name"
 export const Avatar = "Avatar"

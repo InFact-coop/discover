@@ -6,6 +6,7 @@ import profile from "./profile"
 import currentGoal from "./currentGoal"
 import pastGoals from "./pastGoals"
 import tips from "./tips"
+import bot from "./bot"
 
 export default combineReducers({
   router,
@@ -14,4 +15,5 @@ export default combineReducers({
   currentGoal,
   pastGoals,
   tips,
+  bot,
 })

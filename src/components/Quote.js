@@ -1,10 +1,9 @@
 import { Component } from "react"
 import styled from "styled-components"
 
-const _QuoteContainer = styled.div.attrs({
-  className: ({ displayClasses }) =>
-    `w-100 sans flex-column fixed justify-center items-center ph4 pv4 bg-white shadow-2 z-2 tc ${displayClasses}`,
-})`
+const _QuoteContainer = styled.div.attrs(({ displayClasses }) => ({
+  className: `w-100 sans flex-column fixed justify-center items-center ph4 pv4 bg-white shadow-2 z-2 tc ${displayClasses}`,
+}))`
   min-height: var(--height-4);
   transition: 0.5s;
 `
@@ -25,7 +24,9 @@ class Quote extends Component {
   componentDidMount() {
     const { welcomeFlow } = this.props
 
-    if (welcomeFlow) return this.setState({ displayClasses: "dn" })
+    if (welcomeFlow) {
+      return this.setState({ displayClasses: "dn" })
+    }
 
     setTimeout(this.hideQuoteShowBot, 3000)
   }
