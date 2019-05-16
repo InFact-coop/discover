@@ -2,6 +2,7 @@ import { Component } from "react"
 import { connect } from "react-redux"
 import axios from "axios"
 import * as r from "ramda" //eslint-disable-line import/no-namespace
+import { scroller, Element, ScrollElement } from "react-scroll"
 
 import { changeView } from "../state/actions/router"
 import { selectTopic, setPageIndex } from "../state/actions/tips"
@@ -51,6 +52,8 @@ const TypingTemplate = {
   content: "",
 }
 
+const ScrollableMsgContainer = ScrollElement(_MessageContainer)
+
 class Bot extends Component {
   state = {
     initialised: false,
@@ -88,7 +91,11 @@ class Bot extends Component {
   componentDidUpdate = (prevProps, prevState) => {
     const elem = document.querySelector(".message-container")
     if (elem) {
-      elem.scrollTop = elem.scrollHeight
+      scroller.scrollTo("msg-container-bottom", {
+        duration: 1000,
+        smooth: true,
+        containerId: "scrollable-msg-container",
+      })
     }
     if (
       prevState.quoteVanished === false &&
@@ -186,10 +193,10 @@ class Bot extends Component {
         this.addMetaDataToMsgs(r.head(data.responses))
       )
       if (r.length(data.responses) === 1) {
-        return this.setState(prevState => ({
+        this.setState(prevState => ({
           conversation: [...r.dropLast(1, prevState.conversation), newMessage],
-          postback: data.postback,
         }))
+        return setTimeout(() => this.setState({ postback: data.postback }), 0)
       }
       this.setState(prevState => ({
         conversation: [...r.dropLast(1, prevState.conversation), newMessage],
@@ -271,13 +278,14 @@ class Bot extends Component {
           onClick={this.onRestartClick}
         />
         <_ChatContainer welcome={welcomeFlow}>
-          <_MessageContainer>
+          <ScrollableMsgContainer id="scrollable-msg-container">
             <RenderConversation
               conversation={conversation}
               onLinkClick={this.onInternalLinkClick}
               userAvatar={avatar}
             />
-          </_MessageContainer>
+            <Element name="msg-container-bottom" className="dn" />
+          </ScrollableMsgContainer>
 
           {r.isEmpty(postback) ? (
             <div />
