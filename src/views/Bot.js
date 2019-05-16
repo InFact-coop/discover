@@ -193,10 +193,10 @@ class Bot extends Component {
         this.addMetaDataToMsgs(r.head(data.responses))
       )
       if (r.length(data.responses) === 1) {
-        this.setState(prevState => ({
+        return this.setState(prevState => ({
           conversation: [...r.dropLast(1, prevState.conversation), newMessage],
+          postback: data.postback,
         }))
-        return setTimeout(() => this.setState({ postback: data.postback }), 0)
       }
       this.setState(prevState => ({
         conversation: [...r.dropLast(1, prevState.conversation), newMessage],
@@ -284,7 +284,7 @@ class Bot extends Component {
               onLinkClick={this.onInternalLinkClick}
               userAvatar={avatar}
             />
-            <Element name="msg-container-bottom" className="dn" />
+            <Element name="msg-container-bottom" />
           </ScrollableMsgContainer>
 
           {r.isEmpty(postback) ? (
