@@ -25,6 +25,11 @@ const _TapAnywhere = styled.div.attrs({
 })`
   position: relative;
   bottom: 40px;
+
+  ${breakpoint.supersmall`
+  bottom: 20px;
+
+  `};
 `
 
 const _ExitCross = styled.img.attrs({

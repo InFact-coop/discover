@@ -48,13 +48,19 @@ class Router extends Component {
     }
   }
 
-  componentDidUpdate() {
+  async componentDidUpdate() {
     const {
       setDailyQuote,
       setLoggedOnDate,
       profile,
       staticData: { quotes },
     } = this.props
+
+    const newQuotes = await axios
+      .get("/api/user/sheets")
+      .then(({ data: quotes }) => quotes)
+
+    addQuotesData(newQuotes)
 
     if (!isToday(profile.lastLoggedOn)) {
       const random = Math.floor(Math.random() * quotes.length)
