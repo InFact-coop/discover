@@ -28,7 +28,7 @@ class Quote extends Component {
       return this.setState({ displayClasses: "dn" })
     }
 
-    setTimeout(this.hideQuoteShowBot, 3000)
+    setTimeout(this.hideQuoteShowBot, 3500)
   }
 
   hideQuoteShowBot = () => {

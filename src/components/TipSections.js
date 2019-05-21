@@ -650,17 +650,17 @@ const Mindfulness1 = () => (
       your breath, and what is going on around you in the present moment.
       Practicing mindfulness creates a peaceful mental environment.
     </_TipParagraph>
+  </_Container>
+)
+
+const Mindfulness2 = () => (
+  <_Container>
     <_TipParagraph>
       The more you do it, the easier it gets, and the more you will notice the
       benefits! You could also try a mindfulness exercise on an app like{" "}
       <_Link href="http://onelink.to/geu6gt">Headspace</_Link> or{" "}
       <_Link href="http://onelink.to/vaypg4">Smiling Mind</_Link>.
     </_TipParagraph>
-  </_Container>
-)
-
-const Mindfulness2 = () => (
-  <_Container>
     <_TipParagraph>
       Take five minutes to focus on each breath as it flows in and out of your
       body. You don’t have to alter your breath. Focusing on your breath like
