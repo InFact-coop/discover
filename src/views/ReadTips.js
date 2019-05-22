@@ -3,9 +3,14 @@ import styled, { css } from "styled-components"
 import * as r from "ramda" //eslint-disable-line import/no-namespace
 import { connect } from "react-redux"
 
+import { breakpoint } from "../styles/utils"
+import {
+  addStopBounceListener,
+  removeStopBounceListener,
+} from "../utils/preventBounce"
+
 import { changeView } from "../state/actions/router"
 import { setPageIndex } from "../state/actions/tips"
-import { breakpoint } from "../styles/utils"
 
 import { getTipSections } from "../components/TipSections"
 import { ActionButton } from "../components/shared/ActionButton"
@@ -75,7 +80,7 @@ const _TipScreen = styled.div.attrs({
       return `var(--light-blue)`
     if (bgIndex === maxIndex) return `url(${backgrounds[4]}), var(--light-blue)`
     return `url(${backgrounds[bgIndex]}), var(--light-blue)`
-  }};  
+  }};
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -135,6 +140,14 @@ class ReadTips extends Component {
       prevPage: r.last(history),
       historyAtPrevPage: r.dropLast(1, history),
     }
+  }
+
+  componentDidMount() {
+    addStopBounceListener()
+  }
+
+  componentWillUnmount() {
+    removeStopBounceListener()
   }
 
   onExitClick = () => {
