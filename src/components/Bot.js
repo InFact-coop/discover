@@ -2,10 +2,18 @@ import styled, { createGlobalStyle, css, keyframes } from "styled-components"
 
 import ExampleGoal from "../components/ExampleGoal"
 
-import { NewFlow, InternalLink, ExternalLink, User, Typing } from "../Constants"
+import {
+  NewFlow,
+  InternalLink,
+  ExternalLink,
+  AppStoreLink,
+  User,
+  Typing,
+} from "../Constants"
 import { Privacy } from "../views"
 
 import { getAvatarImg } from "../utils/avatar"
+import { appStoreLink } from "../utils/appStoreLink"
 
 import background from "../assets/backgrounds/bg_bot.svg"
 import botIcon from "../assets/icons/robot_round.png"
@@ -162,6 +170,8 @@ const RenderOptions = ({
             return onInternalLinkClick(to)
           case ExternalLink:
             return (window.location.href = url)
+          case AppStoreLink:
+            return (window.location.href = appStoreLink(to))
           default:
             return console.log("No onClick set") //eslint-disable-line
         }

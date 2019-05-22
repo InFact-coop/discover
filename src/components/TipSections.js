@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { breakpoint } from "../styles/utils"
 
-import { appStoreLink } from "../utils/appStoreLink"
+import { appStoreLink, SmilingMind, Headspace } from "../utils/appStoreLink"
 
 import {
   PROCRASTINATION_TIPS,
@@ -537,7 +537,7 @@ const Breathing3 = () => (
     <_TipParagraph>
       If you find it hard to do this on your own, you could try follow a guided
       breathing technique. You can find these on apps such as{" "}
-      <_Link href={appStoreLink("SmilingMind")}>Smiling Mind</_Link>, or on{" "}
+      <_Link href={appStoreLink(SmilingMind)}>Smiling Mind</_Link>, or on{" "}
       <_Link href="https://www.youtube.com/results?search_query=relaxed+breathing+exercises">
         Youtube
       </_Link>
@@ -660,8 +660,8 @@ const Mindfulness2 = () => (
     <_TipParagraph>
       The more you do it, the easier it gets, and the more you will notice the
       benefits! You could also try a mindfulness exercise on an app like{" "}
-      <_Link href={appStoreLink("Headspace")}>Headspac</_Link> or{" "}
-      <_Link href={appStoreLink("SmilingMind")}>Smiling Mind</_Link>.
+      <_Link href={appStoreLink(Headspace)}>Headspace</_Link> or{" "}
+      <_Link href={appStoreLink(SmilingMind)}>Smiling Mind</_Link>.
     </_TipParagraph>
     <_TipParagraph>
       Take five minutes to focus on each breath as it flows in and out of your
