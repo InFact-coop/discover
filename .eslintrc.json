@@ -24,7 +24,7 @@
     "import/no-nodejs-modules": 0,
     "class-methods-use-this": [
       "error",
-      { "exceptMethods": ["componentWillUnmount"] }
+      { "exceptMethods": ["componentWillUnmount", "componentDidMount"] }
     ]
   }
 }

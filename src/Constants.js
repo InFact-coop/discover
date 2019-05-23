@@ -31,6 +31,7 @@ export const Tips = [
 
 export const InternalLink = "InternalLink"
 export const ExternalLink = "ExternalLink"
+export const AppStoreLink = "AppStoreLink"
 export const NewFlow = "NewFlow"
 
 // bot initialisation status
