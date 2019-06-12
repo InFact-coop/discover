@@ -25,13 +25,9 @@ document
     }, initial-scale=1, maximum-scale=1, user-scalable=no`
   )
 
-const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
+// const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
 
-if (
-  process.env.NODE_ENV === "production" &&
-  "serviceWorker" in navigator &&
-  !iOS
-) {
+if (process.env.NODE_ENV === "production" && "serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker
       .register("/sw.js")

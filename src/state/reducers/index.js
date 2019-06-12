@@ -1,14 +1,16 @@
 import { combineReducers } from "redux"
+import reduceReducers from "reduce-reducers"
 
 import router from "./router"
-import staticData from "./staticData"
 import profile from "./profile"
 import currentGoal from "./currentGoal"
 import pastGoals from "./pastGoals"
 import tips from "./tips"
 import bot from "./bot"
+import staticData from "./staticData"
+import v2 from "./v2"
 
-export default combineReducers({
+const combinedReducers = combineReducers({
   router,
   staticData,
   profile,
@@ -17,3 +19,5 @@ export default combineReducers({
   tips,
   bot,
 })
+
+export default reduceReducers(combinedReducers, v2)

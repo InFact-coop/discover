@@ -36,6 +36,7 @@
     "react-hot-loader": "4.3.12",
     "react-redux": "^5.1.0",
     "react-scroll": "^1.7.11",
+    "reduce-reducers": "^1.0.4",
     "redux": "^4.0.1",
     "redux-actions": "^2.6.5",
     "redux-thunk": "^2.3.0",

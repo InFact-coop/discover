@@ -41,3 +41,6 @@ export const ADD_QUOTES_DATA = "ADD_QUOTES_DATA"
 
 //bot
 export const SAVE_BOT_STATE = "SAVE_BOT_STATE"
+
+//versions
+export const UPGRADE_V2 = "UPGRADE_V2"

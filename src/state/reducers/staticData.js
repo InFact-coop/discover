@@ -35,7 +35,7 @@ import {
 
 import { ADD_QUOTES_DATA } from "../types"
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
   techniques: [
     {
       title: PROCRASTINATION_TIPS,
