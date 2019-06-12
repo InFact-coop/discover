@@ -72,7 +72,7 @@ module.exports = {
               network: ["*"],
               fallback: [],
               settings: ["prefer-online"],
-              exclude: [/.*\.DS_Store$/],
+              exclude: [/.*/],
               output: "discoverbot.appcache",
             },
           ])
