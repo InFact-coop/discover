@@ -30,4 +30,4 @@ const breakpoint = {
   `,
 }
 
-export { breakpoint }
+export { breakpoint } //eslint-disable-line
