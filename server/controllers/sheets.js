@@ -21,7 +21,7 @@ exports.querySheets = async (req, res, next) => {
 
     return res.json(quotes)
   } catch (error) {
-    console.error("Error retrieving Google Sheets data: ", error)
+    console.error("Error retrieving Google Sheets data: ", error) //eslint-disable-line
     return next(error)
   }
 }
