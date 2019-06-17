@@ -5,7 +5,7 @@ import BackButton from "../components/BackButton"
 
 import icon from "../assets/icons/privacy_icon.svg"
 
-import { Home } from "."
+import { Bot } from "."
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -18,7 +18,7 @@ const _Bold = styled.span.attrs({
 })``
 
 const _BoldHeading = styled.p.attrs({
-  className: "b mb2",
+  className: "b mb2 blue",
 })``
 
 const _Container = styled.div.attrs({
@@ -45,7 +45,7 @@ const _List = styled.ul.attrs({
 const Privacy = () => (
   <div>
     <GlobalStyle />
-    <BackButton redirectTo={Home} />
+    <BackButton redirectTo={Bot} />
     <IconHeader title="Privacy Policy" icon={icon} />
     <_Container>
       <_SmallSection>
@@ -54,7 +54,7 @@ const Privacy = () => (
         </p>
         <p className="mb1">
           We are committed to protecting and respecting your privacy. The
-          following Privacy Policy applies to DiscoverBOT, which is owned by
+          following Privacy Policy applies to DISCOVERbot, which is owned by
           South London and Maudsley NHS Foundation Trust “SLaM” and sets out how
           your personal data is handled by us. We strongly recommend that you
           take some time to read this policy carefully to understand how we
@@ -66,7 +66,7 @@ const Privacy = () => (
           seriously and all personal data is treated as confidential.
         </p>
         <p className="mb1">
-          This policy was last reviewed and updated in December 2018.
+          This policy was last reviewed and updated in May 2019.
         </p>
       </_SmallSection>
       <_SmallSection>
@@ -81,26 +81,6 @@ const Privacy = () => (
           <_Bold>Why we hold this information:</_Bold>
         </p>
         <p> To address you properly and to identify you</p>
-      </_SmallSection>
-      <_SmallSection>
-        <p>
-          <_BoldHeading>Work well may use this information to:</_BoldHeading>
-        </p>
-        <p>
-          <_Bold>Communicate with you</_Bold>
-        </p>
-        <p className="mb1">
-          We use your information to send you communications about our service
-          or to let you know about any changes to our privacy policy. We also
-          use your information to respond to you if you contact us.
-        </p>
-        <p>
-          <_Bold>Improvement and development</_Bold>
-        </p>
-        <p>
-          From time to time we may conduct surveys to better understand how to
-          improve features.
-        </p>
       </_SmallSection>
       <_SmallSection>
         <p>
@@ -122,7 +102,7 @@ const Privacy = () => (
           <_Bold>Data it processes and why:</_Bold>
         </p>
         <p className="mb1">
-          Google analytics is a business analytics tool which collects
+          Google Analytics is a business analytics tool which collects
           analytical data from the website. This data is used for service
           improvement. Google analytics privacy policy can be found&nbsp;
           <a href="https://policies.google.com/privacy">here.</a>
@@ -130,7 +110,7 @@ const Privacy = () => (
         <p>
           Before you submit any information, it will be made clear to you why we
           are asking for specific information, and it is up to you whether you
-          provide it. The trust does not and will never sell any data.
+          provide it. The Trust does not and will never sell any data.
         </p>
       </_SmallSection>
       <_SmallSection>
@@ -155,7 +135,7 @@ const Privacy = () => (
           </_BoldHeading>
         </p>
         <p>
-          Personal data you add to the DiscoverBOT app is not retained by SLaM.
+          Personal data you add to the DISCOVERbot app is not retained by SLaM.
           If you choose to delete the app, the data will also be deleted.
         </p>
       </_SmallSection>
@@ -261,7 +241,19 @@ const Privacy = () => (
         <p>
           We may amend this policy in the future to ensure it is kept up to date
           with legal requirements. We will notify you when we make any changes
-          to this policy and invite you to review
+          to this policy.
+        </p>
+      </_SmallSection>
+      <_SmallSection>
+        <p>
+          <_BoldHeading>Copyright Statement</_BoldHeading>
+        </p>
+        <p className="mb1"> ©South London and Maudsley NHS Foundation Trust </p>
+        <p>
+          All rights reserved. No part of this app may be reproduced or
+          transmitted in any form or by any means without the prior permission
+          of the DISCOVER Team in accordance with the provisions of the
+          Copyright, Designs and Patents Act 1988.
         </p>
       </_SmallSection>
       <_SmallSection>
@@ -275,11 +267,11 @@ const Privacy = () => (
           feel free to contact us at: discoverworkshops@slam.nhs.uk
         </p>
         <ul className="mb7">
-          <li> Discover Team </li>
+          <li>DISCOVER team</li>
           <li>South London and Maudsley NHS Foundation Trust</li>
           <li>Maudsley Hospital</li>
-          <li> London</li>
-          <li> SE5 8AZ</li>
+          <li>London</li>
+          <li>SE5 8AZ</li>
         </ul>
       </_SmallSection>
     </_Container>

@@ -1,9 +1,8 @@
 const router = require("express").Router()
-const { verifyCode, verifyToken } = require("../controllers/accessCode")
 const { queryDF } = require("../controllers/dialogFlow")
+const { querySheets } = require("../controllers/sheets")
 
-router.post("/accesscode", verifyCode)
-router.post("/codetoken", verifyToken)
 router.get("/dialogflow", queryDF)
+router.get("/sheets", querySheets)
 
 module.exports = router

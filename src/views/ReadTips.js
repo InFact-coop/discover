@@ -3,6 +3,12 @@ import styled, { css } from "styled-components"
 import * as r from "ramda" //eslint-disable-line import/no-namespace
 import { connect } from "react-redux"
 
+import { breakpoint } from "../styles/utils"
+import {
+  addStopBounceListener,
+  removeStopBounceListener,
+} from "../utils/preventBounce"
+
 import { changeView } from "../state/actions/router"
 import { setPageIndex } from "../state/actions/tips"
 
@@ -20,20 +26,37 @@ import tips3 from "../assets/backgrounds/tips3.png"
 import tips4 from "../assets/backgrounds/tips4.png"
 
 const _TapAnywhere = styled.div.attrs({
-  className: "ttu w-100 tc white sans font-5 pa4",
+  className: "ttu w-100 tc white sans font-5 pv2",
 })`
   position: relative;
-  bottom: 12vh;
+  bottom: 40px;
+
+  ${breakpoint.supersmall`
+  bottom: 20px;
+
+  `};
 `
 
 const _ExitCross = styled.img.attrs({
-  className: "absolute top-0 right-0 pa3 z-5",
-})``
+  className: "absolute top-0 right-0 z-5",
+})`
+  padding: var(--spacing-medium);
+
+  ${breakpoint.supersmall`
+padding: var(--spacing-small);
+`};
+`
 
 const _BackArrow = styled.img.attrs({
-  className: "absolute top-0 left-0 pa3 z-6 border-box",
+  className: "absolute top-0 left-0 z-6 border-box",
 })`
   height: 60px;
+  padding: var(--spacing-medium);
+
+  ${breakpoint.supersmall`
+  padding: var(--spacing-small);
+  height: 45px;
+  `};
 `
 
 const backgrounds = [tips0, tips1, tips2, tips3, tips4]
@@ -45,25 +68,46 @@ const _TipScreen = styled.div.attrs({
     if (bgIndex === maxIndex) return `url(${backgrounds[4]}), var(--light-blue)`
     return `url(${backgrounds[bgIndex]}), var(--light-blue)`
   }};
+
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
+
+  ${breakpoint.supersmall`
+  background: ${({ bgIndex, maxIndex, topic }) => {
+    if (bgIndex === 4 && topic === "Procrastination tips")
+      return `var(--light-blue)`
+    if (bgIndex === maxIndex) return `url(${backgrounds[4]}), var(--light-blue)`
+    return `url(${backgrounds[bgIndex]}), var(--light-blue)`
+  }};
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+`};
 `
 
-const _Container = styled.p.attrs({
+const _Container = styled.div.attrs({
   className: "pb4 w-75 font-4",
 })`
   margin: 0 auto;
 `
 const _ButtonBanner = styled.div`
   height: 60px;
+
+  ${breakpoint.supersmall`
+  height: 45px;
+  `};
 `
 const _Main = styled.div.attrs({})`
    ${css`
      height: calc(100vh - 60px);
    `}
   padding-top: ${({ tipIndex }) => (tipIndex === 1 ? "150px" : "0px")};
+  ${breakpoint.supersmall`
+  padding-top: ${({ tipIndex }) => (tipIndex === 1 ? "35vw" : "0px")};
+  `};
 `
 
 const FirstSlide = ({ name, topic }) => (
@@ -98,6 +142,14 @@ class ReadTips extends Component {
     }
   }
 
+  componentDidMount() {
+    addStopBounceListener()
+  }
+
+  componentWillUnmount() {
+    removeStopBounceListener()
+  }
+
   onExitClick = () => {
     const { changeView, setPageIndex } = this.props
 
@@ -126,7 +178,11 @@ class ReadTips extends Component {
     const Content = getTipSections(tips.topic)[tips.index - 1]
     return (
       <div>
-        <_TipScreen bgIndex={tips.index} maxIndex={tips.topicMaxIndex}>
+        <_TipScreen
+          bgIndex={tips.index}
+          maxIndex={tips.topicMaxIndex}
+          topic={tips.topic}
+        >
           <_ButtonBanner className="relative">
             {tips.index !== 0 ? (
               <_BackArrow
@@ -164,7 +220,7 @@ class ReadTips extends Component {
               positionBottom="12vh"
               onClick={() => this.onExitClick()}
             >
-              Thanx, got it!
+              Thanks, got it!
             </ActionButton>
           ) : (
             <_TapAnywhere onClick={() => this.onAnywhereClick(tips.index)}>

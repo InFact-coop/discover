@@ -3,12 +3,17 @@ import { connect } from "react-redux"
 import styled, { createGlobalStyle } from "styled-components"
 import PropTypes from "prop-types"
 
+import {
+  addStopBounceListener,
+  removeStopBounceListener,
+} from "../utils/preventBounce"
+
 import { Avatars, getAvatarImg } from "../utils/avatar"
 
-import { SetGoal } from "."
 import { changeAvatar } from "../state/actions/profile"
 import background from "../assets/backgrounds/bg_avatar.svg"
 
+import { SetGoal } from "."
 import ProgressBar from "../components/ProgressBar"
 import SaveButton from "../components/SaveButton"
 import BackButton from "../components/BackButton"
@@ -55,6 +60,11 @@ class Avatar extends Component {
       avatars: avatars.map(a => ({ ...a, selected: a.name === avatar })),
       selectedAvatar: avatar,
     })
+    addStopBounceListener()
+  }
+
+  componentWillUnmount() {
+    removeStopBounceListener()
   }
 
   onAvatarClick = e => {

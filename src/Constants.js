@@ -3,13 +3,13 @@ export const PROCRASTINATION_TIPS = "Procrastination tips"
 export const TIME_MANAGEMENT_TIPS = "Time management tips"
 export const THINKING_TRAPS = "Thinking traps"
 export const THOUGHT_CHALLENGING = "Thought challenging"
-export const PROBLEM_SOLVING = "Problem Solving"
+export const PROBLEM_SOLVING = "Problem solving"
 export const SLEEP_TIPS = "Sleep tips"
-export const BREATHING_TECHNIQUES = "Breathing technique"
+export const BREATHING_TECHNIQUES = "Deep breathing"
 export const RELAXATION_TIPS = "Relaxation tips"
 export const THOUGHT_SWITCHING = "Thought switching"
 export const FACING_MY_FEARS = "Facing my fears"
-export const MINDFULNESS_EXERCISE = "Mindfulness exercise"
+export const MINDFULNESS_EXERCISE = "Mindfulness"
 export const SKIP_THIS_BIT = "I want to SKIP this bit!"
 
 export const Tips = [
@@ -31,4 +31,17 @@ export const Tips = [
 
 export const InternalLink = "InternalLink"
 export const ExternalLink = "ExternalLink"
+export const AppStoreLink = "AppStoreLink"
 export const NewFlow = "NewFlow"
+
+// bot initialisation status
+
+export const NotInitialised = "NotInitialised"
+export const Initialising = "Initialising"
+export const Initialised = "Initialised"
+
+// bot message states
+
+export const User = "User"
+export const DISCOVERbot = "DISCOVERbot"
+export const Typing = "Typing"

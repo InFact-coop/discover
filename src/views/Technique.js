@@ -4,6 +4,11 @@ import styled, { createGlobalStyle } from "styled-components"
 import PropTypes from "prop-types"
 import * as r from "ramda" // eslint-disable-line
 
+import {
+  addStopBounceListener,
+  removeStopBounceListener,
+} from "../utils/preventBounce"
+
 import { GoalDays, EditGoal } from "."
 import { changeTechniques } from "../state/actions/currentGoal"
 import { changeView } from "../state/actions/router"
@@ -52,6 +57,12 @@ class Technique extends Component {
       })),
       selectedTechniques: currentGoal.techniques,
     })
+
+    addStopBounceListener()
+  }
+
+  componentWillUnmount() {
+    removeStopBounceListener()
   }
 
   onCardClick = title => () => {
@@ -110,7 +121,7 @@ class Technique extends Component {
             </_Question>
             <_Hint>&#40;you can choose more than one!&#41;</_Hint>
             <ValidationMsg valid={valid} bottom="-22px">
-              Choose a technique {edit ? "" :  "or 'skip'"}
+              Choose a technique {edit ? "" : "or 'skip'"}
             </ValidationMsg>
           </div>
           <Carousel

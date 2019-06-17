@@ -16,7 +16,7 @@ const _Container = styled.div.attrs({
   className: "flex flex-column items-center relative",
 })`
   height: calc(100vh - 60px);
-  width: 99%;
+  width: 100%;
 `
 
 const _InnerContainer = styled.div.attrs({

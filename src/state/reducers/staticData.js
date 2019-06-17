@@ -15,11 +15,8 @@ import time_management from "../../assets/images/technique-card-images/time_mana
 import after_school from "../../assets/images/time-card-images/after_school.png"
 import at_lunch_time from "../../assets/images/time-card-images/at_lunch_time.png"
 import before_bed from "../../assets/images/time-card-images/before_bed.png"
-import before_school from "../../assets/images/time-card-images/before_school.png"
 import in_the_afternoon from "../../assets/images/time-card-images/in_the_afternoon.png"
-import in_the_evening from "../../assets/images/time-card-images/in_the_evening.png"
 import in_the_morning from "../../assets/images/time-card-images/in_the_morning.png"
-import when_wake_up from "../../assets/images/time-card-images/when_wake_up.png"
 
 import {
   PROCRASTINATION_TIPS,
@@ -36,47 +33,49 @@ import {
   SKIP_THIS_BIT,
 } from "../../Constants"
 
-const INITIAL_STATE = {
+import { ADD_QUOTES_DATA } from "../types"
+
+export const INITIAL_STATE = {
   techniques: [
     {
       title: PROCRASTINATION_TIPS,
       description:
-        "Tips to overcome delaying or postponing tasks, to help you get started and stay focussed.",
+        "Tips that will stop you putting things off, and help you get started and stay focused.",
       image: procrastination,
       backgroundColor: "--light-purple",
     },
     {
       title: TIME_MANAGEMENT_TIPS,
       description:
-        "Planning how to manage your time can help when you’re feeling overloaded with tasks, and you don’t know where to start.",
+        "Managing your time can help you when you’re feeling overloaded with tasks, and you don’t know where to start.",
       image: time_management,
       backgroundColor: "--light-yellow",
     },
     {
       title: THINKING_TRAPS,
       description:
-        "Noticing when you are falling into thinking traps can be helpful to change your perspectives, to think more objectively, and to feel better.",
+        "Noticing when you are falling into thinking traps can help you to change your perspective, to think more objectively, and to feel better.",
       image: thinking_traps,
       backgroundColor: "--light-red",
     },
     {
       title: THOUGHT_CHALLENGING,
       description:
-        "Challenging your negative thoughts can help you feel better by questioning some of the assumptions your thoughts are based on. It can be helpful to stop and unpick these.",
+        "Challenging your negative thoughts can help you feel better if you can question the assumptions that these thoughts are based on.",
       image: thought_challenging,
       backgroundColor: "--light-green",
     },
     {
       title: PROBLEM_SOLVING,
       description:
-        "These steps can help when you have practical issues to overcome.",
+        "These simple steps can help you tackle practical issues and find solutions.",
       image: problem_solving,
       backgroundColor: "--light-blue",
     },
     {
       title: SLEEP_TIPS,
       description:
-        "Follow these tips to improve your sleep. Getting a better night’s sleep should have a positive impact on your mood and stress levels the next day.",
+        "Getting a better night’s sleep, using these tips, will have a positive impact on your mood and stress levels the next day.",
       image: sleep_tips,
       backgroundColor: "--light-purple",
     },
@@ -136,12 +135,7 @@ const INITIAL_STATE = {
   durations: ["1 month", "2 months", "3 months"],
   times: [
     {
-      title: "Before school",
-      image: before_school,
-      backgroundColor: "--light-green",
-    },
-    {
-      title: "After School",
+      title: "All day",
       image: after_school,
       backgroundColor: "--light-red",
     },
@@ -151,8 +145,8 @@ const INITIAL_STATE = {
       backgroundColor: "--light-yellow",
     },
     {
-      title: "In the evening",
-      image: in_the_evening,
+      title: "At lunch time",
+      image: at_lunch_time,
       backgroundColor: "--light-purple",
     },
     {
@@ -161,25 +155,21 @@ const INITIAL_STATE = {
       backgroundColor: "--light-blue",
     },
     {
-      title: "Before going to bed",
+      title: "In the evening",
       image: before_bed,
       backgroundColor: "--light-green",
     },
-    {
-      title: "When I wake up",
-      image: when_wake_up,
-      backgroundColor: "--light-red",
-    },
-    {
-      title: "At lunch time",
-      image: at_lunch_time,
-      backgroundColor: "--light-yellow",
-    },
   ],
+  quotes: [],
 }
 
-export default (state = INITIAL_STATE, { type }) => {
+export default (state = INITIAL_STATE, { payload, type }) => {
   switch (type) {
+    case ADD_QUOTES_DATA:
+      return {
+        ...state,
+        quotes: payload,
+      }
     default:
       return state
   }

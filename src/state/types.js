@@ -2,12 +2,6 @@
 export const CHANGE_VIEW = "CHANGE_VIEW"
 export const BACK_TO_PREVIOUS_VIEW = "BACK_TO_PREVIOUS_VIEW"
 
-// code
-export const VERIFY_SUCCEEDED = "VERIFY_SUCCEEDED"
-export const VERIFY_FAILED = "VERIFY_FAILED"
-export const VERIFY_START = "VERIFY_START"
-export const VERIFY_FAILED_ROLLBACK = "VERIFY_FAILED_ROLLBACK"
-
 // title
 export const CHANGE_TEXT_COLOR = "CHANGE_TEXT_COLOR"
 export const CHANGE_TEXT_TO_WHITE = "CHANGE_TEXT_TO_WHITE"
@@ -31,6 +25,9 @@ export const TOGGLE_SELECT_TECHNIQUE = "TOGGLE_SELECT_TECHNIQUE"
 // profile
 export const CHANGE_NAME = "CHANGE_NAME"
 export const CHANGE_AVATAR = "CHANGE_AVATAR"
+export const CLEAR_WELCOME_SCREEN = "CLEAR_WELCOME_SCREEN"
+export const SET_LOGGED_ON_DATE = "SET_LOGGED_ON_DATE"
+export const SET_DAILY_QUOTE = "SET_DAILY_QUOTE"
 
 //previous goals
 export const ARCHIVE_GOAL = "ARCHIVE_GOAL"
@@ -39,5 +36,11 @@ export const ARCHIVE_GOAL = "ARCHIVE_GOAL"
 export const SELECT_TOPIC = "SELECT_TOPIC"
 export const SET_PAGE_INDEX = "SET_PAGE_INDEX"
 
-// initial flow
-export const CLEAR_WELCOME_SCREEN = "CLEAR_WELCOME_SCREEN"
+// staticData
+export const ADD_QUOTES_DATA = "ADD_QUOTES_DATA"
+
+//bot
+export const SAVE_BOT_STATE = "SAVE_BOT_STATE"
+
+//versions
+export const UPGRADE_V2 = "UPGRADE_V2"

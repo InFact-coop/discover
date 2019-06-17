@@ -4,6 +4,11 @@ import styled, { createGlobalStyle } from "styled-components"
 import PropTypes from "prop-types"
 import * as r from "ramda" //eslint-disable-line
 
+import {
+  addStopBounceListener,
+  removeStopBounceListener,
+} from "../utils/preventBounce"
+
 import { GoalTime, EditGoal } from "."
 import {
   selectDay,
@@ -22,6 +27,7 @@ import BackButton from "../components/BackButton"
 import { _Title } from "../components/Text"
 import OutlineContainer from "../components/shared/OutlineContainer"
 import ValidationMsg from "../components/ValidationMsg"
+import { breakpoint } from "../styles/utils"
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -33,11 +39,20 @@ const _Container = styled.div.attrs({
   className: "flex flex-column items-center center mt5",
 })`
   width: 95%;
+
+  ${breakpoint.supersmall`
+  font-size: 14px;
+
+    `};
 `
 
 const _BotIcon = styled.img.attrs({
   className: "w-40 mt5 mb1",
-})``
+})`
+  ${breakpoint.supersmall`
+width: 26%;
+`};
+`
 
 const _Description = styled.p.attrs({
   className: "mono font-4 tc",
@@ -52,6 +67,11 @@ const _DayContent = styled.div.attrs({
 })`
   height: 2.5rem;
   width: 2.5rem;
+
+  ${breakpoint.supersmall`
+  height: 2rem;
+  width: 2rem;
+    `};
 `
 
 const Day = ({ selected, children, onClick }) => (
@@ -130,6 +150,12 @@ class GoalDays extends Component {
       startDate,
       scheduledFinishDate,
     })
+
+    addStopBounceListener()
+  }
+
+  componentWillUnmount() {
+    removeStopBounceListener()
   }
 
   onDayClick = day => () => {
@@ -142,14 +168,14 @@ class GoalDays extends Component {
       r.values(days)
     )
 
-    this.setState(prevState => ({
+    this.setState({
       days,
       everyDaySelected:
         Object.keys(days).filter(day => days[day].selected).length === 7,
       valid: submitted
         ? !(!scheduledFinishDate || noDaysHaveBeenSelected)
         : true,
-    }))
+    })
   }
 
   onEveryDayClick = () => {
@@ -157,11 +183,11 @@ class GoalDays extends Component {
     Object.keys(days).forEach(day => {
       days[day].selected = true
     })
-    this.setState(prevState => ({
+    this.setState({
       days,
       everyDaySelected: true,
       valid: submitted ? !!scheduledFinishDate : true,
-    }))
+    })
   }
 
   selectDuration = month => () => {

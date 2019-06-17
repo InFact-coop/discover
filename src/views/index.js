@@ -1,10 +1,14 @@
 import { Component } from "react"
 import { connect } from "react-redux"
-import { verifyToken } from "../state/actions/auth"
-import { changeView } from "../state/actions/router"
+import axios from "axios"
+import * as r from "ramda" //eslint-disable-line import/no-namespace
 
-export const Home = "Home"
-export const Code = "Code"
+import { setLoggedOnDate, setDailyQuote } from "../state/actions/profile"
+import { addQuotesData } from "../state/actions/staticData"
+
+import { isToday } from "../utils/date"
+
+export const Bot = "Bot"
 export const Technique = "Technique"
 export const Name = "Name"
 export const Avatar = "Avatar"
@@ -24,12 +28,46 @@ export const Spinner = "Spinner"
 export const Privacy = "Privacy"
 
 class Router extends Component {
-  componentDidMount() {
-    const { verifyToken, auth, changeView } = this.props
-    if (auth.token) return verifyToken(auth.token)
-    return changeView(Code)
+  async componentDidMount() {
+    const {
+      addQuotesData,
+      setDailyQuote,
+      setLoggedOnDate,
+      profile,
+    } = this.props
+    const quotes = await axios
+      .get("/api/user/sheets")
+      .then(({ data: quotes }) => quotes)
+
+    addQuotesData(quotes)
+
+    if (!isToday(profile.lastLoggedOn)) {
+      const random = Math.floor(Math.random() * quotes.length)
+      setDailyQuote(r.nth(random, quotes))
+      setLoggedOnDate(new Date())
+    }
   }
 
+  async componentDidUpdate() {
+    const {
+      setDailyQuote,
+      setLoggedOnDate,
+      profile,
+      staticData: { quotes },
+    } = this.props
+
+    const newQuotes = await axios
+      .get("/api/user/sheets")
+      .then(({ data: quotes }) => quotes)
+
+    addQuotesData(newQuotes)
+
+    if (!isToday(profile.lastLoggedOn)) {
+      const random = Math.floor(Math.random() * quotes.length)
+      setDailyQuote(r.nth(random, quotes))
+      setLoggedOnDate(new Date())
+    }
+  }
   render() {
     const { router } = this.props
     const CurrentView = require(`./${router.currentView}`).default
@@ -38,9 +76,10 @@ class Router extends Component {
 }
 
 export default connect(
-  ({ auth, router }) => ({
-    auth,
+  ({ router, profile, staticData }) => ({
     router,
+    profile,
+    staticData,
   }),
-  { verifyToken, changeView }
+  { addQuotesData, setDailyQuote, setLoggedOnDate }
 )(Router)

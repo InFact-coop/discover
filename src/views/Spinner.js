@@ -1,10 +1,17 @@
 import { Component } from "react"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
-import { changeView } from "../state/actions/router"
 import * as r from "ramda" //eslint-disable-line import/no-namespace
-import { AllSet, Name, Home } from "."
 import styled, { createGlobalStyle } from "styled-components"
+
+import {
+  addStopBounceListener,
+  removeStopBounceListener,
+} from "../utils/preventBounce"
+
+import { changeView } from "../state/actions/router"
+
+import { AllSet, Name, Bot } from "."
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -27,7 +34,7 @@ const nextView = previousView => {
       return Name
 
     default:
-      return Home
+      return Bot
   }
 }
 
@@ -44,11 +51,17 @@ class Spinner extends Component {
 
     document.querySelector("#spinner").appendChild(script)
 
-    // eslint-disable-next-line
     setTimeout(() => {
       changeView(nextView(r.last(history)))
-    }, 2000)
+    }, Math.floor(Math.random() * 1000) + 1500)
+
+    addStopBounceListener()
   }
+
+  componentWillUnmount() {
+    removeStopBounceListener()
+  }
+
   //eslint-disable-next-line
   render() {
     return (
