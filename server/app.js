@@ -18,7 +18,6 @@ if (process.env.NODE_ENV === "production") {
 }
 
 if (process.NODE_ENV !== 'production') {
-  console.log("Not in production")
   const morgan = require('morgan');
   app.use(morgan("dev"))
 }
