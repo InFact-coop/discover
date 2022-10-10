@@ -17,3 +17,7 @@ body {
 .up-0rem {
   transform: translateY(0rem);
 }
+
+.bg-blue {
+  background-color: #118ab2;
+}
