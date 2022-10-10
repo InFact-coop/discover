@@ -3,7 +3,6 @@ require("env2")("./.env")
 const express = require("express")
 const bodyParser = require("body-parser")
 const path = require("path")
-const morgan = require("morgan")
 const enforce = require("express-sslify")
 
 const router = require("./routes")
@@ -18,9 +17,13 @@ if (process.env.NODE_ENV === "production") {
   app.use(enforce.HTTPS({ trustProtoHeader: true }))
 }
 
+if (process.NODE_ENV !== 'production') {
+  const morgan = require('morgan');
+  app.use(morgan("dev"))
+}
+
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
-app.use(morgan("dev"))
 app.use(express.static(path.join(__dirname, "../build")))
 
 app.use("/", router)
