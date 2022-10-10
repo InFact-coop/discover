@@ -18,7 +18,7 @@
     "@neutrinojs/style-loader": "^8.3.0",
     "@redux-offline/redux-offline": "^2.5.0",
     "appcache-webpack-plugin": "^1.4.0",
-    "axios": "^0.18.0",
+    "axios": "^0.21.2",
     "body-parser": "^1.19.0",
     "dialogflow": "^0.9.0",
     "env2": "^2.2.2",
